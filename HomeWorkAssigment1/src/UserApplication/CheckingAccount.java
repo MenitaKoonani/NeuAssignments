@@ -5,6 +5,8 @@
  */
 package UserApplication;
 
+import java.util.Date;
+
 /**
  *
  * @author Menita Koonani
@@ -12,7 +14,7 @@ package UserApplication;
 public class CheckingAccount {
     
     private String accNumber;
-    private String creationDate;
+    private Date creationDate;
     private String debtAmt;
     private String creditAmt;
     private boolean isActive;
@@ -25,11 +27,11 @@ public class CheckingAccount {
         this.accNumber = accNumber;
     }
 
-    public String getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 

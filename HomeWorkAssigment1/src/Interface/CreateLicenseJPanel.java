@@ -32,8 +32,6 @@ public class CreateLicenseJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         createLicenseJPanel = new javax.swing.JPanel();
-        licenseIssueDateTextField = new javax.swing.JTextField();
-        licenseExpiryDateTextField = new javax.swing.JTextField();
         licenseNameTextField = new javax.swing.JTextField();
         licenseNumTextField = new javax.swing.JTextField();
         createlicenseLabel = new javax.swing.JLabel();
@@ -42,6 +40,8 @@ public class CreateLicenseJPanel extends javax.swing.JPanel {
         licenseExpiryDateLabel = new javax.swing.JLabel();
         licenseIssueDateLabel = new javax.swing.JLabel();
         addLicenseBtn = new javax.swing.JButton();
+        licenseExpiryDateChooser = new com.toedter.calendar.JDateChooser();
+        licenseIssueDateChooser = new com.toedter.calendar.JDateChooser();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -81,11 +81,11 @@ public class CreateLicenseJPanel extends javax.swing.JPanel {
                             .addComponent(licenseExpiryDateLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(licenseNumLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(65, 65, 65)
-                        .addGroup(createLicenseJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(licenseNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(licenseNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(licenseExpiryDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(licenseIssueDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(createLicenseJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(licenseNameTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                            .addComponent(licenseNumTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                            .addComponent(licenseIssueDateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(licenseExpiryDateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(createLicenseJPanelLayout.createSequentialGroup()
                         .addGap(159, 159, 159)
                         .addComponent(createlicenseLabel))
@@ -108,14 +108,14 @@ public class CreateLicenseJPanel extends javax.swing.JPanel {
                     .addComponent(licenseNameLabel)
                     .addComponent(licenseNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(createLicenseJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(createLicenseJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(licenseExpiryDateLabel)
-                    .addComponent(licenseExpiryDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(licenseExpiryDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(createLicenseJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(createLicenseJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(licenseIssueDateLabel)
-                    .addComponent(licenseIssueDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                    .addComponent(licenseIssueDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addComponent(addLicenseBtn)
                 .addGap(136, 136, 136))
         );
@@ -127,8 +127,8 @@ public class CreateLicenseJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         license.setLicenseNumber(licenseNumTextField.getText());
         license.setLicenseName(licenseNameTextField.getText());
-        license.setExpiryDate(licenseExpiryDateTextField.getText());
-        license.setIssueDate(licenseIssueDateTextField.getText());
+        license.setExpiryDate(licenseExpiryDateChooser.getDate());
+        license.setIssueDate(licenseIssueDateChooser.getDate());
 
         JOptionPane.showMessageDialog(null, "License details added successfully!");
 
@@ -139,10 +139,10 @@ public class CreateLicenseJPanel extends javax.swing.JPanel {
     private javax.swing.JButton addLicenseBtn;
     private javax.swing.JPanel createLicenseJPanel;
     private javax.swing.JLabel createlicenseLabel;
+    private com.toedter.calendar.JDateChooser licenseExpiryDateChooser;
     private javax.swing.JLabel licenseExpiryDateLabel;
-    private javax.swing.JTextField licenseExpiryDateTextField;
+    private com.toedter.calendar.JDateChooser licenseIssueDateChooser;
     private javax.swing.JLabel licenseIssueDateLabel;
-    private javax.swing.JTextField licenseIssueDateTextField;
     private javax.swing.JLabel licenseNameLabel;
     private javax.swing.JTextField licenseNameTextField;
     private javax.swing.JLabel licenseNumLabel;

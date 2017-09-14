@@ -39,7 +39,6 @@ public class CreateFinancialAccountsJPanel extends javax.swing.JPanel {
         savDebtLabel = new javax.swing.JLabel();
         savCreditLabel = new javax.swing.JLabel();
         savAccNumTextField = new javax.swing.JTextField();
-        savCreationDateTextField = new javax.swing.JTextField();
         savDebtTextField = new javax.swing.JTextField();
         savCreditTextField = new javax.swing.JTextField();
         savActiveBtn = new javax.swing.JRadioButton();
@@ -50,13 +49,14 @@ public class CreateFinancialAccountsJPanel extends javax.swing.JPanel {
         checkingDebtLabel = new javax.swing.JLabel();
         checkingCreditLabel = new javax.swing.JLabel();
         checkingAccNumTextField = new javax.swing.JTextField();
-        checkingCreationDateTextField = new javax.swing.JTextField();
         checkingDebtTextField = new javax.swing.JTextField();
         checkingCreditTextField = new javax.swing.JTextField();
         addAccountBtn = new javax.swing.JButton();
         checkingActiveBtn = new javax.swing.JRadioButton();
         checkingInactiveBtn = new javax.swing.JRadioButton();
         checkingAccDetailsLabel = new javax.swing.JLabel();
+        savCreationDateChooser = new com.toedter.calendar.JDateChooser();
+        checkingCreationDateChooser = new com.toedter.calendar.JDateChooser();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -84,12 +84,6 @@ public class CreateFinancialAccountsJPanel extends javax.swing.JPanel {
             }
         });
 
-        savCreationDateTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                savCreationDateTextFieldActionPerformed(evt);
-            }
-        });
-
         savDebtTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 savDebtTextFieldActionPerformed(evt);
@@ -103,8 +97,18 @@ public class CreateFinancialAccountsJPanel extends javax.swing.JPanel {
         });
 
         savActiveBtn.setText("Active");
+        savActiveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                savActiveBtnActionPerformed(evt);
+            }
+        });
 
         savInactiveBtn.setText("Inactive");
+        savInactiveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                savInactiveBtnActionPerformed(evt);
+            }
+        });
 
         checkingAccNumLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         checkingAccNumLabel.setText("Enter Checking Account Number:");
@@ -124,12 +128,6 @@ public class CreateFinancialAccountsJPanel extends javax.swing.JPanel {
         checkingAccNumTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkingAccNumTextFieldActionPerformed(evt);
-            }
-        });
-
-        checkingCreationDateTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkingCreationDateTextFieldActionPerformed(evt);
             }
         });
 
@@ -153,8 +151,18 @@ public class CreateFinancialAccountsJPanel extends javax.swing.JPanel {
         });
 
         checkingActiveBtn.setText("Active");
+        checkingActiveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkingActiveBtnActionPerformed(evt);
+            }
+        });
 
         checkingInactiveBtn.setText("Inactive");
+        checkingInactiveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkingInactiveBtnActionPerformed(evt);
+            }
+        });
 
         checkingAccDetailsLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         checkingAccDetailsLabel.setText("Add Checking Account Details");
@@ -180,15 +188,15 @@ public class CreateFinancialAccountsJPanel extends javax.swing.JPanel {
                                         .addComponent(checkingDebtLabel)
                                         .addComponent(checkingCreditLabel))
                                     .addGap(53, 53, 53)
-                                    .addGroup(createSavingsAccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(checkingAccNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(checkingCreationDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(checkingDebtTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(checkingCreditTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(createSavingsAccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(checkingAccNumTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                        .addComponent(checkingDebtTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                        .addComponent(checkingCreditTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                                         .addGroup(createSavingsAccPanelLayout.createSequentialGroup()
                                             .addComponent(checkingActiveBtn)
                                             .addGap(18, 18, 18)
-                                            .addComponent(checkingInactiveBtn))))
+                                            .addComponent(checkingInactiveBtn))
+                                        .addComponent(checkingCreationDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(createSavingsAccPanelLayout.createSequentialGroup()
                                     .addGap(140, 140, 140)
                                     .addComponent(addAccountBtn)))
@@ -200,15 +208,15 @@ public class CreateFinancialAccountsJPanel extends javax.swing.JPanel {
                                     .addComponent(savDebtLabel)
                                     .addComponent(savCreditLabel))
                                 .addGap(53, 53, 53)
-                                .addGroup(createSavingsAccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(savAccNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(savCreationDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(savDebtTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(savCreditTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(createSavingsAccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(savAccNumTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                    .addComponent(savDebtTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                    .addComponent(savCreditTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                                     .addGroup(createSavingsAccPanelLayout.createSequentialGroup()
                                         .addComponent(savActiveBtn)
                                         .addGap(18, 18, 18)
-                                        .addComponent(savInactiveBtn)))))))
+                                        .addComponent(savInactiveBtn))
+                                    .addComponent(savCreationDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addGap(100, 100, 100))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createSavingsAccPanelLayout.createSequentialGroup()
                 .addComponent(checkingAccDetailsLabel)
@@ -229,9 +237,9 @@ public class CreateFinancialAccountsJPanel extends javax.swing.JPanel {
                     .addComponent(savActiveBtn)
                     .addComponent(savInactiveBtn))
                 .addGap(18, 18, 18)
-                .addGroup(createSavingsAccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(createSavingsAccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(savCreationDateLabel)
-                    .addComponent(savCreationDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(savCreationDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(createSavingsAccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(savDebtLabel)
@@ -252,9 +260,9 @@ public class CreateFinancialAccountsJPanel extends javax.swing.JPanel {
                     .addComponent(checkingActiveBtn)
                     .addComponent(checkingInactiveBtn))
                 .addGap(18, 18, 18)
-                .addGroup(createSavingsAccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(createSavingsAccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(checkingCreationDateLabel)
-                    .addComponent(checkingCreationDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(checkingCreationDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(createSavingsAccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(checkingDebtLabel)
@@ -275,10 +283,6 @@ public class CreateFinancialAccountsJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_savAccNumTextFieldActionPerformed
 
-    private void savCreationDateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savCreationDateTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_savCreationDateTextFieldActionPerformed
-
     private void savDebtTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savDebtTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_savDebtTextFieldActionPerformed
@@ -290,10 +294,6 @@ public class CreateFinancialAccountsJPanel extends javax.swing.JPanel {
     private void checkingAccNumTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkingAccNumTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_checkingAccNumTextFieldActionPerformed
-
-    private void checkingCreationDateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkingCreationDateTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkingCreationDateTextFieldActionPerformed
 
     private void checkingDebtTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkingDebtTextFieldActionPerformed
         // TODO add your handling code here:
@@ -307,39 +307,39 @@ public class CreateFinancialAccountsJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         SavingsAccount savingsAccount = financialAccounts.getSavingsAcc();
         savingsAccount.setAccNumber(savAccNumTextField.getText());
-        savingsAccount.setCreationDate(savCreationDateTextField.getText());
+        savingsAccount.setCreationDate(savCreationDateChooser.getDate());
         savingsAccount.setCreditAmt(savCreditTextField.getText());
         savingsAccount.setDebtAmt(savDebtTextField.getText());
-//        if((savActiveBtn.isEnabled() && savInactiveBtn.isEnabled()) 
-//                || (!savActiveBtn.isEnabled() && !savInactiveBtn.isEnabled()))
-//        {
-//            JOptionPane.showMessageDialog(null,"Error! Choose only one option (Active or Inactive)");
-//            return;
-//        }
-//        else
-//        {
-//            savingsAccount.setIsActive(savActiveBtn.isEnabled() && !savInactiveBtn.isEnabled());
-//        }
         savingsAccount.setIsActive(savActiveBtn.isEnabled());
         
         CheckingAccount checkingAccount = financialAccounts.getCheckingAcc();
         checkingAccount.setAccNumber(checkingAccNumTextField.getText());
-        checkingAccount.setCreationDate(checkingCreationDateTextField.getText());
+        checkingAccount.setCreationDate(checkingCreationDateChooser.getDate());
         checkingAccount.setCreditAmt(checkingCreditTextField.getText());
         checkingAccount.setDebtAmt(checkingDebtTextField.getText());
-//        if((checkingActiveBtn.isEnabled() && checkingInactiveBtn.isEnabled()) 
-//                || (!checkingActiveBtn.isEnabled() && !checkingInactiveBtn.isEnabled()))
-//        {
-//            JOptionPane.showMessageDialog(null,"Error! Choose only one option (Active or Inactive)");
-//            return;
-//        }
-//        else
-//        {
-//            checkingAccount.setIsActive(checkingActiveBtn.isEnabled() && !checkingInactiveBtn.isEnabled());
-//        }
         checkingAccount.setIsActive(checkingActiveBtn.isEnabled());
         JOptionPane.showMessageDialog(null, "Account details added successfully!");
     }//GEN-LAST:event_addAccountBtnActionPerformed
+
+    private void savActiveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savActiveBtnActionPerformed
+        // TODO add your handling code here:
+        savInactiveBtn.setSelected(false);
+    }//GEN-LAST:event_savActiveBtnActionPerformed
+
+    private void savInactiveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savInactiveBtnActionPerformed
+        // TODO add your handling code here:
+        savActiveBtn.setSelected(false);
+    }//GEN-LAST:event_savInactiveBtnActionPerformed
+
+    private void checkingActiveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkingActiveBtnActionPerformed
+        // TODO add your handling code here:
+        checkingInactiveBtn.setSelected(false);
+    }//GEN-LAST:event_checkingActiveBtnActionPerformed
+
+    private void checkingInactiveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkingInactiveBtnActionPerformed
+        // TODO add your handling code here:
+        checkingActiveBtn.setSelected(false);
+    }//GEN-LAST:event_checkingInactiveBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -348,8 +348,8 @@ public class CreateFinancialAccountsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel checkingAccNumLabel;
     private javax.swing.JTextField checkingAccNumTextField;
     private javax.swing.JRadioButton checkingActiveBtn;
+    private com.toedter.calendar.JDateChooser checkingCreationDateChooser;
     private javax.swing.JLabel checkingCreationDateLabel;
-    private javax.swing.JTextField checkingCreationDateTextField;
     private javax.swing.JLabel checkingCreditLabel;
     private javax.swing.JTextField checkingCreditTextField;
     private javax.swing.JLabel checkingDebtLabel;
@@ -360,8 +360,8 @@ public class CreateFinancialAccountsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel savAccNumLabel;
     private javax.swing.JTextField savAccNumTextField;
     private javax.swing.JRadioButton savActiveBtn;
+    private com.toedter.calendar.JDateChooser savCreationDateChooser;
     private javax.swing.JLabel savCreationDateLabel;
-    private javax.swing.JTextField savCreationDateTextField;
     private javax.swing.JLabel savCreditLabel;
     private javax.swing.JTextField savCreditTextField;
     private javax.swing.JLabel savDebtLabel;

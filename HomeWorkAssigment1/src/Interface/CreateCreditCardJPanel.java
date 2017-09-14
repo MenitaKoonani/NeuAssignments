@@ -41,9 +41,9 @@ public class CreateCreditCardJPanel extends javax.swing.JPanel {
         cardHolderNameTextField = new javax.swing.JTextField();
         cardNumTextField = new javax.swing.JTextField();
         cardCvvTextField = new javax.swing.JTextField();
-        cardIssueTextField = new javax.swing.JTextField();
-        cardExpiryTextField = new javax.swing.JTextField();
         addCreditCardBtn = new javax.swing.JButton();
+        cardIssueDateChooser = new com.toedter.calendar.JDateChooser();
+        cardExpiryDateChooser = new com.toedter.calendar.JDateChooser();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -68,18 +68,6 @@ public class CreateCreditCardJPanel extends javax.swing.JPanel {
         cardCvvTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cardCvvTextFieldActionPerformed(evt);
-            }
-        });
-
-        cardIssueTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cardIssueTextFieldActionPerformed(evt);
-            }
-        });
-
-        cardExpiryTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cardExpiryTextFieldActionPerformed(evt);
             }
         });
 
@@ -108,15 +96,15 @@ public class CreateCreditCardJPanel extends javax.swing.JPanel {
                             .addComponent(creditCardIssueLabel)
                             .addComponent(creditCardCvvLabel))
                         .addGap(43, 43, 43)
-                        .addGroup(createCreditJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cardHolderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cardNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cardCvvTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cardIssueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cardExpiryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(62, Short.MAX_VALUE))
+                        .addGroup(createCreditJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cardHolderNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                            .addComponent(cardNumTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                            .addComponent(cardCvvTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                            .addComponent(cardIssueDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cardExpiryDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(65, 65, 65))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createCreditJPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(170, 170, 170)
                 .addComponent(addCreditCardBtn)
                 .addGap(176, 176, 176))
         );
@@ -138,14 +126,14 @@ public class CreateCreditCardJPanel extends javax.swing.JPanel {
                     .addComponent(creditCardCvvLabel)
                     .addComponent(cardCvvTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(createCreditJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(createCreditJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(creditCardIssueLabel)
-                    .addComponent(cardIssueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cardIssueDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(createCreditJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(createCreditJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(creditCardExpiryLabel)
-                    .addComponent(cardExpiryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                    .addComponent(cardExpiryDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addComponent(addCreditCardBtn)
                 .addContainerGap())
         );
@@ -157,21 +145,13 @@ public class CreateCreditCardJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cardCvvTextFieldActionPerformed
 
-    private void cardIssueTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardIssueTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cardIssueTextFieldActionPerformed
-
-    private void cardExpiryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardExpiryTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cardExpiryTextFieldActionPerformed
-
     private void addCreditCardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCreditCardBtnActionPerformed
         // TODO add your handling code here:
         creditCard.setCardNumber(cardNumTextField.getText());
         creditCard.setCardHolderName(cardHolderNameTextField.getText());
         creditCard.setCVV(cardCvvTextField.getText());
-        creditCard.setExpiryDate(cardExpiryTextField.getText());
-        creditCard.setIssueDate(cardIssueTextField.getText());
+        creditCard.setExpiryDate(cardExpiryDateChooser.getDate());
+        creditCard.setIssueDate(cardIssueDateChooser.getDate());
         
         JOptionPane.showMessageDialog(null,"Credit card details added successfully!");
     }//GEN-LAST:event_addCreditCardBtnActionPerformed
@@ -181,9 +161,9 @@ public class CreateCreditCardJPanel extends javax.swing.JPanel {
     private javax.swing.JButton addCreditCardBtn;
     private javax.swing.JLabel addCreditCardLabel;
     private javax.swing.JTextField cardCvvTextField;
-    private javax.swing.JTextField cardExpiryTextField;
+    private com.toedter.calendar.JDateChooser cardExpiryDateChooser;
     private javax.swing.JTextField cardHolderNameTextField;
-    private javax.swing.JTextField cardIssueTextField;
+    private com.toedter.calendar.JDateChooser cardIssueDateChooser;
     private javax.swing.JTextField cardNumTextField;
     private javax.swing.JPanel createCreditJPanel;
     private javax.swing.JLabel creditCardCvvLabel;

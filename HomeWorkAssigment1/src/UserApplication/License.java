@@ -14,8 +14,8 @@ import java.util.Date;
 public class License {
     private String licenseNumber;
     private String licenseName;
-    private String expiryDate;
-    private String issueDate;
+    private Date expiryDate;
+    private Date issueDate;
 
     public String getLicenseNumber() {
         return licenseNumber;
@@ -33,19 +33,19 @@ public class License {
         this.licenseName = licenseName;
     }
 
-    public String getExpiryDate() {
+    public Date getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(String expiryDate) {
+    public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
     }
 
-    public String getIssueDate() {
+    public Date getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(String issueDate) {
+    public void setIssueDate(Date issueDate) {
         this.issueDate = issueDate;
     }
 }

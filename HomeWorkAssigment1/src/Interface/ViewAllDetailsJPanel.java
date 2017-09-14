@@ -28,7 +28,7 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
         lastNameTextField.setText(person.getLastName());
         emailTextField.setText(person.getEmailId());
         phoneTextField.setText(person.getPhoneNumber());
-        dobTextField.setText(person.getDateOfBirth());
+        dobDateChooser.setDate(person.getDateOfBirth());
         
         Address address = person.getAddress();
         if(address!=null)
@@ -44,8 +44,8 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
         License license = person.getLicense();
         if(license!=null)
         {
-            licenseExpiryDateLabel.setText(license.getExpiryDate());
-            licenseIssueDateTextField.setText(license.getIssueDate());
+            licenseExpiryDateChooser.setDate(license.getExpiryDate());
+            licenseIssueDateChooser.setDate(license.getIssueDate());
             licenseNameTextField.setText(license.getLicenseName());
             licenseNumTextField.setText(license.getLicenseNumber());
         }
@@ -56,8 +56,8 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
             creditCardNumTextField.setText(creditCard.getCardNumber());
             creditCardHolderTextField.setText(creditCard.getCardHolderName());
             creditCardCvvTextField.setText(creditCard.getCVV());
-            creditCardIssueTextField.setText(creditCard.getIssueDate());
-            creditCardExpiryTextField.setText(creditCard.getExpiryDate());    
+            creditCardIssueDateChooser.setDate(creditCard.getIssueDate());
+            creditCardExpiryDateChooser.setDate(creditCard.getExpiryDate());    
         }
         
         FinancialAccounts financialAccounts = person.getFinancialAccounts();
@@ -68,7 +68,7 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
             {
                 savAccNumTextField.setText(savingsAccount.getAccNumber());
                 savAccStatusTextField.setText(savingsAccount.isActive() ? "Active" : "Inactive");
-                savCreationDateTextField.setText(savingsAccount.getCreationDate());
+                savAccCreationDateChooser.setDate(savingsAccount.getCreationDate());
                 savDebtInfoTextField.setText(savingsAccount.getDebtAmt());
                 saveCreditInfoTeextField.setText(savingsAccount.getCreditAmt());
             }
@@ -77,7 +77,7 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
             {
                 checkAccNumTextField.setText(checkingAccount.getAccNumber());
                 checkAccStatusTextField.setText(checkingAccount.isActive() ? "Active" : "Inactive");
-                checkCreationDateTextField.setText(checkingAccount.getCreationDate());
+                checkAccCreationDateChooser.setDate(checkingAccount.getCreationDate());
                 checkDebtInfoTextField.setText(checkingAccount.getDebtAmt());
                 checkCreditInfoTextField.setText(checkingAccount.getCreditAmt());
             }
@@ -101,7 +101,6 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
         phoneLabel = new javax.swing.JLabel();
         firstNameTextField = new javax.swing.JTextField();
         lastNameTextField = new javax.swing.JTextField();
-        dobTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
         phoneTextField = new javax.swing.JTextField();
         zipcodeTextField = new javax.swing.JTextField();
@@ -123,8 +122,6 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
         licenseNameTextField = new javax.swing.JTextField();
         licenseNameLabel = new javax.swing.JLabel();
         licenseIssueDateLabel = new javax.swing.JLabel();
-        licenseIssueDateTextField = new javax.swing.JTextField();
-        licenseExpiryDateTextField1 = new javax.swing.JTextField();
         licenseExpiryDateLabel = new javax.swing.JLabel();
         createAddressLabel1 = new javax.swing.JLabel();
         creditCardNumLabel = new javax.swing.JLabel();
@@ -135,19 +132,13 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
         creditCardNumTextField = new javax.swing.JTextField();
         creditCardHolderTextField = new javax.swing.JTextField();
         creditCardCvvTextField = new javax.swing.JTextField();
-        creditCardExpiryTextField = new javax.swing.JTextField();
-        creditCardIssueTextField = new javax.swing.JTextField();
-        userPhotoLabel = new javax.swing.JLabel();
-        photoTextField = new javax.swing.JTextField();
         savingsAccDEtailsLabel = new javax.swing.JLabel();
         savAccNumLabel = new javax.swing.JLabel();
         savAccNumTextField = new javax.swing.JTextField();
         savAccStatusLabel = new javax.swing.JLabel();
         savAccStatusTextField = new javax.swing.JTextField();
         savDebtInfoLabel = new javax.swing.JLabel();
-        savCreationDateTextField = new javax.swing.JTextField();
         savCreationDateLabel = new javax.swing.JLabel();
-        savDebtInfoTextField = new javax.swing.JTextField();
         savCreditInfoLabel = new javax.swing.JLabel();
         saveCreditInfoTeextField = new javax.swing.JTextField();
         checkingAccDetailLabel = new javax.swing.JLabel();
@@ -156,15 +147,22 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
         checkAccCreationDateLabel = new javax.swing.JLabel();
         checkDebtInfoLabel = new javax.swing.JLabel();
         checkCreditInfoLabel = new javax.swing.JLabel();
-        checkCreationDateTextField = new javax.swing.JTextField();
         checkAccStatusTextField = new javax.swing.JTextField();
         checkAccNumTextField = new javax.swing.JTextField();
-        checkDebtInfoTextField = new javax.swing.JTextField();
         checkCreditInfoTextField = new javax.swing.JTextField();
+        dobDateChooser = new com.toedter.calendar.JDateChooser();
+        creditCardExpiryDateChooser = new com.toedter.calendar.JDateChooser();
+        creditCardIssueDateChooser = new com.toedter.calendar.JDateChooser();
+        licenseExpiryDateChooser = new com.toedter.calendar.JDateChooser();
+        licenseIssueDateChooser = new com.toedter.calendar.JDateChooser();
+        checkAccCreationDateChooser = new com.toedter.calendar.JDateChooser();
+        savAccCreationDateChooser = new com.toedter.calendar.JDateChooser();
+        savDebtInfoTextField = new javax.swing.JTextField();
+        checkDebtInfoTextField = new javax.swing.JTextField();
 
         setLayout(new java.awt.BorderLayout());
 
-        viewUserLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        viewUserLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         viewUserLabel.setText("Details of User");
 
         firstNameLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -203,13 +201,13 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
         streetNameLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         streetNameLabel.setText("Street Name:");
 
-        createAddressLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        createAddressLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         createAddressLabel.setText("Address Details");
 
         apartmentNumLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         apartmentNumLabel.setText("Apartment Number:");
 
-        licenseDetailsLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        licenseDetailsLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         licenseDetailsLabel.setText("License Details");
 
         licenseNumLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -224,7 +222,7 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
         licenseExpiryDateLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         licenseExpiryDateLabel.setText("License Expiry Date:");
 
-        createAddressLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        createAddressLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         createAddressLabel1.setText("Credit Card Details");
 
         creditCardNumLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -242,16 +240,7 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
         creditCardIssueDateLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         creditCardIssueDateLabel.setText("Credit Card Issue Date:");
 
-        userPhotoLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        userPhotoLabel.setText("Photo:");
-
-        photoTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                photoTextFieldActionPerformed(evt);
-            }
-        });
-
-        savingsAccDEtailsLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        savingsAccDEtailsLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         savingsAccDEtailsLabel.setText("Savings Account Details");
 
         savAccNumLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -266,16 +255,10 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
         savCreationDateLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         savCreationDateLabel.setText("Account Creation Date:");
 
-        savDebtInfoTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                savDebtInfoTextFieldActionPerformed(evt);
-            }
-        });
-
         savCreditInfoLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         savCreditInfoLabel.setText("Credit Info:");
 
-        checkingAccDetailLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        checkingAccDetailLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkingAccDetailLabel.setText("Checking Account Details");
 
         checkAccNumLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -300,188 +283,179 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
             .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
                 .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                        .addGap(80, 80, 80)
+                        .addGap(104, 104, 104)
                         .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(firstNameLabel)
                                 .addComponent(lastNameLabel))
                             .addComponent(emailLabel)
                             .addComponent(DOBLabel)
-                            .addComponent(phoneLabel)
-                            .addComponent(userPhotoLabel)
-                            .addComponent(streetNameLabel)
-                            .addComponent(apartmentNumLabel)
-                            .addComponent(cityLabel)
-                            .addComponent(stateLabel)
-                            .addComponent(countryLabel)
-                            .addComponent(zipcodeLabel))
+                            .addComponent(phoneLabel))
                         .addGap(76, 76, 76)
                         .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(streetNameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                            .addComponent(aptNumTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                            .addComponent(cityTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                            .addComponent(stateTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                            .addComponent(countryTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                            .addComponent(zipcodeTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                            .addComponent(photoTextField, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(phoneTextField, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(emailTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(dobTextField, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lastNameTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(firstNameTextField, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(firstNameTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(dobDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)))
                     .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                        .addGap(141, 141, 141)
+                        .addGap(174, 174, 174)
+                        .addComponent(createAddressLabel))
+                    .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
+                        .addGap(180, 180, 180)
                         .addComponent(viewUserLabel))
-                    .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(createAddressLabel)))
-                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewAllDetailsJPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(createAddressLabel1)
-                        .addGap(136, 136, 136))
-                    .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                        .addGap(73, 73, 73)
+                        .addContainerGap()
                         .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
                                 .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(licenseIssueDateLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(licenseExpiryDateLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(licenseNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(licenseNumLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                                        .addGap(29, 29, 29)
-                                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(licenseNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(licenseNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(licenseIssueDateTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(licenseExpiryDateTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(creditCardHolderLabel)
-                                            .addComponent(creditCardNumLabel)
-                                            .addComponent(creditCardCvvLabel)
-                                            .addComponent(creditCardIssueDateLabel)
-                                            .addComponent(creditCardExpiryDateLabel))
-                                        .addGap(36, 36, 36)
-                                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(creditCardIssueTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(creditCardExpiryTextField)
-                                            .addComponent(creditCardCvvTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(creditCardHolderTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(creditCardNumTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(80, 80, 80))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewAllDetailsJPanelLayout.createSequentialGroup()
-                                .addComponent(licenseDetailsLabel)
-                                .addGap(169, 169, 169))))))
-            .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                                    .addComponent(streetNameLabel)
+                                    .addComponent(apartmentNumLabel)
+                                    .addComponent(cityLabel)
+                                    .addComponent(stateLabel)
+                                    .addComponent(countryLabel)
+                                    .addComponent(zipcodeLabel))
+                                .addGap(76, 76, 76)
+                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(streetNameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                    .addComponent(aptNumTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                    .addComponent(cityTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                    .addComponent(stateTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                    .addComponent(countryTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                    .addComponent(zipcodeTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                    .addComponent(savAccNumTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                    .addComponent(savAccStatusTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                    .addComponent(savAccCreationDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                    .addComponent(savDebtInfoTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(saveCreditInfoTeextField, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
+                                .addGap(63, 63, 63)
+                                .addComponent(savingsAccDEtailsLabel)))))
+                .addGap(50, 50, 50)
                 .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewAllDetailsJPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(savingsAccDEtailsLabel)
-                        .addGap(39, 39, 39))
-                    .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                            .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(savAccStatusLabel)
-                                .addComponent(savAccNumLabel)
-                                .addComponent(savDebtInfoLabel)
-                                .addComponent(savCreationDateLabel))
-                            .addGap(47, 47, 47)
-                            .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(savAccNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(savAccStatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(savCreationDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(savDebtInfoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                            .addComponent(savCreditInfoLabel)
-                            .addGap(47, 47, 47)
-                            .addComponent(saveCreditInfoTeextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
-                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(licenseDetailsLabel)
+                        .addGap(202, 202, 202))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewAllDetailsJPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
+                                    .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(creditCardHolderLabel)
+                                        .addComponent(creditCardNumLabel)
+                                        .addComponent(creditCardCvvLabel)
+                                        .addComponent(creditCardIssueDateLabel)
+                                        .addComponent(creditCardExpiryDateLabel))
+                                    .addGap(36, 36, 36)
+                                    .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(creditCardCvvTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(creditCardHolderTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(creditCardNumTextField)
+                                        .addComponent(creditCardExpiryDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(creditCardIssueDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
+                                    .addGap(103, 103, 103)
+                                    .addComponent(createAddressLabel1)))
+                            .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
+                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(licenseIssueDateLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(licenseExpiryDateLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(licenseNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(licenseNumLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(29, 29, 29)
+                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(licenseNumTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                    .addComponent(licenseNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                    .addComponent(licenseExpiryDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(licenseIssueDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(80, 80, 80))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewAllDetailsJPanelLayout.createSequentialGroup()
                         .addComponent(checkingAccDetailLabel)
-                        .addGap(39, 39, 39))
-                    .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                            .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(checkAccStatusLabel)
-                                .addComponent(checkAccNumLabel)
-                                .addComponent(checkDebtInfoLabel)
-                                .addComponent(checkAccCreationDateLabel))
-                            .addGap(47, 47, 47)
-                            .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(checkAccNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(checkAccStatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(checkCreationDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(checkDebtInfoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                            .addComponent(checkCreditInfoLabel)
-                            .addGap(47, 47, 47)
-                            .addComponent(checkCreditInfoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(96, 96, 96))
+                        .addGap(169, 169, 169))))
+            .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
+                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(savDebtInfoLabel)
+                        .addGap(0, 320, Short.MAX_VALUE))
+                    .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(savCreditInfoLabel)
+                        .addGap(320, 320, 320))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, viewAllDetailsJPanelLayout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(savAccStatusLabel)
+                            .addComponent(savAccNumLabel)
+                            .addComponent(savCreationDateLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
+                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(checkAccStatusLabel)
+                            .addComponent(checkAccNumLabel)
+                            .addComponent(checkDebtInfoLabel)
+                            .addComponent(checkAccCreationDateLabel)
+                            .addComponent(checkCreditInfoLabel))
+                        .addGap(47, 47, 47)
+                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(checkAccNumTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                            .addComponent(checkAccStatusTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                            .addComponent(checkAccCreationDateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(checkDebtInfoTextField)))
+                    .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(checkCreditInfoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(91, 91, 91))
         );
         viewAllDetailsJPanelLayout.setVerticalGroup(
             viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
+                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewUserLabel)
+                    .addComponent(licenseDetailsLabel))
+                .addGap(18, 18, 18)
                 .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
                         .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(viewUserLabel)
-                            .addComponent(licenseDetailsLabel))
-                        .addGap(29, 29, 29)
-                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(firstNameLabel)
-                                    .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lastNameLabel)
-                                    .addComponent(lastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(DOBLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dobTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(emailLabel)
-                                    .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(licenseNumLabel)
-                                    .addComponent(licenseNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(licenseNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(licenseNameLabel))
-                                .addGap(18, 18, 18)
-                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(licenseIssueDateLabel)
-                                    .addComponent(licenseIssueDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(licenseExpiryDateLabel)
-                                    .addComponent(licenseExpiryDateTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(firstNameLabel)
+                            .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(phoneLabel)
-                            .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewAllDetailsJPanelLayout.createSequentialGroup()
-                        .addComponent(createAddressLabel1)
-                        .addGap(8, 8, 8)))
-                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lastNameLabel)
+                            .addComponent(lastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(DOBLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dobDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(emailLabel)
+                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
                         .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(userPhotoLabel)
-                            .addComponent(photoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
+                            .addComponent(licenseNumLabel)
+                            .addComponent(licenseNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(licenseNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(licenseNameLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(licenseIssueDateLabel)
+                            .addComponent(licenseIssueDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(licenseExpiryDateLabel)
+                            .addComponent(licenseExpiryDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(phoneLabel)
+                    .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
                         .addComponent(createAddressLabel)
                         .addGap(18, 18, 18)
                         .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -502,14 +476,17 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(countryLabel)
-                            .addComponent(countryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(zipcodeLabel)
-                            .addComponent(zipcodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(countryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addComponent(createAddressLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
+                                .addComponent(creditCardNumLabel)
+                                .addGap(25, 25, 25)
+                                .addComponent(creditCardHolderLabel)
+                                .addGap(23, 23, 23)
+                                .addComponent(creditCardCvvLabel))
                             .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
                                 .addComponent(creditCardNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -517,68 +494,59 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(creditCardCvvTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(creditCardExpiryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
+                                        .addComponent(creditCardExpiryDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(15, 15, 15)
+                                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(creditCardIssueDateLabel)
+                                            .addComponent(creditCardIssueDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(creditCardExpiryDateLabel))))))
+                .addGap(18, 18, 18)
+                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(zipcodeLabel)
+                    .addComponent(zipcodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(savingsAccDEtailsLabel)
+                    .addComponent(checkingAccDetailLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
+                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(savAccNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(savAccNumLabel)
+                            .addComponent(checkAccNumLabel)
+                            .addComponent(checkAccNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(savAccStatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(savAccStatusLabel)
+                            .addComponent(checkAccStatusLabel)
+                            .addComponent(checkAccStatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(creditCardIssueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(creditCardIssueDateLabel)))
+                                .addComponent(savAccCreationDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                                .addGap(114, 114, 114)
-                                .addComponent(creditCardExpiryDateLabel))
-                            .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                                .addComponent(creditCardNumLabel)
-                                .addGap(25, 25, 25)
-                                .addComponent(creditCardHolderLabel)
-                                .addGap(23, 23, 23)
-                                .addComponent(creditCardCvvLabel)))))
-                .addGap(50, 50, 50)
-                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewAllDetailsJPanelLayout.createSequentialGroup()
-                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                                .addComponent(savingsAccDEtailsLabel)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(savAccNumLabel)
-                                    .addComponent(savAccNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(savAccStatusLabel)
-                                    .addComponent(savAccStatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(savCreationDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(savCreationDateLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(savDebtInfoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(savDebtInfoLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(saveCreditInfoTeextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(savCreditInfoLabel)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewAllDetailsJPanelLayout.createSequentialGroup()
-                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(viewAllDetailsJPanelLayout.createSequentialGroup()
-                                .addComponent(checkingAccDetailLabel)
-                                .addGap(18, 18, 18)
-                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(checkAccNumLabel)
-                                    .addComponent(checkAccNumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(checkAccStatusLabel)
-                                    .addComponent(checkAccStatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(checkCreationDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(checkAccCreationDateLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(checkDebtInfoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(checkDebtInfoLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(checkCreditInfoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(checkCreditInfoLabel)))))
+                                    .addComponent(checkAccCreationDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(checkAccCreationDateLabel)))))
+                    .addComponent(savCreationDateLabel))
+                .addGap(18, 18, 18)
+                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(savDebtInfoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(savDebtInfoLabel)
+                    .addComponent(checkDebtInfoLabel)
+                    .addComponent(checkDebtInfoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(viewAllDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveCreditInfoTeextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(savCreditInfoLabel)
+                    .addComponent(checkCreditInfoLabel)
+                    .addComponent(checkCreditInfoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59))
         );
 
         add(viewAllDetailsJPanel, java.awt.BorderLayout.CENTER);
@@ -587,10 +555,6 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
     private void phoneTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_phoneTextFieldActionPerformed
-
-    private void photoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_photoTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_photoTextFieldActionPerformed
 
     private void savDebtInfoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savDebtInfoTextFieldActionPerformed
         // TODO add your handling code here:
@@ -601,12 +565,12 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel DOBLabel;
     private javax.swing.JLabel apartmentNumLabel;
     private javax.swing.JTextField aptNumTextField;
+    private com.toedter.calendar.JDateChooser checkAccCreationDateChooser;
     private javax.swing.JLabel checkAccCreationDateLabel;
     private javax.swing.JLabel checkAccNumLabel;
     private javax.swing.JTextField checkAccNumTextField;
     private javax.swing.JLabel checkAccStatusLabel;
     private javax.swing.JTextField checkAccStatusTextField;
-    private javax.swing.JTextField checkCreationDateTextField;
     private javax.swing.JLabel checkCreditInfoLabel;
     private javax.swing.JTextField checkCreditInfoTextField;
     private javax.swing.JLabel checkDebtInfoLabel;
@@ -620,15 +584,15 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel createAddressLabel1;
     private javax.swing.JLabel creditCardCvvLabel;
     private javax.swing.JTextField creditCardCvvTextField;
+    private com.toedter.calendar.JDateChooser creditCardExpiryDateChooser;
     private javax.swing.JLabel creditCardExpiryDateLabel;
-    private javax.swing.JTextField creditCardExpiryTextField;
     private javax.swing.JLabel creditCardHolderLabel;
     private javax.swing.JTextField creditCardHolderTextField;
+    private com.toedter.calendar.JDateChooser creditCardIssueDateChooser;
     private javax.swing.JLabel creditCardIssueDateLabel;
-    private javax.swing.JTextField creditCardIssueTextField;
     private javax.swing.JLabel creditCardNumLabel;
     private javax.swing.JTextField creditCardNumTextField;
-    private javax.swing.JTextField dobTextField;
+    private com.toedter.calendar.JDateChooser dobDateChooser;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JLabel firstNameLabel;
@@ -636,23 +600,22 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField lastNameTextField;
     private javax.swing.JLabel licenseDetailsLabel;
+    private com.toedter.calendar.JDateChooser licenseExpiryDateChooser;
     private javax.swing.JLabel licenseExpiryDateLabel;
-    private javax.swing.JTextField licenseExpiryDateTextField1;
+    private com.toedter.calendar.JDateChooser licenseIssueDateChooser;
     private javax.swing.JLabel licenseIssueDateLabel;
-    private javax.swing.JTextField licenseIssueDateTextField;
     private javax.swing.JLabel licenseNameLabel;
     private javax.swing.JTextField licenseNameTextField;
     private javax.swing.JLabel licenseNumLabel;
     private javax.swing.JTextField licenseNumTextField;
     private javax.swing.JLabel phoneLabel;
     private javax.swing.JTextField phoneTextField;
-    private javax.swing.JTextField photoTextField;
+    private com.toedter.calendar.JDateChooser savAccCreationDateChooser;
     private javax.swing.JLabel savAccNumLabel;
     private javax.swing.JTextField savAccNumTextField;
     private javax.swing.JLabel savAccStatusLabel;
     private javax.swing.JTextField savAccStatusTextField;
     private javax.swing.JLabel savCreationDateLabel;
-    private javax.swing.JTextField savCreationDateTextField;
     private javax.swing.JLabel savCreditInfoLabel;
     private javax.swing.JLabel savDebtInfoLabel;
     private javax.swing.JTextField savDebtInfoTextField;
@@ -662,7 +625,6 @@ public class ViewAllDetailsJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField stateTextField;
     private javax.swing.JLabel streetNameLabel;
     private javax.swing.JTextField streetNameTextField;
-    private javax.swing.JLabel userPhotoLabel;
     private javax.swing.JPanel viewAllDetailsJPanel;
     private javax.swing.JLabel viewUserLabel;
     private javax.swing.JLabel zipcodeLabel;

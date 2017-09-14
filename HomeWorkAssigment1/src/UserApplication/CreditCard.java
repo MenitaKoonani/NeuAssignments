@@ -15,8 +15,8 @@ public class CreditCard {
     private String cardNumber;
     private String cardHolderName;
     private String CVV;
-    private String expiryDate;
-    private String issueDate;
+    private Date expiryDate;
+    private Date issueDate;
 
     public String getCardNumber() {
         return cardNumber;
@@ -42,19 +42,19 @@ public class CreditCard {
         this.CVV = CVV;
     }
 
-    public String getExpiryDate() {
+    public Date getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(String expiryDate) {
+    public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
     }
 
-    public String getIssueDate() {
+    public Date getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(String issueDate) {
+    public void setIssueDate(Date issueDate) {
         this.issueDate = issueDate;
     }
 }

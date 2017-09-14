@@ -37,11 +37,11 @@
                               <Component id="licenseNumLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="licenseNameTextField" min="-2" pref="156" max="-2" attributes="0"/>
-                              <Component id="licenseNumTextField" min="-2" pref="156" max="-2" attributes="0"/>
-                              <Component id="licenseExpiryDateTextField" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
-                              <Component id="licenseIssueDateTextField" min="-2" pref="156" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="licenseNameTextField" alignment="0" pref="156" max="32767" attributes="0"/>
+                              <Component id="licenseNumTextField" alignment="0" pref="156" max="32767" attributes="0"/>
+                              <Component id="licenseIssueDateChooser" alignment="0" max="32767" attributes="0"/>
+                              <Component id="licenseExpiryDateChooser" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -73,16 +73,16 @@
                       <Component id="licenseNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="licenseExpiryDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="licenseExpiryDateTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="licenseExpiryDateLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="licenseExpiryDateChooser" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="licenseIssueDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="licenseIssueDateTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="licenseIssueDateLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="licenseIssueDateChooser" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Component id="addLicenseBtn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
               </Group>
@@ -90,10 +90,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="licenseIssueDateTextField">
-        </Component>
-        <Component class="javax.swing.JTextField" name="licenseExpiryDateTextField">
-        </Component>
         <Component class="javax.swing.JTextField" name="licenseNameTextField">
         </Component>
         <Component class="javax.swing.JTextField" name="licenseNumTextField">
@@ -145,6 +141,10 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addLicenseBtnActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="licenseExpiryDateChooser">
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="licenseIssueDateChooser">
         </Component>
       </SubComponents>
     </Container>

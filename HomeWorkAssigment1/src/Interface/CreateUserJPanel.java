@@ -32,10 +32,10 @@ public class CreateUserJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator1 = new javax.swing.JSeparator();
         createUserJPanel = new javax.swing.JPanel();
         phoneTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
-        dobTextField = new javax.swing.JTextField();
         lastNameTextField = new javax.swing.JTextField();
         firstNameTextField = new javax.swing.JTextField();
         createUserLabel = new javax.swing.JLabel();
@@ -45,6 +45,7 @@ public class CreateUserJPanel extends javax.swing.JPanel {
         emailLabel = new javax.swing.JLabel();
         phoneLabel = new javax.swing.JLabel();
         addUserBtn = new javax.swing.JButton();
+        dobDateChooser = new com.toedter.calendar.JDateChooser();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -80,27 +81,28 @@ public class CreateUserJPanel extends javax.swing.JPanel {
             .addGroup(createUserJPanelLayout.createSequentialGroup()
                 .addGroup(createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(createUserJPanelLayout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addGroup(createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(phoneLabel)
-                                .addComponent(lastNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(emailLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(DOBLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(firstNameLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(75, 75, 75)
-                        .addGroup(createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dobTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(createUserJPanelLayout.createSequentialGroup()
                         .addGap(162, 162, 162)
                         .addComponent(createUserLabel))
                     .addGroup(createUserJPanelLayout.createSequentialGroup()
-                        .addGap(207, 207, 207)
-                        .addComponent(addUserBtn)))
+                        .addGap(203, 203, 203)
+                        .addComponent(addUserBtn))
+                    .addGroup(createUserJPanelLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lastNameLabel)
+                            .addComponent(DOBLabel)
+                            .addComponent(firstNameLabel)
+                            .addComponent(emailLabel)
+                            .addComponent(phoneLabel))
+                        .addGap(35, 35, 35)
+                        .addGroup(createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(phoneTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dobDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(80, 80, 80))
         );
         createUserJPanelLayout.setVerticalGroup(
@@ -109,17 +111,18 @@ public class CreateUserJPanel extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addComponent(createUserLabel)
                 .addGap(11, 11, 11)
-                .addGroup(createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(firstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lastNameLabel)
-                    .addComponent(lastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DOBLabel)
-                    .addComponent(dobTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(createUserJPanelLayout.createSequentialGroup()
+                        .addGroup(createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(firstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lastNameLabel)
+                            .addComponent(lastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
+                        .addComponent(DOBLabel))
+                    .addComponent(dobDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emailLabel)
@@ -128,9 +131,9 @@ public class CreateUserJPanel extends javax.swing.JPanel {
                 .addGroup(createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(phoneLabel)
                     .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(52, 52, 52)
                 .addComponent(addUserBtn)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         add(createUserJPanel, java.awt.BorderLayout.CENTER);
@@ -140,15 +143,11 @@ public class CreateUserJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         person.setFirstName(firstNameTextField.getText());
         person.setLastName(lastNameTextField.getText());
-        person.setDateOfBirth(dobTextField.getText());
+        person.setDateOfBirth(dobDateChooser.getDate());
         person.setEmailId(emailTextField.getText());
         person.setPhoneNumber(phoneTextField.getText());
         
         JOptionPane.showMessageDialog(null, "Person added successfully!");
-        
-        
-        
-        
     }//GEN-LAST:event_addUserBtnActionPerformed
 
 
@@ -157,11 +156,12 @@ public class CreateUserJPanel extends javax.swing.JPanel {
     private javax.swing.JButton addUserBtn;
     private javax.swing.JPanel createUserJPanel;
     private javax.swing.JLabel createUserLabel;
-    private javax.swing.JTextField dobTextField;
+    private com.toedter.calendar.JDateChooser dobDateChooser;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JTextField firstNameTextField;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField lastNameTextField;
     private javax.swing.JLabel phoneLabel;
