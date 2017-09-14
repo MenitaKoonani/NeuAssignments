@@ -10,13 +10,13 @@ package UserApplication;
  * @author Menita Koonani
  */
 
-public class AddressDetails {
+public class Address extends Person{
     
     private String streetName;
     private String apartmentNum;
     private String city;
     private String state;
-    private Long zipCode;
+    private String zipCode;
     private String country;
     
     public String getStreetName() {
@@ -51,11 +51,11 @@ public class AddressDetails {
         this.state = state;
     }
 
-    public Long getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(Long zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 

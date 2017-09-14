@@ -11,12 +11,11 @@ import java.util.Date;
  *
  * @author Menita Koonani
  */
-public class LicenseDetails {
+public class License {
     private String licenseNumber;
     private String licenseName;
-    private Date expiryDate;
-    private Date issueDate;
-    private String homeAddress;
+    private String expiryDate;
+    private String issueDate;
 
     public String getLicenseNumber() {
         return licenseNumber;
@@ -34,27 +33,19 @@ public class LicenseDetails {
         this.licenseName = licenseName;
     }
 
-    public Date getExpiryDate() {
+    public String getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(Date expiryDate) {
+    public void setExpiryDate(String expiryDate) {
         this.expiryDate = expiryDate;
     }
 
-    public Date getIssueDate() {
+    public String getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(Date issueDate) {
+    public void setIssueDate(String issueDate) {
         this.issueDate = issueDate;
-    }
-
-    public String getHomeAddress() {
-        return homeAddress;
-    }
-
-    public void setHomeAddress(String homeAddress) {
-        this.homeAddress = homeAddress;
     }
 }

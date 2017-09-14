@@ -5,6 +5,8 @@
  */
 package Interface;
 
+import UserApplication.*;
+
 /**
  *
  * @author Menita Koonani
@@ -14,8 +16,10 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
+    private Person person;
     public MainJFrame() {
         initComponents();
+        person = new Person();
     }
 
     /**
@@ -27,93 +31,166 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tabbedJPane = new javax.swing.JTabbedPane();
-        createJPanel = new javax.swing.JPanel();
-        createSplitPane = new javax.swing.JSplitPane();
-        createControlPanel = new javax.swing.JPanel();
-        userDetailsBtn = new javax.swing.JButton();
-        createDisplayPanel = new javax.swing.JPanel();
-        viewJPanel = new javax.swing.JPanel();
-        viewSplitPane = new javax.swing.JSplitPane();
+        userJPanel = new javax.swing.JPanel();
+        userSplitPane = new javax.swing.JSplitPane();
+        userControlPanel = new javax.swing.JPanel();
+        createUserBtn = new javax.swing.JButton();
+        viewUserBtn = new javax.swing.JButton();
+        addAddressBtn = new javax.swing.JButton();
+        addLicenseBtn = new javax.swing.JButton();
+        addCreditCardBtn = new javax.swing.JButton();
+        addAccountBtn = new javax.swing.JButton();
+        userDisplayPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        userDetailsBtn.setText("User Details");
+        createUserBtn.setText("Create a new User");
+        createUserBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createUserBtnActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout createControlPanelLayout = new javax.swing.GroupLayout(createControlPanel);
-        createControlPanel.setLayout(createControlPanelLayout);
-        createControlPanelLayout.setHorizontalGroup(
-            createControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createControlPanelLayout.createSequentialGroup()
+        viewUserBtn.setText("View User Details");
+        viewUserBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserBtnActionPerformed(evt);
+            }
+        });
+
+        addAddressBtn.setText("Add your address");
+        addAddressBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAddressBtnActionPerformed(evt);
+            }
+        });
+
+        addLicenseBtn.setText("Add License details");
+        addLicenseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addLicenseBtnActionPerformed(evt);
+            }
+        });
+
+        addCreditCardBtn.setText("Add credit card details");
+        addCreditCardBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCreditCardBtnActionPerformed(evt);
+            }
+        });
+
+        addAccountBtn.setText("Add financial details");
+        addAccountBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAccountBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout userControlPanelLayout = new javax.swing.GroupLayout(userControlPanel);
+        userControlPanel.setLayout(userControlPanelLayout);
+        userControlPanelLayout.setHorizontalGroup(
+            userControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userControlPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(userDetailsBtn)
+                .addGroup(userControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(addCreditCardBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addLicenseBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addAddressBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(createUserBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(viewUserBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addAccountBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        createControlPanelLayout.setVerticalGroup(
-            createControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createControlPanelLayout.createSequentialGroup()
+        userControlPanelLayout.setVerticalGroup(
+            userControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userControlPanelLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addComponent(userDetailsBtn)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addComponent(createUserBtn)
+                .addGap(18, 18, 18)
+                .addComponent(addAddressBtn)
+                .addGap(18, 18, 18)
+                .addComponent(addLicenseBtn)
+                .addGap(18, 18, 18)
+                .addComponent(addCreditCardBtn)
+                .addGap(18, 18, 18)
+                .addComponent(addAccountBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(viewUserBtn)
+                .addGap(62, 62, 62))
         );
 
-        createSplitPane.setLeftComponent(createControlPanel);
+        userSplitPane.setLeftComponent(userControlPanel);
 
-        javax.swing.GroupLayout createDisplayPanelLayout = new javax.swing.GroupLayout(createDisplayPanel);
-        createDisplayPanel.setLayout(createDisplayPanelLayout);
-        createDisplayPanelLayout.setHorizontalGroup(
-            createDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 268, Short.MAX_VALUE)
+        javax.swing.GroupLayout userDisplayPanelLayout = new javax.swing.GroupLayout(userDisplayPanel);
+        userDisplayPanel.setLayout(userDisplayPanelLayout);
+        userDisplayPanelLayout.setHorizontalGroup(
+            userDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 474, Short.MAX_VALUE)
         );
-        createDisplayPanelLayout.setVerticalGroup(
-            createDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
-
-        createSplitPane.setRightComponent(createDisplayPanel);
-
-        javax.swing.GroupLayout createJPanelLayout = new javax.swing.GroupLayout(createJPanel);
-        createJPanel.setLayout(createJPanelLayout);
-        createJPanelLayout.setHorizontalGroup(
-            createJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createJPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(createSplitPane)
-                .addContainerGap())
-        );
-        createJPanelLayout.setVerticalGroup(
-            createJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createJPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(createSplitPane)
-                .addContainerGap())
+        userDisplayPanelLayout.setVerticalGroup(
+            userDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 376, Short.MAX_VALUE)
         );
 
-        tabbedJPane.addTab("Create Tab", createJPanel);
+        userSplitPane.setRightComponent(userDisplayPanel);
 
-        javax.swing.GroupLayout viewJPanelLayout = new javax.swing.GroupLayout(viewJPanel);
-        viewJPanel.setLayout(viewJPanelLayout);
-        viewJPanelLayout.setHorizontalGroup(
-            viewJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewJPanelLayout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(viewSplitPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
+        javax.swing.GroupLayout userJPanelLayout = new javax.swing.GroupLayout(userJPanel);
+        userJPanel.setLayout(userJPanelLayout);
+        userJPanelLayout.setHorizontalGroup(
+            userJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userJPanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(userSplitPane)
+                .addGap(25, 25, 25))
         );
-        viewJPanelLayout.setVerticalGroup(
-            viewJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewJPanelLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(viewSplitPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(196, Short.MAX_VALUE))
+        userJPanelLayout.setVerticalGroup(
+            userJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userJPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(userSplitPane)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tabbedJPane.addTab("tab2", viewJPanel);
-
-        getContentPane().add(tabbedJPane, java.awt.BorderLayout.CENTER);
+        getContentPane().add(userJPanel, java.awt.BorderLayout.PAGE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void viewUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserBtnActionPerformed
+        // TODO add your handling code here:
+        ViewAllDetailsJPanel viewAllDetailsPanel = new ViewAllDetailsJPanel(person);
+        userSplitPane.setRightComponent(viewAllDetailsPanel);
+    }//GEN-LAST:event_viewUserBtnActionPerformed
+
+    private void createUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserBtnActionPerformed
+        // TODO add your handling code here:
+        CreateUserJPanel createUserJPanel = new CreateUserJPanel(person);
+        userSplitPane.setRightComponent(createUserJPanel);
+    }//GEN-LAST:event_createUserBtnActionPerformed
+
+    private void addAddressBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAddressBtnActionPerformed
+        // TODO add your handling code here:
+        CreateAddressJPanel createAddressJPanel = new CreateAddressJPanel(person);
+        userSplitPane.setRightComponent(createAddressJPanel);
+    }//GEN-LAST:event_addAddressBtnActionPerformed
+
+    private void addLicenseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLicenseBtnActionPerformed
+        // TODO add your handling code here:
+        CreateLicenseJPanel createLicensePanel = new CreateLicenseJPanel(person);
+        userSplitPane.setRightComponent(createLicensePanel);
+    }//GEN-LAST:event_addLicenseBtnActionPerformed
+
+    private void addCreditCardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCreditCardBtnActionPerformed
+        // TODO add your handling code here:
+        CreateCreditCardJPanel createCreditCardJPanel = new CreateCreditCardJPanel(person);
+        userSplitPane.setRightComponent(createCreditCardJPanel);
+    }//GEN-LAST:event_addCreditCardBtnActionPerformed
+
+    private void addAccountBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAccountBtnActionPerformed
+        // TODO add your handling code here:
+        CreateFinancialAccountsJPanel createFinancialAccPanel = new CreateFinancialAccountsJPanel(person);
+        userSplitPane.setRightComponent(createFinancialAccPanel);
+    }//GEN-LAST:event_addAccountBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,13 +228,15 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel createControlPanel;
-    private javax.swing.JPanel createDisplayPanel;
-    private javax.swing.JPanel createJPanel;
-    private javax.swing.JSplitPane createSplitPane;
-    private javax.swing.JTabbedPane tabbedJPane;
-    private javax.swing.JButton userDetailsBtn;
-    private javax.swing.JPanel viewJPanel;
-    private javax.swing.JSplitPane viewSplitPane;
+    private javax.swing.JButton addAccountBtn;
+    private javax.swing.JButton addAddressBtn;
+    private javax.swing.JButton addCreditCardBtn;
+    private javax.swing.JButton addLicenseBtn;
+    private javax.swing.JButton createUserBtn;
+    private javax.swing.JPanel userControlPanel;
+    private javax.swing.JPanel userDisplayPanel;
+    private javax.swing.JPanel userJPanel;
+    private javax.swing.JSplitPane userSplitPane;
+    private javax.swing.JButton viewUserBtn;
     // End of variables declaration//GEN-END:variables
 }
