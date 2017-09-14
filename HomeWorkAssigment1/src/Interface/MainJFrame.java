@@ -6,6 +6,7 @@
 package Interface;
 
 import UserApplication.*;
+import java.awt.Dimension;
 
 /**
  *
@@ -114,22 +115,24 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(addCreditCardBtn)
                 .addGap(18, 18, 18)
                 .addComponent(addAccountBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(viewUserBtn)
-                .addGap(62, 62, 62))
+                .addGap(100, 100, 100))
         );
 
         userSplitPane.setLeftComponent(userControlPanel);
+
+        userDisplayPanel.setAutoscrolls(true);
 
         javax.swing.GroupLayout userDisplayPanelLayout = new javax.swing.GroupLayout(userDisplayPanel);
         userDisplayPanel.setLayout(userDisplayPanelLayout);
         userDisplayPanelLayout.setHorizontalGroup(
             userDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 474, Short.MAX_VALUE)
+            .addGap(0, 949, Short.MAX_VALUE)
         );
         userDisplayPanelLayout.setVerticalGroup(
             userDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 376, Short.MAX_VALUE)
+            .addGap(0, 691, Short.MAX_VALUE)
         );
 
         userSplitPane.setRightComponent(userDisplayPanel);
@@ -139,16 +142,16 @@ public class MainJFrame extends javax.swing.JFrame {
         userJPanelLayout.setHorizontalGroup(
             userJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userJPanelLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap()
                 .addComponent(userSplitPane)
-                .addGap(25, 25, 25))
+                .addContainerGap())
         );
         userJPanelLayout.setVerticalGroup(
             userJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userJPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(userSplitPane)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addComponent(userSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         getContentPane().add(userJPanel, java.awt.BorderLayout.PAGE_START);
