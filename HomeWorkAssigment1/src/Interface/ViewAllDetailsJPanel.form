@@ -56,28 +56,6 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="firstNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lastNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="emailLabel" min="-2" max="-2" attributes="0"/>
-                                      <Component id="DOBLabel" min="-2" max="-2" attributes="0"/>
-                                      <Component id="phoneLabel" min="-2" max="-2" attributes="0"/>
-                                      <Component id="photoLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="phoneTextField" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="emailTextField" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="lastNameTextField" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="firstNameTextField" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="dobDateChooser" alignment="0" pref="177" max="32767" attributes="0"/>
-                                      <Component id="photoPanel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
                                   <Component id="viewUserLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -127,12 +105,37 @@
                                       </Group>
                                   </Group>
                               </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="firstNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lastNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="emailLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="DOBLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="phoneLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="photoLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="phoneTextField" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="emailTextField" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="lastNameTextField" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="firstNameTextField" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="dobDateChooser" alignment="0" pref="177" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                          <Component id="photoPanel" min="-2" pref="133" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
                                   <Component id="createAddressLabel1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -275,144 +278,138 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="photoLabel" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="creditCardNumTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="creditCardNumLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="creditCardHolderTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="creditCardHolderLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="creditCardCvvTextField" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Component id="creditCardCvvLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <Component id="creditCardExpiryDateChooser" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="creditCardExpiryDateLabel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="creditCardIssueDateLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="creditCardIssueDateChooser" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                                  <Component id="checkingAccDetailLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="creditCardNumTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="creditCardNumLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="checkAccNumTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="checkAccNumLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="creditCardHolderTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="creditCardHolderLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="creditCardCvvTextField" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                                              <Component id="creditCardCvvLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Component id="photoPanel" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                          <Component id="createAddressLabel" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="streetNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="streetNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="apartmentNumLabel" min="-2" max="-2" attributes="0"/>
-                                              <Component id="aptNumTextField" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="cityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="cityTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="stateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="stateTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="countryLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="countryTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="zipcodeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="zipcodeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="savingsAccDEtailsLabel" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="savAccNumTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="savAccNumLabel" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="1" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                                  <Component id="checkAccCreationDateLabel" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="3" attributes="0">
-                                                      <Component id="savAccStatusTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="savAccStatusLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <Component id="savAccCreationDateChooser" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Component id="savCreationDateLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="savDebtInfoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="savDebtInfoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="saveCreditInfoTeextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="savCreditInfoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <Component id="creditCardExpiryDateChooser" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="creditCardExpiryDateLabel" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="creditCardIssueDateLabel" min="-2" max="-2" attributes="0"/>
-                                              <Component id="creditCardIssueDateChooser" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                                          <Component id="checkingAccDetailLabel" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="3" attributes="0">
-                                                      <Component id="checkAccNumTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="checkAccNumLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                                          <Component id="checkAccCreationDateLabel" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="102" attributes="0">
-                                                          <EmptySpace max="-2" attributes="0"/>
-                                                          <Group type="103" groupAlignment="3" attributes="0">
-                                                              <Component id="checkAccStatusTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                              <Component id="checkAccStatusLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                          <Component id="checkAccCreationDateChooser" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="3" attributes="0">
-                                                      <Component id="checkDebtInfoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="checkDebtInfoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="checkAccStatusTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="checkAccStatusLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="3" attributes="0">
-                                                      <Component id="checkCreditInfoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="checkCreditInfoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
+                                                  <Component id="checkAccCreationDateChooser" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
+                                          <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                                       </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="checkDebtInfoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="checkDebtInfoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="checkCreditInfoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="checkCreditInfoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                  <Component id="photoPanel" min="-2" pref="92" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="createAddressLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="streetNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="streetNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="apartmentNumLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="aptNumTextField" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="cityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cityTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="stateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="stateTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="countryLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="countryTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="zipcodeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="zipcodeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="savingsAccDEtailsLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="savAccNumTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="savAccNumLabel" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="savAccStatusTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="savAccStatusLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <Component id="savAccCreationDateChooser" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="savCreationDateLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="savDebtInfoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="savDebtInfoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="saveCreditInfoTeextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="savCreditInfoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -782,29 +779,14 @@
                 </Component>
                 <Container class="javax.swing.JPanel" name="photoPanel">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder roundedCorners="true"/>
                       </Border>
                     </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="Image"/>
                   </Properties>
 
-                  <Layout>
-                    <DimensionLayout dim="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="113" max="32767" attributes="0"/>
-                      </Group>
-                    </DimensionLayout>
-                    <DimensionLayout dim="1">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                    </DimensionLayout>
-                  </Layout>
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
                 </Container>
               </SubComponents>
             </Container>

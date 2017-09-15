@@ -176,7 +176,17 @@ public class CreateUserJPanel extends javax.swing.JPanel {
         person.setFirstName(firstNameTextField.getText());
         person.setLastName(lastNameTextField.getText());
         person.setDateOfBirth(dobDateChooser.getDate());
-        person.setEmailId(emailTextField.getText());
+        String emailId = emailTextField.getText();
+        if(emailId.contains("@") && emailId.contains("."))
+        {
+            person.setEmailId(emailId);    
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Invalid Email");
+            emailTextField.requestFocus();
+            return;
+        }
         person.setPhoneNumber(phoneTextField.getText());
         person.setPhotoPath(photoPathTextField.getText());
         
