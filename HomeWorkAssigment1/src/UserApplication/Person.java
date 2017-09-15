@@ -18,6 +18,7 @@ public class Person {
     private Date dateOfBirth;
     private String phoneNumber;
     private String emailId;
+    private String photoPath;
 
     private Address address;
     private License license;
@@ -62,6 +63,14 @@ public class Person {
 
     public void setEmailId(String emailId) {
         this.emailId = emailId;
+    }
+    
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 
     public Address getAddress() {

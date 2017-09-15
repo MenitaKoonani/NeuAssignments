@@ -128,11 +128,11 @@ public class MainJFrame extends javax.swing.JFrame {
         userDisplayPanel.setLayout(userDisplayPanelLayout);
         userDisplayPanelLayout.setHorizontalGroup(
             userDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 949, Short.MAX_VALUE)
+            .addGap(0, 818, Short.MAX_VALUE)
         );
         userDisplayPanelLayout.setVerticalGroup(
             userDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 691, Short.MAX_VALUE)
+            .addGap(0, 586, Short.MAX_VALUE)
         );
 
         userSplitPane.setRightComponent(userDisplayPanel);
@@ -143,14 +143,14 @@ public class MainJFrame extends javax.swing.JFrame {
             userJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userJPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(userSplitPane)
+                .addComponent(userSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
                 .addContainerGap())
         );
         userJPanelLayout.setVerticalGroup(
             userJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userJPanelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(userSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE)
+                .addComponent(userSplitPane)
                 .addContainerGap())
         );
 
