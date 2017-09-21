@@ -15,22 +15,43 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Menita Koonani
  */
-public class ViewAirplaneJPanel extends javax.swing.JPanel {
+public class SearchAirplaneJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form viewAirplaneJPanel
+     * Creates new form SearchAirplaneJPanel
      */
     private AirplaneCatalog airplaneCatalog;
-
-    public ViewAirplaneJPanel(AirplaneCatalog airplaneCatalog, int criteriaType) {
+    private int searchCriteria;
+    public SearchAirplaneJPanel(AirplaneCatalog airplaneCatalog, int searchCriteria){
         initComponents();
         this.airplaneCatalog = airplaneCatalog;
-        populateTable();
+        this.searchCriteria = searchCriteria;
     }
-
-    public void populateTable() {
-        ArrayList<Airplane> airplaneList = airplaneCatalog.getAirplanesList();
-        DefaultTableModel airplaneTable = (DefaultTableModel) viewAirplaneTable.getModel();
+    
+    public void searchByCriteria()
+    {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        switch(searchCriteria)
+        {
+            // list of available airplanes
+            case 2:
+                airplaneList = airplaneCatalog.getAvailableAirplanes();
+                searchPanelHeader.setText("List of available airplanes!");
+                break;
+            // Made by manufacture 
+            case 3:
+                String findManufacturer = searchAirplaneQueryField.getText();
+                airplaneList = airplaneCatalog.getAirplaneManufacturer(findManufacturer);
+                searchPanelHeader.setText("List of airplanes manufactured by!" + findManufacturer);
+                break;
+        }
+        if(airplaneList != null)
+        {
+            populateTable(airplaneList);
+        }
+    }
+    public void populateTable(ArrayList<Airplane> airplaneList) {
+        DefaultTableModel airplaneTable = (DefaultTableModel) searchAirplaneTable.getModel();
         airplaneTable.setNumRows(0);
         //starting the population form row 0
         airplaneTable.setRowCount(0);
@@ -44,7 +65,6 @@ public class ViewAirplaneJPanel extends javax.swing.JPanel {
         }
 
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,9 +74,12 @@ public class ViewAirplaneJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        viewPanelHeader = new javax.swing.JLabel();
-        viewScrollPane = new javax.swing.JScrollPane();
-        viewAirplaneTable = new javax.swing.JTable();
+        searchAirplaneQueryField = new javax.swing.JTextField();
+        serachAirplaneQueryLabel = new javax.swing.JLabel();
+        searchBtn = new javax.swing.JButton();
+        searchPanelHeader = new javax.swing.JLabel();
+        searchScrollPane = new javax.swing.JScrollPane();
+        searchAirplaneTable = new javax.swing.JTable();
         viewDetailsBtn = new javax.swing.JButton();
         serialNumberLabel = new javax.swing.JLabel();
         serailNumberField = new javax.swing.JTextField();
@@ -75,10 +98,20 @@ public class ViewAirplaneJPanel extends javax.swing.JPanel {
         yearManuField = new javax.swing.JTextField();
         seatsAvailField = new javax.swing.JTextField();
 
-        viewPanelHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        viewPanelHeader.setText("View Airplane Details");
+        serachAirplaneQueryLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        serachAirplaneQueryLabel.setText("Enter searh query:");
 
-        viewAirplaneTable.setModel(new javax.swing.table.DefaultTableModel(
+        searchBtn.setText("Search");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
+
+        searchPanelHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        searchPanelHeader.setText("Airplane Details");
+
+        searchAirplaneTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -101,7 +134,7 @@ public class ViewAirplaneJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        viewScrollPane.setViewportView(viewAirplaneTable);
+        searchScrollPane.setViewportView(searchAirplaneTable);
 
         viewDetailsBtn.setText("View Details");
         viewDetailsBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -147,58 +180,75 @@ public class ViewAirplaneJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(viewDetailsBtn)
-                .addGap(303, 303, 303))
             .addGroup(layout.createSequentialGroup()
+                .addGap(0, 156, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(304, 304, 304)
-                        .addComponent(viewPanelHeader))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
-                        .addComponent(viewScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(204, 204, 204)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(searchBtn)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(yearManuLabel)
-                                    .addComponent(manufacturerNameLabel)
-                                    .addComponent(seatsAvailLabel)
-                                    .addComponent(airportNameLabel))
-                                .addGap(64, 64, 64)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(manufacturerNameField)
-                                    .addComponent(yearManuField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                                    .addComponent(airportNameField)
-                                    .addComponent(seatsAvailField)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(airplaneNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(airplaneAvailableLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(64, 64, 64)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(planeAvailableField, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(airplaneNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(serialNumberLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(modelNumberLabel))
-                                .addGap(64, 64, 64)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(modelNumberField, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                                    .addComponent(serailNumberField))))))
-                .addContainerGap(184, Short.MAX_VALUE))
+                                .addComponent(serachAirplaneQueryLabel)
+                                .addGap(31, 31, 31)
+                                .addComponent(searchAirplaneQueryField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(200, 200, 200))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(254, 254, 254)
+                            .addComponent(viewDetailsBtn)
+                            .addGap(268, 268, 268))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(searchScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(24, 24, 24)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(yearManuLabel)
+                                                .addComponent(manufacturerNameLabel)
+                                                .addComponent(seatsAvailLabel)
+                                                .addComponent(airportNameLabel))
+                                            .addGap(64, 64, 64)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(manufacturerNameField)
+                                                .addComponent(yearManuField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(airportNameField)
+                                                .addComponent(seatsAvailField, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(airplaneNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(airplaneAvailableLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                                            .addGap(64, 64, 64)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(planeAvailableField, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(airplaneNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(serialNumberLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(modelNumberLabel))
+                                            .addGap(64, 64, 64)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(modelNumberField)
+                                                .addComponent(serailNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGap(149, 149, 149)))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(searchPanelHeader)
+                .addGap(297, 297, 297))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(viewPanelHeader)
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchAirplaneQueryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(serachAirplaneQueryLabel))
                 .addGap(18, 18, 18)
-                .addComponent(viewScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchBtn)
+                .addGap(18, 18, 18)
+                .addComponent(searchPanelHeader)
+                .addGap(18, 18, 18)
+                .addComponent(searchScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(viewDetailsBtn)
                 .addGap(18, 18, 18)
@@ -233,15 +283,20 @@ public class ViewAirplaneJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(airportNameLabel)
                     .addComponent(airportNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        // TODO add your handling code here:
+        searchByCriteria();
+    }//GEN-LAST:event_searchBtnActionPerformed
+
     private void viewDetailsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDetailsBtnActionPerformed
         // TODO add your handling code here:
-        int selectedRow = viewAirplaneTable.getSelectedRow();
+        int selectedRow = searchAirplaneTable.getSelectedRow();
         if (selectedRow >= 0) {
-            Airplane airplane = (Airplane) viewAirplaneTable.getValueAt(selectedRow, 0);
+            Airplane airplane = (Airplane) searchAirplaneTable.getValueAt(selectedRow, 0);
             serailNumberField.setText(String.valueOf(airplane.getSerialNumber()));
             modelNumberField.setText(String.valueOf(airplane.getModelNumber()));
             airplaneNameField.setText(String.valueOf(airplane.getAirplaneName()));
@@ -267,14 +322,17 @@ public class ViewAirplaneJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField modelNumberField;
     private javax.swing.JLabel modelNumberLabel;
     private javax.swing.JTextField planeAvailableField;
+    private javax.swing.JTextField searchAirplaneQueryField;
+    private javax.swing.JTable searchAirplaneTable;
+    private javax.swing.JButton searchBtn;
+    private javax.swing.JLabel searchPanelHeader;
+    private javax.swing.JScrollPane searchScrollPane;
     private javax.swing.JTextField seatsAvailField;
     private javax.swing.JLabel seatsAvailLabel;
+    private javax.swing.JLabel serachAirplaneQueryLabel;
     private javax.swing.JTextField serailNumberField;
     private javax.swing.JLabel serialNumberLabel;
-    private javax.swing.JTable viewAirplaneTable;
     private javax.swing.JButton viewDetailsBtn;
-    private javax.swing.JLabel viewPanelHeader;
-    private javax.swing.JScrollPane viewScrollPane;
     private javax.swing.JTextField yearManuField;
     private javax.swing.JLabel yearManuLabel;
     // End of variables declaration//GEN-END:variables
