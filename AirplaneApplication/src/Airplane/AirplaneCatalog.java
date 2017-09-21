@@ -65,7 +65,7 @@ public class AirplaneCatalog {
         ArrayList<Airplane> airplaneList = new ArrayList();
         try {
             for (Airplane eachAirplane : this.getAirplanesList()) {
-                if(eachAirplane.getManufacturerName().equals(manuName))
+                if(eachAirplane.getManufacturerName().startsWith(manuName))
                 {
                     airplaneList.add(eachAirplane);
                 }
@@ -77,34 +77,51 @@ public class AirplaneCatalog {
         return null;
     }
     
-    public void populatingAirplaneCatalog(File chosenFile) throws IOException {
+//    public void populatingAirplaneCatalog(File chosenFile) throws IOException {
+//
+//        AirplaneCatalog airplaneCatalog = new AirplaneCatalog();
+//        BufferedReader bufferedReader = new BufferedReader(new FileReader(chosenFile.getAbsolutePath()));
+//        String stringLine = "";
+//        StringTokenizer string = null;
+//        int lineNum = 0;
+//        int tokenNum = 0;
+//        while ((stringLine = bufferedReader.readLine()) != null) {
+//            lineNum++;
+//            string = new StringTokenizer(stringLine, ",");
+//            int objPosition = 0;
+//            ArrayList eachObject = new ArrayList();
+//            while (string.hasMoreTokens() && objPosition <= 7) {
+//                tokenNum ++;
+//                objPosition ++;
+//                eachObject.add(string.nextToken(";"));
+//            }
+//            Airplane airplane = airplaneCatalog.addNewAirplane();
+//            airplane.setSerialNumber(Long.parseLong(((String) eachObject.get(0)).trim()));
+//            airplane.setModelNumber(String.valueOf(eachObject.get(1)).trim());
+//            airplane.setAirplaneName(String.valueOf(eachObject.get(2)).trim());
+//            airplane.setIsAvailable(String.valueOf(eachObject.get(3)).trim().equals("Yes"));
+//            airplane.setAirportName(String.valueOf(eachObject.get(4)).trim());
+//            airplane.setManufacturerName(String.valueOf(eachObject.get(5)).trim());
+//            airplane.setYearOfManufacture(Integer.parseInt(String.valueOf(eachObject.get(6)).trim()));
+//            airplane.setSeatsAvailable(Integer.parseInt(String.valueOf(eachObject.get(7)).trim()));
+//            JOptionPane.showMessageDialog(null, "Airplane:::" + airplane);
+//        }
+//    }
 
-        AirplaneCatalog airplaneCatalog = new AirplaneCatalog();
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(chosenFile.getAbsolutePath()));
-        String stringLine = "";
-        StringTokenizer string = null;
-        int lineNum = 0;
-        int tokenNum = 0;
-        while ((stringLine = bufferedReader.readLine()) != null) {
-            lineNum++;
-            string = new StringTokenizer(stringLine, ",");
-            int objPosition = 0;
-            ArrayList eachObject = new ArrayList();
-            while (string.hasMoreTokens() && objPosition <= 7) {
-                tokenNum++;
-                eachObject.set(objPosition++, string.nextToken(";"));
+    public ArrayList<Airplane> getAiplaneByManuYear(int findYear) {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        try {
+            for (Airplane eachAirplane : this.getAirplanesList()) {
+                if(eachAirplane.getYearOfManufacture() == findYear)
+                {
+                    airplaneList.add(eachAirplane);
+                }
             }
-            Airplane airplane = airplaneCatalog.addNewAirplane();
-            airplane.setSerialNumber(Long.parseLong((String) eachObject.get(0)));
-            airplane.setModelNumber((String) eachObject.get(1));
-            airplane.setAirplaneName((String) eachObject.get(2));
-            airplane.setIsAvailable(eachObject.get(3).equals("Yes"));
-            airplane.setAirportName((String) eachObject.get(4));
-            airplane.setManufacturerName((String) eachObject.get(5));
-            airplane.setYearOfManufacture((int) eachObject.get(6));
-            airplane.setSeatsAvailable((int) eachObject.get(7));
-            JOptionPane.showMessageDialog(null, "Airplane:::" + airplane);
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No airplanes were manufactured in " + findYear);
         }
+        return null;
     }
 
 }

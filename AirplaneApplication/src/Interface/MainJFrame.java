@@ -7,13 +7,13 @@ package Interface;
 
 import Airplane.Airplane;
 import Airplane.AirplaneCatalog;
+import Airplane.ImportIntoCatalog;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -29,7 +29,6 @@ public class MainJFrame extends javax.swing.JFrame {
      * Creates new form MainJFrame
      */
     private AirplaneCatalog airplaneCatalog;
-
     public MainJFrame() {
         initComponents();
         airplaneCatalog = new AirplaneCatalog();
@@ -50,6 +49,7 @@ public class MainJFrame extends javax.swing.JFrame {
         viewAirplaneBtn = new javax.swing.JButton();
         availableAirplanes = new javax.swing.JButton();
         searchByManuBtn = new javax.swing.JButton();
+        searchByManuYearBtn = new javax.swing.JButton();
         mainDisplayPanel = new javax.swing.JPanel();
         uploadFileBtn = new javax.swing.JButton();
         uploadFileLabel = new javax.swing.JLabel();
@@ -86,17 +86,25 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        searchByManuYearBtn.setText("Search by Manufactured Year");
+        searchByManuYearBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchByManuYearBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainControlPanelLayout = new javax.swing.GroupLayout(mainControlPanel);
         mainControlPanel.setLayout(mainControlPanelLayout);
         mainControlPanelLayout.setHorizontalGroup(
             mainControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainControlPanelLayout.createSequentialGroup()
+            .addGroup(mainControlPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(mainControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(availableAirplanes, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                    .addComponent(addAirplaneBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(viewAirplaneBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchByManuBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(mainControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(availableAirplanes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                    .addComponent(addAirplaneBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(viewAirplaneBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchByManuBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchByManuYearBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         mainControlPanelLayout.setVerticalGroup(
@@ -110,7 +118,9 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(availableAirplanes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(searchByManuBtn)
-                .addContainerGap(304, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(searchByManuYearBtn)
+                .addContainerGap(270, Short.MAX_VALUE))
         );
 
         mainSplitPane.setLeftComponent(mainControlPanel);
@@ -210,19 +220,30 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void addAirplaneListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAirplaneListBtnActionPerformed
         // TODO add your handling code here:
-        try {
-            File chosenFile = new File(uploadFilePathField.getText());
-            JOptionPane.showMessageDialog(null, "File : " + chosenFile.getName());
-            airplaneCatalog.populatingAirplaneCatalog(chosenFile);
-        } catch (IOException ex) {
-            Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        String fileName = uploadFilePathField.getText().trim();
+        if(!fileName.isEmpty())
+        {
+            try {
+                File chosenFile = new File(fileName);
+//                JOptionPane.showMessageDialog(null, "File : " + chosenFile.getName());
+                airplaneCatalog = ImportIntoCatalog.populatingAirplaneCatalog(chosenFile);
+                uploadFilePathField.setText("");
+            } catch (IOException ex) {
+                Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please choose a file!");
+            uploadFilePathField.requestFocus();
+            return;
         }
     }//GEN-LAST:event_addAirplaneListBtnActionPerformed
 
     private void availableAirplanesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_availableAirplanesActionPerformed
         // TODO add your handling code here:
-        ViewAirplaneJPanel viewAirplanePanel = new ViewAirplaneJPanel(airplaneCatalog, 2);
-        mainSplitPane.setRightComponent(viewAirplanePanel);
+        SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(airplaneCatalog, 2);
+        mainSplitPane.setRightComponent(searchAirplanePanel);
     }//GEN-LAST:event_availableAirplanesActionPerformed
 
     private void searchByManuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByManuBtnActionPerformed
@@ -230,6 +251,12 @@ public class MainJFrame extends javax.swing.JFrame {
         SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(airplaneCatalog, 3);
         mainSplitPane.setRightComponent(searchAirplanePanel);
     }//GEN-LAST:event_searchByManuBtnActionPerformed
+
+    private void searchByManuYearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByManuYearBtnActionPerformed
+        // TODO add your handling code here:
+        SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(airplaneCatalog, 4);
+        mainSplitPane.setRightComponent(searchAirplanePanel);
+    }//GEN-LAST:event_searchByManuYearBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,6 +301,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel mainDisplayPanel;
     private javax.swing.JSplitPane mainSplitPane;
     private javax.swing.JButton searchByManuBtn;
+    private javax.swing.JButton searchByManuYearBtn;
     private javax.swing.JButton uploadFileBtn;
     private javax.swing.JLabel uploadFileLabel;
     private javax.swing.JTextField uploadFilePathField;

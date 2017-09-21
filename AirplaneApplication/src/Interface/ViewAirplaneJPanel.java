@@ -71,12 +71,18 @@ public class ViewAirplaneJPanel extends javax.swing.JPanel {
         seatsAvailLabel = new javax.swing.JLabel();
         airportNameLabel = new javax.swing.JLabel();
         airportNameField = new javax.swing.JTextField();
-        planeAvailableField = new javax.swing.JTextField();
-        yearManuField = new javax.swing.JTextField();
-        seatsAvailField = new javax.swing.JTextField();
+        updateAirplaneBtn = new javax.swing.JButton();
+        planeAvailable = new javax.swing.JCheckBox();
+        planeUnavailable = new javax.swing.JCheckBox();
+        yearManuChooser = new com.toedter.calendar.JYearChooser();
+        seatsAvailChooser = new com.toedter.components.JSpinField();
+        updateChangesBtn = new javax.swing.JButton();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         viewPanelHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         viewPanelHeader.setText("View Airplane Details");
+        add(viewPanelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 39, -1, -1));
 
         viewAirplaneTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,158 +109,180 @@ public class ViewAirplaneJPanel extends javax.swing.JPanel {
         });
         viewScrollPane.setViewportView(viewAirplaneTable);
 
+        add(viewScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 86, 462, 190));
+
         viewDetailsBtn.setText("View Details");
         viewDetailsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewDetailsBtnActionPerformed(evt);
             }
         });
+        add(viewDetailsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 294, -1, -1));
 
         serialNumberLabel.setText("Airplane Serial  Number:");
+        add(serialNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 338, -1, -1));
 
         serailNumberField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        serailNumberField.setEnabled(false);
+        add(serailNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 335, 211, -1));
 
         modelNumberLabel.setText("Airplane Model Number:");
-
-        modelNumberField.setEnabled(false);
+        add(modelNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 376, -1, -1));
+        add(modelNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 373, 211, -1));
 
         airplaneNameLabel.setText("Airplane Name:");
-
-        airplaneNameField.setEnabled(false);
+        add(airplaneNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 414, -1, -1));
+        add(airplaneNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 411, 211, -1));
 
         airplaneAvailableLabel.setText("Is the airplane available:");
+        add(airplaneAvailableLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(226, 453, -1, -1));
 
         manufacturerNameLabel.setText("Airplane manufacturer name:");
-
-        manufacturerNameField.setEnabled(false);
+        add(manufacturerNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 493, -1, -1));
+        add(manufacturerNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 490, 211, -1));
 
         yearManuLabel.setText("Year of manufacture:");
+        add(yearManuLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 534, -1, -1));
 
         seatsAvailLabel.setText("Number of seats available:");
+        add(seatsAvailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 572, -1, -1));
 
         airportNameLabel.setText("Airport Name:");
+        add(airportNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(277, 607, -1, -1));
+        add(airportNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 604, 211, -1));
 
-        airportNameField.setEnabled(false);
+        updateAirplaneBtn.setText("Update");
+        updateAirplaneBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateAirplaneBtnActionPerformed(evt);
+            }
+        });
+        add(updateAirplaneBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(541, 294, 101, -1));
 
-        planeAvailableField.setEnabled(false);
+        planeAvailable.setSelected(true);
+        planeAvailable.setText("Yes");
+        add(planeAvailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(424, 449, -1, -1));
 
-        yearManuField.setEnabled(false);
+        planeUnavailable.setText("No");
+        add(planeUnavailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(539, 449, -1, -1));
 
-        seatsAvailField.setEnabled(false);
+        yearManuChooser.setEndYear(2017);
+        yearManuChooser.setMinimum(1990);
+        yearManuChooser.setName("yearOfManu"); // NOI18N
+        add(yearManuChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 528, 67, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(viewDetailsBtn)
-                .addGap(303, 303, 303))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(304, 304, 304)
-                        .addComponent(viewPanelHeader))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
-                        .addComponent(viewScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(204, 204, 204)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(yearManuLabel)
-                                    .addComponent(manufacturerNameLabel)
-                                    .addComponent(seatsAvailLabel)
-                                    .addComponent(airportNameLabel))
-                                .addGap(64, 64, 64)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(manufacturerNameField)
-                                    .addComponent(yearManuField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                                    .addComponent(airportNameField)
-                                    .addComponent(seatsAvailField)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(airplaneNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(airplaneAvailableLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(64, 64, 64)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(planeAvailableField, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(airplaneNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(serialNumberLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(modelNumberLabel))
-                                .addGap(64, 64, 64)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(modelNumberField, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                                    .addComponent(serailNumberField))))))
-                .addContainerGap(184, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(viewPanelHeader)
-                .addGap(18, 18, 18)
-                .addComponent(viewScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(viewDetailsBtn)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(serialNumberLabel)
-                    .addComponent(serailNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(modelNumberLabel)
-                    .addComponent(modelNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(airplaneNameLabel)
-                    .addComponent(airplaneNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(airplaneAvailableLabel)
-                    .addComponent(planeAvailableField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(manufacturerNameLabel)
-                    .addComponent(manufacturerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(yearManuLabel)
-                    .addComponent(yearManuField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(seatsAvailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(seatsAvailLabel))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(airportNameLabel)
-                    .addComponent(airportNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(84, Short.MAX_VALUE))
-        );
+        seatsAvailChooser.setMaximum(550);
+        seatsAvailChooser.setMinimum(0);
+        seatsAvailChooser.setName("seatsAvailable"); // NOI18N
+        seatsAvailChooser.setValue(550);
+        add(seatsAvailChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 566, 67, -1));
+
+        updateChangesBtn.setText("Update changes");
+        updateChangesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateChangesBtnActionPerformed(evt);
+            }
+        });
+        add(updateChangesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 652, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewDetailsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDetailsBtnActionPerformed
         // TODO add your handling code here:
+        populateAirplaneViewDetails(false);
+        updateChangesBtn.setVisible(false);
+    }//GEN-LAST:event_viewDetailsBtnActionPerformed
+    public void isEdittable(boolean isEdittable) {
+        serailNumberField.setEditable(isEdittable);
+        modelNumberField.setEditable(isEdittable);
+        airplaneNameField.setEditable(isEdittable);
+        planeAvailable.setEnabled(isEdittable);
+        planeUnavailable.setEnabled(isEdittable);
+        serailNumberField.setEditable(isEdittable);
+        yearManuChooser.setEnabled(isEdittable);
+        seatsAvailChooser.setEnabled(isEdittable);
+        airportNameField.setEditable(isEdittable);
+    }
+
+    private void populateAirplaneViewDetails(boolean isEdittable) {
+        isEdittable(isEdittable);
         int selectedRow = viewAirplaneTable.getSelectedRow();
         if (selectedRow >= 0) {
             Airplane airplane = (Airplane) viewAirplaneTable.getValueAt(selectedRow, 0);
             serailNumberField.setText(String.valueOf(airplane.getSerialNumber()));
             modelNumberField.setText(String.valueOf(airplane.getModelNumber()));
             airplaneNameField.setText(String.valueOf(airplane.getAirplaneName()));
-            planeAvailableField.setText(airplane.isAvailable() ? "Yes! The airplane is available" : "No sorry! The airplane is unavailable");
+            if(airplane.isAvailable())
+            {
+                planeAvailable.setSelected(true);
+            }
+            else
+            {
+                planeUnavailable.setSelected(false); 
+            }
             manufacturerNameField.setText(String.valueOf(airplane.getManufacturerName()));
-            yearManuField.setText(String.valueOf(airplane.getYearOfManufacture()));
-            seatsAvailField.setText(String.valueOf(airplane.getSeatsAvailable()));
+            yearManuChooser.setYear(airplane.getYearOfManufacture());
+            seatsAvailChooser.setValue(airplane.getSeatsAvailable());
             airportNameField.setText(String.valueOf(airplane.getAirportName()));
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row!!");
         }
-    }//GEN-LAST:event_viewDetailsBtnActionPerformed
+    }
+    private void updateAirplaneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAirplaneBtnActionPerformed
+        // TODO add your handling code here:
+        populateAirplaneViewDetails(true);
+        updateChangesBtn.setVisible(true);
+    }//GEN-LAST:event_updateAirplaneBtnActionPerformed
 
+    private void updateChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateChangesBtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = viewAirplaneTable.getSelectedRow();
+        if (selectedRow >= 0) {
+            Airplane airplane = (Airplane) viewAirplaneTable.getValueAt(selectedRow, 0);
+            getViewFieldsFromPanel(airplane);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row!!");
+        }
+    }//GEN-LAST:event_updateChangesBtnActionPerformed
+
+    public void getViewFieldsFromPanel(Airplane airplane) {
+        try {
+            Long serialNumber = Long.parseLong(serailNumberField.getText());
+            String modelNumber = modelNumberField.getText();
+            String airplaneName = airplaneNameField.getText();
+            boolean isAvailable = planeAvailable.isSelected();
+            String manufacturerName = manufacturerNameField.getText();
+            int yearManu = yearManuChooser.getYear();
+            int seatsAvailable = seatsAvailChooser.getValue();
+            String airportName = airportNameField.getText();
+
+            airplane.setSerialNumber(serialNumber);
+            airplane.setModelNumber(modelNumber);
+            airplane.setAirplaneName(airplaneName);
+            airplane.setIsAvailable(isAvailable);
+            airplane.setManufacturerName(manufacturerName);
+            airplane.setYearOfManufacture(yearManu);
+            airplane.setSeatsAvailable(seatsAvailable);
+            airplane.setAirportName(airportName);
+            
+            JOptionPane.showMessageDialog(null, "Updated!!");
+            resetViewFields();
+            isEdittable(false);
+            populateTable();
+            
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid Serial Number : Serial Number field can contian only numbers!! Please try again!");
+            serailNumberField.requestFocus();
+        }
+    }
+    public void resetViewFields() {
+        serailNumberField.setText("");
+        modelNumberField.setText("");
+        airplaneNameField.setText("");
+        planeAvailable.setSelected(true);
+        manufacturerNameField.setText("");
+        yearManuChooser.setYear(2017);
+        seatsAvailChooser.setValue(550);
+        airportNameField.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel airplaneAvailableLabel;
@@ -266,16 +294,19 @@ public class ViewAirplaneJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel manufacturerNameLabel;
     private javax.swing.JTextField modelNumberField;
     private javax.swing.JLabel modelNumberLabel;
-    private javax.swing.JTextField planeAvailableField;
-    private javax.swing.JTextField seatsAvailField;
+    private javax.swing.JCheckBox planeAvailable;
+    private javax.swing.JCheckBox planeUnavailable;
+    private com.toedter.components.JSpinField seatsAvailChooser;
     private javax.swing.JLabel seatsAvailLabel;
     private javax.swing.JTextField serailNumberField;
     private javax.swing.JLabel serialNumberLabel;
+    private javax.swing.JButton updateAirplaneBtn;
+    private javax.swing.JButton updateChangesBtn;
     private javax.swing.JTable viewAirplaneTable;
     private javax.swing.JButton viewDetailsBtn;
     private javax.swing.JLabel viewPanelHeader;
     private javax.swing.JScrollPane viewScrollPane;
-    private javax.swing.JTextField yearManuField;
+    private com.toedter.calendar.JYearChooser yearManuChooser;
     private javax.swing.JLabel yearManuLabel;
     // End of variables declaration//GEN-END:variables
 }

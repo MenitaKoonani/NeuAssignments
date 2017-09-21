@@ -19,6 +19,7 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
      * Creates new form addAirplaneJPanel
      */
     private AirplaneCatalog airplaneCatalog;
+
     public AddAirplaneJPanel(AirplaneCatalog airplaneCatalog) {
         initComponents();
         this.airplaneCatalog = airplaneCatalog;
@@ -92,6 +93,7 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
         seatsAvailField.setMaximum(550);
         seatsAvailField.setMinimum(0);
         seatsAvailField.setName("seatsAvailable"); // NOI18N
+        seatsAvailField.setValue(550);
 
         airportNameLabel.setText("Enter Airport Name:");
 
@@ -199,8 +201,24 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
 
     private void addAirplaneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAirplaneBtnActionPerformed
         // TODO add your handling code here:
-        try
-        {
+        getAddFieldsFromPanel();
+        JOptionPane.showMessageDialog(null, "Airplane added successfully!");
+        resetAddFields();
+    }//GEN-LAST:event_addAirplaneBtnActionPerformed
+    
+    public void resetAddFields() {
+        serialNumberField.setText("");
+        modelNumberField.setText("");
+        airplaneNameField.setText("");
+        planeAvailable.setSelected(true);
+        manufacturerNameField.setText("");
+        yearManuChooser.setYear(2017);
+        seatsAvailField.setValue(550);
+        airportNameField.setText("");
+    }
+
+    public void getAddFieldsFromPanel() {
+        try {
             Long serialNumber = Long.parseLong(serialNumberField.getText());
             String modelNumber = modelNumberField.getText();
             String airplaneName = airplaneNameField.getText();
@@ -219,27 +237,11 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
             airplane.setYearOfManufacture(yearManu);
             airplane.setSeatsAvailable(seatsAvailable);
             airplane.setAirportName(airportName);
-
-            JOptionPane.showMessageDialog(null, "Airplane added successfully!");
-
-            serialNumberField.setText("");
-            modelNumberField.setText("");
-            airplaneNameField.setText("");
-            planeAvailable.setSelected(true);
-            manufacturerNameField.setText("");
-            yearManuChooser.setYear(2017);
-            seatsAvailField.setValue(0);
-            airportNameField.setText("");
-            
-        }
-        catch(NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(null,"Invalid Serial Number : Serial Number field can contian only numbers!! Please try again!");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid Serial Number : Serial Number field can contian only numbers!! Please try again!");
             serialNumberField.requestFocus();
         }
-        
-    }//GEN-LAST:event_addAirplaneBtnActionPerformed
-
+    }
     private void serialNumberFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serialNumberFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_serialNumberFieldActionPerformed
