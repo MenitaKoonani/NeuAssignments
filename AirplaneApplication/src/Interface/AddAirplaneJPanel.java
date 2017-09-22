@@ -35,6 +35,7 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         airplaneAvailability = new javax.swing.ButtonGroup();
+        expiryBtnGroup = new javax.swing.ButtonGroup();
         addPanelHeader = new javax.swing.JLabel();
         serialNumberLabel = new javax.swing.JLabel();
         serialNumberField = new javax.swing.JTextField();
@@ -54,6 +55,9 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
         airportNameLabel = new javax.swing.JLabel();
         airportNameField = new javax.swing.JTextField();
         addAirplaneBtn = new javax.swing.JButton();
+        certificateExpiredLabel = new javax.swing.JLabel();
+        certificateInvalid = new javax.swing.JRadioButton();
+        certificateValid = new javax.swing.JRadioButton();
 
         addPanelHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         addPanelHeader.setText("Add Airplane Details");
@@ -71,10 +75,9 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
 
         airplaneNameLabel.setText("Enter Airplane Name:");
 
-        airplaneAvailableLabel.setText("Is it Available:");
+        airplaneAvailableLabel.setText("Is it Available?");
 
         airplaneAvailability.add(planeAvailable);
-        planeAvailable.setSelected(true);
         planeAvailable.setText("Yes");
 
         airplaneAvailability.add(planeUnavailable);
@@ -103,6 +106,14 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
                 addAirplaneBtnActionPerformed(evt);
             }
         });
+
+        certificateExpiredLabel.setText("Did maintanence certificate expire?");
+
+        expiryBtnGroup.add(certificateInvalid);
+        certificateInvalid.setText("Yes");
+
+        expiryBtnGroup.add(certificateValid);
+        certificateValid.setText("No");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -144,16 +155,23 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
                                         .addComponent(planeUnavailable, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(airplaneNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(airportNameLabel)
-                                .addGap(125, 125, 125)
-                                .addComponent(airportNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(certificateExpiredLabel)
+                                    .addComponent(airportNameLabel))
+                                .addGap(123, 123, 123)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(airportNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(certificateInvalid)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(certificateValid))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(223, 223, 223)
                         .addComponent(addPanelHeader))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(288, 288, 288)
                         .addComponent(addAirplaneBtn)))
-                .addGap(125, 125, 125))
+                .addGap(121, 121, 121))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +211,12 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(airportNameLabel)
                     .addComponent(airportNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(certificateExpiredLabel)
+                    .addComponent(certificateInvalid)
+                    .addComponent(certificateValid))
+                .addGap(20, 20, 20)
                 .addComponent(addAirplaneBtn)
                 .addGap(60, 60, 60))
         );
@@ -202,6 +225,7 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
     private void addAirplaneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAirplaneBtnActionPerformed
         // TODO add your handling code here:
         getAddFieldsFromPanel();
+        MainJFrame.airplaneCatalog.setUpdatedTime(System.currentTimeMillis());
         JOptionPane.showMessageDialog(null, "Airplane added successfully!");
         resetAddFields();
     }//GEN-LAST:event_addAirplaneBtnActionPerformed
@@ -227,8 +251,10 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
             int yearManu = yearManuChooser.getYear();
             int seatsAvailable = seatsAvailField.getValue();
             String airportName = airportNameField.getText();
-
+            boolean isValidCertificate = certificateValid.isSelected();
+            
             Airplane airplane = airplaneCatalog.addNewAirplane();
+            airplaneCatalog.setUpdatedTime(System.currentTimeMillis());
             airplane.setSerialNumber(serialNumber);
             airplane.setModelNumber(modelNumber);
             airplane.setAirplaneName(airplaneName);
@@ -237,6 +263,8 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
             airplane.setYearOfManufacture(yearManu);
             airplane.setSeatsAvailable(seatsAvailable);
             airplane.setAirportName(airportName);
+            airplane.setIsCertificateValid(isValidCertificate);
+            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid Serial Number : Serial Number field can contian only numbers!! Please try again!");
             serialNumberField.requestFocus();
@@ -256,6 +284,10 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel airplaneNameLabel;
     private javax.swing.JTextField airportNameField;
     private javax.swing.JLabel airportNameLabel;
+    private javax.swing.JLabel certificateExpiredLabel;
+    private javax.swing.JRadioButton certificateInvalid;
+    private javax.swing.JRadioButton certificateValid;
+    private javax.swing.ButtonGroup expiryBtnGroup;
     private javax.swing.JTextField manufacturerNameField;
     private javax.swing.JLabel manufacturerNameLabel;
     private javax.swing.JTextField modelNumberField;

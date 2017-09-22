@@ -32,20 +32,22 @@ public class ImportIntoCatalog {
             string = new StringTokenizer(stringLine, ",");
             int objPosition = 0;
             ArrayList eachObject = new ArrayList();
-            while (string.hasMoreTokens() && objPosition <= 7) {
+            while (string.hasMoreTokens() && objPosition <= 8) {
                 tokenNum ++;
                 objPosition ++;
                 eachObject.add(string.nextToken(";"));
             }
             Airplane airplane = airplaneCatalog.addNewAirplane();
+            airplaneCatalog.setUpdatedTime(System.currentTimeMillis());
             airplane.setSerialNumber(Long.parseLong(((String) eachObject.get(0)).trim()));
             airplane.setModelNumber(String.valueOf(eachObject.get(1)).trim());
             airplane.setAirplaneName(String.valueOf(eachObject.get(2)).trim());
-            airplane.setIsAvailable(String.valueOf(eachObject.get(3)).trim().equals("Yes"));
+            airplane.setIsAvailable(String.valueOf(eachObject.get(3)).trim().equalsIgnoreCase("Yes"));
             airplane.setAirportName(String.valueOf(eachObject.get(4)).trim());
             airplane.setManufacturerName(String.valueOf(eachObject.get(5)).trim());
             airplane.setYearOfManufacture(Integer.parseInt(String.valueOf(eachObject.get(6)).trim()));
             airplane.setSeatsAvailable(Integer.parseInt(String.valueOf(eachObject.get(7)).trim()));
+            airplane.setIsCertificateValid(String.valueOf(eachObject.get(8)).trim().equalsIgnoreCase("Yes"));
         }
         JOptionPane.showMessageDialog(null, "Airplane Catalog Added!");
         return airplaneCatalog;

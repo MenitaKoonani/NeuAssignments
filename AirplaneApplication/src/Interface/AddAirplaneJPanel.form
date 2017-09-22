@@ -4,6 +4,8 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="airplaneAvailability">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="expiryBtnGroup">
+    </Component>
   </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -66,9 +68,19 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="airportNameLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="125" pref="125" max="-2" attributes="0"/>
-                              <Component id="airportNameField" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="certificateExpiredLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="airportNameLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="airportNameField" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="certificateInvalid" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="certificateValid" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -81,7 +93,7 @@
                       <Component id="addAirplaneBtn" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -131,7 +143,13 @@
                   <Component id="airportNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="airportNameField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="certificateExpiredLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="certificateInvalid" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="certificateValid" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Component id="addAirplaneBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
           </Group>
@@ -178,7 +196,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="airplaneAvailableLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Is it Available:"/>
+        <Property name="text" type="java.lang.String" value="Is it Available?"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="planeAvailable">
@@ -186,7 +204,6 @@
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="airplaneAvailability"/>
         </Property>
-        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Yes"/>
       </Properties>
     </Component>
@@ -244,6 +261,27 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addAirplaneBtnActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="certificateExpiredLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Did maintanence certificate expire?"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="certificateInvalid">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="expiryBtnGroup"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Yes"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="certificateValid">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="expiryBtnGroup"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="No"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

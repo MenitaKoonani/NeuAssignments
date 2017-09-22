@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +27,16 @@ import javax.swing.JOptionPane;
 public class AirplaneCatalog {
 
     private ArrayList<Airplane> airplanesList;
+    private Long updatedTime;
 
+    public Long getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(Long updatedTime) {
+        this.updatedTime = updatedTime;
+    }
+    
     public AirplaneCatalog() {
         airplanesList = new ArrayList<Airplane>();
     }
@@ -49,8 +59,7 @@ public class AirplaneCatalog {
         ArrayList<Airplane> airplaneList = new ArrayList();
         try {
             for (Airplane eachAirplane : this.getAirplanesList()) {
-                if(eachAirplane.isAvailable())
-                {
+                if (eachAirplane.isAvailable()) {
                     airplaneList.add(eachAirplane);
                 }
             }
@@ -65,8 +74,7 @@ public class AirplaneCatalog {
         ArrayList<Airplane> airplaneList = new ArrayList();
         try {
             for (Airplane eachAirplane : this.getAirplanesList()) {
-                if(eachAirplane.getManufacturerName().startsWith(manuName))
-                {
+                if (eachAirplane.getManufacturerName().toLowerCase().startsWith(manuName.toLowerCase())) {
                     airplaneList.add(eachAirplane);
                 }
             }
@@ -76,44 +84,12 @@ public class AirplaneCatalog {
         }
         return null;
     }
-    
-//    public void populatingAirplaneCatalog(File chosenFile) throws IOException {
-//
-//        AirplaneCatalog airplaneCatalog = new AirplaneCatalog();
-//        BufferedReader bufferedReader = new BufferedReader(new FileReader(chosenFile.getAbsolutePath()));
-//        String stringLine = "";
-//        StringTokenizer string = null;
-//        int lineNum = 0;
-//        int tokenNum = 0;
-//        while ((stringLine = bufferedReader.readLine()) != null) {
-//            lineNum++;
-//            string = new StringTokenizer(stringLine, ",");
-//            int objPosition = 0;
-//            ArrayList eachObject = new ArrayList();
-//            while (string.hasMoreTokens() && objPosition <= 7) {
-//                tokenNum ++;
-//                objPosition ++;
-//                eachObject.add(string.nextToken(";"));
-//            }
-//            Airplane airplane = airplaneCatalog.addNewAirplane();
-//            airplane.setSerialNumber(Long.parseLong(((String) eachObject.get(0)).trim()));
-//            airplane.setModelNumber(String.valueOf(eachObject.get(1)).trim());
-//            airplane.setAirplaneName(String.valueOf(eachObject.get(2)).trim());
-//            airplane.setIsAvailable(String.valueOf(eachObject.get(3)).trim().equals("Yes"));
-//            airplane.setAirportName(String.valueOf(eachObject.get(4)).trim());
-//            airplane.setManufacturerName(String.valueOf(eachObject.get(5)).trim());
-//            airplane.setYearOfManufacture(Integer.parseInt(String.valueOf(eachObject.get(6)).trim()));
-//            airplane.setSeatsAvailable(Integer.parseInt(String.valueOf(eachObject.get(7)).trim()));
-//            JOptionPane.showMessageDialog(null, "Airplane:::" + airplane);
-//        }
-//    }
 
     public ArrayList<Airplane> getAiplaneByManuYear(int findYear) {
         ArrayList<Airplane> airplaneList = new ArrayList();
         try {
             for (Airplane eachAirplane : this.getAirplanesList()) {
-                if(eachAirplane.getYearOfManufacture() == findYear)
-                {
+                if (eachAirplane.getYearOfManufacture() == findYear) {
                     airplaneList.add(eachAirplane);
                 }
             }
@@ -124,4 +100,78 @@ public class AirplaneCatalog {
         return null;
     }
 
+    public ArrayList<Airplane> getAirplaneBySerialNum(Long findSerialNum) {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        try {
+            for (Airplane eachAirplane : this.getAirplanesList()) {
+                if (Objects.equals(eachAirplane.getSerialNumber(), findSerialNum)) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No airplanes with serial Number : " + findSerialNum);
+        }
+        return null;
+    }
+
+    public ArrayList<Airplane> getAirplaneByModelNum(String findModelNum) {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        try {
+            for (Airplane eachAirplane : this.getAirplanesList()) {
+                if (eachAirplane.getModelNumber().equalsIgnoreCase(findModelNum)) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No airplanes with serial Number : " + findModelNum);
+        }
+        return null;
+    }
+
+    public ArrayList<Airplane> getAirplaneByAirport(String findAirport) {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        try {
+            for (Airplane eachAirplane : this.getAirplanesList()) {
+                if ((eachAirplane.getAirportName()).equalsIgnoreCase(findAirport)) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No airplanes in this airport : " + findAirport);
+        }
+        return null;
+    }
+
+    public ArrayList<Airplane> getAirplaneByName(String findAirplaneName) {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        try {
+            for (Airplane eachAirplane : this.getAirplanesList()) {
+                if ((eachAirplane.getAirplaneName().toLowerCase()).startsWith(findAirplaneName.toLowerCase())) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No " + findAirplaneName + " found!");
+        }
+        return null;
+    }
+
+    public ArrayList<Airplane> getValidCertiAirplanes() {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        try {
+            for (Airplane eachAirplane : this.getAirplanesList()) {
+                if (!eachAirplane.isCertitficateValid()) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No Airplanes have valid certificates!");
+        }
+        return null;
+    }
 }

@@ -19,6 +19,15 @@ public class Airplane {
     private int yearOfManufacture;
     private int seatsAvailable;
     private String airportName;
+    private boolean isCertificateValid;
+
+    public boolean isCertitficateValid() {
+        return isCertificateValid;
+    }
+
+    public void setIsCertificateValid(boolean isCertificateValid) {
+        this.isCertificateValid = isCertificateValid;
+    }
 
     public Long getSerialNumber() {
         return serialNumber;
