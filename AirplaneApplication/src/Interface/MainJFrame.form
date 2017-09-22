@@ -55,10 +55,11 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="searchByCertificateExpiryBtn" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="searchBySeatsBtn" alignment="1" max="32767" attributes="0"/>
+                          <Component id="searchByCertificateExpiryBtn" alignment="1" max="32767" attributes="0"/>
                           <Component id="searchByAirplaneNameBtn" alignment="0" max="32767" attributes="0"/>
                           <Component id="availableAirplanes" alignment="1" max="32767" attributes="0"/>
                           <Component id="addAirplaneBtn" alignment="1" max="32767" attributes="0"/>
@@ -69,6 +70,7 @@
                           <Component id="importFileBtn" alignment="0" max="32767" attributes="0"/>
                           <Component id="searchByModelNumBtn" alignment="0" max="32767" attributes="0"/>
                           <Component id="searchByAirportBtn" alignment="1" max="32767" attributes="0"/>
+                          <Component id="searchFirstAvailAirplaneBtn" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -83,13 +85,17 @@
                       <Component id="addAirplaneBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="viewAirplaneBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="58" max="32767" attributes="0"/>
+                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                      <Component id="searchFirstAvailAirplaneBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="availableAirplanes" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="searchByManuBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="searchByManuYearBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="searchBySeatsBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="searchBySerialNumBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="searchByModelNumBtn" min="-2" max="-2" attributes="0"/>
@@ -191,6 +197,22 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchByCertificateExpiryBtnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="searchBySeatsBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Search by seat availability"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchBySeatsBtnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="searchFirstAvailAirplaneBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Search first available airplane"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchFirstAvailAirplaneBtnActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

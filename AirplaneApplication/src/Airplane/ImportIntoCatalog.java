@@ -9,7 +9,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 
@@ -19,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class ImportIntoCatalog {
     
-    public static AirplaneCatalog populatingAirplaneCatalog(File chosenFile) throws IOException {
+    public static AirplaneCatalog populatingAirplaneCatalog(File chosenFile) throws IOException, ParseException {
 
         AirplaneCatalog airplaneCatalog = new AirplaneCatalog();
         BufferedReader bufferedReader = new BufferedReader(new FileReader(chosenFile.getAbsolutePath()));
@@ -32,7 +36,7 @@ public class ImportIntoCatalog {
             string = new StringTokenizer(stringLine, ",");
             int objPosition = 0;
             ArrayList eachObject = new ArrayList();
-            while (string.hasMoreTokens() && objPosition <= 8) {
+            while (string.hasMoreTokens() && objPosition <= 10) {
                 tokenNum ++;
                 objPosition ++;
                 eachObject.add(string.nextToken(";"));
@@ -48,6 +52,11 @@ public class ImportIntoCatalog {
             airplane.setYearOfManufacture(Integer.parseInt(String.valueOf(eachObject.get(6)).trim()));
             airplane.setSeatsAvailable(Integer.parseInt(String.valueOf(eachObject.get(7)).trim()));
             airplane.setIsCertificateValid(String.valueOf(eachObject.get(8)).trim().equalsIgnoreCase("Yes"));
+
+            String availDate = (String) eachObject.get(9);
+            DateFormat formatter = new SimpleDateFormat("MM/DD/YYYY"); 
+            Date date = (Date)formatter.parse(availDate);
+            airplane.setNextAvailableDate(date);
         }
         JOptionPane.showMessageDialog(null, "Airplane Catalog Added!");
         return airplaneCatalog;

@@ -5,6 +5,8 @@
  */
 package Airplane;
 
+import java.util.Date;
+
 /**
  *
  * @author Menita Koonani
@@ -18,8 +20,17 @@ public class Airplane {
     private String manufacturerName;
     private int yearOfManufacture;
     private int seatsAvailable;
+    private Date nextAvailableDate;
     private String airportName;
     private boolean isCertificateValid;
+
+    public Date getNextAvailableDate() {
+        return nextAvailableDate;
+    }
+
+    public void setNextAvailableDate(Date nextAvailableDate) {
+        this.nextAvailableDate = nextAvailableDate;
+    }
 
     public boolean isCertitficateValid() {
         return isCertificateValid;

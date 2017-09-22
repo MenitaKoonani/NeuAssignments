@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
@@ -36,7 +38,7 @@ public class AirplaneCatalog {
     public void setUpdatedTime(Long updatedTime) {
         this.updatedTime = updatedTime;
     }
-    
+
     public AirplaneCatalog() {
         airplanesList = new ArrayList<Airplane>();
     }
@@ -164,13 +166,60 @@ public class AirplaneCatalog {
         ArrayList<Airplane> airplaneList = new ArrayList();
         try {
             for (Airplane eachAirplane : this.getAirplanesList()) {
-                if (!eachAirplane.isCertitficateValid()) {
+                if (eachAirplane.isCertitficateValid()) {
                     airplaneList.add(eachAirplane);
                 }
             }
             return airplaneList;
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "No Airplanes have valid certificates!");
+        }
+        return null;
+    }
+
+    public ArrayList<Airplane> getAirplanesBySeatRange(int minSeats, int maxSeats) {
+        ArrayList<Airplane> airplaneList = new ArrayList<Airplane>();
+        try {
+            for (Airplane eachAirplane : this.getAirplanesList()) {
+                int seatAvailability = eachAirplane.getSeatsAvailable();
+                if (seatAvailability >= minSeats && seatAvailability <= maxSeats) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No Airplanes in the specified seat range!");
+        }
+        return null;
+    }
+
+    public ArrayList<Airplane> getFirstAvailableAirplane() {
+        ArrayList<Airplane> airplaneList = new ArrayList<Airplane>();
+        ArrayList<Date> availableDates = new ArrayList<Date>();
+        try {
+            // collecting all the dates in an arraylist
+            for (Airplane eachAirplane : this.getAirplanesList()) {
+                availableDates.add(eachAirplane.getNextAvailableDate());
+            }
+            Date now = new Date();
+            Collections.sort(availableDates, (d1, d2) -> {
+                if (d1.after(now) && d2.after(now)) {
+                    return d1.compareTo(d2);
+                }
+                if (d1.before(now) && d2.before(now)) {
+                    return -d1.compareTo(d2);
+                }
+                return -d1.compareTo(d2);
+            });
+            // getting the first available
+            for (Airplane eachAirplane : this.getAirplanesList()) {
+                if (eachAirplane.getNextAvailableDate() == availableDates.get(0)) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No Airplanes matched this search!");
         }
         return null;
     }

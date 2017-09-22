@@ -9,6 +9,7 @@ import Airplane.AirplaneCatalog;
 import Airplane.ImportIntoCatalog;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -112,6 +113,8 @@ public class ImportCatalogJPanel extends javax.swing.JPanel {
                 uploadFilePathField.setText("");
             } catch (IOException ex) {
                 Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(ImportCatalogJPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else
