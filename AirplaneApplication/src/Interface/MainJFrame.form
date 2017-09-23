@@ -55,9 +55,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lastTimeFleetUpdated" max="32767" attributes="0"/>
                           <Component id="searchBySeatsBtn" alignment="1" max="32767" attributes="0"/>
                           <Component id="searchByCertificateExpiryBtn" alignment="1" max="32767" attributes="0"/>
                           <Component id="searchByAirplaneNameBtn" alignment="0" max="32767" attributes="0"/>
@@ -101,7 +102,9 @@
                       <Component id="searchByModelNumBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="searchByAirplaneNameBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Component id="lastTimeFleetUpdated" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="searchByAirportBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="searchByCertificateExpiryBtn" min="-2" max="-2" attributes="0"/>
@@ -201,7 +204,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="searchBySeatsBtn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Search by seat availability"/>
+                <Property name="text" type="java.lang.String" value="Search by Seat Availability"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchBySeatsBtnActionPerformed"/>
@@ -213,6 +216,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchFirstAvailAirplaneBtnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="lastTimeFleetUpdated">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Last time fleet updated"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lastTimeFleetUpdatedActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

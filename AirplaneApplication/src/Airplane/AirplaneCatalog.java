@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -202,18 +203,18 @@ public class AirplaneCatalog {
                 availableDates.add(eachAirplane.getNextAvailableDate());
             }
             Date now = new Date();
-            Collections.sort(availableDates, (d1, d2) -> {
-                if (d1.after(now) && d2.after(now)) {
-                    return d1.compareTo(d2);
+            Collections.sort(availableDates, (date1, date2) -> {
+                if (date1.after(now) && date2.after(now)) {
+                    return date1.compareTo(date2);
                 }
-                if (d1.before(now) && d2.before(now)) {
-                    return -d1.compareTo(d2);
+                if (date1.before(now) && date2.before(now)) {
+                    return -date1.compareTo(date2);
                 }
-                return -d1.compareTo(d2);
+                return -date1.compareTo(date2);
             });
             // getting the first available
             for (Airplane eachAirplane : this.getAirplanesList()) {
-                if (eachAirplane.getNextAvailableDate() == availableDates.get(0)) {
+                if ((eachAirplane.getNextAvailableDate() == availableDates.get(0)) && eachAirplane.isAvailable()) {
                     airplaneList.add(eachAirplane);
                 }
             }
@@ -222,5 +223,15 @@ public class AirplaneCatalog {
             JOptionPane.showMessageDialog(null, "No Airplanes matched this search!");
         }
         return null;
+    }
+
+    public String getLastFleetUpdatedTime() {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat ("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
+            Date lastDate = new Date(getUpdatedTime()); 
+            return simpleDateFormat.format(lastDate);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

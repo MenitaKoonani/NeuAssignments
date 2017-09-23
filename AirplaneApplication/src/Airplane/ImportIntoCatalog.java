@@ -39,7 +39,7 @@ public class ImportIntoCatalog {
             while (string.hasMoreTokens() && objPosition <= 10) {
                 tokenNum ++;
                 objPosition ++;
-                eachObject.add(string.nextToken(";"));
+                eachObject.add(string.nextToken(","));
             }
             Airplane airplane = airplaneCatalog.addNewAirplane();
             airplaneCatalog.setUpdatedTime(System.currentTimeMillis());
@@ -54,8 +54,8 @@ public class ImportIntoCatalog {
             airplane.setIsCertificateValid(String.valueOf(eachObject.get(8)).trim().equalsIgnoreCase("Yes"));
 
             String availDate = (String) eachObject.get(9);
-            DateFormat formatter = new SimpleDateFormat("MM/DD/YYYY"); 
-            Date date = (Date)formatter.parse(availDate);
+            DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy"); 
+            Date date = formatter.parse(availDate);
             airplane.setNextAvailableDate(date);
         }
         JOptionPane.showMessageDialog(null, "Airplane Catalog Added!");

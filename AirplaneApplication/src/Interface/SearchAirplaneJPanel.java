@@ -35,13 +35,9 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
         this.searchCriteria = searchCriteria;
         noSearchStringCalls();
     }
-    
-    public void noSearchStringCalls()
-    {
+
+    public void noSearchStringCalls() {
         ArrayList<Airplane> airplaneList = new ArrayList();
-        searchAirplaneQueryField.setVisible(false);
-        searchBtn.setVisible(false);
-        searchAirplaneQueryLabel.setVisible(false);
         minSeatsField.setVisible(false);
         minSeatsQueryLabel.setVisible(false);
         maxSeatsField.setVisible(false);
@@ -49,19 +45,30 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
         switch (searchCriteria) {
             // all the airplanes
             case -1:
+                searchAirplaneQueryField.setVisible(false);
+                searchBtn.setVisible(false);
+                searchAirplaneQueryLabel.setVisible(false);
                 airplaneList = MainJFrame.airplaneCatalog.getAirplanesList();
                 break;
             // first available airplane
             case 1:
+                searchAirplaneQueryField.setVisible(false);
+                searchBtn.setVisible(false);
+                searchAirplaneQueryLabel.setVisible(false);
                 airplaneList = MainJFrame.airplaneCatalog.getFirstAvailableAirplane();
                 break;
             // available airplanes
             case 2:
+                searchAirplaneQueryField.setVisible(false);
+                searchBtn.setVisible(false);
+                searchAirplaneQueryLabel.setVisible(false);
                 searchPanelHeader.setText("List of available airplanes!");
                 airplaneList = MainJFrame.airplaneCatalog.getAvailableAirplanes();
                 break;
             // seat range availabilty
             case 5:
+                searchAirplaneQueryField.setVisible(false);
+                searchAirplaneQueryLabel.setVisible(false);
                 minSeatsField.setVisible(true);
                 minSeatsQueryLabel.setVisible(true);
                 maxSeatsField.setVisible(true);
@@ -70,21 +77,25 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
                 break;
             // certificates expired airplanes
             case 11:
+                searchAirplaneQueryField.setVisible(false);
+                searchBtn.setVisible(false);
+                searchAirplaneQueryLabel.setVisible(false);
                 searchPanelHeader.setText("List of airplanes having valid certificates!");
                 airplaneList = MainJFrame.airplaneCatalog.getValidCertiAirplanes();
                 break;
+
         }
         if (airplaneList != null) {
             populateTable(airplaneList);
             searchResultCountField.setText(String.valueOf(airplaneList.size()));
         }
     }
-    
+
     public ArrayList<Airplane> searchByCriteria() {
-        try{
-            
+        try {
+
             ArrayList<Airplane> airplaneList = new ArrayList();
-            switch(searchCriteria){
+            switch (searchCriteria) {
                 // by manufacture name
                 case 3:
                     String findManufacturer = searchAirplaneQueryField.getText();
@@ -134,7 +145,7 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
             }
             return airplaneList;
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null,"Enter only numbers!!");
+            JOptionPane.showMessageDialog(null, "Enter only numbers!!");
         }
         return null;
     }
@@ -324,6 +335,11 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
         expiryBtnGroup.add(validCertificate);
         validCertificate.setSelected(true);
         validCertificate.setText("No");
+        validCertificate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validCertificateActionPerformed(evt);
+            }
+        });
 
         minSeatsQueryLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         minSeatsQueryLabel.setText("Enter minimum seats:");
@@ -368,17 +384,16 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
                                     .addComponent(airplaneNameLabel)
                                     .addComponent(manufacturerNameLabel))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(serailNumberField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(modelNumberField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(airplaneNameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(manufacturerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(airplaneNameField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(modelNumberField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(serailNumberField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(manufacturerNameField)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(airportNameLabel)
                                 .addGap(18, 18, 18)
-                                .addComponent(airportNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                                .addComponent(airportNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(86, 86, 86)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(yearManuLabel)
                             .addComponent(seatsAvailLabel)
@@ -395,9 +410,9 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
                                 .addComponent(validCertificate))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(planeAvailable)
-                                .addGap(47, 47, 47)
+                                .addGap(18, 18, 18)
                                 .addComponent(planeUnavailable))
-                            .addComponent(nextAvailFlightChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(nextAvailFlightChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(153, 153, 153)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,12 +438,12 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
                             .addComponent(minSeatsQueryLabel)
                             .addComponent(maxSeatsQueryLabel))
                         .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(minSeatsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(maxSeatsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(68, 68, 68)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(minSeatsField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(maxSeatsField, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE))
+                        .addGap(43, 43, 43)
                         .addComponent(searchBtn)))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addGap(87, 87, 87))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -543,7 +558,7 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
             validCertificate.setSelected(airplane.isCertitficateValid());
             invalidCertificate.setSelected(!airplane.isCertitficateValid());
             nextAvailFlightChooser.setDate(airplane.getNextAvailableDate());
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row!!");
         }
@@ -556,7 +571,7 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
         serailNumberField.setEditable(isEditable);
         airportNameField.setEditable(isEditable);
         manufacturerNameField.setEditable(isEditable);
-        
+
         planeAvailable.setEnabled(isEditable);
         planeUnavailable.setEnabled(isEditable);
         yearManuChooser.setEnabled(isEditable);
@@ -598,6 +613,10 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_planeAvailableActionPerformed
 
+    private void validCertificateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validCertificateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_validCertificateActionPerformed
+
     public void getViewFieldsFromPanel(Airplane airplane) {
         try {
             Long serialNumber = Long.parseLong(serailNumberField.getText());
@@ -610,7 +629,7 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
             String airportName = airportNameField.getText();
             boolean isValidCertificate = validCertificate.isSelected();
             Date nextAvailDate = nextAvailFlightChooser.getDate();
-                    
+
             airplane.setSerialNumber(serialNumber);
             airplane.setModelNumber(modelNumber);
             airplane.setAirplaneName(airplaneName);

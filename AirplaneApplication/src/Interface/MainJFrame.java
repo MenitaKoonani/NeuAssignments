@@ -58,6 +58,7 @@ public class MainJFrame extends javax.swing.JFrame {
         searchByCertificateExpiryBtn = new javax.swing.JButton();
         searchBySeatsBtn = new javax.swing.JButton();
         searchFirstAvailAirplaneBtn = new javax.swing.JButton();
+        lastTimeFleetUpdated = new javax.swing.JButton();
         mainDisplayPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -139,7 +140,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        searchBySeatsBtn.setText("Search by seat availability");
+        searchBySeatsBtn.setText("Search by Seat Availability");
         searchBySeatsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchBySeatsBtnActionPerformed(evt);
@@ -153,26 +154,34 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        lastTimeFleetUpdated.setText("Last time fleet updated");
+        lastTimeFleetUpdated.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lastTimeFleetUpdatedActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainControlPanelLayout = new javax.swing.GroupLayout(mainControlPanel);
         mainControlPanel.setLayout(mainControlPanelLayout);
         mainControlPanelLayout.setHorizontalGroup(
             mainControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainControlPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainControlPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(mainControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(searchBySeatsBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchByCertificateExpiryBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchByAirplaneNameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(availableAirplanes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addAirplaneBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(viewAirplaneBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchByManuBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchByManuYearBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                    .addComponent(searchBySerialNumBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(importFileBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchByModelNumBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchByAirportBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchFirstAvailAirplaneBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(mainControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lastTimeFleetUpdated, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchBySeatsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchByCertificateExpiryBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchByAirplaneNameBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(availableAirplanes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addAirplaneBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(viewAirplaneBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchByManuBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchByManuYearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(searchBySerialNumBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(importFileBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchByModelNumBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchByAirportBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchFirstAvailAirplaneBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         mainControlPanelLayout.setVerticalGroup(
@@ -200,7 +209,9 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(searchByModelNumBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchByAirplaneNameBtn)
-                .addGap(39, 39, 39)
+                .addGap(10, 10, 10)
+                .addComponent(lastTimeFleetUpdated)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchByAirportBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchByCertificateExpiryBtn)
@@ -298,8 +309,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void searchByAirplaneNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByAirplaneNameBtnActionPerformed
         // TODO add your handling code here:
-        SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(8);
-        mainSplitPane.setRightComponent(searchAirplanePanel);
+        AirplaneManufactureList airplaneManuList = new AirplaneManufactureList();
+        mainSplitPane.setRightComponent(airplaneManuList);
     }//GEN-LAST:event_searchByAirplaneNameBtnActionPerformed
 
     private void searchByCertificateExpiryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByCertificateExpiryBtnActionPerformed
@@ -312,8 +323,6 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(5);
         mainSplitPane.setRightComponent(searchAirplanePanel);
-//        SeatAvailabilitySearchJPanel seatAvailPanel = new SeatAvailabilitySearchJPanel();
-//        mainSplitPane.setRightComponent(seatAvailPanel);
     }//GEN-LAST:event_searchBySeatsBtnActionPerformed
 
     private void searchFirstAvailAirplaneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFirstAvailAirplaneBtnActionPerformed
@@ -321,6 +330,12 @@ public class MainJFrame extends javax.swing.JFrame {
         SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(1);
         mainSplitPane.setRightComponent(searchAirplanePanel);
     }//GEN-LAST:event_searchFirstAvailAirplaneBtnActionPerformed
+
+    private void lastTimeFleetUpdatedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastTimeFleetUpdatedActionPerformed
+        // TODO add your handling code here:
+        LastTimeFleetUpdated lastTimeFleetUpdated = new LastTimeFleetUpdated();
+        mainSplitPane.setRightComponent(lastTimeFleetUpdated);
+    }//GEN-LAST:event_lastTimeFleetUpdatedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,6 +376,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton addAirplaneBtn;
     private javax.swing.JButton availableAirplanes;
     private javax.swing.JButton importFileBtn;
+    private javax.swing.JButton lastTimeFleetUpdated;
     private javax.swing.JPanel mainControlPanel;
     private javax.swing.JPanel mainDisplayPanel;
     private javax.swing.JSplitPane mainSplitPane;

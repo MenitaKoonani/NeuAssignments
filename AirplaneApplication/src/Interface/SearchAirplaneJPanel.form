@@ -40,22 +40,20 @@
                                   <Component id="manufacturerNameLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="serailNumberField" alignment="1" min="-2" pref="211" max="-2" attributes="0"/>
-                                      <Component id="modelNumberField" alignment="1" min="-2" pref="211" max="-2" attributes="0"/>
-                                      <Component id="airplaneNameField" alignment="1" min="-2" pref="211" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="manufacturerNameField" alignment="0" min="-2" pref="211" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="airplaneNameField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="modelNumberField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="serailNumberField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="manufacturerNameField" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="airportNameLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="airportNameField" min="-2" pref="211" max="-2" attributes="0"/>
+                              <Component id="airportNameField" min="-2" pref="143" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="yearManuLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="seatsAvailLabel" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -74,10 +72,10 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="planeAvailable" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="planeUnavailable" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="nextAvailFlightChooser" min="-2" max="-2" attributes="0"/>
+                          <Component id="nextAvailFlightChooser" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -111,15 +109,15 @@
                           <Component id="maxSeatsQueryLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="minSeatsField" min="-2" max="-2" attributes="0"/>
-                          <Component id="maxSeatsField" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="minSeatsField" max="32767" attributes="0"/>
+                          <Component id="maxSeatsField" pref="66" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Component id="searchBtn" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="85" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -422,6 +420,9 @@
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="No"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="validCertificateActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="minSeatsQueryLabel">
       <Properties>
