@@ -138,7 +138,11 @@ public class AirplaneCatalog {
         try {
             for (Airplane eachAirplane : this.getAirplanesList()) {
                 if ((eachAirplane.getAirportName()).equalsIgnoreCase(findAirport)) {
-                    airplaneList.add(eachAirplane);
+                    if (airplaneList.contains(eachAirplane)) {
+                        continue;
+                    } else {
+                        airplaneList.add(eachAirplane);
+                    }
                 }
             }
             return airplaneList;
@@ -148,17 +152,17 @@ public class AirplaneCatalog {
         return null;
     }
 
-    public ArrayList<Airplane> getAirplaneByName(String findAirplaneName) {
+    public ArrayList<Airplane> getAirplaneByName(String findAirlinerName) {
         ArrayList<Airplane> airplaneList = new ArrayList();
         try {
             for (Airplane eachAirplane : this.getAirplanesList()) {
-                if ((eachAirplane.getAirplaneName().toLowerCase()).startsWith(findAirplaneName.toLowerCase())) {
+                if ((eachAirplane.getAirlinerName().toLowerCase()).startsWith(findAirlinerName.toLowerCase())) {
                     airplaneList.add(eachAirplane);
                 }
             }
             return airplaneList;
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "No " + findAirplaneName + " found!");
+            JOptionPane.showMessageDialog(null, "No " + findAirlinerName + " found!");
         }
         return null;
     }
@@ -183,7 +187,7 @@ public class AirplaneCatalog {
         try {
             for (Airplane eachAirplane : this.getAirplanesList()) {
                 int seatAvailability = eachAirplane.getSeatsAvailable();
-                if (seatAvailability >= minSeats && seatAvailability <= maxSeats) {
+                if (seatAvailability >= minSeats && seatAvailability <= maxSeats && eachAirplane.isAvailable()) {
                     airplaneList.add(eachAirplane);
                 }
             }
@@ -200,21 +204,24 @@ public class AirplaneCatalog {
         try {
             // collecting all the dates in an arraylist
             for (Airplane eachAirplane : this.getAirplanesList()) {
-                availableDates.add(eachAirplane.getNextAvailableDate());
+                if (eachAirplane.isAvailable()) {
+                    availableDates.add(eachAirplane.getNextAvailableDate());
+                }
             }
-            Date now = new Date();
+            // comparing the list of dates with the curretn date adn sorting accordingly
+            Date currentDate = new Date();
             Collections.sort(availableDates, (date1, date2) -> {
-                if (date1.after(now) && date2.after(now)) {
+                if (date1.after(currentDate) && date2.after(currentDate)) {
                     return date1.compareTo(date2);
                 }
-                if (date1.before(now) && date2.before(now)) {
+                if (date1.before(currentDate) && date2.before(currentDate)) {
                     return -date1.compareTo(date2);
                 }
                 return -date1.compareTo(date2);
             });
             // getting the first available
             for (Airplane eachAirplane : this.getAirplanesList()) {
-                if ((eachAirplane.getNextAvailableDate() == availableDates.get(0)) && eachAirplane.isAvailable()) {
+                if (eachAirplane.getNextAvailableDate() == availableDates.get(0)) {
                     airplaneList.add(eachAirplane);
                 }
             }
@@ -227,11 +234,20 @@ public class AirplaneCatalog {
 
     public String getLastFleetUpdatedTime() {
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat ("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
-            Date lastDate = new Date(getUpdatedTime()); 
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
+            Date lastDate = new Date(getUpdatedTime());
             return simpleDateFormat.format(lastDate);
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public boolean isAirlinerInCatalog(String airlinerName) {
+        for (Airplane eachAirplane : this.airplanesList) {
+            if (eachAirplane.getAirlinerName().equalsIgnoreCase(airlinerName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -31,28 +31,12 @@ public class LastTimeFleetUpdated extends javax.swing.JPanel {
         fleetUpdateLabel = new javax.swing.JLabel();
         fleetUpdateField = new javax.swing.JTextField();
 
-        fleetUpdateLabel.setText("The last time fleet was updated : ");
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(fleetUpdateLabel)
-                .addGap(18, 18, 18)
-                .addComponent(fleetUpdateField, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(253, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fleetUpdateLabel)
-                    .addComponent(fleetUpdateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(409, Short.MAX_VALUE))
-        );
+        fleetUpdateLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        fleetUpdateLabel.setText("The last time fleet was updated : ");
+        add(fleetUpdateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 74, -1, -1));
+        add(fleetUpdateField, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 74, 247, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 

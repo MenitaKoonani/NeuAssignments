@@ -7,6 +7,7 @@ package Interface;
 
 import Airplane.Airplane;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,21 +21,33 @@ public class AirplaneManufactureList extends javax.swing.JPanel {
      */
     public AirplaneManufactureList() {
         initComponents();
+        manuListPanelHeader.setVisible(false);
+        manuTable.setVisible(false);
     }
-    public void populateManufactureTable(String airplaneName){
-        ArrayList<Airplane> airplaneList = MainJFrame.airplaneCatalog.getAirplaneByName(airplaneName);
-        DefaultTableModel airplaneTable = (DefaultTableModel) manuTable.getModel();
-        airplaneTable.setNumRows(0);
-        //starting the population form row 0
-        airplaneTable.setRowCount(0);
-        for (Airplane eachAirplane : airplaneList) {
-            Object row[] = new Object[3];
-            //setting the object to the first row as we need to access all the other attributes of that particular object
-            row[0] = eachAirplane;
-            row[1] = eachAirplane.getManufacturerName();
-            airplaneTable.addRow(row);
+
+    public void populateManufactureTable(String airlinerName) {
+        if (MainJFrame.airplaneCatalog.isAirlinerInCatalog(airlinerName)) {
+            manuTable.setVisible(true);
+            manuListPanelHeader.setVisible(true);
+            manuListPanelHeader.setText("Manufacturers of " + airlinerName);
+            ArrayList<Airplane> airplaneList = MainJFrame.airplaneCatalog.getAirplaneByName(airlinerName);
+            DefaultTableModel airplaneTable = (DefaultTableModel) manuTable.getModel();
+            airplaneTable.setNumRows(0);
+            //starting the population form row 0
+            airplaneTable.setRowCount(0);
+            for (Airplane eachAirplane : airplaneList) {
+                Object row[] = new Object[3];
+                //setting the object to the first row as we need to access all the other attributes of that particular object
+                row[0] = eachAirplane;
+                row[1] = eachAirplane.getAirplaneName();
+                row[2] = eachAirplane.getManufacturerName();
+                airplaneTable.addRow(row);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please enter the full airliner's name!");
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,16 +64,18 @@ public class AirplaneManufactureList extends javax.swing.JPanel {
         airplaneNameSearchField = new javax.swing.JTextField();
         searchManuBtn = new javax.swing.JButton();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         manuTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Airplane Serial Number", "Manufacturer"
+                "Airplane Serial Number", "Airplane Name", "Manufacturer"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -69,10 +84,15 @@ public class AirplaneManufactureList extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(manuTable);
 
-        manuListPanelHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        manuListPanelHeader.setText("Airplane - Manufacturer Details");
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 157, 441, 289));
 
-        airplaneNameSearchLabel.setText("Enter airplane name to search:");
+        manuListPanelHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        manuListPanelHeader.setText("Airliner - Manufacturer Details");
+        add(manuListPanelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 102, -1, -1));
+
+        airplaneNameSearchLabel.setText("Enter airliner name to search:");
+        add(airplaneNameSearchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 40, -1, -1));
+        add(airplaneNameSearchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(381, 37, 148, -1));
 
         searchManuBtn.setText("Search");
         searchManuBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -80,45 +100,7 @@ public class AirplaneManufactureList extends javax.swing.JPanel {
                 searchManuBtnActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
-                        .addComponent(airplaneNameSearchLabel)
-                        .addGap(26, 26, 26)
-                        .addComponent(airplaneNameSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(338, 338, 338)
-                        .addComponent(searchManuBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addComponent(manuListPanelHeader)))))
-                .addContainerGap(185, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(airplaneNameSearchLabel)
-                    .addComponent(airplaneNameSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(searchManuBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(manuListPanelHeader)
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
-        );
+        add(searchManuBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(338, 68, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchManuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchManuBtnActionPerformed

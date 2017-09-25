@@ -42,7 +42,11 @@ public class ImportCatalogJPanel extends javax.swing.JPanel {
         uploadFileBtn = new javax.swing.JButton();
         addAirplaneListBtn = new javax.swing.JButton();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         uploadFileLabel.setText("Upload CSV File containing Airplane Data");
+        add(uploadFileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 47, -1, -1));
+        add(uploadFilePathField, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 185, -1));
 
         uploadFileBtn.setText("Browse");
         uploadFileBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -50,6 +54,7 @@ public class ImportCatalogJPanel extends javax.swing.JPanel {
                 uploadFileBtnActionPerformed(evt);
             }
         });
+        add(uploadFileBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, -1, -1));
 
         addAirplaneListBtn.setText("Add Airplane List from File");
         addAirplaneListBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -57,36 +62,7 @@ public class ImportCatalogJPanel extends javax.swing.JPanel {
                 addAirplaneListBtnActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(uploadFileLabel)
-                .addGap(75, 75, 75)
-                .addComponent(uploadFilePathField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(uploadFileBtn)
-                .addGap(115, 115, 115))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(298, 298, 298)
-                .addComponent(addAirplaneListBtn)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(uploadFileBtn)
-                    .addComponent(uploadFileLabel)
-                    .addComponent(uploadFilePathField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addComponent(addAirplaneListBtn)
-                .addContainerGap(171, Short.MAX_VALUE))
-        );
+        add(addAirplaneListBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 108, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void uploadFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadFileBtnActionPerformed

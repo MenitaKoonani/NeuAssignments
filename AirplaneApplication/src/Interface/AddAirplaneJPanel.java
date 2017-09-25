@@ -61,11 +61,17 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
         certificateValid = new javax.swing.JRadioButton();
         nextFlightLabel = new javax.swing.JLabel();
         nextFlightDateChooser = new com.toedter.calendar.JDateChooser();
+        airlinerNameLabel = new javax.swing.JLabel();
+        airlinerNameField = new javax.swing.JTextField();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         addPanelHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         addPanelHeader.setText("Add Airplane Details");
+        add(addPanelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 36, -1, -1));
 
         serialNumberLabel.setText("Enter Airplane Serial  Number:");
+        add(serialNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
 
         serialNumberField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         serialNumberField.addActionListener(new java.awt.event.ActionListener() {
@@ -73,36 +79,52 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
                 serialNumberFieldActionPerformed(evt);
             }
         });
+        add(serialNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 150, -1));
 
         modelNumberLabel.setText("Enter Airplane Model Number:");
+        add(modelNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
+        add(modelNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 150, -1));
 
         airplaneNameLabel.setText("Enter Airplane Name:");
+        add(airplaneNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
+        add(airplaneNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 150, -1));
 
         airplaneAvailableLabel.setText("Is it Available?");
+        add(airplaneAvailableLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(526, 96, -1, -1));
 
         airplaneAvailability.add(planeAvailable);
         planeAvailable.setSelected(true);
         planeAvailable.setText("Yes");
+        add(planeAvailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 92, 63, -1));
 
         airplaneAvailability.add(planeUnavailable);
         planeUnavailable.setText("No");
+        add(planeUnavailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(691, 92, 57, -1));
 
         manufacturerNameLabel.setText("Enter Airplane manufacturer name:");
+        add(manufacturerNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+        add(manufacturerNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 150, -1));
 
         yearManuLabel.setText("Enter year of manufacture:");
+        add(yearManuLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(463, 219, -1, -1));
 
         yearManuChooser.setEndYear(2017);
         yearManuChooser.setMinimum(1990);
         yearManuChooser.setName("yearOfManu"); // NOI18N
+        add(yearManuChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 213, 58, -1));
 
         seatsAvailLabel.setText("Enter number of seats available:");
+        add(seatsAvailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(439, 177, -1, -1));
 
         seatsAvailField.setMaximum(550);
         seatsAvailField.setMinimum(0);
         seatsAvailField.setName("seatsAvailable"); // NOI18N
         seatsAvailField.setValue(550);
+        add(seatsAvailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 171, 58, -1));
 
         airportNameLabel.setText("Enter Airport Name:");
+        add(airportNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
+        add(airportNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 150, -1));
 
         addAirplaneBtn.setText("Add Airplane");
         addAirplaneBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -110,137 +132,27 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
                 addAirplaneBtnActionPerformed(evt);
             }
         });
+        add(addAirplaneBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, -1, -1));
 
         certificateExpiredLabel.setText("Did maintanence certificate expire?");
+        add(certificateExpiredLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 255, -1, -1));
 
         expiryBtnGroup.add(certificateInvalid);
         certificateInvalid.setText("Yes");
+        add(certificateInvalid, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 251, -1, -1));
 
         expiryBtnGroup.add(certificateValid);
         certificateValid.setSelected(true);
         certificateValid.setText("No");
+        add(certificateValid, new org.netbeans.lib.awtextra.AbsoluteConstraints(697, 251, -1, -1));
 
         nextFlightLabel.setText("Enter next available date of flight:");
+        add(nextFlightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 137, -1, -1));
+        add(nextFlightDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 133, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(297, 297, 297)
-                .addComponent(addPanelHeader)
-                .addGap(297, 297, 297))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(1, 1, 1)
-                                    .addComponent(modelNumberLabel))
-                                .addComponent(serialNumberLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(manufacturerNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(65, 65, 65)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(airplaneNameLabel)
-                                        .addComponent(airportNameLabel))
-                                    .addGap(2, 2, 2))))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(airportNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(airplaneNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manufacturerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(modelNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(serialNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(52, 52, 52)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(airplaneAvailableLabel)
-                            .addComponent(seatsAvailLabel)
-                            .addComponent(nextFlightLabel)
-                            .addComponent(yearManuLabel)
-                            .addComponent(certificateExpiredLabel))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(seatsAvailField, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(yearManuChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(planeAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(planeUnavailable, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(certificateInvalid)
-                                .addGap(26, 26, 26)
-                                .addComponent(certificateValid))
-                            .addComponent(nextFlightDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(351, 351, 351)
-                        .addComponent(addAirplaneBtn)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(addPanelHeader)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(nextFlightLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(serialNumberLabel)
-                                        .addComponent(serialNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(36, 36, 36)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(modelNumberLabel)
-                                            .addComponent(modelNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(airplaneNameLabel)
-                                    .addComponent(airplaneNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(airportNameLabel)
-                                .addComponent(airportNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(manufacturerNameLabel)
-                                    .addComponent(manufacturerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(planeAvailable)
-                            .addComponent(planeUnavailable)
-                            .addComponent(airplaneAvailableLabel))
-                        .addGap(18, 18, 18)
-                        .addComponent(nextFlightDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(seatsAvailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(seatsAvailLabel))
-                                .addGap(28, 28, 28)
-                                .addComponent(yearManuLabel))
-                            .addComponent(yearManuChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(certificateInvalid)
-                            .addComponent(certificateValid)
-                            .addComponent(certificateExpiredLabel))))
-                .addGap(18, 18, 18)
-                .addComponent(addAirplaneBtn)
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
+        airlinerNameLabel.setText("Enter Airliner Name:");
+        add(airlinerNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
+        add(airlinerNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 150, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void addAirplaneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAirplaneBtnActionPerformed
@@ -269,6 +181,7 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
             Long serialNumber = Long.parseLong(serialNumberField.getText());
             String modelNumber = modelNumberField.getText();
             String airplaneName = airplaneNameField.getText();
+            String airlinerName = airlinerNameField.getText();
             boolean isAvailable = planeAvailable.isSelected();
             String manufacturerName = manufacturerNameField.getText();
             int yearManu = yearManuChooser.getYear();
@@ -281,6 +194,7 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
             airplaneCatalog.setUpdatedTime(System.currentTimeMillis());
             airplane.setSerialNumber(serialNumber);
             airplane.setModelNumber(modelNumber);
+            airplane.setAirlinerName(airlinerName);
             airplane.setAirplaneName(airplaneName);
             airplane.setIsAvailable(isAvailable);
             airplane.setManufacturerName(manufacturerName);
@@ -303,6 +217,8 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAirplaneBtn;
     private javax.swing.JLabel addPanelHeader;
+    private javax.swing.JTextField airlinerNameField;
+    private javax.swing.JLabel airlinerNameLabel;
     private javax.swing.ButtonGroup airplaneAvailability;
     private javax.swing.JLabel airplaneAvailableLabel;
     private javax.swing.JTextField airplaneNameField;

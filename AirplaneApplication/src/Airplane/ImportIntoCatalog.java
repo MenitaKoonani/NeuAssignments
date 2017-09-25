@@ -36,27 +36,31 @@ public class ImportIntoCatalog {
             string = new StringTokenizer(stringLine, ",");
             int objPosition = 0;
             ArrayList eachObject = new ArrayList();
-            while (string.hasMoreTokens() && objPosition <= 10) {
+            while (string.hasMoreTokens() && objPosition <= 11) {
                 tokenNum ++;
                 objPosition ++;
                 eachObject.add(string.nextToken(","));
             }
-            Airplane airplane = airplaneCatalog.addNewAirplane();
-            airplaneCatalog.setUpdatedTime(System.currentTimeMillis());
-            airplane.setSerialNumber(Long.parseLong(((String) eachObject.get(0)).trim()));
-            airplane.setModelNumber(String.valueOf(eachObject.get(1)).trim());
-            airplane.setAirplaneName(String.valueOf(eachObject.get(2)).trim());
-            airplane.setIsAvailable(String.valueOf(eachObject.get(3)).trim().equalsIgnoreCase("Yes"));
-            airplane.setAirportName(String.valueOf(eachObject.get(4)).trim());
-            airplane.setManufacturerName(String.valueOf(eachObject.get(5)).trim());
-            airplane.setYearOfManufacture(Integer.parseInt(String.valueOf(eachObject.get(6)).trim()));
-            airplane.setSeatsAvailable(Integer.parseInt(String.valueOf(eachObject.get(7)).trim()));
-            airplane.setIsCertificateValid(String.valueOf(eachObject.get(8)).trim().equalsIgnoreCase("Yes"));
+            if(eachObject != null && !eachObject.isEmpty())
+            {
+                Airplane airplane = airplaneCatalog.addNewAirplane();
+                airplaneCatalog.setUpdatedTime(System.currentTimeMillis());
+                airplane.setSerialNumber(Long.parseLong(((String) eachObject.get(0)).trim()));
+                airplane.setModelNumber(String.valueOf(eachObject.get(1)).trim());
+                airplane.setAirlinerName(String.valueOf(eachObject.get(2)).trim());
+                airplane.setAirplaneName(String.valueOf(eachObject.get(3)).trim());
+                airplane.setIsAvailable(String.valueOf(eachObject.get(4)).trim().equalsIgnoreCase("Yes"));
+                airplane.setAirportName(String.valueOf(eachObject.get(5)).trim());
+                airplane.setManufacturerName(String.valueOf(eachObject.get(6)).trim());
+                airplane.setYearOfManufacture(Integer.parseInt(String.valueOf(eachObject.get(7)).trim()));
+                airplane.setSeatsAvailable(Integer.parseInt(String.valueOf(eachObject.get(8)).trim()));
+                airplane.setIsCertificateValid(String.valueOf(eachObject.get(9)).trim().equalsIgnoreCase("Yes"));
 
-            String availDate = (String) eachObject.get(9);
-            DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy"); 
-            Date date = formatter.parse(availDate);
-            airplane.setNextAvailableDate(date);
+                String availDate = (String) eachObject.get(10);
+                DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy"); 
+                Date date = formatter.parse(availDate);
+                airplane.setNextAvailableDate(date);
+            }
         }
         JOptionPane.showMessageDialog(null, "Airplane Catalog Added!");
         return airplaneCatalog;

@@ -16,6 +16,7 @@ public class Airplane {
     private Long serialNumber;
     private String modelNumber;
     private String airplaneName;
+    private String airlinerName;
     private boolean isAvailable;
     private String manufacturerName;
     private int yearOfManufacture;
@@ -30,6 +31,14 @@ public class Airplane {
 
     public void setNextAvailableDate(Date nextAvailableDate) {
         this.nextAvailableDate = nextAvailableDate;
+    }
+    
+    public String getAirlinerName() {
+        return airlinerName;
+    }
+
+    public void setAirlinerName(String airlinerName) {
+        this.airlinerName = airlinerName;
     }
 
     public boolean isCertitficateValid() {
