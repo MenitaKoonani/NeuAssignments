@@ -25,6 +25,7 @@ public class SearchJPanel extends javax.swing.JPanel {
     public SearchJPanel() {
         initComponents();
         nextAvailFlightChooser.setMinSelectableDate(new Date(System.currentTimeMillis()));
+        nextAvailFlightChooser.setDate(new Date(System.currentTimeMillis()));
         searchAirplaneQueryField.setVisible(false);
         searchAirplaneQueryLabel.setVisible(false);
         minSeatsField.setVisible(false);
@@ -425,13 +426,13 @@ public class SearchJPanel extends javax.swing.JPanel {
         add(airlinerNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, 143, -1));
 
         searchComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        searchComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Search first available airplane", "List currently available airplanes", "List of airplanes by Boeing", "Search by manufacture year", "Search by seat availability", "Search by serial number", "Search by model number", "Search by airport name", "List airplanes having expired maintanence certificate", "" }));
+        searchComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Search first available airplane", "List currently available airplanes", "List of airplanes by Boeing", "Search by manufacture year", "Search by seat availability", "Search by serial number", "Search by model number", "Search by airport name", "List airplanes having expired maintanence certificate" }));
         searchComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchComboBoxActionPerformed(evt);
             }
         });
-        add(searchComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 250, 30));
+        add(searchComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 300, 30));
 
         searchAirplaneQueryLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         searchAirplaneQueryLabel.setText("Enter search query:");

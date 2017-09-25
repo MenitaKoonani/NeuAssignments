@@ -44,8 +44,9 @@ public class ImportCatalogJPanel extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        uploadFileLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         uploadFileLabel.setText("Upload CSV File containing Airplane Data");
-        add(uploadFileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 47, -1, -1));
+        add(uploadFileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, 20));
         add(uploadFilePathField, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 185, -1));
 
         uploadFileBtn.setText("Browse");

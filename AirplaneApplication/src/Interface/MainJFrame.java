@@ -157,7 +157,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void viewAirplaneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAirplaneBtnActionPerformed
         // TODO add your handling code here:
-        SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(-1);
+        ViewAllAirplaneJPanel searchAirplanePanel = new ViewAllAirplaneJPanel();
         mainSplitPane.setRightComponent(searchAirplanePanel);
     }//GEN-LAST:event_viewAirplaneBtnActionPerformed
 

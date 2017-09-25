@@ -472,7 +472,7 @@
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="10">
+          <StringArray count="9">
             <StringItem index="0" value="Search first available airplane"/>
             <StringItem index="1" value="List currently available airplanes"/>
             <StringItem index="2" value="List of airplanes by Boeing"/>
@@ -482,7 +482,6 @@
             <StringItem index="6" value="Search by model number"/>
             <StringItem index="7" value="Search by airport name"/>
             <StringItem index="8" value="List airplanes having expired maintanence certificate"/>
-            <StringItem index="9" value=""/>
           </StringArray>
         </Property>
       </Properties>
@@ -494,7 +493,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="50" y="80" width="250" height="30"/>
+          <AbsoluteConstraints x="50" y="80" width="300" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
