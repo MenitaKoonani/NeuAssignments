@@ -30,6 +30,7 @@ import javax.swing.JOptionPane;
 public class AirplaneCatalog {
 
     private ArrayList<Airplane> airplanesList;
+    private ArrayList<Airplane> multisearchList;
     private Long updatedTime;
 
     public Long getUpdatedTime() {
@@ -52,16 +53,25 @@ public class AirplaneCatalog {
         this.airplanesList = airplanesList;
     }
 
+    public ArrayList<Airplane> getMultisearchList() {
+        return multisearchList;
+    }
+
+    public void setMultisearchList(ArrayList<Airplane> multisearchList) {
+        this.multisearchList = multisearchList;
+    }
+
     public Airplane addNewAirplane() {
         Airplane newAirplane = new Airplane();
         airplanesList.add(newAirplane);
         return newAirplane;
     }
 
-    public ArrayList<Airplane> getAvailableAirplanes() {
+    public ArrayList<Airplane> getAvailableAirplanes(boolean isMultiSearch) {
         ArrayList<Airplane> airplaneList = new ArrayList();
+        multisearchList = (isMultiSearch && multisearchList != null && !multisearchList.isEmpty()) ? multisearchList : this.airplanesList;
         try {
-            for (Airplane eachAirplane : this.getAirplanesList()) {
+            for (Airplane eachAirplane : multisearchList) {
                 if (eachAirplane.isAvailable()) {
                     airplaneList.add(eachAirplane);
                 }
@@ -73,10 +83,11 @@ public class AirplaneCatalog {
         return null;
     }
 
-    public ArrayList<Airplane> getAirplaneManufacturer(String manuName) {
+    public ArrayList<Airplane> getAirplaneManufacturer(String manuName, boolean isMultiSearch) {
         ArrayList<Airplane> airplaneList = new ArrayList();
+        multisearchList = (isMultiSearch && multisearchList != null && !multisearchList.isEmpty()) ? multisearchList : this.airplanesList;
         try {
-            for (Airplane eachAirplane : this.getAirplanesList()) {
+            for (Airplane eachAirplane : multisearchList) {
                 if (eachAirplane.getManufacturerName().toLowerCase().startsWith(manuName.toLowerCase())) {
                     airplaneList.add(eachAirplane);
                 }
@@ -133,10 +144,11 @@ public class AirplaneCatalog {
         return null;
     }
 
-    public ArrayList<Airplane> getAirplaneByAirport(String findAirport) {
+    public ArrayList<Airplane> getAirplaneByAirport(String findAirport, boolean isMultiSearch) {
         ArrayList<Airplane> airplaneList = new ArrayList();
+        multisearchList = (isMultiSearch && multisearchList != null && !multisearchList.isEmpty()) ? multisearchList : this.airplanesList;
         try {
-            for (Airplane eachAirplane : this.getAirplanesList()) {
+            for (Airplane eachAirplane : multisearchList) {
                 if ((eachAirplane.getAirportName()).equalsIgnoreCase(findAirport)) {
                     if (airplaneList.contains(eachAirplane)) {
                         continue;
@@ -152,10 +164,11 @@ public class AirplaneCatalog {
         return null;
     }
 
-    public ArrayList<Airplane> getAirplaneByName(String findAirlinerName) {
+    public ArrayList<Airplane> getAirplanesInAirliner(String findAirlinerName, boolean isMultiSearch) {
         ArrayList<Airplane> airplaneList = new ArrayList();
+        multisearchList = (isMultiSearch && multisearchList != null && !multisearchList.isEmpty()) ? multisearchList : this.airplanesList;
         try {
-            for (Airplane eachAirplane : this.getAirplanesList()) {
+            for (Airplane eachAirplane : multisearchList) {
                 if ((eachAirplane.getAirlinerName().toLowerCase()).startsWith(findAirlinerName.toLowerCase())) {
                     airplaneList.add(eachAirplane);
                 }
@@ -250,4 +263,55 @@ public class AirplaneCatalog {
         }
         return false;
     }
+
+    public ArrayList<Airplane> getMultiSearchList(String findQueryName, int searchType) {
+        try {
+            boolean isMultiSearch = true;
+            ArrayList<Airplane> tempSearchList = new ArrayList<Airplane>();
+            multisearchList = (multisearchList != null && !multisearchList.isEmpty()) ? multisearchList : this.airplanesList;
+            switch (searchType) {
+                case 1:
+                    tempSearchList = getAirplanesInAirliner(findQueryName, isMultiSearch);
+                    break;
+                case 2:
+                    tempSearchList = getAirplanesByName(findQueryName, isMultiSearch);
+                    break;
+                case 3:
+                    tempSearchList = getAirplaneByAirport(findQueryName, isMultiSearch);
+                    break;
+                case 4:
+                    tempSearchList = getAirplaneManufacturer(findQueryName, isMultiSearch);
+                    break;
+                case 5:
+                    tempSearchList = getAvailableAirplanes(isMultiSearch);
+                    break;
+            }
+            if (tempSearchList != null && !tempSearchList.isEmpty()) {
+                multisearchList = tempSearchList;
+            } else {
+                JOptionPane.showMessageDialog(null, "No matches found!");
+            }
+            return multisearchList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No matches found!");
+        }
+        return null;
+    }
+
+    private ArrayList<Airplane> getAirplanesByName(String airplaneName, boolean isMultiSearch) {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        multisearchList = (isMultiSearch && multisearchList != null && !multisearchList.isEmpty()) ? multisearchList : this.airplanesList;
+        try {
+            for (Airplane eachAirplane : multisearchList) {
+                if ((eachAirplane.getAirplaneName().toLowerCase()).startsWith(airplaneName.toLowerCase())) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No matches found!");
+        }
+        return null;
+    }
+
 }

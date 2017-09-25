@@ -47,18 +47,11 @@ public class MainJFrame extends javax.swing.JFrame {
         mainControlPanel = new javax.swing.JPanel();
         addAirplaneBtn = new javax.swing.JButton();
         viewAirplaneBtn = new javax.swing.JButton();
-        availableAirplanes = new javax.swing.JButton();
-        searchByManuBtn = new javax.swing.JButton();
-        searchByManuYearBtn = new javax.swing.JButton();
-        searchBySerialNumBtn = new javax.swing.JButton();
         importFileBtn = new javax.swing.JButton();
-        searchByModelNumBtn = new javax.swing.JButton();
-        searchByAirportBtn = new javax.swing.JButton();
         searchByAirlinerNameBtn = new javax.swing.JButton();
-        searchByCertificateExpiryBtn = new javax.swing.JButton();
-        searchBySeatsBtn = new javax.swing.JButton();
-        searchFirstAvailAirplaneBtn = new javax.swing.JButton();
         lastTimeFleetUpdated = new javax.swing.JButton();
+        multiSearchBtn = new javax.swing.JButton();
+        mainSearchBtn = new javax.swing.JButton();
         mainDisplayPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -79,39 +72,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 viewAirplaneBtnActionPerformed(evt);
             }
         });
-        mainControlPanel.add(viewAirplaneBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 93, 204, -1));
-
-        availableAirplanes.setText("Search available airplanes");
-        availableAirplanes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                availableAirplanesActionPerformed(evt);
-            }
-        });
-        mainControlPanel.add(availableAirplanes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 174, 204, -1));
-
-        searchByManuBtn.setText("Search by Manufacturer");
-        searchByManuBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchByManuBtnActionPerformed(evt);
-            }
-        });
-        mainControlPanel.add(searchByManuBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 203, 204, -1));
-
-        searchByManuYearBtn.setText("Search by Manufactured Year");
-        searchByManuYearBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchByManuYearBtnActionPerformed(evt);
-            }
-        });
-        mainControlPanel.add(searchByManuYearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 232, 204, -1));
-
-        searchBySerialNumBtn.setText("Search by Serial Number");
-        searchBySerialNumBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchBySerialNumBtnActionPerformed(evt);
-            }
-        });
-        mainControlPanel.add(searchBySerialNumBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 204, -1));
+        mainControlPanel.add(viewAirplaneBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 204, -1));
 
         importFileBtn.setText("Import CSV file");
         importFileBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -121,53 +82,13 @@ public class MainJFrame extends javax.swing.JFrame {
         });
         mainControlPanel.add(importFileBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 204, -1));
 
-        searchByModelNumBtn.setText("Search by Model Number");
-        searchByModelNumBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchByModelNumBtnActionPerformed(evt);
-            }
-        });
-        mainControlPanel.add(searchByModelNumBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 319, 204, -1));
-
-        searchByAirportBtn.setText("Search by Airport");
-        searchByAirportBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchByAirportBtnActionPerformed(evt);
-            }
-        });
-        mainControlPanel.add(searchByAirportBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 204, -1));
-
         searchByAirlinerNameBtn.setText("Search by Airliner Name");
         searchByAirlinerNameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchByAirlinerNameBtnActionPerformed(evt);
             }
         });
-        mainControlPanel.add(searchByAirlinerNameBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 348, 204, -1));
-
-        searchByCertificateExpiryBtn.setText("Search by certificate expiry");
-        searchByCertificateExpiryBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchByCertificateExpiryBtnActionPerformed(evt);
-            }
-        });
-        mainControlPanel.add(searchByCertificateExpiryBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 439, 204, -1));
-
-        searchBySeatsBtn.setText("Search by Seat Availability");
-        searchBySeatsBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchBySeatsBtnActionPerformed(evt);
-            }
-        });
-        mainControlPanel.add(searchBySeatsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 261, 204, -1));
-
-        searchFirstAvailAirplaneBtn.setText("Search first available airplane");
-        searchFirstAvailAirplaneBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchFirstAvailAirplaneBtnActionPerformed(evt);
-            }
-        });
-        mainControlPanel.add(searchFirstAvailAirplaneBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 145, 204, -1));
+        mainControlPanel.add(searchByAirlinerNameBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 204, -1));
 
         lastTimeFleetUpdated.setText("Last time fleet updated");
         lastTimeFleetUpdated.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +96,23 @@ public class MainJFrame extends javax.swing.JFrame {
                 lastTimeFleetUpdatedActionPerformed(evt);
             }
         });
-        mainControlPanel.add(lastTimeFleetUpdated, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 381, 204, -1));
+        mainControlPanel.add(lastTimeFleetUpdated, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 204, -1));
+
+        multiSearchBtn.setText("Multi search");
+        multiSearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                multiSearchBtnActionPerformed(evt);
+            }
+        });
+        mainControlPanel.add(multiSearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
+
+        mainSearchBtn.setText("Search ");
+        mainSearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainSearchBtnActionPerformed(evt);
+            }
+        });
+        mainControlPanel.add(mainSearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 200, -1));
 
         mainSplitPane.setLeftComponent(mainControlPanel);
 
@@ -224,47 +161,11 @@ public class MainJFrame extends javax.swing.JFrame {
         mainSplitPane.setRightComponent(searchAirplanePanel);
     }//GEN-LAST:event_viewAirplaneBtnActionPerformed
 
-    private void availableAirplanesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_availableAirplanesActionPerformed
-        // TODO add your handling code here:
-        SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(2);
-        mainSplitPane.setRightComponent(searchAirplanePanel);
-    }//GEN-LAST:event_availableAirplanesActionPerformed
-
-    private void searchByManuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByManuBtnActionPerformed
-        // TODO add your handling code here:
-        SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(3);
-        mainSplitPane.setRightComponent(searchAirplanePanel);
-    }//GEN-LAST:event_searchByManuBtnActionPerformed
-
-    private void searchByManuYearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByManuYearBtnActionPerformed
-        // TODO add your handling code here:
-        SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(4);
-        mainSplitPane.setRightComponent(searchAirplanePanel);
-    }//GEN-LAST:event_searchByManuYearBtnActionPerformed
-
-    private void searchBySerialNumBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBySerialNumBtnActionPerformed
-        // TODO add your handling code here:
-        SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(6);
-        mainSplitPane.setRightComponent(searchAirplanePanel);
-    }//GEN-LAST:event_searchBySerialNumBtnActionPerformed
-
     private void importFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importFileBtnActionPerformed
         // TODO add your handling code here:
         ImportCatalogJPanel importCatalogJPanel = new ImportCatalogJPanel();
         mainSplitPane.setRightComponent(importCatalogJPanel);
     }//GEN-LAST:event_importFileBtnActionPerformed
-
-    private void searchByModelNumBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByModelNumBtnActionPerformed
-        // TODO add your handling code here:
-        SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(7);
-        mainSplitPane.setRightComponent(searchAirplanePanel);
-    }//GEN-LAST:event_searchByModelNumBtnActionPerformed
-
-    private void searchByAirportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByAirportBtnActionPerformed
-        // TODO add your handling code here:
-        SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(10);
-        mainSplitPane.setRightComponent(searchAirplanePanel);
-    }//GEN-LAST:event_searchByAirportBtnActionPerformed
 
     private void searchByAirlinerNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByAirlinerNameBtnActionPerformed
         // TODO add your handling code here:
@@ -272,29 +173,23 @@ public class MainJFrame extends javax.swing.JFrame {
         mainSplitPane.setRightComponent(airplaneManuList);
     }//GEN-LAST:event_searchByAirlinerNameBtnActionPerformed
 
-    private void searchByCertificateExpiryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByCertificateExpiryBtnActionPerformed
-        // TODO add your handling code here:
-        SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(11);
-        mainSplitPane.setRightComponent(searchAirplanePanel);
-    }//GEN-LAST:event_searchByCertificateExpiryBtnActionPerformed
-
-    private void searchBySeatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBySeatsBtnActionPerformed
-        // TODO add your handling code here:
-        SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(5);
-        mainSplitPane.setRightComponent(searchAirplanePanel);
-    }//GEN-LAST:event_searchBySeatsBtnActionPerformed
-
-    private void searchFirstAvailAirplaneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFirstAvailAirplaneBtnActionPerformed
-        // TODO add your handling code here:
-        SearchAirplaneJPanel searchAirplanePanel = new SearchAirplaneJPanel(1);
-        mainSplitPane.setRightComponent(searchAirplanePanel);
-    }//GEN-LAST:event_searchFirstAvailAirplaneBtnActionPerformed
-
     private void lastTimeFleetUpdatedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastTimeFleetUpdatedActionPerformed
         // TODO add your handling code here:
         LastTimeFleetUpdated lastTimeFleetUpdated = new LastTimeFleetUpdated();
         mainSplitPane.setRightComponent(lastTimeFleetUpdated);
     }//GEN-LAST:event_lastTimeFleetUpdatedActionPerformed
+
+    private void multiSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiSearchBtnActionPerformed
+        // TODO add your handling code here:
+        MultisearchJPanel multiSearchPanel = new MultisearchJPanel();
+        mainSplitPane.setRightComponent(multiSearchPanel);
+    }//GEN-LAST:event_multiSearchBtnActionPerformed
+
+    private void mainSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainSearchBtnActionPerformed
+        // TODO add your handling code here:
+        SearchJPanel searchJPanel = new SearchJPanel();
+        mainSplitPane.setRightComponent(searchJPanel);
+    }//GEN-LAST:event_mainSearchBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -333,21 +228,14 @@ public class MainJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAirplaneBtn;
-    private javax.swing.JButton availableAirplanes;
     private javax.swing.JButton importFileBtn;
     private javax.swing.JButton lastTimeFleetUpdated;
     private javax.swing.JPanel mainControlPanel;
     private javax.swing.JPanel mainDisplayPanel;
+    private javax.swing.JButton mainSearchBtn;
     private javax.swing.JSplitPane mainSplitPane;
+    private javax.swing.JButton multiSearchBtn;
     private javax.swing.JButton searchByAirlinerNameBtn;
-    private javax.swing.JButton searchByAirportBtn;
-    private javax.swing.JButton searchByCertificateExpiryBtn;
-    private javax.swing.JButton searchByManuBtn;
-    private javax.swing.JButton searchByManuYearBtn;
-    private javax.swing.JButton searchByModelNumBtn;
-    private javax.swing.JButton searchBySeatsBtn;
-    private javax.swing.JButton searchBySerialNumBtn;
-    private javax.swing.JButton searchFirstAvailAirplaneBtn;
     private javax.swing.JButton viewAirplaneBtn;
     // End of variables declaration//GEN-END:variables
 }

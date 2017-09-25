@@ -24,6 +24,8 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
     public AddAirplaneJPanel(AirplaneCatalog airplaneCatalog) {
         initComponents();
         this.airplaneCatalog = airplaneCatalog;
+        nextFlightDateChooser.setMinSelectableDate(new Date(System.currentTimeMillis()));
+        nextFlightDateChooser.setDate(new Date(System.currentTimeMillis()));
     }
 
     /**
@@ -68,10 +70,11 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
 
         addPanelHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         addPanelHeader.setText("Add Airplane Details");
-        add(addPanelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 36, -1, -1));
+        add(addPanelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, -1, -1));
 
+        serialNumberLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         serialNumberLabel.setText("Enter Airplane Serial  Number:");
-        add(serialNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
+        add(serialNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 170, 20));
 
         serialNumberField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         serialNumberField.addActionListener(new java.awt.event.ActionListener() {
@@ -79,52 +82,59 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
                 serialNumberFieldActionPerformed(evt);
             }
         });
-        add(serialNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 150, -1));
+        add(serialNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 150, -1));
 
+        modelNumberLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         modelNumberLabel.setText("Enter Airplane Model Number:");
-        add(modelNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
-        add(modelNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 150, -1));
+        add(modelNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 170, 20));
+        add(modelNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 150, -1));
 
+        airplaneNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         airplaneNameLabel.setText("Enter Airplane Name:");
-        add(airplaneNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
-        add(airplaneNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 150, -1));
+        add(airplaneNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 160, 20));
+        add(airplaneNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 150, 30));
 
+        airplaneAvailableLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         airplaneAvailableLabel.setText("Is it Available?");
-        add(airplaneAvailableLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(526, 96, -1, -1));
+        add(airplaneAvailableLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, -1, -1));
 
         airplaneAvailability.add(planeAvailable);
         planeAvailable.setSelected(true);
         planeAvailable.setText("Yes");
-        add(planeAvailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 92, 63, -1));
+        add(planeAvailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 63, -1));
 
         airplaneAvailability.add(planeUnavailable);
         planeUnavailable.setText("No");
-        add(planeUnavailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(691, 92, 57, -1));
+        add(planeUnavailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 100, 57, -1));
 
+        manufacturerNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         manufacturerNameLabel.setText("Enter Airplane manufacturer name:");
-        add(manufacturerNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
-        add(manufacturerNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 150, -1));
+        add(manufacturerNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 200, 20));
+        add(manufacturerNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 150, -1));
 
+        yearManuLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         yearManuLabel.setText("Enter year of manufacture:");
-        add(yearManuLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(463, 219, -1, -1));
+        add(yearManuLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, -1, -1));
 
         yearManuChooser.setEndYear(2017);
         yearManuChooser.setMinimum(1990);
         yearManuChooser.setName("yearOfManu"); // NOI18N
-        add(yearManuChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 213, 58, -1));
+        add(yearManuChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 220, 58, -1));
 
+        seatsAvailLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         seatsAvailLabel.setText("Enter number of seats available:");
-        add(seatsAvailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(439, 177, -1, -1));
+        add(seatsAvailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, -1, -1));
 
         seatsAvailField.setMaximum(550);
         seatsAvailField.setMinimum(0);
         seatsAvailField.setName("seatsAvailable"); // NOI18N
         seatsAvailField.setValue(550);
-        add(seatsAvailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 171, 58, -1));
+        add(seatsAvailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 180, 58, -1));
 
+        airportNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         airportNameLabel.setText("Enter Airport Name:");
-        add(airportNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
-        add(airportNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 150, -1));
+        add(airportNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 170, 20));
+        add(airportNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 150, -1));
 
         addAirplaneBtn.setText("Add Airplane");
         addAirplaneBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -132,37 +142,39 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
                 addAirplaneBtnActionPerformed(evt);
             }
         });
-        add(addAirplaneBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, -1, -1));
+        add(addAirplaneBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 400, -1, -1));
 
+        certificateExpiredLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         certificateExpiredLabel.setText("Did maintanence certificate expire?");
-        add(certificateExpiredLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 255, -1, -1));
+        add(certificateExpiredLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, -1, -1));
 
         expiryBtnGroup.add(certificateInvalid);
         certificateInvalid.setText("Yes");
-        add(certificateInvalid, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 251, -1, -1));
+        add(certificateInvalid, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, -1, -1));
 
         expiryBtnGroup.add(certificateValid);
         certificateValid.setSelected(true);
         certificateValid.setText("No");
-        add(certificateValid, new org.netbeans.lib.awtextra.AbsoluteConstraints(697, 251, -1, -1));
+        add(certificateValid, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 260, -1, -1));
 
+        nextFlightLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         nextFlightLabel.setText("Enter next available date of flight:");
-        add(nextFlightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 137, -1, -1));
-        add(nextFlightDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 133, -1, -1));
+        add(nextFlightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, -1, -1));
+        add(nextFlightDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 140, 160, -1));
 
+        airlinerNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         airlinerNameLabel.setText("Enter Airliner Name:");
-        add(airlinerNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
-        add(airlinerNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 150, -1));
+        add(airlinerNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 160, 20));
+        add(airlinerNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 150, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void addAirplaneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAirplaneBtnActionPerformed
         // TODO add your handling code here:
         getAddFieldsFromPanel();
         airplaneCatalog.setUpdatedTime(System.currentTimeMillis());
-        JOptionPane.showMessageDialog(null, "Airplane added successfully!");
         resetAddFields();
     }//GEN-LAST:event_addAirplaneBtnActionPerformed
-    
+
     public void resetAddFields() {
         serialNumberField.setText("");
         modelNumberField.setText("");
@@ -173,7 +185,8 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
         seatsAvailField.setValue(550);
         airportNameField.setText("");
         certificateInvalid.setSelected(true);
-        nextFlightDateChooser.setDate(null);
+        nextFlightDateChooser.setDate(new Date(System.currentTimeMillis()));
+        airlinerNameField.setText("");
     }
 
     public void getAddFieldsFromPanel() {
@@ -189,21 +202,26 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
             String airportName = airportNameField.getText();
             boolean isValidCertificate = certificateValid.isSelected();
             Date nextAvailFlight = nextFlightDateChooser.getDate();
-            
-            Airplane airplane = airplaneCatalog.addNewAirplane();
-            airplaneCatalog.setUpdatedTime(System.currentTimeMillis());
-            airplane.setSerialNumber(serialNumber);
-            airplane.setModelNumber(modelNumber);
-            airplane.setAirlinerName(airlinerName);
-            airplane.setAirplaneName(airplaneName);
-            airplane.setIsAvailable(isAvailable);
-            airplane.setManufacturerName(manufacturerName);
-            airplane.setYearOfManufacture(yearManu);
-            airplane.setSeatsAvailable(seatsAvailable);
-            airplane.setAirportName(airportName);
-            airplane.setIsCertificateValid(isValidCertificate);
-            airplane.setNextAvailableDate(nextAvailFlight);
-            
+
+            if (modelNumber.isEmpty() || airplaneName.isEmpty() || airlinerName.isEmpty() || manufacturerName.isEmpty() || airportName.isEmpty()
+                || nextAvailFlight == null) {
+                JOptionPane.showMessageDialog(null, "Fields cannot be empty!");
+            } else {
+                Airplane airplane = airplaneCatalog.addNewAirplane();
+                airplaneCatalog.setUpdatedTime(System.currentTimeMillis());
+                airplane.setSerialNumber(serialNumber);
+                airplane.setModelNumber(modelNumber);
+                airplane.setAirlinerName(airlinerName);
+                airplane.setAirplaneName(airplaneName);
+                airplane.setIsAvailable(isAvailable);
+                airplane.setManufacturerName(manufacturerName);
+                airplane.setYearOfManufacture(yearManu);
+                airplane.setSeatsAvailable(seatsAvailable);
+                airplane.setAirportName(airportName);
+                airplane.setIsCertificateValid(isValidCertificate);
+                airplane.setNextAvailableDate(nextAvailFlight);
+                JOptionPane.showMessageDialog(null, "Airplane added successfully!");
+            }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid Serial Number : Serial Number field can contian only numbers!! Please try again!");
             serialNumberField.requestFocus();

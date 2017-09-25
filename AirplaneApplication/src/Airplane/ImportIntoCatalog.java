@@ -5,6 +5,7 @@
  */
 package Airplane;
 
+import Interface.MainJFrame;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -25,7 +26,7 @@ public class ImportIntoCatalog {
     
     public static AirplaneCatalog populatingAirplaneCatalog(File chosenFile) throws IOException, ParseException {
 
-        AirplaneCatalog airplaneCatalog = new AirplaneCatalog();
+        AirplaneCatalog airplaneCatalog = MainJFrame.airplaneCatalog;
         BufferedReader bufferedReader = new BufferedReader(new FileReader(chosenFile.getAbsolutePath()));
         String stringLine = "";
         StringTokenizer string = null;

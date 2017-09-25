@@ -56,6 +56,7 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
                 searchAirplaneQueryField.setVisible(false);
                 searchBtn.setVisible(false);
                 searchAirplaneQueryLabel.setVisible(false);
+                searchPanelHeader.setText("The first available airplane");
                 airplaneList = MainJFrame.airplaneCatalog.getFirstAvailableAirplane();
                 break;
             // available airplanes
@@ -64,7 +65,7 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
                 searchBtn.setVisible(false);
                 searchAirplaneQueryLabel.setVisible(false);
                 searchPanelHeader.setText("List of available airplanes!");
-                airplaneList = MainJFrame.airplaneCatalog.getAvailableAirplanes();
+                airplaneList = MainJFrame.airplaneCatalog.getAvailableAirplanes(false);
                 break;
             // by manufacture name
              case 3:
@@ -125,7 +126,7 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
                 case 3:
                     String findManufacturer = searchAirplaneQueryField.getText();
                     searchPanelHeader.setText("List of airplanes manufactured by " + findManufacturer);
-                    airplaneList = MainJFrame.airplaneCatalog.getAirplaneManufacturer(findManufacturer);
+                    airplaneList = MainJFrame.airplaneCatalog.getAirplaneManufacturer(findManufacturer, false);
                     break;
                 // by manufactured year
                 case 4:
@@ -154,13 +155,13 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
                 case 8:
                     String findAirplaneName = searchAirplaneQueryField.getText();
                     searchPanelHeader.setText("List of " + findAirplaneName + "airplanes");
-                    airplaneList = MainJFrame.airplaneCatalog.getAirplaneByName(findAirplaneName);
+                    airplaneList = MainJFrame.airplaneCatalog.getAirplanesInAirliner(findAirplaneName, false);
                     break;
                 // by airport name
                 case 10:
                     String findAirport = searchAirplaneQueryField.getText();
                     searchPanelHeader.setText("List of airplanes in " + findAirport);
-                    airplaneList = MainJFrame.airplaneCatalog.getAirplaneByAirport(findAirport);
+                    airplaneList = MainJFrame.airplaneCatalog.getAirplaneByAirport(findAirport, false);
                     break;
             }
             if (airplaneList == null || airplaneList.isEmpty()) {
@@ -243,12 +244,12 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
         airlinerNameField = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(searchAirplaneQueryField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 198, -1));
+        add(searchAirplaneQueryField, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 198, -1));
 
         searchAirplaneQueryLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         searchAirplaneQueryLabel.setText("Enter search query:");
         searchAirplaneQueryLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        add(searchAirplaneQueryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 310, 20));
+        add(searchAirplaneQueryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 310, 20));
 
         searchBtn.setText("Search");
         searchBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -256,13 +257,13 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
                 searchBtnActionPerformed(evt);
             }
         });
-        add(searchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 48, -1, -1));
+        add(searchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
 
         searchPanelHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         searchPanelHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         searchPanelHeader.setText("Airplane Details");
         searchPanelHeader.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        add(searchPanelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 450, -1));
+        add(searchPanelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 610, -1));
 
         searchAirplaneTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -289,7 +290,7 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
         });
         searchScrollPane.setViewportView(searchAirplaneTable);
 
-        add(searchScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 136, -1, 110));
+        add(searchScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, -1, 140));
 
         viewDetailsBtn.setText("View Details");
         viewDetailsBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -297,54 +298,54 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
                 viewDetailsBtnActionPerformed(evt);
             }
         });
-        add(viewDetailsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(381, 257, -1, -1));
+        add(viewDetailsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, -1, -1));
 
         searchResultCountLabel.setText("Number of Airplanes found: ");
-        add(searchResultCountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 261, -1, -1));
+        add(searchResultCountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, 160, 20));
 
         searchResultCountField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchResultCountFieldActionPerformed(evt);
             }
         });
-        add(searchResultCountField, new org.netbeans.lib.awtextra.AbsoluteConstraints(316, 258, 55, -1));
+        add(searchResultCountField, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, 55, -1));
 
         serialNumberLabel.setText("Airplane Serial  Number:");
-        add(serialNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
+        add(serialNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, -1, -1));
 
         serailNumberField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        add(serailNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 143, -1));
+        add(serailNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 143, -1));
 
         modelNumberLabel.setText("Airplane Model Number:");
-        add(modelNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, -1, -1));
-        add(modelNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 143, -1));
+        add(modelNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, -1, -1));
+        add(modelNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 143, -1));
 
         airplaneNameLabel.setText("Airplane Name:");
-        add(airplaneNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, -1, -1));
-        add(airplaneNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 420, 143, -1));
+        add(airplaneNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, -1, -1));
+        add(airplaneNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 390, 143, -1));
 
         airplaneAvailableLabel.setText("Is the airplane available:");
-        add(airplaneAvailableLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, -1, -1));
+        add(airplaneAvailableLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 410, -1, -1));
 
         manufacturerNameLabel.setText("Airplane manufacturer name:");
-        add(manufacturerNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
+        add(manufacturerNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, -1, -1));
 
         manufacturerNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manufacturerNameFieldActionPerformed(evt);
             }
         });
-        add(manufacturerNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, 143, -1));
+        add(manufacturerNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 470, 143, -1));
 
         yearManuLabel.setText("Year of manufacture:");
-        add(yearManuLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, -1));
+        add(yearManuLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 290, -1, -1));
 
         seatsAvailLabel.setText("Number of seats available:");
-        add(seatsAvailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 360, -1, -1));
+        add(seatsAvailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 330, -1, -1));
 
         airportNameLabel.setText("Airport Name:");
-        add(airportNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 460, -1, -1));
-        add(airportNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, 143, -1));
+        add(airportNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, -1, -1));
+        add(airportNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 430, 143, -1));
 
         updateAirplaneBtn.setText("Update");
         updateAirplaneBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -352,7 +353,7 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
                 updateAirplaneBtnActionPerformed(evt);
             }
         });
-        add(updateAirplaneBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 257, 101, -1));
+        add(updateAirplaneBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 230, 101, -1));
 
         availBtnGroup.add(planeAvailable);
         planeAvailable.setSelected(true);
@@ -362,22 +363,22 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
                 planeAvailableActionPerformed(evt);
             }
         });
-        add(planeAvailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 440, -1, -1));
+        add(planeAvailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 410, -1, -1));
 
         availBtnGroup.add(planeUnavailable);
         planeUnavailable.setText("No");
-        add(planeUnavailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 440, -1, -1));
+        add(planeUnavailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 410, -1, -1));
 
         yearManuChooser.setEndYear(2017);
         yearManuChooser.setMinimum(1990);
         yearManuChooser.setName("yearOfManu"); // NOI18N
-        add(yearManuChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, 67, -1));
+        add(yearManuChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 290, 67, -1));
 
         seatsAvailChooser.setMaximum(550);
         seatsAvailChooser.setMinimum(0);
         seatsAvailChooser.setName("seatsAvailable"); // NOI18N
         seatsAvailChooser.setValue(550);
-        add(seatsAvailChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 360, 67, -1));
+        add(seatsAvailChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 330, 67, -1));
 
         updateChangesBtn.setText("Update changes");
         updateChangesBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -385,14 +386,14 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
                 updateChangesBtnActionPerformed(evt);
             }
         });
-        add(updateChangesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 530, -1, -1));
+        add(updateChangesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 500, -1, -1));
 
         airplaneAvailableLabel1.setText("Certificate expired:");
-        add(airplaneAvailableLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, -1, -1));
+        add(airplaneAvailableLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 370, -1, -1));
 
         expiryBtnGroup.add(invalidCertificate);
         invalidCertificate.setText("Yes");
-        add(invalidCertificate, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 400, -1, -1));
+        add(invalidCertificate, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 370, -1, -1));
 
         expiryBtnGroup.add(validCertificate);
         validCertificate.setSelected(true);
@@ -402,12 +403,12 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
                 validCertificateActionPerformed(evt);
             }
         });
-        add(validCertificate, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 400, -1, -1));
+        add(validCertificate, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 370, -1, -1));
 
         minSeatsQueryLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         minSeatsQueryLabel.setText("Enter minimum seats:");
         minSeatsQueryLabel.setName("minSeatsLabel"); // NOI18N
-        add(minSeatsQueryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 42, -1, -1));
+        add(minSeatsQueryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         minSeatsField.setMaximum(550);
         minSeatsField.setMinimum(1);
@@ -415,27 +416,27 @@ public class SearchAirplaneJPanel extends javax.swing.JPanel {
         minSeatsField.setOpaque(false);
         minSeatsField.setValue(1);
         minSeatsField.setVerifyInputWhenFocusTarget(false);
-        add(minSeatsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 42, 66, -1));
+        add(minSeatsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 66, -1));
 
         maxSeatsField.setMaximum(550);
         maxSeatsField.setMinimum(1);
         maxSeatsField.setName("maxSeatsField"); // NOI18N
         maxSeatsField.setOpaque(false);
         maxSeatsField.setValue(550);
-        add(maxSeatsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 68, 66, -1));
+        add(maxSeatsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 66, -1));
 
         maxSeatsQueryLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         maxSeatsQueryLabel.setText("Enter maximum seats:");
         maxSeatsQueryLabel.setName("maxSeatsLabel"); // NOI18N
-        add(maxSeatsQueryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 68, -1, -1));
+        add(maxSeatsQueryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         nextAvailFlightLabel.setText("Next available Date:");
-        add(nextAvailFlightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 480, -1, -1));
-        add(nextAvailFlightChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 480, 160, -1));
+        add(nextAvailFlightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 450, -1, -1));
+        add(nextAvailFlightChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 450, 160, -1));
 
         airlinerNameLabel.setText("Airliner Name:");
-        add(airlinerNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, -1, -1));
-        add(airlinerNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 143, -1));
+        add(airlinerNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, -1, -1));
+        add(airlinerNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, 143, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed

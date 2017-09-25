@@ -117,5 +117,10 @@ public class Airplane {
     public String toString() {
         return String.valueOf(this.serialNumber);
     }
+    
+    public boolean isNotEmpty(String stringField)
+    {
+        return stringField != null && !stringField.isEmpty();
+    }
 
 }

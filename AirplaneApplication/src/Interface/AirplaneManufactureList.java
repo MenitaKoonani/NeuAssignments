@@ -30,7 +30,7 @@ public class AirplaneManufactureList extends javax.swing.JPanel {
             manuTable.setVisible(true);
             manuListPanelHeader.setVisible(true);
             manuListPanelHeader.setText("Manufacturers of " + airlinerName);
-            ArrayList<Airplane> airplaneList = MainJFrame.airplaneCatalog.getAirplaneByName(airlinerName);
+            ArrayList<Airplane> airplaneList = MainJFrame.airplaneCatalog.getAirplanesInAirliner(airlinerName, false);
             DefaultTableModel airplaneTable = (DefaultTableModel) manuTable.getModel();
             airplaneTable.setNumRows(0);
             //starting the population form row 0
