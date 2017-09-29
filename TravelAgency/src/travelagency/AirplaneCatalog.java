@@ -1,0 +1,362 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package travelagency;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Objects;
+import java.util.StringTokenizer;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author Menita Koonani
+ */
+public class AirplaneCatalog {
+
+    private ArrayList<Airplane> airplanesList;
+    private ArrayList<Airplane> multisearchList;
+    private SeatArrangement seatArrangement;
+    private Long updatedTime;
+
+    public AirplaneCatalog() {
+        airplanesList = new ArrayList<Airplane>();
+        seatArrangement = new SeatArrangement();
+    }
+    
+    public SeatArrangement getSeatArrangement() {
+        return seatArrangement;
+    }
+
+    public void setSeatArrangement(SeatArrangement seatArrangement) {
+        this.seatArrangement = seatArrangement;
+    }
+
+    public Long getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(Long updatedTime) {
+        this.updatedTime = updatedTime;
+    }
+
+    public ArrayList<Airplane> getAirplanesList() {
+        return airplanesList;
+    }
+
+    public void setAirplanesList(ArrayList<Airplane> airplanesList) {
+        this.airplanesList = airplanesList;
+    }
+
+    public ArrayList<Airplane> getMultisearchList() {
+        return multisearchList;
+    }
+
+    public void setMultisearchList(ArrayList<Airplane> multisearchList) {
+        this.multisearchList = multisearchList;
+    }
+
+    public Airplane addNewAirplane() {
+        Airplane newAirplane = new Airplane();
+        airplanesList.add(newAirplane);
+        return newAirplane;
+    }
+
+    public ArrayList<Airplane> getAvailableAirplanes(boolean isMultiSearch) {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        multisearchList = (isMultiSearch && multisearchList != null && !multisearchList.isEmpty()) ? multisearchList : this.airplanesList;
+        try {
+            for (Airplane eachAirplane : multisearchList) {
+                if (eachAirplane.isAvailable()) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Currently no available airplanes!");
+        }
+        return null;
+    }
+
+    public ArrayList<Airplane> getAirplaneManufacturer(String manuName, boolean isMultiSearch) {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        multisearchList = (isMultiSearch && multisearchList != null && !multisearchList.isEmpty()) ? multisearchList : this.airplanesList;
+        try {
+            for (Airplane eachAirplane : multisearchList) {
+                if (eachAirplane.getManufacturerName().toLowerCase().startsWith(manuName.toLowerCase())) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No airplanes manufactured by " + manuName);
+        }
+        return null;
+    }
+
+    public ArrayList<Airplane> getAiplaneByManuYear(int findYear) {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        try {
+            for (Airplane eachAirplane : getAirplanesList()) {
+                if (eachAirplane.getYearOfManufacture() == findYear) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No airplanes were manufactured in " + findYear);
+        }
+        return null;
+    }
+
+    public ArrayList<Airplane> getAirplaneBySerialNum(Long findSerialNum) {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        try {
+            for (Airplane eachAirplane : getAirplanesList()) {
+                if (Objects.equals(eachAirplane.getSerialNumber(), findSerialNum)) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No airplanes with serial Number : " + findSerialNum);
+        }
+        return null;
+    }
+
+    public ArrayList<Airplane> getAirplaneByModelNum(String findModelNum) {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        try {
+            for (Airplane eachAirplane : getAirplanesList()) {
+                if (eachAirplane.getModelNumber().equalsIgnoreCase(findModelNum)) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No airplanes with serial Number : " + findModelNum);
+        }
+        return null;
+    }
+
+    public ArrayList<Airplane> getAirplaneByAirport(String findAirport, boolean isMultiSearch) {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        multisearchList = (isMultiSearch && multisearchList != null && !multisearchList.isEmpty()) ? multisearchList : this.airplanesList;
+        try {
+            for (Airplane eachAirplane : multisearchList) {
+                if ((eachAirplane.getAirportName()).equalsIgnoreCase(findAirport)) {
+                    if (airplaneList.contains(eachAirplane)) {
+                        continue;
+                    } else {
+                        airplaneList.add(eachAirplane);
+                    }
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No airplanes in this airport : " + findAirport);
+        }
+        return null;
+    }
+
+    public ArrayList<Airplane> getAirplanesInAirliner(String findAirlinerName, boolean isMultiSearch) {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        multisearchList = (isMultiSearch && multisearchList != null && !multisearchList.isEmpty()) ? multisearchList : this.airplanesList;
+        try {
+            for (Airplane eachAirplane : multisearchList) {
+                if ((eachAirplane.getAirlinerName().toLowerCase()).startsWith(findAirlinerName.toLowerCase())) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No " + findAirlinerName + " found!");
+        }
+        return null;
+    }
+
+    public ArrayList<Airplane> getValidCertiAirplanes() {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        try {
+            for (Airplane eachAirplane : getAirplanesList()) {
+                if (eachAirplane.isCertitficateValid()) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No Airplanes have valid certificates!");
+        }
+        return null;
+    }
+
+    public ArrayList<Airplane> getAirplanesBySeatRange(int minSeats, int maxSeats) {
+        ArrayList<Airplane> airplaneList = new ArrayList<Airplane>();
+        try {
+            for (Airplane eachAirplane : getAirplanesList()) {
+                int seatAvailability = eachAirplane.getSeatsAvailable();
+                if (seatAvailability >= minSeats && seatAvailability <= maxSeats && eachAirplane.isAvailable()) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No Airplanes in the specified seat range!");
+        }
+        return null;
+    }
+
+    public ArrayList<Airplane> getFirstAvailableAirplane() {
+        ArrayList<Airplane> airplaneList = new ArrayList<Airplane>();
+        ArrayList<Date> availableDates = new ArrayList<Date>();
+        try {
+            // collecting all the dates in an arraylist
+            for (Airplane eachAirplane : getAirplanesList()) {
+                if (eachAirplane.isAvailable()) {
+                    availableDates.add(eachAirplane.getNextAvailableDate());
+                }
+            }
+            // comparing the list of dates with the curretn date adn sorting accordingly
+            Date currentDate = new Date();
+            Collections.sort(availableDates, (date1, date2) -> {
+                if (date1.after(currentDate) && date2.after(currentDate)) {
+                    return date1.compareTo(date2);
+                }
+                if (date1.before(currentDate) && date2.before(currentDate)) {
+                    return -date1.compareTo(date2);
+                }
+                return -date1.compareTo(date2);
+            });
+            // getting the first available
+            for (Airplane eachAirplane : getAirplanesList()) {
+                if (eachAirplane.getNextAvailableDate() == availableDates.get(0)) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No Airplanes matched this search!");
+        }
+        return null;
+    }
+
+    public String getLastFleetUpdatedTime() {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
+            Date lastDate = new Date(getUpdatedTime());
+            return simpleDateFormat.format(lastDate);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public boolean isAirlinerInCatalog(String airlinerName) {
+        for (Airplane eachAirplane : this.airplanesList) {
+            if (eachAirplane.getAirlinerName().equalsIgnoreCase(airlinerName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<Airplane> getMultiSearchList(String findQueryName, int searchType) {
+        try {
+            boolean isMultiSearch = true;
+            ArrayList<Airplane> tempSearchList = new ArrayList<Airplane>();
+            multisearchList = (multisearchList != null && !multisearchList.isEmpty()) ? multisearchList : this.airplanesList;
+            switch (searchType) {
+                case 1:
+                    tempSearchList = getAirplanesInAirliner(findQueryName, isMultiSearch);
+                    break;
+                case 2:
+                    tempSearchList = getAirplanesByName(findQueryName, isMultiSearch);
+                    break;
+                case 3:
+                    tempSearchList = getAirplaneByAirport(findQueryName, isMultiSearch);
+                    break;
+                case 4:
+                    tempSearchList = getAirplaneManufacturer(findQueryName, isMultiSearch);
+                    break;
+                case 5:
+                    tempSearchList = getAvailableAirplanes(isMultiSearch);
+                    break;
+            }
+            if (tempSearchList != null && !tempSearchList.isEmpty()) {
+                multisearchList = tempSearchList;
+            } else {
+                JOptionPane.showMessageDialog(null, "No matches found!");
+            }
+            return multisearchList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No matches found!");
+        }
+        return null;
+    }
+
+    private ArrayList<Airplane> getAirplanesByName(String airplaneName, boolean isMultiSearch) {
+        ArrayList<Airplane> airplaneList = new ArrayList();
+        multisearchList = (isMultiSearch && multisearchList != null && !multisearchList.isEmpty()) ? multisearchList : this.airplanesList;
+        try {
+            for (Airplane eachAirplane : multisearchList) {
+                if ((eachAirplane.getAirplaneName().toLowerCase()).startsWith(airplaneName.toLowerCase())) {
+                    airplaneList.add(eachAirplane);
+                }
+            }
+            return airplaneList;
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No matches found!");
+        }
+        return null;
+    }
+
+    public void populatingAirplaneCatalog() throws IOException, ParseException {
+
+        File chosenFile = new File("AirplaneData.csv");
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(chosenFile.getAbsolutePath()));
+        String stringLine = "";
+        StringTokenizer string = null;
+        int lineNum = 0;
+        int tokenNum = 0;
+        while ((stringLine = bufferedReader.readLine()) != null) {
+            lineNum++;
+            string = new StringTokenizer(stringLine, ",");
+            int objPosition = 0;
+            ArrayList eachObject = new ArrayList();
+            while (string.hasMoreTokens() && objPosition <= 11) {
+                tokenNum++;
+                objPosition++;
+                eachObject.add(string.nextToken(","));
+            }
+            if (eachObject != null && !eachObject.isEmpty()) {
+                Airplane airplane = addNewAirplane();
+                setUpdatedTime(System.currentTimeMillis());
+                airplane.setSerialNumber(Long.parseLong(((String) eachObject.get(0)).trim()));
+                airplane.setModelNumber(String.valueOf(eachObject.get(1)).trim());
+                airplane.setAirlinerName(String.valueOf(eachObject.get(2)).trim());
+                airplane.setAirplaneName(String.valueOf(eachObject.get(3)).trim());
+                airplane.setIsAvailable(String.valueOf(eachObject.get(4)).trim().equalsIgnoreCase("Yes"));
+                airplane.setAirportName(String.valueOf(eachObject.get(5)).trim());
+                airplane.setManufacturerName(String.valueOf(eachObject.get(6)).trim());
+                airplane.setYearOfManufacture(Integer.parseInt(String.valueOf(eachObject.get(7)).trim()));
+                airplane.setSeatsAvailable(Integer.parseInt(String.valueOf(eachObject.get(8)).trim()));
+                airplane.setIsCertificateValid(String.valueOf(eachObject.get(9)).trim().equalsIgnoreCase("Yes"));
+
+                String availDate = (String) eachObject.get(10);
+                DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                Date date = formatter.parse(availDate);
+                airplane.setNextAvailableDate(date);
+            }
+        }
+    }
+}
