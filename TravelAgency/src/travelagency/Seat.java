@@ -18,9 +18,9 @@ public class Seat {
     private int totalSeats;
 
     public Seat(){
-        numWindow = 50;
-        numAisle = 50;
-        numMiddle = 50;
+        numWindow = 0;
+        numAisle = 0;
+        numMiddle = 0;
         columnNum = 1;
         totalSeats = numWindow + numAisle + numMiddle;
     }
@@ -46,7 +46,7 @@ public class Seat {
     }
 
     public void setNumWindow(int numWindow) {
-        this.numWindow = numWindow;
+        this.numWindow += numWindow;
     }
 
     public int getNumAisle() {
@@ -54,7 +54,7 @@ public class Seat {
     }
 
     public void setNumAisle(int numAisle) {
-        this.numAisle = numAisle;
+        this.numAisle += numAisle;
     }
 
     public int getNumMiddle() {
@@ -62,6 +62,6 @@ public class Seat {
     }
 
     public void setNumMiddle(int numMiddle) {
-        this.numMiddle = numMiddle;
+        this.numMiddle += numMiddle;
     }
 }

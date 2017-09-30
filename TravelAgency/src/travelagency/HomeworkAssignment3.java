@@ -23,8 +23,17 @@ public class HomeworkAssignment3 {
         // TODO code application logic here
 
         TravelAgency travelAgency = new TravelAgency();
+
         // importing airplaneData
         travelAgency.populatingAirplaneCatalog();
+
+        // importing Master schedule
+        MasterSchedule masterSchedule = travelAgency.getMasterSchedule();
+        masterSchedule.populatingMasterSchedule();
+
+        // importing custromer directory
+        CustomerDirectory customerDirectory = travelAgency.getCustomerDir();
+        customerDirectory.populatingCustomerDirectory(travelAgency);
 
         // displaying data
         ArrayList<Airliner> airlinerList = travelAgency.getAirlinerList();
@@ -33,38 +42,21 @@ public class HomeworkAssignment3 {
             System.out.println("----------------------------------------------");
             ArrayList<AirplaneFleet> fleetList = eachAirliner.getFleetList();
             for (AirplaneFleet eachFleet : fleetList) {
-                System.out.println(" Fleet Id :::: " + eachFleet.getFleetId());
+                System.out.println("\nFleet Id :::: " + eachFleet.getFleetId());
                 ArrayList<Airplane> airplanesList = eachFleet.getAirplanesList();
                 for (Airplane eachAirplane : airplanesList) {
-                    System.out.println("Airplane Id ::: " + eachAirplane.getAirplaneId());
-                    System.out.println("Airplane revenue : " + eachAirplane.getAirplaneRevenue());
-                    System.out.println("Seats Taken : " + eachAirplane.getSeat().getTotalSeats());
+                    System.out.println("\tAirplane Id ::: " + eachAirplane.getAirplaneId() + "\tAirplane revenue : " + eachAirplane.calcAirplaneRevenue());
                 }
                 System.out.println("Fleet Revenue : " + eachFleet.calcFleetRevenue());
             }
-            System.out.println("Airliner Revenue :" + eachAirliner.calcAirlinerRevenue());
-            System.out.println("----------------------------------------------");
+            System.out.println("Airliner Revenue : " + eachAirliner.calcAirlinerRevenue());
+            System.out.println("\n----------------------------------------------");
         }
-
-        // importing custromer directory
-        CustomerDirectory customerDirectory = travelAgency.getCustomerDir();
-        customerDirectory.populatingCustomerDirectory(travelAgency);
-
-        // displaying customerData
-        ArrayList<Customer> customerList = customerDirectory.getCustomerList();
-        for (Customer eachCustomer : customerList) {
-            System.out.println("First Name : " + eachCustomer.getFirstName() + "\tPrice : " + eachCustomer.calcCustPrice());
-        }
-
-        // importing Master schedule
-        MasterSchedule masterSchedule = travelAgency.getMasterSchedule();
-        masterSchedule.populatingMasterSchedule();
-
+        System.out.println("\nTravel Agency Revenue : " + travelAgency.calcAgencyRevenue());
         // displaying masterSchedule
-        ArrayList<Schedule> scheduleList = masterSchedule.getScheduleList();
-        for (Schedule eachSchedule : scheduleList) {
-            System.out.println("Airplane Num : " + eachSchedule.getAirplaneSerialNumber() + "\tDeparture Time : " + eachSchedule.getDepartureTime());
-        }
-
+//        ArrayList<Schedule> scheduleList = masterSchedule.getScheduleList();
+//        for (Schedule eachSchedule : scheduleList) {
+//            System.out.println("Airplane Num : " + eachSchedule.getAirplaneSerialNumber() + "\tDeparture Time : " + eachSchedule.getDepartureTime());
+//        }
     }
 }

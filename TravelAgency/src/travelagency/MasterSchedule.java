@@ -99,13 +99,6 @@ public class MasterSchedule {
 
                 boolean isDelayed = String.valueOf(eachObject.get(7)).trim().equalsIgnoreCase("Yes");
                 schedule.setIsDelayed(isDelayed);
-
-//                if (isDelayed) {
-//                    time = (String) eachObject.get(8);
-//                    System.out.println("delay time: " + time);
-//                    Date delayTime = timeFormatter.parse(time);
-//                    schedule.setDelayTime(new java.sql.Time(delayTime.getTime()));
-//                }
             }
         }
     }

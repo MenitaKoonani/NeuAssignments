@@ -15,15 +15,6 @@ public class Airplane {
     private String airplaneName;
     private int maxSeats;
     private Seat seat;
-    private float airplaneRevenue;
-
-    public float getAirplaneRevenue() {
-        return airplaneRevenue;
-    }
-
-    public void setAirplaneRevenue(float airplaneRevenue) {
-        this.airplaneRevenue = airplaneRevenue;
-    }
 
     public float calcAirplaneRevenue() {
         return (seat.getNumAisle() * 400) + (seat.getNumMiddle() * 300) + (seat.getNumWindow() * 500);
@@ -38,7 +29,6 @@ public class Airplane {
     }
 
     public Airplane() {
-        this.maxSeats = 150;
         seat = new Seat();
     }
 

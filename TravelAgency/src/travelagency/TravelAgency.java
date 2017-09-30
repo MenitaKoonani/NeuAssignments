@@ -127,4 +127,12 @@ public class TravelAgency {
         }
     }
 
+    public float calcAgencyRevenue() {
+        float travelAgencyRev = 0;
+        for (Airliner eachAirliner : getAirlinerList()) {
+            travelAgencyRev += eachAirliner.calcAirlinerRevenue();
+        }
+        return travelAgencyRev;
+    }
+
 }

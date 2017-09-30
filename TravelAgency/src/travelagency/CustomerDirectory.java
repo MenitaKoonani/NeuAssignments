@@ -97,7 +97,6 @@ public class CustomerDirectory {
                 airplaneSeat.setNumMiddle(numMiddle);
                 airplaneSeat.setNumWindow(numWindow);
                 airplaneSeat.setTotalSeats(totalSeatsBooked);
-                airplane.setAirplaneRevenue(airplane.calcAirplaneRevenue());
             }
         }
     }
