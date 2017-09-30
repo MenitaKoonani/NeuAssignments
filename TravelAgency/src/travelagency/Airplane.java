@@ -5,109 +5,49 @@
  */
 package travelagency;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 /**
  *
  * @author Menita Koonani
  */
 public class Airplane {
 
-    private Long serialNumber;
-    private String modelNumber;
+    private Long airplaneId;
     private String airplaneName;
-    private String airlinerName;
-    private boolean isAvailable;
-    private String manufacturerName;
-    private int yearOfManufacture;
-    private int seatsAvailable;
-    private int maxRows;
-    private Date nextAvailableDate;
-    private String airportName;
-    private boolean isCertificateValid;
-//    private SeatArrangement seatArrangement;
-//
-//    private Schedule schedule;
-//    private float review;
+    private int maxSeats;
+    private Seat seat;
+    private float airplaneRevenue;
+
+    public float getAirplaneRevenue() {
+        return airplaneRevenue;
+    }
+
+    public void setAirplaneRevenue(float airplaneRevenue) {
+        this.airplaneRevenue = airplaneRevenue;
+    }
+
+    public float calcAirplaneRevenue() {
+        return (seat.getNumAisle() * 400) + (seat.getNumMiddle() * 300) + (seat.getNumWindow() * 500);
+    }
+
+    public Seat getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
 
     public Airplane() {
-        this.maxRows = 25;
-//        this.review = getSumSeatPrices();
-    }
-    
-//    public float getSumSeatPrices()
-//    {
-//        float seatPrices = 0;
-//        for (Seat eachSeat : seatArrangement.getSeatList()) {
-//            seatPrices += eachSeat.getPrice();
-//        }
-//        return seatPrices;
-//    }
-//
-//    public SeatArrangement getSeatArrangement() {
-//        return seatArrangement;
-//    }
-//
-//    public void setSeatArrangement(SeatArrangement seatArrangement) {
-//        this.seatArrangement = seatArrangement;
-//    }
-//    
-//    public float getReview() {
-//        return review;
-//    }
-//
-//    public void setReview(float review) {
-//        this.review = review;
-//    }
-
-
-    public Date getNextAvailableDate() {
-        return nextAvailableDate;
+        this.maxSeats = 150;
+        seat = new Seat();
     }
 
-    public void setNextAvailableDate(Date nextAvailableDate) {
-        this.nextAvailableDate = nextAvailableDate;
+    public Long getAirplaneId() {
+        return airplaneId;
     }
 
-    public String getAirlinerName() {
-        return airlinerName;
-    }
-
-    public void setAirlinerName(String airlinerName) {
-        this.airlinerName = airlinerName;
-    }
-
-//    public Schedule getSchedule() {
-//        return schedule;
-//    }
-//
-//    public void setSchedule(Schedule schedule) {
-//        this.schedule = schedule;
-//    }
-
-    public boolean isCertitficateValid() {
-        return isCertificateValid;
-    }
-
-    public void setIsCertificateValid(boolean isCertificateValid) {
-        this.isCertificateValid = isCertificateValid;
-    }
-
-    public Long getSerialNumber() {
-        return serialNumber;
-    }
-
-    public void setSerialNumber(Long serialNumber) {
-        this.serialNumber = serialNumber;
-    }
-
-    public String getModelNumber() {
-        return modelNumber;
-    }
-
-    public void setModelNumber(String modelNumber) {
-        this.modelNumber = modelNumber;
+    public void setAirplaneId(Long airplaneId) {
+        this.airplaneId = airplaneId;
     }
 
     public String getAirplaneName() {
@@ -118,61 +58,11 @@ public class Airplane {
         this.airplaneName = airplaneName;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
+    public int getMaxSeats() {
+        return maxSeats;
     }
 
-    public void setIsAvailable(boolean isAvailable) {
-        this.isAvailable = isAvailable;
+    public void setMaxSeats(int maxSeats) {
+        this.maxSeats = maxSeats;
     }
-
-    public String getManufacturerName() {
-        return manufacturerName;
-    }
-
-    public void setManufacturerName(String manufacturerName) {
-        this.manufacturerName = manufacturerName;
-    }
-
-    public int getYearOfManufacture() {
-        return yearOfManufacture;
-    }
-
-    public void setYearOfManufacture(int yearOfManufacture) {
-        this.yearOfManufacture = yearOfManufacture;
-    }
-
-    public int getSeatsAvailable() {
-        return seatsAvailable;
-    }
-
-    public void setSeatsAvailable(int seatsAvailable) {
-        this.seatsAvailable = seatsAvailable;
-    }
-
-    public int getMaxRows() {
-        return maxRows;
-    }
-
-    public void setMaxRows(int maxRows) {
-        this.maxRows = maxRows;
-    }
-
-    public String getAirportName() {
-        return airportName;
-    }
-
-    public void setAirportName(String airportName) {
-        this.airportName = airportName;
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(this.serialNumber);
-    }
-
-    public boolean isNotEmpty(String stringField) {
-        return stringField != null && !stringField.isEmpty();
-    }
-
 }

@@ -13,10 +13,37 @@ public class Customer {
 
     private String firstName;
     private String lastName;
-    private String passportNumber;
-    private Long phoneNumber;
-    private String emailId;
-    private Long userId;
+    private Long airplaneNum;
+    private Seat seat;
+    private int seatsBooked;
+
+    public int getSeatsBooked() {
+        return seatsBooked;
+    }
+
+    public void setSeatsBooked(int seatsBooked) {
+        this.seatsBooked = seatsBooked;
+    }
+
+    public Customer() {
+        this.seat = new Seat();
+    }
+
+    public Long getAirplaneNum() {
+        return airplaneNum;
+    }
+
+    public void setAirplaneNum(Long airplaneNum) {
+        this.airplaneNum = airplaneNum;
+    }
+
+    public Seat getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -34,36 +61,7 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public String getPassportNumber() {
-        return passportNumber;
+    public float calcCustPrice() {
+        return (seat.getNumAisle() * 400) + (seat.getNumMiddle() * 300) + (seat.getNumWindow() * 500);
     }
-
-    public void setPassportNumber(String passportNumber) {
-        this.passportNumber = passportNumber;
-    }
-
-    public Long getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(Long phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmailId() {
-        return emailId;
-    }
-
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
 }

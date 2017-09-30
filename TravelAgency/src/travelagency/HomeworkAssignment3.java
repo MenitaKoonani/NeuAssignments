@@ -21,26 +21,39 @@ public class HomeworkAssignment3 {
      */
     public static void main(String[] args) throws IOException, ParseException {
         // TODO code application logic here
+
         TravelAgency travelAgency = new TravelAgency();
-
         // importing airplaneData
-        AirplaneCatalog airplaneCatalog = travelAgency.getAirplaneCatalog();
-        airplaneCatalog.populatingAirplaneCatalog();
+        travelAgency.populatingAirplaneCatalog();
 
-        // displaying airplane catalog
-        ArrayList<Airplane> airplanesList = airplaneCatalog.getAirplanesList();
-        for (Airplane eachAirplane : airplanesList) {
-            System.out.println("Airplane Serial Number :" + eachAirplane.getSerialNumber());
+        // displaying data
+        ArrayList<Airliner> airlinerList = travelAgency.getAirlinerList();
+        for (Airliner eachAirliner : airlinerList) {
+            System.out.println("Airliner Id : " + eachAirliner.getAirlinerId());
+            System.out.println("----------------------------------------------");
+            ArrayList<AirplaneFleet> fleetList = eachAirliner.getFleetList();
+            for (AirplaneFleet eachFleet : fleetList) {
+                System.out.println(" Fleet Id :::: " + eachFleet.getFleetId());
+                ArrayList<Airplane> airplanesList = eachFleet.getAirplanesList();
+                for (Airplane eachAirplane : airplanesList) {
+                    System.out.println("Airplane Id ::: " + eachAirplane.getAirplaneId());
+                    System.out.println("Airplane revenue : " + eachAirplane.getAirplaneRevenue());
+                    System.out.println("Seats Taken : " + eachAirplane.getSeat().getTotalSeats());
+                }
+                System.out.println("Fleet Revenue : " + eachFleet.calcFleetRevenue());
+            }
+            System.out.println("Airliner Revenue :" + eachAirliner.calcAirlinerRevenue());
+            System.out.println("----------------------------------------------");
         }
 
         // importing custromer directory
         CustomerDirectory customerDirectory = travelAgency.getCustomerDir();
-        customerDirectory.populatingCustomerDirectory();
+        customerDirectory.populatingCustomerDirectory(travelAgency);
 
         // displaying customerData
         ArrayList<Customer> customerList = customerDirectory.getCustomerList();
         for (Customer eachCustomer : customerList) {
-            System.out.println("User ID : " + eachCustomer.getUserId());
+            System.out.println("First Name : " + eachCustomer.getFirstName() + "\tPrice : " + eachCustomer.calcCustPrice());
         }
 
         // importing Master schedule
@@ -52,16 +65,6 @@ public class HomeworkAssignment3 {
         for (Schedule eachSchedule : scheduleList) {
             System.out.println("Airplane Num : " + eachSchedule.getAirplaneSerialNumber() + "\tDeparture Time : " + eachSchedule.getDepartureTime());
         }
-        
-        // importing seat arrangement
-        SeatArrangement seatArrangement = airplaneCatalog.getSeatArrangement();
-        seatArrangement.populatingSeatArrangement();
-        
-        // displaying seatArrangement
-        ArrayList<Seat> seatArrangementList = seatArrangement.getSeatList();
-        for(Seat eachSeat : seatArrangementList){
-            System.out.println("User ID : " + eachSeat.getUserId()+ "\tSeatPref : " + eachSeat.getSeatPref());
-        }
-        
+
     }
 }

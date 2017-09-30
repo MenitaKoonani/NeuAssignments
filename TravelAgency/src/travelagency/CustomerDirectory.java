@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -49,11 +48,11 @@ public class CustomerDirectory {
         customerList.add(newCustomer);
         return newCustomer;
     }
-    
-    // import customer directory
-     public void populatingCustomerDirectory() throws IOException, ParseException {
 
-        File chosenFile = new File("CustomerDir.csv");
+    // import customer directory
+    public void populatingCustomerDirectory(TravelAgency travelAgency) throws IOException, ParseException {
+
+        File chosenFile = new File("Customer_Seat.csv");
         BufferedReader bufferedReader = new BufferedReader(new FileReader(chosenFile.getAbsolutePath()));
         String stringLine = "";
         StringTokenizer string = null;
@@ -64,22 +63,51 @@ public class CustomerDirectory {
             string = new StringTokenizer(stringLine, ",");
             int objPosition = 0;
             ArrayList eachObject = new ArrayList();
-            while (string.hasMoreTokens() && objPosition <= 6) {
-                tokenNum ++;
-                objPosition ++;
+            while (string.hasMoreTokens() && objPosition <= 7) {
+                tokenNum++;
+                objPosition++;
                 eachObject.add(string.nextToken(","));
             }
-            if(eachObject != null && !eachObject.isEmpty())
-            {
+            if (eachObject != null && !eachObject.isEmpty()) {
                 Customer customer = addNewCustomer();
-                setUpdatedTime(System.currentTimeMillis());
-                customer.setUserId(Long.parseLong(((String) eachObject.get(0)).trim()));
-                customer.setFirstName(String.valueOf(eachObject.get(1)).trim());
-                customer.setLastName(String.valueOf(eachObject.get(2)).trim());
-                customer.setPassportNumber(String.valueOf(eachObject.get(3)).trim());
-                customer.setPhoneNumber(Long.parseLong(((String) eachObject.get(4)).trim()));
-                customer.setEmailId(String.valueOf(eachObject.get(5)).trim());
+                customer.setFirstName(String.valueOf(eachObject.get(0)).trim());
+                customer.setLastName(String.valueOf(eachObject.get(1)).trim());
+
+                Long airlinerNum = Long.parseLong(String.valueOf(eachObject.get(2)));
+                Long fleetNum = Long.parseLong(String.valueOf(eachObject.get(3)));
+                Long airplaneNum = Long.parseLong(String.valueOf(eachObject.get(4)));
+                customer.setAirplaneNum(airplaneNum);
+
+                Seat customerSeat = customer.getSeat();
+                int numAisle = (Integer.parseInt((String) eachObject.get(5)));
+                int numMiddle = (Integer.parseInt((String) eachObject.get(6)));
+                int numWindow = (Integer.parseInt((String) eachObject.get(7)));
+                customerSeat.setNumAisle(numAisle);
+                customerSeat.setNumMiddle(numMiddle);
+                customerSeat.setNumWindow(numWindow);
+
+                int totalSeatsBooked = numAisle + numMiddle + numWindow;
+                customer.setSeatsBooked(totalSeatsBooked);
+
+                Airliner airliner = travelAgency.getAirlinerById(airlinerNum);
+                AirplaneFleet fleet = airliner.getFleetById(fleetNum);
+                Airplane airplane = fleet.getAirplaneById(airplaneNum);
+                Seat airplaneSeat = airplane.getSeat();
+                airplaneSeat.setNumAisle(numAisle);
+                airplaneSeat.setNumMiddle(numMiddle);
+                airplaneSeat.setNumWindow(numWindow);
+                airplaneSeat.setTotalSeats(totalSeatsBooked);
+                airplane.setAirplaneRevenue(airplane.calcAirplaneRevenue());
             }
         }
+    }
+
+    public float calcCustDirPrice() {
+        float custDirPrice = 0;
+        for (Customer eachCustomer : customerList) {
+            custDirPrice += eachCustomer.calcCustPrice();
+        }
+
+        return custDirPrice;
     }
 }

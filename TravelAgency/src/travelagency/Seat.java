@@ -10,68 +10,58 @@ package travelagency;
  * @author Menita Koonani
  */
 public class Seat {
+    
+    private int numWindow;
+    private int numAisle;
+    private int numMiddle;
+    private int columnNum;
+    private int totalSeats;
 
-    private int seatNumber;
-    private char seatPref; // A, M, W
-    private boolean isColumn1;
-    private float price;
-    private Long userId;
-    private Long airplaneSerialNumber;
-    private boolean isAssgined;
-
-    public int getSeatNumber() {
-        return seatNumber;
+    public Seat(){
+        numWindow = 50;
+        numAisle = 50;
+        numMiddle = 50;
+        columnNum = 1;
+        totalSeats = numWindow + numAisle + numMiddle;
+    }
+    
+    public int getTotalSeats() {
+        return totalSeats;
     }
 
-    public void setSeatNumber(int seatNumber) {
-        this.seatNumber = seatNumber;
+    public void setTotalSeats(int totalSeats) {
+        this.totalSeats = totalSeats;
+    }
+    
+    public int getColumnNum() {
+        return columnNum;
     }
 
-    public char getSeatPref() {
-        return seatPref;
+    public void setColumnNum(int columnNum) {
+        this.columnNum = columnNum;
     }
 
-    public void setSeatPref(char seatPref) {
-        this.seatPref = seatPref;
+    public int getNumWindow() {
+        return numWindow;
     }
 
-    public boolean isIsColumn1() {
-        return isColumn1;
+    public void setNumWindow(int numWindow) {
+        this.numWindow = numWindow;
     }
 
-    public void setIsColumn1(boolean isColumn1) {
-        this.isColumn1 = isColumn1;
+    public int getNumAisle() {
+        return numAisle;
     }
 
-    public float getPrice() {
-        return price;
+    public void setNumAisle(int numAisle) {
+        this.numAisle = numAisle;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public int getNumMiddle() {
+        return numMiddle;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getAirplaneSerialNumber() {
-        return airplaneSerialNumber;
-    }
-
-    public void setAirplaneSerialNumber(Long airplaneSerialNumber) {
-        this.airplaneSerialNumber = airplaneSerialNumber;
-    }
-
-    public boolean isIsAssgined() {
-        return isAssgined;
-    }
-
-    public void setIsAssgined(boolean isAssgined) {
-        this.isAssgined = isAssgined;
+    public void setNumMiddle(int numMiddle) {
+        this.numMiddle = numMiddle;
     }
 }
