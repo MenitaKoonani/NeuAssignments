@@ -75,7 +75,7 @@ public class MasterSchedule {
             if (!eachObject.isEmpty()) {
                 Schedule schedule = addNewSchedule();
                 setUpdatedTime(System.currentTimeMillis());
-                schedule.setAirplaneSerialNumber(Long.parseLong(((String) eachObject.get(0)).trim()));
+                schedule.setAirplaneId(Long.parseLong(((String) eachObject.get(0)).trim()));
                 schedule.setArrivalCity(String.valueOf(eachObject.get(1)).trim());
                 schedule.setDepartureCity(String.valueOf(eachObject.get(2)).trim());
 

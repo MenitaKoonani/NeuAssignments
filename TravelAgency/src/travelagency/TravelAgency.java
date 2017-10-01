@@ -24,12 +24,41 @@ public class TravelAgency {
     private MasterSchedule masterSchedule;
     private ArrayList<Airliner> airlinerList;
 
+    // constructor
+    public TravelAgency() {
+        this.customerDir = new CustomerDirectory();
+        this.masterSchedule = new MasterSchedule();
+        this.airlinerList = new ArrayList<Airliner>();
+    }
+
+    public CustomerDirectory getCustomerDir() {
+        return customerDir;
+    }
+
+    public void setCustomerDir(CustomerDirectory customerDir) {
+        this.customerDir = customerDir;
+    }
+
+    public MasterSchedule getMasterSchedule() {
+        return masterSchedule;
+    }
+
+    public void setMasterSchedule(MasterSchedule masterSchedule) {
+        this.masterSchedule = masterSchedule;
+    }
+
     public ArrayList<Airliner> getAirlinerList() {
         return airlinerList;
     }
 
     public void setAirlinerList(ArrayList<Airliner> airlinerList) {
         this.airlinerList = airlinerList;
+    }
+
+    public Airliner addNewAirliner() {
+        Airliner airliner = new Airliner();
+        airlinerList.add(airliner);
+        return airliner;
     }
 
     public ArrayList<Long> getAirlinerIdList() {
@@ -53,34 +82,6 @@ public class TravelAgency {
         return null;
     }
 
-    public TravelAgency() {
-        this.customerDir = new CustomerDirectory();
-        this.masterSchedule = new MasterSchedule();
-        this.airlinerList = new ArrayList<Airliner>();
-    }
-
-    public CustomerDirectory getCustomerDir() {
-        return customerDir;
-    }
-
-    public void setCustomerDir(CustomerDirectory customerDir) {
-        this.customerDir = customerDir;
-    }
-
-    public MasterSchedule getMasterSchedule() {
-        return masterSchedule;
-    }
-
-    public void setMasterSchedule(MasterSchedule masterSchedule) {
-        this.masterSchedule = masterSchedule;
-    }
-
-    public Airliner addNewAirliner() {
-        Airliner airliner = new Airliner();
-        airlinerList.add(airliner);
-        return airliner;
-    }
-
     public void populatingAirplaneCatalog() throws IOException, ParseException {
 
         File chosenFile = new File("Airliner.csv");
@@ -99,7 +100,7 @@ public class TravelAgency {
                 objPosition++;
                 eachObject.add(string.nextToken(","));
             }
-            if (eachObject != null && !eachObject.isEmpty()) {
+            if (!eachObject.isEmpty()) {
                 Long airlinerNum = Long.parseLong(((String) eachObject.get(0)).trim());
                 Airliner airliner;
                 if (isAirlinerInList(airlinerNum)) {
@@ -119,7 +120,7 @@ public class TravelAgency {
                     airplaneFleet.setFleetId(fleetId);
                 }
                 Long airplaneId = Long.parseLong(((String) eachObject.get(3)).trim());
-                Airplane airplane = airplaneFleet.addNewAirplane();
+                Flight airplane = airplaneFleet.addNewAirplane();
                 airplane.setAirplaneId(airplaneId);
                 airplane.setAirplaneName(String.valueOf(eachObject.get(4)).trim());
                 airplane.setMaxSeats(Integer.parseInt(String.valueOf(eachObject.get(5)).trim()));

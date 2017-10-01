@@ -17,6 +17,7 @@ public class Seat {
     private int columnNum;
     private int totalSeats;
 
+    // constructor
     public Seat(){
         numWindow = 0;
         numAisle = 0;
@@ -30,7 +31,7 @@ public class Seat {
     }
 
     public void setTotalSeats(int totalSeats) {
-        this.totalSeats = totalSeats;
+        this.totalSeats += totalSeats;
     }
     
     public int getColumnNum() {

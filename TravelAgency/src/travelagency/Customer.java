@@ -17,16 +17,25 @@ public class Customer {
     private Seat seat;
     private int seatsBooked;
 
-    public int getSeatsBooked() {
-        return seatsBooked;
-    }
-
-    public void setSeatsBooked(int seatsBooked) {
-        this.seatsBooked = seatsBooked;
-    }
-
+    // constructor
     public Customer() {
         this.seat = new Seat();
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Long getAirplaneNum() {
@@ -45,20 +54,12 @@ public class Customer {
         this.seat = seat;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public int getSeatsBooked() {
+        return seatsBooked;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSeatsBooked(int seatsBooked) {
+        this.seatsBooked = seatsBooked;
     }
 
     public float calcCustPrice() {

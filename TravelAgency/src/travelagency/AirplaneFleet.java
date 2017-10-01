@@ -20,8 +20,21 @@ import java.util.StringTokenizer;
  */
 public class AirplaneFleet {
 
-    private ArrayList<Airplane> airplanesList;
+    private ArrayList<Flight> airplanesList;
     private Long fleetId;
+
+    // construtor
+    public AirplaneFleet() {
+        airplanesList = new ArrayList<>();
+    }
+
+    public ArrayList<Flight> getAirplanesList() {
+        return airplanesList;
+    }
+
+    public void setAirplanesList(ArrayList<Flight> airplanesList) {
+        this.airplanesList = airplanesList;
+    }
 
     public Long getFleetId() {
         return fleetId;
@@ -31,46 +44,43 @@ public class AirplaneFleet {
         this.fleetId = fleetId;
     }
 
-    public AirplaneFleet() {
-        airplanesList = new ArrayList<>();
-    }
-
-    public float calcFleetRevenue() {
-        float fleetPrice = 0;
-        for (Airplane eachAirplane : airplanesList) {
-            fleetPrice += eachAirplane.calcAirplaneRevenue();
-        }
-        return fleetPrice;
-    }
-
-    public Airplane addNewAirplane() {
-        Airplane newAirplane = new Airplane();
+    public Flight addNewAirplane() {
+        Flight newAirplane = new Flight();
         airplanesList.add(newAirplane);
         return newAirplane;
     }
 
-    public ArrayList<Airplane> getAirplanesList() {
-        return airplanesList;
-    }
-
-    public void setAirplanesList(ArrayList<Airplane> airplanesList) {
-        this.airplanesList = airplanesList;
-    }
-
-    public ArrayList<Long> getAirplaneIds() {
-        ArrayList<Long> airplaneIds = new ArrayList<>();
-        for (Airplane eachAirplane : airplanesList) {
-            airplaneIds.add(eachAirplane.getAirplaneId());
+    public boolean isAirplaneInList(Long airplaneId) {
+        for (Flight eachAirplane : airplanesList) {
+            if (Objects.equals(eachAirplane.getAirplaneId(), airplaneId)) {
+                return true;
+            }
         }
-        return airplaneIds;
+        return false;
     }
 
-    public Airplane getAirplaneById(Long airplaneId) {
-        for (Airplane eachAirplane : airplanesList) {
+    public Flight getAirplaneById(Long airplaneId) {
+        for (Flight eachAirplane : airplanesList) {
             if (Objects.equals(eachAirplane.getAirplaneId(), airplaneId)) {
                 return eachAirplane;
             }
         }
         return null;
+    }
+
+    public ArrayList<Long> getAirplaneIds() {
+        ArrayList<Long> airplaneIds = new ArrayList<>();
+        for (Flight eachAirplane : airplanesList) {
+            airplaneIds.add(eachAirplane.getAirplaneId());
+        }
+        return airplaneIds;
+    }
+
+    public float calcFleetRevenue() {
+        float fleetPrice = 0;
+        for (Flight eachAirplane : airplanesList) {
+            fleetPrice += eachAirplane.calcAirplaneRevenue();
+        }
+        return fleetPrice;
     }
 }

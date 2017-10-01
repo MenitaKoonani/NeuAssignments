@@ -43,8 +43,8 @@ public class HomeworkAssignment3 {
             ArrayList<AirplaneFleet> fleetList = eachAirliner.getFleetList();
             for (AirplaneFleet eachFleet : fleetList) {
                 System.out.println("\nFleet Id :::: " + eachFleet.getFleetId());
-                ArrayList<Airplane> airplanesList = eachFleet.getAirplanesList();
-                for (Airplane eachAirplane : airplanesList) {
+                ArrayList<Flight> airplanesList = eachFleet.getAirplanesList();
+                for (Flight eachAirplane : airplanesList) {
                     System.out.println("\tAirplane Id ::: " + eachAirplane.getAirplaneId() + "\tAirplane revenue : " + eachAirplane.calcAirplaneRevenue());
                 }
                 System.out.println("Fleet Revenue : " + eachFleet.calcFleetRevenue());
@@ -53,10 +53,11 @@ public class HomeworkAssignment3 {
             System.out.println("\n----------------------------------------------");
         }
         System.out.println("\nTravel Agency Revenue : " + travelAgency.calcAgencyRevenue());
+        
         // displaying masterSchedule
 //        ArrayList<Schedule> scheduleList = masterSchedule.getScheduleList();
 //        for (Schedule eachSchedule : scheduleList) {
-//            System.out.println("Airplane Num : " + eachSchedule.getAirplaneSerialNumber() + "\tDeparture Time : " + eachSchedule.getDepartureTime());
+//            System.out.println("Flight Num : " + eachSchedule.getAirplaneSerialNumber() + "\tDeparture Time : " + eachSchedule.getDepartureTime());
 //        }
     }
 }

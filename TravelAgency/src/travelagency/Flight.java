@@ -9,29 +9,20 @@ package travelagency;
  *
  * @author Menita Koonani
  */
-public class Airplane {
+public class Flight {
 
     private Long airplaneId;
     private String airplaneName;
     private int maxSeats;
     private Seat seat;
+    private int seatsBooked;
 
-    public float calcAirplaneRevenue() {
-        return (seat.getNumAisle() * 400) + (seat.getNumMiddle() * 300) + (seat.getNumWindow() * 500);
-    }
-
-    public Seat getSeat() {
-        return seat;
-    }
-
-    public void setSeat(Seat seat) {
-        this.seat = seat;
-    }
-
-    public Airplane() {
+    // constructor
+    public Flight() {
         seat = new Seat();
+        this.seatsBooked = 0;
     }
-
+    
     public Long getAirplaneId() {
         return airplaneId;
     }
@@ -54,5 +45,25 @@ public class Airplane {
 
     public void setMaxSeats(int maxSeats) {
         this.maxSeats = maxSeats;
+    }
+    
+    public Seat getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
+    
+    public int getSeatsBooked() {
+        return seatsBooked;
+    }
+
+    public void setSeatsBooked(int seatsBooked) {
+        this.seatsBooked += seatsBooked;
+    }
+    
+    public float calcAirplaneRevenue() {
+        return (seat.getNumAisle() * 400) + (seat.getNumMiddle() * 300) + (seat.getNumWindow() * 500);
     }
 }

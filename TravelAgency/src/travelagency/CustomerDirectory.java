@@ -22,6 +22,7 @@ public class CustomerDirectory {
     private ArrayList<Customer> customerList;
     private Long updatedTime;
 
+    // constructor
     public CustomerDirectory() {
         this.customerList = new ArrayList<Customer>();
     }
@@ -68,35 +69,69 @@ public class CustomerDirectory {
                 objPosition++;
                 eachObject.add(string.nextToken(","));
             }
-            if (eachObject != null && !eachObject.isEmpty()) {
-                Customer customer = addNewCustomer();
-                customer.setFirstName(String.valueOf(eachObject.get(0)).trim());
-                customer.setLastName(String.valueOf(eachObject.get(1)).trim());
+            if (!eachObject.isEmpty()) {
 
+                String firstName = String.valueOf(eachObject.get(0)).trim();
+                String lastName = String.valueOf(eachObject.get(1)).trim();
                 Long airlinerNum = Long.parseLong(String.valueOf(eachObject.get(2)));
                 Long fleetNum = Long.parseLong(String.valueOf(eachObject.get(3)));
                 Long airplaneNum = Long.parseLong(String.valueOf(eachObject.get(4)));
-                customer.setAirplaneNum(airplaneNum);
 
-                Seat customerSeat = customer.getSeat();
-                int numAisle = (Integer.parseInt((String) eachObject.get(5)));
-                int numMiddle = (Integer.parseInt((String) eachObject.get(6)));
-                int numWindow = (Integer.parseInt((String) eachObject.get(7)));
-                customerSeat.setNumAisle(numAisle);
-                customerSeat.setNumMiddle(numMiddle);
-                customerSeat.setNumWindow(numWindow);
+                if (travelAgency.isAirlinerInList(airlinerNum)) {
+                    Airliner airliner = travelAgency.getAirlinerById(airlinerNum);
+                    if (airliner.isFleetInList(fleetNum)) {
+                        AirplaneFleet fleet = airliner.getFleetById(fleetNum);
+                        if (fleet.isAirplaneInList(airplaneNum)) {
+                            Flight airplane = fleet.getAirplaneById(airplaneNum);
 
-                int totalSeatsBooked = numAisle + numMiddle + numWindow;
-                customer.setSeatsBooked(totalSeatsBooked);
+                            int numAisle = (Integer.parseInt((String) eachObject.get(5)));
+                            int numMiddle = (Integer.parseInt((String) eachObject.get(6)));
+                            int numWindow = (Integer.parseInt((String) eachObject.get(7)));
+                            int totalSeatsBookedByCust = numAisle + numMiddle + numWindow;
 
-                Airliner airliner = travelAgency.getAirlinerById(airlinerNum);
-                AirplaneFleet fleet = airliner.getFleetById(fleetNum);
-                Airplane airplane = fleet.getAirplaneById(airplaneNum);
-                Seat airplaneSeat = airplane.getSeat();
-                airplaneSeat.setNumAisle(numAisle);
-                airplaneSeat.setNumMiddle(numMiddle);
-                airplaneSeat.setNumWindow(numWindow);
-                airplaneSeat.setTotalSeats(totalSeatsBooked);
+                            Seat airplaneSeat = airplane.getSeat();
+
+                            if ((totalSeatsBookedByCust + airplane.getSeatsBooked()) >= airplane.getMaxSeats()) {
+                                airplaneSeat.setNumAisle(numAisle);
+                                airplaneSeat.setNumMiddle(numMiddle);
+                                airplaneSeat.setNumWindow(numWindow);
+                                airplaneSeat.setTotalSeats(totalSeatsBookedByCust);
+
+                                airplane.setSeatsBooked(totalSeatsBookedByCust); //should be summed up
+                                
+                                Customer customer = addNewCustomer();
+                                customer.setFirstName(firstName);
+                                customer.setLastName(lastName);
+                                customer.setAirplaneNum(airplaneNum);
+
+                                Seat customerSeat = customer.getSeat();
+                                customerSeat.setNumAisle(numAisle);
+                                customerSeat.setNumMiddle(numMiddle);
+                                customerSeat.setNumWindow(numWindow);
+                                customer.setSeatsBooked(totalSeatsBookedByCust);
+                                
+                            } else {
+                                System.out.println("Exceeded maximum seats in flight " + airplaneNum);
+                                System.out.println("Customer " + firstName + " was not added to the directory!");
+                                continue;
+                            }
+
+                        } else {
+                            System.out.println("Invalid flight ( " + airplaneNum + " ) !! ");
+                            System.out.println("Customer " + firstName + " was not added to the directory!");
+                            continue;
+                        }
+                    } else {
+                        System.out.println("Invalid fleet ( " + fleetNum + " ) !! ");
+                        System.out.println("Customer " + firstName + " was not added to the directory!");
+                        continue;
+                    }
+                } else {
+                    System.out.println("Invalid airliner ( " + airlinerNum + " ) !! ");
+                    System.out.println("Customer " + firstName + " was not added to the directory!");
+                    continue;
+                }
+
             }
         }
     }
@@ -106,7 +141,6 @@ public class CustomerDirectory {
         for (Customer eachCustomer : customerList) {
             custDirPrice += eachCustomer.calcCustPrice();
         }
-
         return custDirPrice;
     }
 }

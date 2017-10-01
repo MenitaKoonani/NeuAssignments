@@ -18,14 +18,41 @@ public class Airliner {
     private Long airlinerId;
     private String airlinerName;
 
-    public float calcAirlinerRevenue() {
-        float airlinerPrice = 0;
-        for (AirplaneFleet eachFleet : fleetList) {
-            airlinerPrice += eachFleet.calcFleetRevenue();
-        }
-        return airlinerPrice;
+    // constructor
+    public Airliner() {
+        fleetList = new ArrayList<>();
+    }
+    
+    public ArrayList<AirplaneFleet> getFleetList() {
+        return fleetList;
     }
 
+    public void setFleetList(ArrayList<AirplaneFleet> fleetList) {
+        this.fleetList = fleetList;
+    }
+    
+    public Long getAirlinerId() {
+        return airlinerId;
+    }
+
+    public void setAirlinerId(Long airlinerId) {
+        this.airlinerId = airlinerId;
+    }
+    
+    public String getAirlinerName() {
+        return airlinerName;
+    }
+
+    public void setAirlinerName(String airlinerName) {
+        this.airlinerName = airlinerName;
+    }
+
+    public AirplaneFleet addNewAirplaneFleet() {
+        AirplaneFleet newFleet = new AirplaneFleet();
+        fleetList.add(newFleet);
+        return newFleet;
+    }
+    
     public ArrayList<Long> getFleetIdList() {
         ArrayList<Long> fleetIdList = new ArrayList<>();
         for (AirplaneFleet eachFleet : fleetList) {
@@ -46,45 +73,13 @@ public class Airliner {
         }
         return null;
     }
-
-    public String getAirlinerName() {
-        return airlinerName;
+    
+    public float calcAirlinerRevenue() {
+        float airlinerPrice = 0;
+        for (AirplaneFleet eachFleet : fleetList) {
+            airlinerPrice += eachFleet.calcFleetRevenue();
+        }
+        return airlinerPrice;
     }
 
-    public void setAirlinerName(String airlinerName) {
-        this.airlinerName = airlinerName;
-    }
-
-    public Long getAirlinerId() {
-        return airlinerId;
-    }
-
-    public void setAirlinerId(Long airlinerId) {
-        this.airlinerId = airlinerId;
-    }
-
-    // constructor
-    public Airliner() {
-        fleetList = new ArrayList<>();
-        importAirliner();
-    }
-
-    public ArrayList<AirplaneFleet> getFleetList() {
-        return fleetList;
-    }
-
-    public void setFleetList(ArrayList<AirplaneFleet> fleetList) {
-        this.fleetList = fleetList;
-    }
-
-    public AirplaneFleet addNewAirplaneFleet() {
-        AirplaneFleet newFleet = new AirplaneFleet();
-        fleetList.add(newFleet);
-        return newFleet;
-    }
-
-    public void importAirliner() {
-        setAirlinerId(Long.parseLong("1001"));
-        setAirlinerName("Jet airways");
-    }
 }

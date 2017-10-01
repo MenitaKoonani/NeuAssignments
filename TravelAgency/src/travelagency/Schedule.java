@@ -16,23 +16,15 @@ public class Schedule {
 
     private Time arrivalTime;
     private Time departureTime;
+    private boolean isDelayed;
     private Date arrivalDate;
     private Date departureDate;
-    private boolean isDelayed;
     private String arrivalCity;
     private String departureCity;
-    private Long airplaneSerialNumber;
+    private Long airplaneId;
 
     public Time getArrivalTime() {
         return arrivalTime;
-    }
-
-    public Long getAirplaneSerialNumber() {
-        return airplaneSerialNumber;
-    }
-
-    public void setAirplaneSerialNumber(Long airplaneSerialNumber) {
-        this.airplaneSerialNumber = airplaneSerialNumber;
     }
 
     public void setArrivalTime(Time arrivalTime) {
@@ -45,6 +37,14 @@ public class Schedule {
 
     public void setDepartureTime(Time departureTime) {
         this.departureTime = departureTime;
+    }
+
+    public boolean isIsDelayed() {
+        return isDelayed;
+    }
+
+    public void setIsDelayed(boolean isDelayed) {
+        this.isDelayed = isDelayed;
     }
 
     public Date getArrivalDate() {
@@ -63,14 +63,6 @@ public class Schedule {
         this.departureDate = departureDate;
     }
 
-    public boolean isIsDelayed() {
-        return isDelayed;
-    }
-
-    public void setIsDelayed(boolean isDelayed) {
-        this.isDelayed = isDelayed;
-    }
-
     public String getArrivalCity() {
         return arrivalCity;
     }
@@ -85,5 +77,13 @@ public class Schedule {
 
     public void setDepartureCity(String departureCity) {
         this.departureCity = departureCity;
+    }
+
+    public Long getAirplaneId() {
+        return airplaneId;
+    }
+
+    public void setAirplaneId(Long airplaneId) {
+        this.airplaneId = airplaneId;
     }
 }
