@@ -38,26 +38,22 @@ public class HomeworkAssignment3 {
         // displaying data
         ArrayList<Airliner> airlinerList = travelAgency.getAirlinerList();
         for (Airliner eachAirliner : airlinerList) {
-            System.out.println("Airliner Id : " + eachAirliner.getAirlinerId());
+            System.out.println("----------------------------------------------");
+            System.out.println("Airliner Id : " + eachAirliner.getAirlinerId() + "\tAirliner Name : " + eachAirliner.getAirlinerName());
             System.out.println("----------------------------------------------");
             ArrayList<AirplaneFleet> fleetList = eachAirliner.getFleetList();
             for (AirplaneFleet eachFleet : fleetList) {
                 System.out.println("\nFleet Id :::: " + eachFleet.getFleetId());
                 ArrayList<Flight> airplanesList = eachFleet.getAirplanesList();
                 for (Flight eachAirplane : airplanesList) {
-                    System.out.println("\tAirplane Id ::: " + eachAirplane.getAirplaneId() + "\tAirplane revenue : " + eachAirplane.calcAirplaneRevenue());
+                    System.out.println("\tAirplane Id ::: " + eachAirplane.getAirplaneId() + "\tAirplane Name : " + eachAirplane.getAirplaneName() + "\tAirplane revenue : $" + eachAirplane.calcAirplaneRevenue());
                 }
-                System.out.println("Fleet Revenue : " + eachFleet.calcFleetRevenue());
+                System.out.println("Fleet Revenue : $" + eachFleet.calcFleetRevenue());
             }
-            System.out.println("Airliner Revenue : " + eachAirliner.calcAirlinerRevenue());
+            System.out.println("\n" + eachAirliner.getAirlinerName() + " Airliner Revenue : $" + eachAirliner.calcAirlinerRevenue());
             System.out.println("\n----------------------------------------------");
         }
-        System.out.println("\nTravel Agency Revenue : " + travelAgency.calcAgencyRevenue());
-        
-        // displaying masterSchedule
-//        ArrayList<Schedule> scheduleList = masterSchedule.getScheduleList();
-//        for (Schedule eachSchedule : scheduleList) {
-//            System.out.println("Flight Num : " + eachSchedule.getAirplaneSerialNumber() + "\tDeparture Time : " + eachSchedule.getDepartureTime());
-//        }
+        System.out.println("\nTravel Agency Revenue : $" + travelAgency.calcAgencyRevenue());
+        System.out.println("\n----------------------------------------------");
     }
 }

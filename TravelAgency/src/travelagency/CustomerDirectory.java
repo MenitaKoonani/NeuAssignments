@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
@@ -90,8 +91,7 @@ public class CustomerDirectory {
                             int totalSeatsBookedByCust = numAisle + numMiddle + numWindow;
 
                             Seat airplaneSeat = airplane.getSeat();
-
-                            if ((totalSeatsBookedByCust + airplane.getSeatsBooked()) >= airplane.getMaxSeats()) {
+                            if ((totalSeatsBookedByCust + airplane.getSeatsBooked()) <= airplane.getMaxSeats()) {
                                 airplaneSeat.setNumAisle(numAisle);
                                 airplaneSeat.setNumMiddle(numMiddle);
                                 airplaneSeat.setNumWindow(numWindow);
@@ -113,25 +113,20 @@ public class CustomerDirectory {
                             } else {
                                 System.out.println("Exceeded maximum seats in flight " + airplaneNum);
                                 System.out.println("Customer " + firstName + " was not added to the directory!");
-                                continue;
                             }
 
                         } else {
                             System.out.println("Invalid flight ( " + airplaneNum + " ) !! ");
                             System.out.println("Customer " + firstName + " was not added to the directory!");
-                            continue;
                         }
                     } else {
                         System.out.println("Invalid fleet ( " + fleetNum + " ) !! ");
                         System.out.println("Customer " + firstName + " was not added to the directory!");
-                        continue;
                     }
                 } else {
                     System.out.println("Invalid airliner ( " + airlinerNum + " ) !! ");
                     System.out.println("Customer " + firstName + " was not added to the directory!");
-                    continue;
                 }
-
             }
         }
     }
