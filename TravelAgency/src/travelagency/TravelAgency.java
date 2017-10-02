@@ -95,7 +95,7 @@ public class TravelAgency {
             string = new StringTokenizer(stringLine, ",");
             int objPosition = 0;
             ArrayList eachObject = new ArrayList();
-            while (string.hasMoreTokens() && objPosition <= 5) {
+            while (string.hasMoreTokens() && objPosition <= 8) {
                 tokenNum++;
                 objPosition++;
                 eachObject.add(string.nextToken(","));
@@ -124,6 +124,10 @@ public class TravelAgency {
                 airplane.setAirplaneId(airplaneId);
                 airplane.setAirplaneName(String.valueOf(eachObject.get(4)).trim());
                 airplane.setMaxSeats(Integer.parseInt(String.valueOf(eachObject.get(5)).trim()));
+                Seat seat = airplane.getSeat();
+                seat.setAislePrice(Float.parseFloat(String.valueOf(eachObject.get(6)).trim()));
+                seat.setMiddlePrice(Float.parseFloat(String.valueOf(eachObject.get(7)).trim()));
+                seat.setWindowPrice(Float.parseFloat(String.valueOf(eachObject.get(8)).trim()));
             }
         }
     }

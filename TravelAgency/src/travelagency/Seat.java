@@ -16,10 +16,9 @@ public class Seat {
     private int numMiddle;
     private int columnNum;
     private int totalSeats;
-    private int colNum;
-    private static float aislePrice = 400f;
-    private static float windowPrice = 500f;
-    private static float middlePrice = 300f;
+    private static float aislePrice;
+    private static float windowPrice;
+    private static float middlePrice;
 
     // constructor
     public Seat() {
@@ -28,22 +27,6 @@ public class Seat {
         numMiddle = 0;
         columnNum = 1;
         totalSeats = numWindow + numAisle + numMiddle;
-    }
-
-    public int getTotalSeats() {
-        return totalSeats;
-    }
-
-    public void setTotalSeats(int totalSeats) {
-        this.totalSeats += totalSeats;
-    }
-
-    public int getColumnNum() {
-        return columnNum;
-    }
-
-    public void setColumnNum(int columnNum) {
-        this.columnNum = columnNum;
     }
 
     public int getNumWindow() {
@@ -69,13 +52,21 @@ public class Seat {
     public void setNumMiddle(int numMiddle) {
         this.numMiddle += numMiddle;
     }
-
-    public int getColNum() {
-        return colNum;
+    
+    public int getTotalSeats() {
+        return totalSeats;
     }
 
-    public void setColNum(int colNum) {
-        this.colNum = colNum;
+    public void setTotalSeats(int totalSeats) {
+        this.totalSeats += totalSeats;
+    }
+
+    public int getColumnNum() {
+        return columnNum;
+    }
+
+    public void setColumnNum(int columnNum) {
+        this.columnNum = columnNum;
     }
 
     public float getAislePrice() {

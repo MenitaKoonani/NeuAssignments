@@ -110,7 +110,7 @@ public class CustomerDirectory {
                                     customerSeat.setNumAisle(numAisle);
                                     customerSeat.setNumMiddle(numMiddle);
                                     customerSeat.setNumWindow(numWindow);
-                                    customerSeat.setColNum(colNum);
+                                    customerSeat.setColumnNum(colNum);
                                     customer.setSeatsBooked(totalSeatsBookedByCust);
 
                                 } else {
