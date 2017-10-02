@@ -10,22 +10,26 @@ package travelagency;
  * @author Menita Koonani
  */
 public class Seat {
-    
+
     private int numWindow;
     private int numAisle;
     private int numMiddle;
     private int columnNum;
     private int totalSeats;
+    private int colNum;
+    private static float aislePrice = 400f;
+    private static float windowPrice = 500f;
+    private static float middlePrice = 300f;
 
     // constructor
-    public Seat(){
+    public Seat() {
         numWindow = 0;
         numAisle = 0;
         numMiddle = 0;
         columnNum = 1;
         totalSeats = numWindow + numAisle + numMiddle;
     }
-    
+
     public int getTotalSeats() {
         return totalSeats;
     }
@@ -33,7 +37,7 @@ public class Seat {
     public void setTotalSeats(int totalSeats) {
         this.totalSeats += totalSeats;
     }
-    
+
     public int getColumnNum() {
         return columnNum;
     }
@@ -64,5 +68,37 @@ public class Seat {
 
     public void setNumMiddle(int numMiddle) {
         this.numMiddle += numMiddle;
+    }
+
+    public int getColNum() {
+        return colNum;
+    }
+
+    public void setColNum(int colNum) {
+        this.colNum = colNum;
+    }
+
+    public float getAislePrice() {
+        return aislePrice;
+    }
+
+    public void setAislePrice(float aislePrice) {
+        this.aislePrice = aislePrice;
+    }
+
+    public float getWindowPrice() {
+        return windowPrice;
+    }
+
+    public void setWindowPrice(float windowPrice) {
+        this.windowPrice = windowPrice;
+    }
+
+    public float getMiddlePrice() {
+        return middlePrice;
+    }
+
+    public void setMiddlePrice(float middlePrice) {
+        this.middlePrice = middlePrice;
     }
 }

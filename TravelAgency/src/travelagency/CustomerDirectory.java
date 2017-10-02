@@ -65,7 +65,7 @@ public class CustomerDirectory {
             string = new StringTokenizer(stringLine, ",");
             int objPosition = 0;
             ArrayList eachObject = new ArrayList();
-            while (string.hasMoreTokens() && objPosition <= 7) {
+            while (string.hasMoreTokens() && objPosition <= 8) {
                 tokenNum++;
                 objPosition++;
                 eachObject.add(string.nextToken(","));
@@ -85,33 +85,40 @@ public class CustomerDirectory {
                         if (fleet.isAirplaneInList(airplaneNum)) {
                             Flight airplane = fleet.getAirplaneById(airplaneNum);
 
-                            int numAisle = (Integer.parseInt((String) eachObject.get(5)));
-                            int numMiddle = (Integer.parseInt((String) eachObject.get(6)));
-                            int numWindow = (Integer.parseInt((String) eachObject.get(7)));
-                            int totalSeatsBookedByCust = numAisle + numMiddle + numWindow;
+                            int colNum = (Integer.parseInt((String) eachObject.get(5)));
+                            if (colNum == 1 || colNum == 2) {
+                                int numAisle = (Integer.parseInt((String) eachObject.get(6)));
+                                int numMiddle = (Integer.parseInt((String) eachObject.get(7)));
+                                int numWindow = (Integer.parseInt((String) eachObject.get(8)));
+                                int totalSeatsBookedByCust = numAisle + numMiddle + numWindow;
 
-                            Seat airplaneSeat = airplane.getSeat();
-                            if ((totalSeatsBookedByCust + airplane.getSeatsBooked()) <= airplane.getMaxSeats()) {
-                                airplaneSeat.setNumAisle(numAisle);
-                                airplaneSeat.setNumMiddle(numMiddle);
-                                airplaneSeat.setNumWindow(numWindow);
-                                airplaneSeat.setTotalSeats(totalSeatsBookedByCust);
+                                Seat airplaneSeat = airplane.getSeat();
+                                if ((totalSeatsBookedByCust + airplane.getSeatsBooked()) <= airplane.getMaxSeats()) {
+                                    airplaneSeat.setNumAisle(numAisle);
+                                    airplaneSeat.setNumMiddle(numMiddle);
+                                    airplaneSeat.setNumWindow(numWindow);
+                                    airplaneSeat.setTotalSeats(totalSeatsBookedByCust);
 
-                                airplane.setSeatsBooked(totalSeatsBookedByCust); //should be summed up
-                                
-                                Customer customer = addNewCustomer();
-                                customer.setFirstName(firstName);
-                                customer.setLastName(lastName);
-                                customer.setAirplaneNum(airplaneNum);
+                                    airplane.setSeatsBooked(totalSeatsBookedByCust); //should be summed up
 
-                                Seat customerSeat = customer.getSeat();
-                                customerSeat.setNumAisle(numAisle);
-                                customerSeat.setNumMiddle(numMiddle);
-                                customerSeat.setNumWindow(numWindow);
-                                customer.setSeatsBooked(totalSeatsBookedByCust);
-                                
+                                    Customer customer = addNewCustomer();
+                                    customer.setFirstName(firstName);
+                                    customer.setLastName(lastName);
+                                    customer.setAirplaneNum(airplaneNum);
+
+                                    Seat customerSeat = customer.getSeat();
+                                    customerSeat.setNumAisle(numAisle);
+                                    customerSeat.setNumMiddle(numMiddle);
+                                    customerSeat.setNumWindow(numWindow);
+                                    customerSeat.setColNum(colNum);
+                                    customer.setSeatsBooked(totalSeatsBookedByCust);
+
+                                } else {
+                                    System.out.println("Exceeded maximum seats in flight " + airplaneNum);
+                                    System.out.println("Customer " + firstName + " was not added to the directory!");
+                                }
                             } else {
-                                System.out.println("Exceeded maximum seats in flight " + airplaneNum);
+                                System.out.println("Customer " + firstName + " hasn't chosen a valid column! Choose either Column 1 or Column 2");
                                 System.out.println("Customer " + firstName + " was not added to the directory!");
                             }
 

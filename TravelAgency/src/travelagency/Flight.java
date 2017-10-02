@@ -22,7 +22,7 @@ public class Flight {
         seat = new Seat();
         this.seatsBooked = 0;
     }
-    
+
     public Long getAirplaneId() {
         return airplaneId;
     }
@@ -46,7 +46,7 @@ public class Flight {
     public void setMaxSeats(int maxSeats) {
         this.maxSeats = maxSeats;
     }
-    
+
     public Seat getSeat() {
         return seat;
     }
@@ -54,7 +54,7 @@ public class Flight {
     public void setSeat(Seat seat) {
         this.seat = seat;
     }
-    
+
     public int getSeatsBooked() {
         return seatsBooked;
     }
@@ -62,8 +62,8 @@ public class Flight {
     public void setSeatsBooked(int seatsBooked) {
         this.seatsBooked += seatsBooked;
     }
-    
+
     public float calcAirplaneRevenue() {
-        return (seat.getNumAisle() * 400) + (seat.getNumMiddle() * 300) + (seat.getNumWindow() * 500);
+        return (seat.getNumAisle() * seat.getAislePrice()) + (seat.getNumMiddle() * seat.getMiddlePrice()) + (seat.getNumWindow() * seat.getWindowPrice());
     }
 }

@@ -63,6 +63,6 @@ public class Customer {
     }
 
     public float calcCustPrice() {
-        return (seat.getNumAisle() * 400) + (seat.getNumMiddle() * 300) + (seat.getNumWindow() * 500);
+        return (seat.getNumAisle() * seat.getAislePrice()) + (seat.getNumMiddle() * seat.getMiddlePrice()) + (seat.getNumWindow() * seat.getWindowPrice());
     }
 }

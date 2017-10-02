@@ -35,12 +35,12 @@ public class HomeworkAssignment3 {
         CustomerDirectory customerDirectory = travelAgency.getCustomerDir();
         customerDirectory.populatingCustomerDirectory(travelAgency);
 
-        // displaying data
+        // displaying airliner data
         ArrayList<Airliner> airlinerList = travelAgency.getAirlinerList();
         for (Airliner eachAirliner : airlinerList) {
-            System.out.println("----------------------------------------------");
+            System.out.println("----------------------------------------------------------------------");
             System.out.println("Airliner Id : " + eachAirliner.getAirlinerId() + "\tAirliner Name : " + eachAirliner.getAirlinerName());
-            System.out.println("----------------------------------------------");
+            System.out.println("----------------------------------------------------------------------");
             ArrayList<AirplaneFleet> fleetList = eachAirliner.getFleetList();
             for (AirplaneFleet eachFleet : fleetList) {
                 System.out.println("\nFleet Id :::: " + eachFleet.getFleetId());
@@ -51,9 +51,9 @@ public class HomeworkAssignment3 {
                 System.out.println("Fleet Revenue : $" + eachFleet.calcFleetRevenue());
             }
             System.out.println("\n" + eachAirliner.getAirlinerName() + " Airliner Revenue : $" + eachAirliner.calcAirlinerRevenue());
-            System.out.println("\n----------------------------------------------");
+            System.out.println("\n---------------------------------------------------------------------");
         }
         System.out.println("\nTravel Agency Revenue : $" + travelAgency.calcAgencyRevenue());
-        System.out.println("\n----------------------------------------------");
+        System.out.println("\n-------------------------------------------------------------------------");
     }
 }
