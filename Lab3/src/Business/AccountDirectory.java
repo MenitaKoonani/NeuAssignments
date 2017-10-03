@@ -39,7 +39,7 @@ public class AccountDirectory {
 
     public Account searchAccount(int accountNum) {
         for (Account account : accountList) {
-            if (accountNum == (account.getAccountNumber())) {
+            if (accountNum == account.getAccountNumber()) {
                 return account;
             }
         }

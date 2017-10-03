@@ -159,19 +159,23 @@ public class ManageAccountPanel extends javax.swing.JPanel {
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         // TODO add your handling code here:
-        int searchAcc = Integer.parseInt(searchField.getText().trim());
-        if (searchField.getText().trim().isEmpty()) {
-            Account account = accountDirectory.searchAccount(searchAcc);
-            if (account == null) {
-                JOptionPane.showMessageDialog(null, "Account does not exist!", "Warning", JOptionPane.WARNING_MESSAGE);
+        try {
+            String searchAcc = searchField.getText().trim();
+            if (!searchAcc.isEmpty()) {
+                Account account = accountDirectory.searchAccount(Integer.parseInt(searchAcc));
+                if (account == null) {
+                    JOptionPane.showMessageDialog(null, "Account does not exist!", "Warning", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    ViewAccountPanel viewPanel = new ViewAccountPanel(userProcessPanel, account, accountDirectory);
+                    CardLayout cardLayout = (CardLayout) userProcessPanel.getLayout();
+                    userProcessPanel.add("SearchPanel", viewPanel);
+                    cardLayout.next(userProcessPanel);
+                }
             } else {
-                ViewAccountPanel viewPanel = new ViewAccountPanel(userProcessPanel, account, accountDirectory);
-                CardLayout cardLayout = (CardLayout) userProcessPanel.getLayout();
-                userProcessPanel.add("SearchPanel", viewPanel);
-                cardLayout.next(userProcessPanel);
+                JOptionPane.showMessageDialog(null, "Please enter account number to search.", "Warning", JOptionPane.WARNING_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Please enter account number to search.", "Warning", JOptionPane.WARNING_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please enter numbers only!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_searchBtnActionPerformed
 

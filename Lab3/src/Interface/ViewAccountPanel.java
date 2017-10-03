@@ -120,6 +120,7 @@ public class ViewAccountPanel extends javax.swing.JPanel {
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
         CardLayout cardLayout = (CardLayout) userProcessPanel.getLayout();
+        // removing the managePanel at the index 1 of cardlayout
         userProcessPanel.remove(1);
         userProcessPanel.remove(this);
         ManageAccountPanel managePanel = new ManageAccountPanel(userProcessPanel, accountDirectory);
