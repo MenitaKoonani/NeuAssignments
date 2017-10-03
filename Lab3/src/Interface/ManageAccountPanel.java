@@ -40,8 +40,8 @@ public class ManageAccountPanel extends javax.swing.JPanel {
             Object row[] = new Object[4];
             //setting the object to the first row as we need to access all the other attributes of that particular object
             row[0] = eachAccount;
-            row[1] = eachAccount.getRoutingNumber();
-            row[2] = eachAccount.getBankName();
+            row[1] = eachAccount.getAccountNumber();
+            row[2] = eachAccount.getRoutingNumber();
             row[3] = eachAccount.getBalance();
             jTable.addRow(row);
         }
@@ -125,7 +125,7 @@ public class ManageAccountPanel extends javax.swing.JPanel {
         int selectedRow = manageTable.getSelectedRow();
         if (selectedRow >= 0) {
             Account account = (Account) manageTable.getValueAt(selectedRow, 0);
-            ViewAccountPanel viewPanel = new ViewAccountPanel(userProcessPanel, account);
+            ViewAccountPanel viewPanel = new ViewAccountPanel(userProcessPanel, account, accountDirectory);
             CardLayout cardLayout = (CardLayout) userProcessPanel.getLayout();
             userProcessPanel.add("ViewPanel", viewPanel);
             cardLayout.next(userProcessPanel);
@@ -159,13 +159,13 @@ public class ManageAccountPanel extends javax.swing.JPanel {
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         // TODO add your handling code here:
-        String searchAcc = searchField.getText();
-        if (!searchAcc.isEmpty()) {
+        int searchAcc = Integer.parseInt(searchField.getText().trim());
+        if (searchField.getText().trim().isEmpty()) {
             Account account = accountDirectory.searchAccount(searchAcc);
             if (account == null) {
                 JOptionPane.showMessageDialog(null, "Account does not exist!", "Warning", JOptionPane.WARNING_MESSAGE);
             } else {
-                ViewAccountPanel viewPanel = new ViewAccountPanel(userProcessPanel, account);
+                ViewAccountPanel viewPanel = new ViewAccountPanel(userProcessPanel, account, accountDirectory);
                 CardLayout cardLayout = (CardLayout) userProcessPanel.getLayout();
                 userProcessPanel.add("SearchPanel", viewPanel);
                 cardLayout.next(userProcessPanel);

@@ -104,12 +104,16 @@ public class CreateAccountPanel extends javax.swing.JPanel {
     private void createAccountBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountBtnActionPerformed
         // TODO add your handling code here:
         try {
-            String routingNum = accRoutingField.getText();
-            String bankNum = bankNameField.getText();
-            Integer accNum = Integer.parseInt(accNumField.getText());
-            Integer balance = Integer.parseInt(balanceField.getText());
+            String routingNum = accRoutingField.getText().trim();
+            String bankNum = bankNameField.getText().trim();
+            Integer accNum = Integer.parseInt(accNumField.getText().trim());
+            float balance = Float.parseFloat(balanceField.getText().trim());
 
             if (!routingNum.isEmpty() && !bankNum.isEmpty() && balanceField != null && accNumField != null) {
+                if (balance < 0) {
+                    JOptionPane.showMessageDialog(null, "Balance cannot be negative!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 Account account = accountDirectory.addNewAccount();
                 account.setAccountNumber(accNum);
                 account.setRoutingNumber(routingNum);
@@ -117,11 +121,15 @@ public class CreateAccountPanel extends javax.swing.JPanel {
                 account.setBankName(bankNum);
                 account.setCreatedOn(new Date(System.currentTimeMillis()));
                 JOptionPane.showMessageDialog(null, "Account added successfully!");
+                accNumField.setText("");
+                accRoutingField.setText("");
+                bankNameField.setText("");
+                balanceField.setText("");
             } else {
                 JOptionPane.showMessageDialog(null, "All fields are mandatory!");
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Enter only numbers in balance field!", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Enter only numbers in balance and account number fields!", "Warning", JOptionPane.WARNING_MESSAGE);
             balanceField.requestFocus();
         }
     }//GEN-LAST:event_createAccountBtnActionPerformed

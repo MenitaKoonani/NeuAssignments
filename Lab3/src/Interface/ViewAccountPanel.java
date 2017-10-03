@@ -6,6 +6,7 @@
 package Interface;
 
 import Business.Account;
+import Business.AccountDirectory;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,22 +22,24 @@ public class ViewAccountPanel extends javax.swing.JPanel {
      */
     private JPanel userProcessPanel;
     private Account account;
-    
-    ViewAccountPanel(JPanel userProcessPanel, Account account) {
+    private AccountDirectory accountDirectory;
+
+    ViewAccountPanel(JPanel userProcessPanel, Account account, AccountDirectory accountDirectory) {
         initComponents();
         this.userProcessPanel = userProcessPanel;
         this.account = account;
+        this.accountDirectory = accountDirectory;
         populateAccountDetails();
         saveBtn.setEnabled(false);
         updateBtn.setEnabled(true);
     }
-    
+
     public void populateAccountDetails() {
         accNumField.setText(String.valueOf(account.getAccountNumber()));
         accRoutingField.setText(account.getRoutingNumber());
-        bankNumField.setText(account.getBankName());
+        bankNameField.setText(account.getBankName());
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,7 +56,7 @@ public class ViewAccountPanel extends javax.swing.JPanel {
         accNumLabel = new javax.swing.JLabel();
         bankNameLabel = new javax.swing.JLabel();
         backBtn = new javax.swing.JButton();
-        bankNumField = new javax.swing.JTextField();
+        bankNameField = new javax.swing.JTextField();
         saveBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
 
@@ -93,8 +96,8 @@ public class ViewAccountPanel extends javax.swing.JPanel {
         });
         add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 92, 35));
 
-        bankNumField.setEditable(false);
-        add(bankNumField, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 261, 182, 29));
+        bankNameField.setEditable(false);
+        add(bankNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 261, 182, 29));
 
         saveBtn.setText("Save");
         saveBtn.setEnabled(false);
@@ -116,8 +119,11 @@ public class ViewAccountPanel extends javax.swing.JPanel {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
-        userProcessPanel.remove(this);
         CardLayout cardLayout = (CardLayout) userProcessPanel.getLayout();
+        userProcessPanel.remove(1);
+        userProcessPanel.remove(this);
+        ManageAccountPanel managePanel = new ManageAccountPanel(userProcessPanel, accountDirectory);
+        userProcessPanel.add("ManagePanel", managePanel);
         cardLayout.previous(userProcessPanel);
     }//GEN-LAST:event_backBtnActionPerformed
 
@@ -127,20 +133,37 @@ public class ViewAccountPanel extends javax.swing.JPanel {
         updateBtn.setEnabled(false);
         accNumField.setEditable(true);
         accRoutingField.setEditable(true);
-        bankNumField.setEditable(true);
+        bankNameField.setEditable(true);
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
-        account.setAccountNumber(Integer.parseInt(accNumField.getText()));
-        account.setRoutingNumber(accRoutingField.getText());
-        account.setBankName(bankNumField.getText());
-        accNumField.setEditable(false);
-        accRoutingField.setEditable(false);
-        bankNumField.setEditable(false);
-        saveBtn.setEnabled(false);
-        updateBtn.setEnabled(true);
-        JOptionPane.showMessageDialog(null, "Account updated successfully!");
+        String newRoutingNum = accRoutingField.getText().trim();
+        String newBankNum = bankNameField.getText().trim();
+        Integer newAccNum = Integer.parseInt(accNumField.getText().trim());
+
+        String oldRoutingNum = accRoutingField.getText().trim();
+        String oldBankNum = bankNameField.getText().trim();
+        Integer oldAccNum = Integer.parseInt(accNumField.getText().trim());
+
+        if (!newRoutingNum.isEmpty() && !newBankNum.isEmpty() && accNumField != null) {
+            if (oldAccNum == newAccNum && oldBankNum == newBankNum && oldRoutingNum == newRoutingNum) {
+                JOptionPane.showMessageDialog(null, "No fields have changed to be updated", "Warning", JOptionPane.WARNING_MESSAGE);
+            } else {
+                account.setAccountNumber(Integer.parseInt(accNumField.getText()));
+                account.setRoutingNumber(accRoutingField.getText());
+                account.setBankName(bankNameField.getText());
+                accNumField.setEditable(false);
+                accRoutingField.setEditable(false);
+                bankNameField.setEditable(false);
+                saveBtn.setEnabled(false);
+                updateBtn.setEnabled(true);
+                JOptionPane.showMessageDialog(null, "Account updated successfully!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "All fields are mandatory!");
+        }
+
     }//GEN-LAST:event_saveBtnActionPerformed
 
 
@@ -150,8 +173,8 @@ public class ViewAccountPanel extends javax.swing.JPanel {
     private javax.swing.JTextField accRoutingField;
     private javax.swing.JLabel accRoutingLabel;
     private javax.swing.JButton backBtn;
+    private javax.swing.JTextField bankNameField;
     private javax.swing.JLabel bankNameLabel;
-    private javax.swing.JTextField bankNumField;
     private javax.swing.JLabel createAccLabel;
     private javax.swing.JButton saveBtn;
     private javax.swing.JButton updateBtn;

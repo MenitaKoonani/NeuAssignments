@@ -16,7 +16,7 @@ public class Account {
     private String routingNumber;
     private int accountNumber;
     private String bankName;
-    private int balance;
+    private float balance;
     private Date createdOn;
 
     public Account() {
@@ -47,11 +47,11 @@ public class Account {
         this.bankName = bankName;
     }
 
-    public int getBalance() {
+    public float getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(float balance) {
         this.balance = balance;
     }
 
