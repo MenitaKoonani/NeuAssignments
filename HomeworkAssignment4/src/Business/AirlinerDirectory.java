@@ -113,4 +113,19 @@ public class AirlinerDirectory {
             return null;
         }
     }
+
+    // get fligth list based on max price
+    public ArrayList<Flight> getFlightsByMaxPrice(float maxPrice, ArrayList<Flight> searchFlightList) {
+        ArrayList<Flight> flightList = new ArrayList<>();
+        for (Flight eachFlight : searchFlightList) {
+            if (eachFlight.getSchedule().getPrice() <= maxPrice) {
+                flightList.add(eachFlight);
+            }
+        }
+        if (!flightList.isEmpty()) {
+            return flightList;
+        } else {
+            return null;
+        }
+    }
 }

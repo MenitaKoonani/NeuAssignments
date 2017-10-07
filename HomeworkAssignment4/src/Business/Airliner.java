@@ -68,13 +68,6 @@ public class Airliner {
         return this.airlinerId.toString();
     }
 
-    public boolean isEmptyCheck(Long airlinerId, String airlinerName, String airlinerAddress, int numFlight) {
-        if (airlinerId <= 0 || airlinerName.isEmpty() || airlinerAddress.isEmpty() || numFlight <= 0) {
-            return false;
-        }
-        return true;
-    }
-
     // check if flight in airliner
     public boolean isFlightInAirliner(Long flightId) {
         if (!fleet.getFlightList().isEmpty()) {

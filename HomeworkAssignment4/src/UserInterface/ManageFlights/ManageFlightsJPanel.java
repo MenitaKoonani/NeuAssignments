@@ -8,12 +8,12 @@ package UserInterface.ManageFlights;
 import Business.Airliner;
 import Business.Flight;
 import Business.AirlinerDirectory;
+import UserInterface.ManageAirliners.ManageAirlinersJPanel;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import sun.swing.MenuItemLayoutHelper;
 
 /**
  *
@@ -26,19 +26,19 @@ public class ManageFlightsJPanel extends javax.swing.JPanel {
      */
     private AirlinerDirectory airlinerDirectory;
     private javax.swing.JPanel CardSequenceJPanel;
-    
+
     public ManageFlightsJPanel(javax.swing.JPanel CardSequenceJPanel, AirlinerDirectory airlinerDirectory) {
         initComponents();
         this.CardSequenceJPanel = CardSequenceJPanel;
         this.airlinerDirectory = airlinerDirectory;
         populateManageFlightPanel();
     }
-    
+
     public void populateManageFlightPanel() {
         populateAirlinerDropdown();
-        populateManageFlightsTable();
+        populateManageFlightsTable(null);
     }
-    
+
     public void populateAirlinerDropdown() {
         chooseAirlinerDropdown.removeAllItems();
         chooseAirlinerDropdown.addItem("Select");
@@ -47,44 +47,21 @@ public class ManageFlightsJPanel extends javax.swing.JPanel {
             chooseAirlinerDropdown.addItem(eachAirliner.getAirlinerName());
         }
     }
-    
-    public void populateManageFlightsTable() {
-        DefaultTableModel jTable = (DefaultTableModel) manageFlightsTable.getModel();
-        //starting the population form row 0
-        jTable.setRowCount(0);
-        
-        for (Airliner eachAirliner : airlinerDirectory.getAirlinerList()) {
-            for (Flight eachFlight : eachAirliner.getFleet().getFlightList()) {
-                Object row[] = new Object[7];
-                //setting the object to the first row as we need to access all the other attributes of that particular object
-                row[0] = eachFlight;
-                row[1] = eachAirliner;
-                row[2] = eachAirliner.getAirlinerName();
-                row[3] = eachFlight.getFlightName();
-                row[4] = eachFlight.getSchedule().getSourceLocation();
-                row[5] = eachFlight.getSchedule().getDestLocation();
-                row[6] = eachFlight.getSchedule().getDepartureDate();
-                jTable.addRow(row);
-            }
-        }
-    }
-    
+
     public void populateManageFlightsTable(ArrayList<Flight> flightList) {
         DefaultTableModel jTable = (DefaultTableModel) manageFlightsTable.getModel();
         //starting the population form row 0
         jTable.setRowCount(0);
-        
-        manageFlightsTable.removeColumn(manageFlightsTable.getColumn("Airliner Id"));
-        manageFlightsTable.removeColumn(manageFlightsTable.getColumn("Airliner Name"));
-        
+
+        flightList = flightList.isEmpty() || flightList == null ? airlinerDirectory.getAllFlightsList() : flightList;
         for (Flight eachFlight : flightList) {
-            Object row[] = new Object[7];
+            Object row[] = new Object[5];
             //setting the object to the first row as we need to access all the other attributes of that particular object
-            row[0] = eachFlight;
-            row[3] = eachFlight.getFlightName();
-            row[4] = eachFlight.getSchedule().getSourceLocation();
-            row[5] = eachFlight.getSchedule().getDestLocation();
-            row[6] = eachFlight.getSchedule().getDepartureDate();
+            row[0] = eachFlight.getAirlinerName();
+            row[1] = eachFlight;
+            row[2] = eachFlight.getFlightName();
+            row[3] = eachFlight.getSchedule().getSourceLocation();
+            row[4] = eachFlight.getSchedule().getDestLocation();
             jTable.addRow(row);
         }
     }
@@ -110,14 +87,16 @@ public class ManageFlightsJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         destLocField = new javax.swing.JTextField();
+        mangageFlightBackBtn = new javax.swing.JButton();
+        listAllFlights = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        mangeFlightsLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        mangeFlightsLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         mangeFlightsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mangeFlightsLabel.setText("Manage Flights");
         mangeFlightsLabel.setToolTipText("");
-        add(mangeFlightsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 810, 40));
+        add(mangeFlightsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 810, 30));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -133,27 +112,27 @@ public class ManageFlightsJPanel extends javax.swing.JPanel {
         add(chooseAirlinerDropdown, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 170, 30));
 
         listFlightsBtn.setBackground(new java.awt.Color(0, 153, 153));
-        listFlightsBtn.setText("List Flights");
+        listFlightsBtn.setText("Search flights");
         listFlightsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listFlightsBtnActionPerformed(evt);
             }
         });
-        add(listFlightsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 90, 30));
+        add(listFlightsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 410, 110, 30));
 
         manageFlightsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Flight Id", "Airliner Id", "Airliner Name", "Flight Name", "Source", "Destination", "Departure Date"
+                "Airliner Name", "Flight Id", "Flight Name", "Source", "Destination"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -176,7 +155,7 @@ public class ManageFlightsJPanel extends javax.swing.JPanel {
                 newFlightBtnActionPerformed(evt);
             }
         });
-        add(newFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 383, 130, 30));
+        add(newFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 370, 130, 30));
 
         viewFlightBtn.setBackground(new java.awt.Color(0, 153, 153));
         viewFlightBtn.setText("View Flight >>");
@@ -185,7 +164,7 @@ public class ManageFlightsJPanel extends javax.swing.JPanel {
                 viewFlightBtnActionPerformed(evt);
             }
         });
-        add(viewFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 430, 130, 30));
+        add(viewFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 410, 130, 30));
         add(sourceLocField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, 170, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -198,6 +177,24 @@ public class ManageFlightsJPanel extends javax.swing.JPanel {
         jLabel3.setText("Enter Destination : ");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 140, 30));
         add(destLocField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 470, 170, 30));
+
+        mangageFlightBackBtn.setBackground(new java.awt.Color(0, 153, 153));
+        mangageFlightBackBtn.setText("<< Back");
+        mangageFlightBackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mangageFlightBackBtnActionPerformed(evt);
+            }
+        });
+        add(mangageFlightBackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 80, 30));
+
+        listAllFlights.setBackground(new java.awt.Color(0, 153, 153));
+        listAllFlights.setText("List All Flights");
+        listAllFlights.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listAllFlightsActionPerformed(evt);
+            }
+        });
+        add(listAllFlights, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, 130, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void chooseAirlinerDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseAirlinerDropdownActionPerformed
@@ -206,26 +203,32 @@ public class ManageFlightsJPanel extends javax.swing.JPanel {
 
     private void listFlightsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listFlightsBtnActionPerformed
         // TODO add your handling code here:
-        ArrayList<Flight> flightList = new ArrayList<>();
         String airlinerName = chooseAirlinerDropdown.getSelectedItem().toString();
-        if (!airlinerName.equalsIgnoreCase("Select")) {
-            Airliner selectedAirliner = airlinerDirectory.getAirlinerByName(airlinerName);
-            flightList = selectedAirliner.getFleet().getFlightList();
-        } else {
-            flightList = airlinerDirectory.getAllFlightsList();
-        }
-        
         String sourceLoc = sourceLocField.getText();
-        if (!sourceLoc.isEmpty()) {
-            flightList = airlinerDirectory.getFlightsBySource(sourceLoc, flightList);
-        }
-        
         String destLoc = destLocField.getText();
-        if (!destLoc.isEmpty()) {
-            flightList = airlinerDirectory.getFlightsByDestination(destLoc, flightList);
+
+        if (airlinerName.equalsIgnoreCase("Select") && sourceLoc.isEmpty() && destLoc.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Search by atleast one filter!", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            ArrayList<Flight> flightList = new ArrayList<>();
+            if (!airlinerName.equalsIgnoreCase("Select")) {
+                Airliner selectedAirliner = airlinerDirectory.getAirlinerByName(airlinerName);
+                flightList = selectedAirliner.getFleet().getFlightList();
+            } else {
+                flightList = airlinerDirectory.getAllFlightsList();
+            }
+            if (!sourceLoc.isEmpty()) {
+                flightList = airlinerDirectory.getFlightsBySource(sourceLoc, flightList);
+            }
+            if (!destLoc.isEmpty()) {
+                flightList = airlinerDirectory.getFlightsByDestination(destLoc, flightList);
+            }
+            if (!flightList.isEmpty()) {
+                populateManageFlightsTable(flightList);
+            } else {
+                JOptionPane.showMessageDialog(null, "No flights found with this search filter!", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
         }
-        
-        populateManageFlightsTable(flightList);
     }//GEN-LAST:event_listFlightsBtnActionPerformed
 
     private void newFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFlightBtnActionPerformed
@@ -250,6 +253,24 @@ public class ManageFlightsJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_viewFlightBtnActionPerformed
 
+    private void mangageFlightBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mangageFlightBackBtnActionPerformed
+        // TODO add your handling code here:
+        CardSequenceJPanel.remove(this);
+        Component[] componentArray = CardSequenceJPanel.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        ManageAirlinersJPanel manageAirlinerPanel = (ManageAirlinersJPanel) component;
+        manageAirlinerPanel.populateManageAirlinerTable();
+        CardLayout cardLayout = (CardLayout) CardSequenceJPanel.getLayout();
+        cardLayout.previous(CardSequenceJPanel);
+    }//GEN-LAST:event_mangageFlightBackBtnActionPerformed
+
+    private void listAllFlightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listAllFlightsActionPerformed
+        // TODO add your handling code here:
+        sourceLocField.setText("");
+        destLocField.setText((""));
+        populateManageFlightsTable(null);
+    }//GEN-LAST:event_listAllFlightsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> chooseAirlinerDropdown;
@@ -258,8 +279,10 @@ public class ManageFlightsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton listAllFlights;
     private javax.swing.JButton listFlightsBtn;
     private javax.swing.JTable manageFlightsTable;
+    private javax.swing.JButton mangageFlightBackBtn;
     private javax.swing.JLabel mangeFlightsLabel;
     private javax.swing.JButton newFlightBtn;
     private javax.swing.JTextField sourceLocField;

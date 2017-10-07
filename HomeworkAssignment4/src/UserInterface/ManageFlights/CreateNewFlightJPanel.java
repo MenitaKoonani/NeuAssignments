@@ -183,6 +183,7 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
             Flight newFlight = airliner.getFleet().addNewFlight();
             newFlight.setFlightId(flightId);
             newFlight.setFlightName(flightName);
+            newFlight.setAirlinerName(airlinerName);
             
             Schedule schedule = new Schedule();
             schedule.setSourceLocation(sourceLoc);
@@ -205,6 +206,9 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
     public void emptyFields() {
         flightIdField.setText("");
         flightNameField.setText("");
+        sourceLocField.setText("");
+        destLocField.setText("");
+        departDate.setDate(new Date(System.currentTimeMillis()));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

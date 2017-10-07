@@ -5,6 +5,7 @@
  */
 package UserInterface;
 
+import UserInterface.ManageFlights.SearchFlightsJPanel;
 import UserInterface.ManageAirliners.ManageAirlinersJPanel;
 import Business.AirlinerDirectory;
 import Business.TravelAgency;
@@ -43,10 +44,11 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         jSplitPane2 = new javax.swing.JSplitPane();
         LeftPanel = new javax.swing.JPanel();
         ManageAirlinersBtn = new javax.swing.JButton();
-        ManageFlightsBtn = new javax.swing.JButton();
+        ManageCustomersBtn = new javax.swing.JButton();
         CardSequenceJPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1200, 700));
 
         LeftPanel.setPreferredSize(new java.awt.Dimension(150, 200));
         LeftPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -59,17 +61,17 @@ public class TravelAgencyMain extends javax.swing.JFrame {
                 ManageAirlinersBtnActionPerformed(evt);
             }
         });
-        LeftPanel.add(ManageAirlinersBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 100, 50));
+        LeftPanel.add(ManageAirlinersBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 130, 50));
 
-        ManageFlightsBtn.setBackground(new java.awt.Color(0, 153, 153));
-        ManageFlightsBtn.setText("Manage Flights");
-        ManageFlightsBtn.setBorder(new javax.swing.border.MatteBorder(null));
-        ManageFlightsBtn.addActionListener(new java.awt.event.ActionListener() {
+        ManageCustomersBtn.setBackground(new java.awt.Color(0, 153, 153));
+        ManageCustomersBtn.setText("Manage Customers");
+        ManageCustomersBtn.setBorder(new javax.swing.border.MatteBorder(null));
+        ManageCustomersBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ManageFlightsBtnActionPerformed(evt);
+                ManageCustomersBtnActionPerformed(evt);
             }
         });
-        LeftPanel.add(ManageFlightsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 100, 50));
+        LeftPanel.add(ManageCustomersBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 130, 50));
 
         jSplitPane2.setLeftComponent(LeftPanel);
 
@@ -111,14 +113,13 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ManageAirlinersBtnActionPerformed
 
-    private void ManageFlightsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageFlightsBtnActionPerformed
+    private void ManageCustomersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageCustomersBtnActionPerformed
         // TODO add your handling code here:
-        ManageFlightsJPanel manageFlightPanel = new ManageFlightsJPanel(CardSequenceJPanel, travelAgency.getAirlinerDirectory());
+        SearchFlightsJPanel searchFlightPanel = new SearchFlightsJPanel(CardSequenceJPanel, travelAgency);
+        CardSequenceJPanel.add("SearchFlightPanel", searchFlightPanel);
         CardLayout cardLayout = (CardLayout) CardSequenceJPanel.getLayout();
-        CardSequenceJPanel.add("ManageFlightPanel", manageFlightPanel);
         cardLayout.next(CardSequenceJPanel);
-
-    }//GEN-LAST:event_ManageFlightsBtnActionPerformed
+    }//GEN-LAST:event_ManageCustomersBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,7 +160,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
     private javax.swing.JPanel CardSequenceJPanel;
     private javax.swing.JPanel LeftPanel;
     private javax.swing.JButton ManageAirlinersBtn;
-    private javax.swing.JButton ManageFlightsBtn;
+    private javax.swing.JButton ManageCustomersBtn;
     private javax.swing.JSplitPane jSplitPane2;
     // End of variables declaration//GEN-END:variables
 }

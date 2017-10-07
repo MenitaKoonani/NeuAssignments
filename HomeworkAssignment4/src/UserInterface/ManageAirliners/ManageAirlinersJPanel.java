@@ -7,6 +7,7 @@ package UserInterface.ManageAirliners;
 
 import Business.Airliner;
 import Business.TravelAgency;
+import UserInterface.ManageFlights.ManageFlightsJPanel;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -64,13 +65,14 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
         manageAirlinerTable = new javax.swing.JTable();
         newAirlinerBtn = new javax.swing.JButton();
         viewAirlinerBtn = new javax.swing.JButton();
+        manageFlightsBtn = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         manageAirlinersLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         manageAirlinersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         manageAirlinersLabel.setText("Manage Airliners");
-        add(manageAirlinersLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 220, 30));
+        add(manageAirlinersLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 750, 30));
 
         manageAirlinerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,23 +99,34 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(manageAirlinerTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 660, 230));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 750, 230));
 
+        newAirlinerBtn.setBackground(new java.awt.Color(0, 153, 153));
         newAirlinerBtn.setText("New Airliner >>");
         newAirlinerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newAirlinerBtnActionPerformed(evt);
             }
         });
-        add(newAirlinerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, 150, 30));
+        add(newAirlinerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 370, 150, 30));
 
+        viewAirlinerBtn.setBackground(new java.awt.Color(0, 153, 153));
         viewAirlinerBtn.setText("View Airliner >>");
         viewAirlinerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewAirlinerBtnActionPerformed(evt);
             }
         });
-        add(viewAirlinerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, 150, 30));
+        add(viewAirlinerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 330, 150, 30));
+
+        manageFlightsBtn.setBackground(new java.awt.Color(0, 153, 153));
+        manageFlightsBtn.setText("Manage Flights");
+        manageFlightsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageFlightsBtnActionPerformed(evt);
+            }
+        });
+        add(manageFlightsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 440, 150, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void newAirlinerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAirlinerBtnActionPerformed
@@ -138,11 +151,20 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_viewAirlinerBtnActionPerformed
 
+    private void manageFlightsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageFlightsBtnActionPerformed
+        // TODO add your handling code here:
+        ManageFlightsJPanel manageFlightPanel = new ManageFlightsJPanel(CardSequenceJPanel, travelAgency.getAirlinerDirectory());
+        CardLayout cardLayout = (CardLayout) CardSequenceJPanel.getLayout();
+        CardSequenceJPanel.add("ManageFlightPanel", manageFlightPanel);
+        cardLayout.next(CardSequenceJPanel);
+    }//GEN-LAST:event_manageFlightsBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable manageAirlinerTable;
     private javax.swing.JLabel manageAirlinersLabel;
+    private javax.swing.JButton manageFlightsBtn;
     private javax.swing.JButton newAirlinerBtn;
     private javax.swing.JButton viewAirlinerBtn;
     // End of variables declaration//GEN-END:variables

@@ -7,9 +7,15 @@ package UserInterface.ManageFlights;
 
 import Business.Airliner;
 import Business.Flight;
+import Business.Schedule;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.xml.crypto.dsig.spec.C14NMethodParameterSpec;
 
@@ -36,11 +42,13 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
     public void populateViewFlight(boolean isEditable) {
         isEditable(isEditable);
 
+        viewFlightsLabel.setText("View flight in " + flight.getAirlinerName() + " airlines");
         flightIdField.setText(String.valueOf(flight.getFlightId()));
         flightNameField.setText(flight.getFlightName());
         sourceLocField.setText(flight.getSchedule().getSourceLocation());
         destLocField.setText((flight.getSchedule().getDestLocation()));
         departDate.setDate(flight.getSchedule().getDepartureDate());
+        departTimeField.setText(String.valueOf(flight.getSchedule().getDepartureTime()));
     }
 
     /**
@@ -67,6 +75,8 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
         departDate = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        departTimeField = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -165,6 +175,18 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Destination Location : ");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 190, 28));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Departure Time : ");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 190, 28));
+
+        departTimeField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                departTimeFieldActionPerformed(evt);
+            }
+        });
+        add(departTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 136, 32));
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewFlightBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewFlightBackBtnActionPerformed
@@ -196,12 +218,31 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
     private void saveFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveFlightBtnActionPerformed
         // TODO add your handling code here:
         String flightName = flightNameField.getText();
-        if (!flightName.isEmpty()) {
-            flight.setFlightName(flightName);
-            JOptionPane.showMessageDialog(null, "Flight updated successfully!!");
-            isEditable(false);
-        } else {
+        String sourceLoc = sourceLocField.getText();
+        String destLoc = destLocField.getText();
+        Date departureDate = departDate.getDate();
+        String departTime = departTimeField.getText();
+
+        if (flightName.isEmpty() || sourceLoc.isEmpty() || destLoc.isEmpty() || departTime.isEmpty()) {
             JOptionPane.showMessageDialog(null, "All the fields are mandatory!!", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                flight.setFlightName(flightName);
+                Schedule schedule = new Schedule();
+                schedule.setSourceLocation(sourceLoc);
+                schedule.setDestLocation(destLoc);
+                schedule.setDepartureDate(departureDate);
+                
+                DateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+                Date departureTime = timeFormatter.parse(departTime);
+                schedule.setDepartureTime(new java.sql.Time(departureTime.getTime()));
+                
+                flight.setSchedule(schedule);
+                JOptionPane.showMessageDialog(null, "Flight updated successfully!!");
+                isEditable(false);
+            } catch (ParseException ex) {
+                Logger.getLogger(ViewFlightsJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_saveFlightBtnActionPerformed
 
@@ -213,6 +254,10 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_destLocFieldActionPerformed
 
+    private void departTimeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departTimeFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_departTimeFieldActionPerformed
+
     public void isEditable(boolean isEditable) {
         saveFlightBtn.setEnabled(isEditable);
         cancelUpdateBtn.setEnabled(isEditable);
@@ -221,11 +266,13 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
         sourceLocField.setEditable(isEditable);
         destLocField.setEditable(isEditable);
         departDate.setEnabled(isEditable);
+        departTimeField.setEditable(isEditable);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelUpdateBtn;
     private com.toedter.calendar.JDateChooser departDate;
+    private javax.swing.JTextField departTimeField;
     private javax.swing.JTextField destLocField;
     private javax.swing.JTextField flightIdField;
     private javax.swing.JTextField flightNameField;
@@ -234,6 +281,7 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JButton saveFlightBtn;
     private javax.swing.JTextField sourceLocField;
     private javax.swing.JButton updateFlightBtn;

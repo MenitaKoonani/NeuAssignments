@@ -7,6 +7,7 @@ package UserInterface.ManageAirliners;
 
 import Business.Airliner;
 import Business.AirlinerDirectory;
+import UserInterface.ManageFlights.CreateNewFlightJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -22,7 +23,7 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
      */
     private javax.swing.JPanel CardSequenceJPanel;
     private AirlinerDirectory airlinerDirectory;
-    
+
     public CreateNewAirlinerJPanel(javax.swing.JPanel CardSequenceJPanel, AirlinerDirectory airlinerDirectory) {
         initComponents();
         this.CardSequenceJPanel = CardSequenceJPanel;
@@ -43,12 +44,10 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
         viewAirlinerLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         airlinerIdField = new javax.swing.JTextField();
         airlinerAddressField = new javax.swing.JTextField();
         airlinerNameField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        airlinerFlightCount = new javax.swing.JSpinner();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -59,7 +58,7 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
                 createAirlinerBtnActionPerformed(evt);
             }
         });
-        add(createAirlinerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 355, -1, -1));
+        add(createAirlinerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 150, -1));
 
         createBackBtn.setBackground(new java.awt.Color(0, 153, 153));
         createBackBtn.setText("<< Back");
@@ -68,7 +67,7 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
                 createBackBtnActionPerformed(evt);
             }
         });
-        add(createBackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 355, -1, -1));
+        add(createBackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
 
         viewAirlinerLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         viewAirlinerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -86,11 +85,6 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
         jLabel2.setText("Enter airliner name :");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 157, 28));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Enter number of flights : ");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 157, 28));
-
         airlinerIdField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 airlinerIdFieldActionPerformed(evt);
@@ -104,7 +98,6 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Enter airliner address :");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 157, 28));
-        add(airlinerFlightCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 140, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void createBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBackBtnActionPerformed
@@ -127,40 +120,33 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
         Long airlinerId = Long.parseLong(String.valueOf(airlinerIdField.getText()));
         String airlinerName = airlinerNameField.getText();
         String airlinerAddress = airlinerAddressField.getText();
-        int numFlight = Integer.parseInt(String.valueOf(airlinerFlightCount.getValue()));
-        
-        Airliner dummyAirliner = new Airliner();
-        boolean isDataNotEmpty = dummyAirliner.isEmptyCheck(airlinerId, airlinerName, airlinerAddress, numFlight);
-        if (isDataNotEmpty) {
+
+        if (airlinerIdField.getText().isEmpty() || airlinerName.isEmpty() || airlinerAddress.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "All the fields are mandatory!!", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
             Airliner newAirliner = airlinerDirectory.addNewAirliner();
             newAirliner.setAirlinerId(airlinerId);
             newAirliner.setAirlinerName(airlinerName);
             newAirliner.setAirlinerAddress(airlinerAddress);
-            newAirliner.setFlightCount(numFlight);
-            
+
             JOptionPane.showMessageDialog(null, "New airliner successfully added!");
             emptyFields();
-        } else {
-            JOptionPane.showMessageDialog(null, "All the fields are mandatory!!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_createAirlinerBtnActionPerformed
     public void emptyFields() {
         airlinerIdField.setText("");
         airlinerNameField.setText("");
         airlinerAddressField.setText("");
-        airlinerFlightCount.setValue(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField airlinerAddressField;
-    private javax.swing.JSpinner airlinerFlightCount;
     private javax.swing.JTextField airlinerIdField;
     private javax.swing.JTextField airlinerNameField;
     private javax.swing.JButton createAirlinerBtn;
     private javax.swing.JButton createBackBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel viewAirlinerLabel;
     // End of variables declaration//GEN-END:variables

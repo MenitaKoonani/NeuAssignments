@@ -74,6 +74,7 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        updateAirlinerBtn.setBackground(new java.awt.Color(0, 153, 153));
         updateAirlinerBtn.setText("Update");
         updateAirlinerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,13 +83,14 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
         });
         add(updateAirlinerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 420, -1, -1));
 
+        viewBackBtn.setBackground(new java.awt.Color(0, 153, 153));
         viewBackBtn.setText("<< Back");
         viewBackBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewBackBtnActionPerformed(evt);
             }
         });
-        add(viewBackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 416, -1, -1));
+        add(viewBackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
         viewAirlinerLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         viewAirlinerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -128,6 +130,7 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
         airlinerFlightCount.setEnabled(false);
         add(airlinerFlightCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 140, 30));
 
+        saveAirlinerBtn.setBackground(new java.awt.Color(0, 153, 153));
         saveAirlinerBtn.setText("Save");
         saveAirlinerBtn.setEnabled(false);
         saveAirlinerBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -137,6 +140,7 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
         });
         add(saveAirlinerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, -1, -1));
 
+        cancelUpdateBtn.setBackground(new java.awt.Color(0, 153, 153));
         cancelUpdateBtn.setText("Cancel");
         cancelUpdateBtn.setEnabled(false);
         cancelUpdateBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -167,20 +171,16 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
         Long airlinerId = Long.parseLong(String.valueOf(airlinerIdField.getText()));
         String airlinerName = airlinerNameField.getText();
         String airlinerAddress = airlinerAddressField.getText();
-        int numFlight = Integer.parseInt(String.valueOf(airlinerFlightCount.getValue()));
 
-        Airliner dummyAirliner = new Airliner();
-        boolean isDataNotEmpty = dummyAirliner.isEmptyCheck(airlinerId, airlinerName, airlinerAddress, numFlight);
-        if (isDataNotEmpty) {
+        if (airlinerId <= 0 || airlinerName.isEmpty() || airlinerAddress.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "All the fields are mandatory!!", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
             Airliner updateAirliner = airlinerDirectory.getAirlinerById(airlinerId);
             updateAirliner.setAirlinerName(airlinerName);
             updateAirliner.setAirlinerAddress(airlinerAddress);
-            updateAirliner.setFlightCount(numFlight);
 
             JOptionPane.showMessageDialog(null, "Airliner updated successfully!!");
             isEditable(false);
-        } else {
-            JOptionPane.showMessageDialog(null, "All the fields are mandatory!!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_saveAirlinerBtnActionPerformed
 

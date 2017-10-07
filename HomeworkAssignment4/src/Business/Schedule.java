@@ -5,6 +5,7 @@
  */
 package Business;
 
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -17,13 +18,10 @@ public class Schedule {
     private String destLocation;
     private float price;
     private Date departureDate;
+    private Time departureTime;
 
-    public Date getDepartureDate() {
-        return departureDate;
-    }
-
-    public void setDepartureDate(Date departureDate) {
-        this.departureDate = departureDate;
+    public Schedule() {
+        this.price = 400f;
     }
 
     public String getSourceLocation() {
@@ -48,6 +46,22 @@ public class Schedule {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public Date getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public Time getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(Time departureTime) {
+        this.departureTime = departureTime;
     }
 
 }

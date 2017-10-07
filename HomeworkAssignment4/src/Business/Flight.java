@@ -14,10 +14,7 @@ public class Flight {
     private Long flightId;
     private String flightName;
     private Schedule schedule;
-
-    public Flight() {
-        this.schedule = new Schedule();
-    }
+    private String airlinerName;
 
     public Long getFlightId() {
         return flightId;
@@ -41,6 +38,18 @@ public class Flight {
 
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
+    }
+    
+    public String getAirlinerName() {
+        return airlinerName;
+    }
+
+    public void setAirlinerName(String airlinerName) {
+        this.airlinerName = airlinerName;
+    }
+
+    public Flight() {
+        this.schedule = new Schedule();
     }
 
     @Override
