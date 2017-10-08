@@ -118,7 +118,7 @@ public class AirlinerDirectory {
     public ArrayList<Flight> getFlightsByMaxPrice(float maxPrice, ArrayList<Flight> searchFlightList) {
         ArrayList<Flight> flightList = new ArrayList<>();
         for (Flight eachFlight : searchFlightList) {
-            if (eachFlight.getSchedule().getPrice() <= maxPrice) {
+            if (eachFlight.getPricePerTicket() <= maxPrice) {
                 flightList.add(eachFlight);
             }
         }

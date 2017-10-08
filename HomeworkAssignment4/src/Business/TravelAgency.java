@@ -24,10 +24,12 @@ import javax.swing.JOptionPane;
 public class TravelAgency {
 
     private AirlinerDirectory airlinerDirectory;
+    private CustomerDirectory customerDirectory;
 
     // constructor
     public TravelAgency() {
         this.airlinerDirectory = new AirlinerDirectory();
+        this.customerDirectory = new CustomerDirectory();
     }
 
     public AirlinerDirectory getAirlinerDirectory() {
@@ -36,6 +38,28 @@ public class TravelAgency {
 
     public void setAirlinerDirectory(AirlinerDirectory airlinerDirectory) {
         this.airlinerDirectory = airlinerDirectory;
+    }
+
+    public CustomerDirectory getCustomerDirectory() {
+        return customerDirectory;
+    }
+
+    public void setCustomerDirectory(CustomerDirectory customerDirectory) {
+        this.customerDirectory = customerDirectory;
+    }
+
+    // get price of flight
+    public float getPriceOfFlight(Long flightId, String airlinerName) {
+        for (Airliner eachAirliner : getAirlinerDirectory().getAirlinerList()) {
+            if (eachAirliner.getAirlinerName().equalsIgnoreCase(airlinerName)) {
+                for (Flight eachFlight : eachAirliner.getFleet().getFlightList()) {
+                    if (eachFlight.getFlightId().equals(flightId)) {
+                        return eachFlight.getPricePerTicket();
+                    }
+                }
+            }
+        }
+        return -1;
     }
 
     public ArrayList<Flight> getAllFlights() {
@@ -79,7 +103,7 @@ public class TravelAgency {
             string = new StringTokenizer(stringLine, ",");
             int objPosition = 0;
             ArrayList eachObject = new ArrayList();
-            while (string.hasMoreTokens() && objPosition <= 8) {
+            while (string.hasMoreTokens() && objPosition <= 10) {
                 tokenNum++;
                 objPosition++;
                 eachObject.add(string.nextToken(","));
@@ -95,35 +119,36 @@ public class TravelAgency {
                     airliner = airlinerDirectory.addNewAirliner();
                     airliner.setAirlinerId(airlinerId);
                     airliner.setAirlinerName(airlinerName);
+                    airliner.setAirlinerAddress(String.valueOf(eachObject.get(2)).trim());
                 }
 
-                Long flightId = Long.parseLong(((String) eachObject.get(2)).trim());
+                Long flightId = Long.parseLong(((String) eachObject.get(3)).trim());
                 Flight flight;
                 if (airliner.isFlightInAirliner(flightId)) {
                     System.out.println("Flight id already exists in the airliner! Provide a new unique flight id");
                 } else {
                     flight = airliner.getFleet().addNewFlight();
                     flight.setFlightId(flightId);
-                    flight.setFlightName(String.valueOf(eachObject.get(3)).trim());
+                    flight.setFlightName(String.valueOf(eachObject.get(4)).trim());
 
                     Schedule schedule = new Schedule();
-                    schedule.setSourceLocation(String.valueOf(eachObject.get(4)).trim());
-                    schedule.setDestLocation(String.valueOf(eachObject.get(5)).trim());
-                    
-                    String date = (String) eachObject.get(6);
+                    schedule.setSourceLocation(String.valueOf(eachObject.get(5)).trim());
+                    schedule.setDestLocation(String.valueOf(eachObject.get(6)).trim());
+
+                    String date = (String) eachObject.get(7);
                     DateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
                     Date departureDate = dateFormatter.parse(date);
                     schedule.setDepartureDate(departureDate);
 
-                    String time = (String) eachObject.get(7);
+                    String time = (String) eachObject.get(8);
                     DateFormat timeFormatter = new SimpleDateFormat("HH:mm");
                     Date arrivalTime = timeFormatter.parse(time);
                     schedule.setDepartureTime(new java.sql.Time(arrivalTime.getTime()));
 
-                    schedule.setPrice(Float.parseFloat(String.valueOf(eachObject.get(8)).trim()));
+                    flight.setPricePerTicket(Float.parseFloat(String.valueOf(eachObject.get(9)).trim()));
                     flight.setSchedule(schedule);
                     flight.setAirlinerName(airlinerName);
-                    
+
                 }
                 airliner.setFlightCount(airliner.getFleet().getFlightList().size());
             }

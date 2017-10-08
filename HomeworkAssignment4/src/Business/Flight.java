@@ -15,6 +15,13 @@ public class Flight {
     private String flightName;
     private Schedule schedule;
     private String airlinerName;
+    private float pricePerTicket;
+
+    // cosntructor
+    public Flight() {
+        this.schedule = new Schedule();
+        this.pricePerTicket = 100.0F;
+    }
 
     public Long getFlightId() {
         return flightId;
@@ -39,7 +46,7 @@ public class Flight {
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
     }
-    
+
     public String getAirlinerName() {
         return airlinerName;
     }
@@ -48,8 +55,12 @@ public class Flight {
         this.airlinerName = airlinerName;
     }
 
-    public Flight() {
-        this.schedule = new Schedule();
+    public float getPricePerTicket() {
+        return pricePerTicket;
+    }
+
+    public void setPricePerTicket(float pricePerTicket) {
+        this.pricePerTicket = pricePerTicket;
     }
 
     @Override

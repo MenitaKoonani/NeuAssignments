@@ -36,7 +36,7 @@ public class ManageFlightsJPanel extends javax.swing.JPanel {
 
     public void populateManageFlightPanel() {
         populateAirlinerDropdown();
-        populateManageFlightsTable(null);
+        populateManageFlightsTable(airlinerDirectory.getAllFlightsList());
     }
 
     public void populateAirlinerDropdown() {
@@ -243,7 +243,7 @@ public class ManageFlightsJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRow = manageFlightsTable.getSelectedRow();
         if (selectedRow >= 0) {
-            Flight selectedFlight = (Flight) manageFlightsTable.getValueAt(selectedRow, 0);
+            Flight selectedFlight = (Flight) manageFlightsTable.getValueAt(selectedRow, 1);
             ViewFlightsJPanel viewFlightPanel = new ViewFlightsJPanel(CardSequenceJPanel, selectedFlight);
             CardLayout cardLayout = (CardLayout) CardSequenceJPanel.getLayout();
             CardSequenceJPanel.add("ViewFlightPanel", viewFlightPanel);
@@ -268,7 +268,7 @@ public class ManageFlightsJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         sourceLocField.setText("");
         destLocField.setText((""));
-        populateManageFlightsTable(null);
+        populateManageFlightsTable(airlinerDirectory.getAllFlightsList());
     }//GEN-LAST:event_listAllFlightsActionPerformed
 
 

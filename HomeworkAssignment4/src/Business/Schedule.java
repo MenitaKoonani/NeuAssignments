@@ -16,13 +16,8 @@ public class Schedule {
 
     private String sourceLocation;
     private String destLocation;
-    private float price;
     private Date departureDate;
     private Time departureTime;
-
-    public Schedule() {
-        this.price = 400f;
-    }
 
     public String getSourceLocation() {
         return sourceLocation;
@@ -38,14 +33,6 @@ public class Schedule {
 
     public void setDestLocation(String destLocation) {
         this.destLocation = destLocation;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
     }
 
     public Date getDepartureDate() {

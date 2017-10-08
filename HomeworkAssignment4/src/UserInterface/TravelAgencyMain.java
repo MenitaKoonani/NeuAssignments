@@ -5,10 +5,11 @@
  */
 package UserInterface;
 
-import UserInterface.ManageFlights.SearchFlightsJPanel;
+import UserInterface.ManageCustomers.SearchFlightJPanel;
 import UserInterface.ManageAirliners.ManageAirlinersJPanel;
 import Business.AirlinerDirectory;
 import Business.TravelAgency;
+import UserInterface.ManageCustomers.SearchFlightJPanel;
 import UserInterface.ManageFlights.ManageFlightsJPanel;
 import java.awt.CardLayout;
 import java.io.IOException;
@@ -84,7 +85,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
+                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -103,8 +104,8 @@ public class TravelAgencyMain extends javax.swing.JFrame {
             // TODO add your handling code here:
             travelAgency.importAirlinersDetails();
             ManageAirlinersJPanel manageAirlinerPanel = new ManageAirlinersJPanel(CardSequenceJPanel, travelAgency);
-            CardLayout cardLayout = (CardLayout) CardSequenceJPanel.getLayout();
             CardSequenceJPanel.add("ManageAirlinerPanel", manageAirlinerPanel);
+            CardLayout cardLayout = (CardLayout) CardSequenceJPanel.getLayout();
             cardLayout.next(CardSequenceJPanel);
         } catch (IOException ex) {
             Logger.getLogger(TravelAgencyMain.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,7 +116,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
 
     private void ManageCustomersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageCustomersBtnActionPerformed
         // TODO add your handling code here:
-        SearchFlightsJPanel searchFlightPanel = new SearchFlightsJPanel(CardSequenceJPanel, travelAgency);
+        SearchFlightJPanel searchFlightPanel = new SearchFlightJPanel(CardSequenceJPanel, travelAgency);
         CardSequenceJPanel.add("SearchFlightPanel", searchFlightPanel);
         CardLayout cardLayout = (CardLayout) CardSequenceJPanel.getLayout();
         cardLayout.next(CardSequenceJPanel);

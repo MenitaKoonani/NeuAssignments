@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UserInterface.ManageFlights;
+package UserInterface.ManageCustomers;
 
 import Business.Flight;
 import Business.TravelAgency;
-import UserInterface.BookFlightPanel;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -17,21 +16,38 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Menita Koonani
  */
-public class SearchFlightsJPanel extends javax.swing.JPanel {
+public class SearchFlightJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form SearchFlightsJPanel
+     * Creates new form SearchFlightJPanel
      */
     private javax.swing.JPanel CardSequenceJPanel;
     private TravelAgency travelAgency;
-
-    public SearchFlightsJPanel(javax.swing.JPanel CardSequenceJPanel, TravelAgency travelAgency) {
+    public SearchFlightJPanel(javax.swing.JPanel CardSequenceJPanel, TravelAgency travelAgency) {
         initComponents();
         this.CardSequenceJPanel = CardSequenceJPanel;
         this.travelAgency = travelAgency;
         populateSearchFlightTable(travelAgency.getAllFlights());
     }
 
+    public void populateSearchFlightTable(ArrayList<Flight> flightList) {
+        DefaultTableModel jTable = (DefaultTableModel) searchFlightsTable.getModel();
+        //starting the population form row 0
+        jTable.setRowCount(0);
+
+        for (Flight eachFlight : flightList) {
+            Object row[] = new Object[7];
+            //setting the object to the first row as we need to access all the other attributes of that particular object
+            row[0] = eachFlight;
+            row[1] = eachFlight.getFlightName();
+            row[2] = eachFlight.getSchedule().getSourceLocation();
+            row[3] = eachFlight.getSchedule().getDestLocation();
+            row[4] = eachFlight.getSchedule().getDepartureDate();
+            row[5] = eachFlight.getSchedule().getDepartureTime();
+            row[6] = "$ " + eachFlight.getPricePerTicket();
+            jTable.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,7 +106,7 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
@@ -124,25 +140,6 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
         add(bookFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 440, 200, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    public void populateSearchFlightTable(ArrayList<Flight> flightList) {
-        DefaultTableModel jTable = (DefaultTableModel) searchFlightsTable.getModel();
-        //starting the population form row 0
-        jTable.setRowCount(0);
-
-        for (Flight eachFlight : flightList) {
-            Object row[] = new Object[7];
-            //setting the object to the first row as we need to access all the other attributes of that particular object
-            row[0] = eachFlight;
-            row[1] = eachFlight.getFlightName();
-            row[2] = eachFlight.getSchedule().getSourceLocation();
-            row[3] = eachFlight.getSchedule().getDestLocation();
-            row[4] = eachFlight.getSchedule().getDepartureDate();
-            row[5] = eachFlight.getSchedule().getDepartureTime();
-            row[6] = "$ " + eachFlight.getSchedule().getPrice();
-            jTable.addRow(row);
-        }
-    }
-
     private void searchFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFlightBtnActionPerformed
         // TODO add your handling code here:
         try {
@@ -170,7 +167,6 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Enter only numbers in max price search field!", "Warning", JOptionPane.WARNING_MESSAGE);
 
         }
-
     }//GEN-LAST:event_searchFlightBtnActionPerformed
 
     private void bookFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookFlightBtnActionPerformed
@@ -178,7 +174,7 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
         int selectedRow = searchFlightsTable.getSelectedRow();
         if (selectedRow >= 0) {
             Flight flight = (Flight) searchFlightsTable.getValueAt(selectedRow, 0);
-            BookFlightPanel bookFlightPanel = new BookFlightPanel(CardSequenceJPanel, flight);
+            BookFlightPanel bookFlightPanel = new BookFlightPanel(CardSequenceJPanel, flight, travelAgency);
             CardLayout cardLayout = (CardLayout) CardSequenceJPanel.getLayout();
             CardSequenceJPanel.add("BookFlightPanel", bookFlightPanel);
             cardLayout.next(CardSequenceJPanel);
