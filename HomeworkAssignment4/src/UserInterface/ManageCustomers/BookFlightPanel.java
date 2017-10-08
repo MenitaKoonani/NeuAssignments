@@ -9,12 +9,15 @@ import Business.Customer;
 import Business.CustomerDirectory;
 import Business.Flight;
 import Business.TravelAgency;
-import UserInterface.ManageFlights.ManageFlightsJPanel;
-import UserInterface.ManageCustomers.SearchFlightJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -28,7 +31,7 @@ public class BookFlightPanel extends javax.swing.JPanel {
     private javax.swing.JPanel CardSequenceJPanel;
     private Flight flight;
     private TravelAgency travelAgency;
-    
+
     public BookFlightPanel(javax.swing.JPanel CardSequenceJPanel, Flight flight, TravelAgency travelAgency) {
         initComponents();
         this.CardSequenceJPanel = CardSequenceJPanel;
@@ -38,16 +41,27 @@ public class BookFlightPanel extends javax.swing.JPanel {
         totalCostLabel.setVisible(false);
         confirmBookingBtn.setVisible(false);
         dobField.setMaxSelectableDate(new Date(System.currentTimeMillis()));
+        SpinnerNumberModel spinnerModel = (SpinnerNumberModel) numSeats.getModel();
+        spinnerModel.setMaximum(flight.getSeatAvailable());
+
         populateBookFlightPanel();
     }
-    
+
     public void populateBookFlightPanel() {
-        airlinerName.setText(flight.getAirlinerName());
-        flightId.setText(String.valueOf(flight.getFlightId()));
-        flightName.setText(flight.getFlightName());
-        fromLocation.setText(flight.getSchedule().getSourceLocation());
-        toLocation.setText(flight.getSchedule().getDestLocation());
-        ticketPrice.setText(String.valueOf(flight.getPricePerTicket()));
+        try {
+            airlinerName.setText(flight.getAirlinerName());
+            flightId.setText(String.valueOf(flight.getFlightId()));
+            flightName.setText(flight.getFlightName());
+            fromLocation.setText(flight.getSchedule().getSourceLocation());
+            toLocation.setText(flight.getSchedule().getDestLocation());
+            ticketPrice.setText(String.valueOf(flight.getPricePerTicket()));
+            String departureDate = String.valueOf(flight.getSchedule().getDepartureDate());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            departDate.setText(dateFormat.format(dateFormat.parse(departureDate)));
+            departDate.setText(String.valueOf(flight.getSchedule().getDepartureDate()));
+        } catch (ParseException ex) {
+            Logger.getLogger(BookFlightPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -86,6 +100,8 @@ public class BookFlightPanel extends javax.swing.JPanel {
         totalCostLabel = new javax.swing.JLabel();
         confirmBookingBtn = new javax.swing.JButton();
         totalCostValue = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        departDate = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -130,7 +146,7 @@ public class BookFlightPanel extends javax.swing.JPanel {
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Choose number of Seats : ");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 320, 130, 20));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 320, 150, 20));
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Enter Last Name : ");
@@ -146,7 +162,7 @@ public class BookFlightPanel extends javax.swing.JPanel {
                 bookFlightBtnActionPerformed(evt);
             }
         });
-        add(bookFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 100, -1));
+        add(bookFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 360, 100, -1));
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Flight ID : ");
@@ -166,9 +182,9 @@ public class BookFlightPanel extends javax.swing.JPanel {
         jLabel12.setText("Enter First Name : ");
         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 130, 20));
 
-        numSeats.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        numSeats.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         numSeats.setRequestFocusEnabled(false);
-        add(numSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, 80, -1));
+        add(numSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, 80, -1));
 
         totalCostLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         totalCostLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -187,6 +203,11 @@ public class BookFlightPanel extends javax.swing.JPanel {
         totalCostValue.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         totalCostValue.setForeground(new java.awt.Color(204, 0, 0));
         add(totalCostValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, 110, 20));
+
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("Departure Date : ");
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 130, 20));
+        add(departDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 120, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void bookFlightBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookFlightBackBtnActionPerformed
@@ -195,7 +216,7 @@ public class BookFlightPanel extends javax.swing.JPanel {
         Component[] componentArray = CardSequenceJPanel.getComponents();
         Component component = componentArray[componentArray.length - 1];
         SearchFlightJPanel searchFlightPanel = (SearchFlightJPanel) component;
-        searchFlightPanel.populateSearchFlightTable(travelAgency.getAllFlights());
+        searchFlightPanel.populateSearchFlightTable(travelAgency.getAirlinerDirectory().getAvailableFlights(travelAgency.getAllFlights()));
         CardLayout cardLayout = (CardLayout) CardSequenceJPanel.getLayout();
         cardLayout.previous(CardSequenceJPanel);
     }//GEN-LAST:event_bookFlightBackBtnActionPerformed
@@ -216,11 +237,13 @@ public class BookFlightPanel extends javax.swing.JPanel {
             newCust.setDateOfBirth(dob);
             newCust.setAirplaneName(airlinerName.getText());
             newCust.setTotalSeatsBooked(totalSeats);
-            
+
             bookFlightBtn.setEnabled(false);
             firstNameField.setEditable(false);
             lastNameField.setEditable(false);
             dobField.setEnabled(false);
+            numSeats.setEnabled(false);
+
             totalCostValue.setVisible(true);
             totalCostLabel.setVisible(true);
 //            float priceFlight = travelAgency.getPriceOfFlight(Long.parseLong(flightId.getText()), airlinerName.getText());
@@ -246,6 +269,7 @@ public class BookFlightPanel extends javax.swing.JPanel {
     private javax.swing.JButton bookFlightBackBtn;
     private javax.swing.JButton bookFlightBtn;
     private javax.swing.JButton confirmBookingBtn;
+    private javax.swing.JLabel departDate;
     private com.toedter.calendar.JDateChooser dobField;
     private javax.swing.JTextField firstNameField;
     private javax.swing.JLabel flightId;
@@ -255,6 +279,7 @@ public class BookFlightPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -49,6 +49,8 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
         destLocField.setText((flight.getSchedule().getDestLocation()));
         departDate.setDate(flight.getSchedule().getDepartureDate());
         departTimeField.setText(String.valueOf(flight.getSchedule().getDepartureTime()));
+        maxSeatCount.setValue(flight.getMaxSeatCount());
+        pricePerTicket.setText(String.valueOf(flight.getPricePerTicket()));
     }
 
     /**
@@ -77,6 +79,10 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         departTimeField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        maxSeatCount = new javax.swing.JSpinner();
+        pricePerTicket = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -123,7 +129,7 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
                 cancelUpdateBtnActionPerformed(evt);
             }
         });
-        add(cancelUpdateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, -1, -1));
+        add(cancelUpdateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 560, -1, -1));
 
         updateFlightBtn.setBackground(new java.awt.Color(0, 153, 153));
         updateFlightBtn.setText("Update");
@@ -132,7 +138,7 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
                 updateFlightBtnActionPerformed(evt);
             }
         });
-        add(updateFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 430, -1, -1));
+        add(updateFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, -1, -1));
 
         saveFlightBtn.setBackground(new java.awt.Color(0, 153, 153));
         saveFlightBtn.setText("Save");
@@ -142,7 +148,7 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
                 saveFlightBtnActionPerformed(evt);
             }
         });
-        add(saveFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, -1, -1));
+        add(saveFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 560, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -187,6 +193,26 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
             }
         });
         add(departTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 136, 32));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("Choose Max seats in the flight :");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, 190, 20));
+
+        maxSeatCount.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        add(maxSeatCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 140, 30));
+
+        pricePerTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pricePerTicketActionPerformed(evt);
+            }
+        });
+        add(pricePerTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, 140, 30));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel9.setText("Enter price per ticket for this flight : ");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 230, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewFlightBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewFlightBackBtnActionPerformed
@@ -222,21 +248,23 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
         String destLoc = destLocField.getText();
         Date departureDate = departDate.getDate();
         String departTime = departTimeField.getText();
-
         if (flightName.isEmpty() || sourceLoc.isEmpty() || destLoc.isEmpty() || departTime.isEmpty()) {
             JOptionPane.showMessageDialog(null, "All the fields are mandatory!!", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
             try {
+                int maxSeats = Integer.parseInt(String.valueOf(maxSeatCount.getValue()));
                 flight.setFlightName(flightName);
+                flight.setMaxSeatCount(maxSeats);
+                flight.setPricePerTicket(Float.parseFloat(String.valueOf(pricePerTicket.getText())));
                 Schedule schedule = new Schedule();
                 schedule.setSourceLocation(sourceLoc);
                 schedule.setDestLocation(destLoc);
                 schedule.setDepartureDate(departureDate);
-                
+
                 DateFormat timeFormatter = new SimpleDateFormat("HH:mm");
                 Date departureTime = timeFormatter.parse(departTime);
                 schedule.setDepartureTime(new java.sql.Time(departureTime.getTime()));
-                
+
                 flight.setSchedule(schedule);
                 JOptionPane.showMessageDialog(null, "Flight updated successfully!!");
                 isEditable(false);
@@ -257,6 +285,10 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
     private void departTimeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departTimeFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_departTimeFieldActionPerformed
+
+    private void pricePerTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pricePerTicketActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pricePerTicketActionPerformed
 
     public void isEditable(boolean isEditable) {
         saveFlightBtn.setEnabled(isEditable);
@@ -282,6 +314,10 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JSpinner maxSeatCount;
+    private javax.swing.JTextField pricePerTicket;
     private javax.swing.JButton saveFlightBtn;
     private javax.swing.JTextField sourceLocField;
     private javax.swing.JButton updateFlightBtn;

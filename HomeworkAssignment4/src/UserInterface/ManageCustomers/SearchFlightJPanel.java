@@ -28,7 +28,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         initComponents();
         this.CardSequenceJPanel = CardSequenceJPanel;
         this.travelAgency = travelAgency;
-        populateSearchFlightTable(travelAgency.getAllFlights());
+        populateSearchFlightTable(travelAgency.getAirlinerDirectory().getAvailableFlights(travelAgency.getAllFlights()));
     }
 
     public void populateSearchFlightTable(ArrayList<Flight> flightList) {
@@ -77,7 +77,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Search and Book Flights ");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 750, 40));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 910, 40));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -109,7 +109,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
@@ -125,7 +125,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(searchFlightsTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 730, 190));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 900, 190));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -140,7 +140,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
                 bookFlightBtnActionPerformed(evt);
             }
         });
-        add(bookFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 440, 200, -1));
+        add(bookFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 430, 200, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFlightBtnActionPerformed
@@ -162,7 +162,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
                 flightList = travelAgency.getAirlinerDirectory().getFlightsByMaxPrice(maxPrice, flightList);
             }
             if (!flightList.isEmpty()) {
-                populateSearchFlightTable(flightList);
+                populateSearchFlightTable(travelAgency.getAirlinerDirectory().getAvailableFlights(flightList));
             } else {
                 JOptionPane.showMessageDialog(null, "No flights in the specified search!!", "Warning", JOptionPane.WARNING_MESSAGE);
             }

@@ -114,11 +114,26 @@ public class AirlinerDirectory {
         }
     }
 
-    // get fligth list based on max price
+    // get flight list based on max price
     public ArrayList<Flight> getFlightsByMaxPrice(float maxPrice, ArrayList<Flight> searchFlightList) {
         ArrayList<Flight> flightList = new ArrayList<>();
         for (Flight eachFlight : searchFlightList) {
             if (eachFlight.getPricePerTicket() <= maxPrice) {
+                flightList.add(eachFlight);
+            }
+        }
+        if (!flightList.isEmpty()) {
+            return flightList;
+        } else {
+            return null;
+        }
+    }
+
+    // get flight list which have seats available
+    public ArrayList<Flight> getAvailableFlights(ArrayList<Flight> searchFlightList) {
+        ArrayList<Flight> flightList = new ArrayList<>();
+        for (Flight eachFlight : searchFlightList) {
+            if (eachFlight.getSeatAvailable() <= eachFlight.getMaxSeatCount() && eachFlight.getSeatAvailable() > 0) {
                 flightList.add(eachFlight);
             }
         }

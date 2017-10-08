@@ -12,8 +12,14 @@ import Business.Schedule;
 import UserInterface.ManageAirliners.CreateNewAirlinerJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -70,6 +76,10 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
         departDate = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         maxSeatCount = new javax.swing.JSpinner();
+        jLabel8 = new javax.swing.JLabel();
+        departTimeField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        pricePerTicket = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -89,13 +99,13 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
                 flightIdFieldActionPerformed(evt);
             }
         });
-        add(flightIdField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 136, 32));
-        add(flightNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 136, 32));
+        add(flightIdField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 136, 30));
+        add(flightNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 136, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Enter flight name : ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 210, 180, 28));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 180, 20));
 
         createFlightBtn.setBackground(new java.awt.Color(0, 153, 153));
         createFlightBtn.setText("Create");
@@ -104,7 +114,7 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
                 createFlightBtnActionPerformed(evt);
             }
         });
-        add(createFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 490, 90, -1));
+        add(createFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, 90, -1));
 
         createFlightBackBtn.setBackground(new java.awt.Color(0, 153, 153));
         createFlightBackBtn.setText("<< Back");
@@ -118,49 +128,73 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Enter flight Id :");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 150, 190, 28));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 190, 20));
 
         add(chooseAirliner, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 140, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Enter Source Location : ");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 270, 190, 28));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 190, 20));
 
         sourceLocField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sourceLocFieldActionPerformed(evt);
             }
         });
-        add(sourceLocField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 136, 32));
+        add(sourceLocField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 136, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Choose Max seats in the flight :");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, 190, 28));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, 190, 20));
 
         destLocField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 destLocFieldActionPerformed(evt);
             }
         });
-        add(destLocField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, 136, 32));
+        add(destLocField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, 136, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Enter Destination Location : ");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 330, 190, 28));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 190, 20));
 
         departDate.setAutoscrolls(true);
-        add(departDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, 140, 30));
+        add(departDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, 140, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Choose departure date : ");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 190, 28));
+        jLabel7.setText("Enter price per ticket for this flight : ");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 230, 20));
 
         maxSeatCount.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         add(maxSeatCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 140, 30));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("Choose departure date : ");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 190, 20));
+
+        departTimeField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                departTimeFieldActionPerformed(evt);
+            }
+        });
+        add(departTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, 136, 30));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel9.setText("Enter departure time : ");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 190, 20));
+
+        pricePerTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pricePerTicketActionPerformed(evt);
+            }
+        });
+        add(pricePerTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, 140, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void flightIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightIdFieldActionPerformed
@@ -182,32 +216,44 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
 
     private void createFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createFlightBtnActionPerformed
         // TODO add your handling code here:
-        Long flightId = Long.parseLong(String.valueOf(flightIdField.getText()));
         String flightName = flightNameField.getText();
         String sourceLoc = sourceLocField.getText();
         String destLoc = destLocField.getText();
         Date departureDate = departDate.getDate();
 
-        if (flightId <= 0 || flightName.isEmpty() || sourceLoc.isEmpty() || destLoc.isEmpty()) {
+        if (flightIdField.getText().isEmpty() || flightName.isEmpty() || sourceLoc.isEmpty() || destLoc.isEmpty() || pricePerTicket.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "All the fields are mandatory!!", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
-            String airlinerName = chooseAirliner.getSelectedItem().toString();
-            Airliner airliner = airlinerDirectory.getAirlinerByName(airlinerName);
-            Flight newFlight = airliner.getFleet().addNewFlight();
-            newFlight.setFlightId(flightId);
-            newFlight.setFlightName(flightName);
-            newFlight.setAirlinerName(airlinerName);
-            newFlight.setMaxSeatCount((int) maxSeatCount.getValue());
-            newFlight.setSeatAvailable((int) maxSeatCount.getValue());
+            try {
+                Long flightId = Long.parseLong(String.valueOf(flightIdField.getText()));
+                float pricePerSeat = Float.parseFloat(String.valueOf(pricePerTicket.getText()));
+                String departTime = departTimeField.getText();
+                
+                String airlinerName = chooseAirliner.getSelectedItem().toString();
+                Airliner airliner = airlinerDirectory.getAirlinerByName(airlinerName);
+                Flight newFlight = airliner.getFleet().addNewFlight();
+                newFlight.setFlightId(flightId);
+                newFlight.setFlightName(flightName);
+                newFlight.setAirlinerName(airlinerName);
+                newFlight.setMaxSeatCount((int) maxSeatCount.getValue());
+                newFlight.setSeatAvailable((int) maxSeatCount.getValue());
+                newFlight.setPricePerTicket(pricePerSeat);
 
-            Schedule schedule = new Schedule();
-            schedule.setSourceLocation(sourceLoc);
-            schedule.setDestLocation(destLoc);
-            schedule.setDepartureDate(departureDate);
-            newFlight.setSchedule(schedule);
+                Schedule schedule = new Schedule();
+                schedule.setSourceLocation(sourceLoc);
+                schedule.setDestLocation(destLoc);
+                schedule.setDepartureDate(departureDate);
+                
+                DateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+                Date departureTime = timeFormatter.parse(departTime);
+                schedule.setDepartureTime(new java.sql.Time(departureTime.getTime()));
+                newFlight.setSchedule(schedule);
 
-            JOptionPane.showMessageDialog(null, "Flight successfully added in " + airlinerName + "!");
-            resetFields();
+                JOptionPane.showMessageDialog(null, "Flight successfully added in " + airlinerName + "!");
+                resetFields();
+            } catch (ParseException ex) {
+                Logger.getLogger(CreateNewFlightJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_createFlightBtnActionPerformed
 
@@ -218,6 +264,14 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
     private void destLocFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destLocFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_destLocFieldActionPerformed
+
+    private void departTimeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departTimeFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_departTimeFieldActionPerformed
+
+    private void pricePerTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pricePerTicketActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pricePerTicketActionPerformed
     public void resetFields() {
         flightIdField.setText("");
         flightNameField.setText("");
@@ -233,6 +287,7 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
     private javax.swing.JButton createFlightBtn;
     private javax.swing.JLabel createFlightLabel;
     private com.toedter.calendar.JDateChooser departDate;
+    private javax.swing.JTextField departTimeField;
     private javax.swing.JTextField destLocField;
     private javax.swing.JTextField flightIdField;
     private javax.swing.JTextField flightNameField;
@@ -243,7 +298,10 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JSpinner maxSeatCount;
+    private javax.swing.JTextField pricePerTicket;
     private javax.swing.JTextField sourceLocField;
     // End of variables declaration//GEN-END:variables
 }

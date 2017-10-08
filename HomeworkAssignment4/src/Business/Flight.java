@@ -87,5 +87,6 @@ public class Flight {
         return this.flightId.toString();
     }
 
+    // add flights in new airliner panel
     // departure time
 }
