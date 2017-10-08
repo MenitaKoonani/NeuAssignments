@@ -55,13 +55,14 @@ public class ManageFlightsJPanel extends javax.swing.JPanel {
 
         flightList = flightList.isEmpty() || flightList == null ? airlinerDirectory.getAllFlightsList() : flightList;
         for (Flight eachFlight : flightList) {
-            Object row[] = new Object[5];
+            Object row[] = new Object[6];
             //setting the object to the first row as we need to access all the other attributes of that particular object
             row[0] = eachFlight.getAirlinerName();
             row[1] = eachFlight;
             row[2] = eachFlight.getFlightName();
             row[3] = eachFlight.getSchedule().getSourceLocation();
             row[4] = eachFlight.getSchedule().getDestLocation();
+            row[5] = eachFlight.getSeatAvailable();
             jTable.addRow(row);
         }
     }
@@ -125,14 +126,14 @@ public class ManageFlightsJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Airliner Name", "Flight Id", "Flight Name", "Source", "Destination"
+                "Airliner Name", "Flight Id", "Flight Name", "Source", "Destination", "Seats Available"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

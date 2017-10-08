@@ -16,11 +16,14 @@ public class Flight {
     private Schedule schedule;
     private String airlinerName;
     private float pricePerTicket;
+    private int maxSeatCount;
+    private int seatAvailable;
 
     // cosntructor
     public Flight() {
         this.schedule = new Schedule();
         this.pricePerTicket = 100.0F;
+        this.seatAvailable = this.maxSeatCount;
     }
 
     public Long getFlightId() {
@@ -63,8 +66,26 @@ public class Flight {
         this.pricePerTicket = pricePerTicket;
     }
 
+    public int getMaxSeatCount() {
+        return maxSeatCount;
+    }
+
+    public void setMaxSeatCount(int maxSeatCount) {
+        this.maxSeatCount = maxSeatCount;
+    }
+
+    public int getSeatAvailable() {
+        return seatAvailable;
+    }
+
+    public void setSeatAvailable(int seatAvailable) {
+        this.seatAvailable = seatAvailable;
+    }
+
     @Override
     public String toString() {
         return this.flightId.toString();
     }
+
+    // departure time
 }

@@ -28,18 +28,19 @@ public class BookFlightPanel extends javax.swing.JPanel {
     private javax.swing.JPanel CardSequenceJPanel;
     private Flight flight;
     private TravelAgency travelAgency;
-
+    
     public BookFlightPanel(javax.swing.JPanel CardSequenceJPanel, Flight flight, TravelAgency travelAgency) {
         initComponents();
         this.CardSequenceJPanel = CardSequenceJPanel;
         this.flight = flight;
         this.travelAgency = travelAgency;
-        totalCostField.setVisible(false);
+        totalCostValue.setVisible(false);
         totalCostLabel.setVisible(false);
         confirmBookingBtn.setVisible(false);
+        dobField.setMaxSelectableDate(new Date(System.currentTimeMillis()));
         populateBookFlightPanel();
     }
-
+    
     public void populateBookFlightPanel() {
         airlinerName.setText(flight.getAirlinerName());
         flightId.setText(String.valueOf(flight.getFlightId()));
@@ -83,8 +84,8 @@ public class BookFlightPanel extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         numSeats = new javax.swing.JSpinner();
         totalCostLabel = new javax.swing.JLabel();
-        totalCostField = new javax.swing.JTextField();
         confirmBookingBtn = new javax.swing.JButton();
+        totalCostValue = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -164,17 +165,15 @@ public class BookFlightPanel extends javax.swing.JPanel {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("Enter First Name : ");
         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 130, 20));
+
+        numSeats.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        numSeats.setRequestFocusEnabled(false);
         add(numSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, 80, -1));
 
         totalCostLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         totalCostLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         totalCostLabel.setText("Total Cost of Tickets  :");
         add(totalCostLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, 150, 40));
-
-        totalCostField.setEditable(false);
-        totalCostField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        totalCostField.setForeground(new java.awt.Color(204, 0, 0));
-        add(totalCostField, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, 130, 30));
 
         confirmBookingBtn.setBackground(new java.awt.Color(0, 153, 153));
         confirmBookingBtn.setText("Confirm Booking");
@@ -184,6 +183,10 @@ public class BookFlightPanel extends javax.swing.JPanel {
             }
         });
         add(confirmBookingBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 460, 200, -1));
+
+        totalCostValue.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        totalCostValue.setForeground(new java.awt.Color(204, 0, 0));
+        add(totalCostValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, 110, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void bookFlightBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookFlightBackBtnActionPerformed
@@ -213,16 +216,18 @@ public class BookFlightPanel extends javax.swing.JPanel {
             newCust.setDateOfBirth(dob);
             newCust.setAirplaneName(airlinerName.getText());
             newCust.setTotalSeatsBooked(totalSeats);
-
+            
             bookFlightBtn.setEnabled(false);
             firstNameField.setEditable(false);
             lastNameField.setEditable(false);
             dobField.setEnabled(false);
-            totalCostField.setVisible(true);
+            totalCostValue.setVisible(true);
             totalCostLabel.setVisible(true);
 //            float priceFlight = travelAgency.getPriceOfFlight(Long.parseLong(flightId.getText()), airlinerName.getText());
-            totalCostLabel.setText("Cost of " + totalSeats + " tickets : ");
-            totalCostField.setText("$ " + (Float.parseFloat(ticketPrice.getText()) * totalSeats));
+            totalCostLabel.setText("Cost of " + totalSeats + " tickets : USD ");
+            float eachCustPrice = Float.parseFloat(ticketPrice.getText()) * totalSeats;
+            totalCostValue.setText(String.valueOf(eachCustPrice));
+            newCust.setTicketsPrice(eachCustPrice);
             confirmBookingBtn.setVisible(true);
         }
 
@@ -230,6 +235,8 @@ public class BookFlightPanel extends javax.swing.JPanel {
 
     private void confirmBookingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBookingBtnActionPerformed
         // TODO add your handling code here:
+        int seatsBooked = (int) numSeats.getValue();
+        flight.setSeatAvailable((flight.getSeatAvailable() - seatsBooked));
         JOptionPane.showMessageDialog(null, "Booking confirmed! Have a nice flight!! :D ");
     }//GEN-LAST:event_confirmBookingBtnActionPerformed
 
@@ -260,7 +267,7 @@ public class BookFlightPanel extends javax.swing.JPanel {
     private javax.swing.JSpinner numSeats;
     private javax.swing.JLabel ticketPrice;
     private javax.swing.JLabel toLocation;
-    private javax.swing.JTextField totalCostField;
     private javax.swing.JLabel totalCostLabel;
+    private javax.swing.JLabel totalCostValue;
     // End of variables declaration//GEN-END:variables
 }

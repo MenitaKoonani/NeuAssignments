@@ -37,7 +37,6 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
         airlinerIdField.setText(String.valueOf(airliner.getAirlinerId()));
         airlinerNameField.setText(airliner.getAirlinerName());
         airlinerAddressField.setText(airliner.getAirlinerAddress());
-        airlinerFlightCount.setValue(airliner.getFlightCount());
     }
 
     public void isEditable(boolean isEditable) {
@@ -63,12 +62,10 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
         viewAirlinerLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         airlinerIdField = new javax.swing.JTextField();
         airlinerAddressField = new javax.swing.JTextField();
         airlinerNameField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        airlinerFlightCount = new javax.swing.JSpinner();
         saveAirlinerBtn = new javax.swing.JButton();
         cancelUpdateBtn = new javax.swing.JButton();
 
@@ -81,7 +78,7 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
                 updateAirlinerBtnActionPerformed(evt);
             }
         });
-        add(updateAirlinerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 420, -1, -1));
+        add(updateAirlinerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, -1, -1));
 
         viewBackBtn.setBackground(new java.awt.Color(0, 153, 153));
         viewBackBtn.setText("<< Back");
@@ -108,11 +105,6 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
         jLabel2.setText("Airliner Name : ");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 157, 28));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Number of Flights : ");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 157, 28));
-
         airlinerIdField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 airlinerIdFieldActionPerformed(evt);
@@ -127,9 +119,6 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
         jLabel4.setText("Airliner Address : ");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 157, 28));
 
-        airlinerFlightCount.setEnabled(false);
-        add(airlinerFlightCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 140, 30));
-
         saveAirlinerBtn.setBackground(new java.awt.Color(0, 153, 153));
         saveAirlinerBtn.setText("Save");
         saveAirlinerBtn.setEnabled(false);
@@ -138,7 +127,7 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
                 saveAirlinerBtnActionPerformed(evt);
             }
         });
-        add(saveAirlinerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, -1, -1));
+        add(saveAirlinerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, -1, -1));
 
         cancelUpdateBtn.setBackground(new java.awt.Color(0, 153, 153));
         cancelUpdateBtn.setText("Cancel");
@@ -148,7 +137,7 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
                 cancelUpdateBtnActionPerformed(evt);
             }
         });
-        add(cancelUpdateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, -1, -1));
+        add(cancelUpdateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 280, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBackBtnActionPerformed
@@ -199,13 +188,11 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField airlinerAddressField;
-    private javax.swing.JSpinner airlinerFlightCount;
     private javax.swing.JTextField airlinerIdField;
     private javax.swing.JTextField airlinerNameField;
     private javax.swing.JButton cancelUpdateBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton saveAirlinerBtn;
     private javax.swing.JButton updateAirlinerBtn;

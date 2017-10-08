@@ -9,6 +9,7 @@ import Business.Airliner;
 import Business.AirlinerDirectory;
 import Business.Flight;
 import Business.Schedule;
+import UserInterface.ManageAirliners.CreateNewAirlinerJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
      */
     private javax.swing.JPanel CardSequenceJPanel;
     private AirlinerDirectory airlinerDirectory;
-    
+
     public CreateNewFlightJPanel(javax.swing.JPanel CardSequenceJPanel, AirlinerDirectory airlinerDirectory) {
         initComponents();
         this.CardSequenceJPanel = CardSequenceJPanel;
@@ -35,7 +36,7 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
         departDate.setDate(new Date(System.currentTimeMillis()));
         populateAirlinerList();
     }
-    
+
     public void populateAirlinerList() {
         ArrayList<Airliner> airlinerList = airlinerDirectory.getAirlinerList();
         for (Airliner eachAirliner : airlinerList) {
@@ -67,6 +68,8 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
         destLocField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         departDate = new com.toedter.calendar.JDateChooser();
+        jLabel7 = new javax.swing.JLabel();
+        maxSeatCount = new javax.swing.JSpinner();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -101,7 +104,7 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
                 createFlightBtnActionPerformed(evt);
             }
         });
-        add(createFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 460, 90, -1));
+        add(createFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 490, 90, -1));
 
         createFlightBackBtn.setBackground(new java.awt.Color(0, 153, 153));
         createFlightBackBtn.setText("<< Back");
@@ -133,8 +136,8 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Choose departure date : ");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 190, 28));
+        jLabel5.setText("Choose Max seats in the flight :");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, 190, 28));
 
         destLocField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +153,14 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
 
         departDate.setAutoscrolls(true);
         add(departDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, 140, 30));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Choose departure date : ");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 190, 28));
+
+        maxSeatCount.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        add(maxSeatCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 140, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void flightIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightIdFieldActionPerformed
@@ -161,8 +172,10 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
         CardSequenceJPanel.remove(this);
         Component[] componentArray = CardSequenceJPanel.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ManageFlightsJPanel manageFlightPanel = (ManageFlightsJPanel) component;
-        manageFlightPanel.populateManageFlightPanel();
+        if (!component.getClass().getName().equalsIgnoreCase("UserInterface.ManageAirliners.CreateNewAirlinerJPanel")) {
+            ManageFlightsJPanel manageFlightPanel = (ManageFlightsJPanel) component;
+            manageFlightPanel.populateManageFlightPanel();
+        }
         CardLayout cardLayout = (CardLayout) CardSequenceJPanel.getLayout();
         cardLayout.previous(CardSequenceJPanel);
     }//GEN-LAST:event_createFlightBackBtnActionPerformed
@@ -174,7 +187,7 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
         String sourceLoc = sourceLocField.getText();
         String destLoc = destLocField.getText();
         Date departureDate = departDate.getDate();
-        
+
         if (flightId <= 0 || flightName.isEmpty() || sourceLoc.isEmpty() || destLoc.isEmpty()) {
             JOptionPane.showMessageDialog(null, "All the fields are mandatory!!", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
@@ -184,15 +197,17 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
             newFlight.setFlightId(flightId);
             newFlight.setFlightName(flightName);
             newFlight.setAirlinerName(airlinerName);
-            
+            newFlight.setMaxSeatCount((int) maxSeatCount.getValue());
+            newFlight.setSeatAvailable((int) maxSeatCount.getValue());
+
             Schedule schedule = new Schedule();
             schedule.setSourceLocation(sourceLoc);
             schedule.setDestLocation(destLoc);
             schedule.setDepartureDate(departureDate);
             newFlight.setSchedule(schedule);
-            
+
             JOptionPane.showMessageDialog(null, "Flight successfully added in " + airlinerName + "!");
-            emptyFields();
+            resetFields();
         }
     }//GEN-LAST:event_createFlightBtnActionPerformed
 
@@ -203,12 +218,13 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
     private void destLocFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destLocFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_destLocFieldActionPerformed
-    public void emptyFields() {
+    public void resetFields() {
         flightIdField.setText("");
         flightNameField.setText("");
         sourceLocField.setText("");
         destLocField.setText("");
         departDate.setDate(new Date(System.currentTimeMillis()));
+        maxSeatCount.setValue(1);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -226,6 +242,8 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JSpinner maxSeatCount;
     private javax.swing.JTextField sourceLocField;
     // End of variables declaration//GEN-END:variables
 }

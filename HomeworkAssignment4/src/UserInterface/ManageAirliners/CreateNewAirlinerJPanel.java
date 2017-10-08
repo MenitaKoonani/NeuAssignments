@@ -48,6 +48,7 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
         airlinerAddressField = new javax.swing.JTextField();
         airlinerNameField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        addFlightsBtn = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -98,6 +99,15 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Enter airliner address :");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 157, 28));
+
+        addFlightsBtn.setBackground(new java.awt.Color(0, 153, 153));
+        addFlightsBtn.setText("Add Flights");
+        addFlightsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addFlightsBtnActionPerformed(evt);
+            }
+        });
+        add(addFlightsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 150, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void createBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBackBtnActionPerformed
@@ -117,13 +127,13 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
 
     private void createAirlinerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAirlinerBtnActionPerformed
         // TODO add your handling code here:
-        Long airlinerId = Long.parseLong(String.valueOf(airlinerIdField.getText()));
         String airlinerName = airlinerNameField.getText();
         String airlinerAddress = airlinerAddressField.getText();
 
         if (airlinerIdField.getText().isEmpty() || airlinerName.isEmpty() || airlinerAddress.isEmpty()) {
             JOptionPane.showMessageDialog(null, "All the fields are mandatory!!", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
+            Long airlinerId = Long.parseLong(String.valueOf(airlinerIdField.getText()));
             Airliner newAirliner = airlinerDirectory.addNewAirliner();
             newAirliner.setAirlinerId(airlinerId);
             newAirliner.setAirlinerName(airlinerName);
@@ -133,6 +143,14 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
             emptyFields();
         }
     }//GEN-LAST:event_createAirlinerBtnActionPerformed
+
+    private void addFlightsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFlightsBtnActionPerformed
+        // TODO add your handling code here:
+        CreateNewFlightJPanel createFlightPanel = new CreateNewFlightJPanel(CardSequenceJPanel, airlinerDirectory);
+        CardSequenceJPanel.add("CreateNewFlight",createFlightPanel);
+        CardLayout cardLayout = (CardLayout) CardSequenceJPanel.getLayout();
+        cardLayout.next(CardSequenceJPanel);
+    }//GEN-LAST:event_addFlightsBtnActionPerformed
     public void emptyFields() {
         airlinerIdField.setText("");
         airlinerNameField.setText("");
@@ -140,6 +158,7 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addFlightsBtn;
     private javax.swing.JTextField airlinerAddressField;
     private javax.swing.JTextField airlinerIdField;
     private javax.swing.JTextField airlinerNameField;

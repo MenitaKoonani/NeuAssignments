@@ -23,6 +23,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
      */
     private javax.swing.JPanel CardSequenceJPanel;
     private TravelAgency travelAgency;
+
     public SearchFlightJPanel(javax.swing.JPanel CardSequenceJPanel, TravelAgency travelAgency) {
         initComponents();
         this.CardSequenceJPanel = CardSequenceJPanel;
@@ -36,7 +37,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         jTable.setRowCount(0);
 
         for (Flight eachFlight : flightList) {
-            Object row[] = new Object[7];
+            Object row[] = new Object[8];
             //setting the object to the first row as we need to access all the other attributes of that particular object
             row[0] = eachFlight;
             row[1] = eachFlight.getFlightName();
@@ -45,9 +46,11 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             row[4] = eachFlight.getSchedule().getDepartureDate();
             row[5] = eachFlight.getSchedule().getDepartureTime();
             row[6] = "$ " + eachFlight.getPricePerTicket();
+            row[7] = eachFlight.getSeatAvailable();
             jTable.addRow(row);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,14 +105,14 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Flight ID", "Flight Name", "Source", "Destination", "Departure Date", "Departure Time", "Price of a ticket"
+                "Flight ID", "Flight Name", "Source", "Destination", "Departure Date", "Departure Time", "Price of a ticket", "Seats available"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

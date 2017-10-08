@@ -1,7 +1,7 @@
-10213021,Emirates,Dubai,2324421,Boeing 202,Boston,Denver,12/12/2017,22:00,200
-33231232,Qatar,Qatar,3224324,Airbus 103,Golden,Boston,10/10/2017,1:00,300
-10213021,Emirates,Dubai,3423443,Boeing 204,Texas,Las Vegas,11/11/2017,2:00,350
-33231232,Qatar,Qatar,4234234,Aribus 232,Colorado,Pittsburg,10/11/2017,7:00,250
-10213021,Emirates,Dubai,3243244,Boeing 777,New York,New Jersey,11/12/2017,4:00,150
-33231232,Qatar,Qatar,3242222,Airbus 222,Florida,Boston,10/12/2017,10:00,400
-10101020,Lufthansa,Singapore,1020203,Airbus 303,Pittsburg,FloridA,2/12/2018,11:00,450
+10213021,Emirates,Dubai,2324421,Boeing 202,Boston,Denver,12/12/2017,22:00,200,200
+33231232,Qatar,Qatar,3224324,Airbus 103,Golden,Boston,10/10/2017,1:00,300,400
+10213021,Emirates,Dubai,3423443,Boeing 204,Texas,Las Vegas,11/11/2017,2:00,350,300
+33231232,Qatar,Qatar,4234234,Aribus 232,Colorado,Pittsburg,10/11/2017,7:00,250,200
+10213021,Emirates,Dubai,3243244,Boeing 777,New York,New Jersey,11/12/2017,4:00,150,150
+33231232,Qatar,Qatar,3242222,Airbus 222,Florida,Boston,10/12/2017,10:00,400,300
+10101020,Lufthansa,Singapore,1020203,Airbus 303,Pittsburg,FloridA,2/12/2018,11:00,450,350
