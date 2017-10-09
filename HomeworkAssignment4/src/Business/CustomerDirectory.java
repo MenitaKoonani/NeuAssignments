@@ -44,4 +44,18 @@ public class CustomerDirectory {
         return newCustomer;
     }
 
+    // get Customer by First and Last names
+    public Customer getCustomerByNames(String firstName, String lastName) {
+        for (Customer eachCustomer : customerList) {
+            if (eachCustomer.getFirstName().equalsIgnoreCase(firstName) && eachCustomer.getLastName().equals(lastName)) {
+                return eachCustomer;
+            }
+        }
+        return null;
+    }
+
+    // remove Customer from Directory
+    public void removeCustomer(Customer customer) {
+        customerList.remove(customer);
+    }
 }

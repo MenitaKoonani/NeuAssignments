@@ -30,7 +30,7 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
      */
     private javax.swing.JPanel CardSeqenceJPanel;
     private Flight flight;
-
+    
     public ViewFlightsJPanel(javax.swing.JPanel CardSequenceJPanel, Flight flight) {
         initComponents();
         this.CardSeqenceJPanel = CardSequenceJPanel;
@@ -38,10 +38,10 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
         departDate.setMinSelectableDate(new Date(System.currentTimeMillis()));
         populateViewFlight(false);
     }
-
+    
     public void populateViewFlight(boolean isEditable) {
         isEditable(isEditable);
-
+        
         viewFlightsLabel.setText("View flight in " + flight.getAirlinerName() + " airlines");
         flightIdField.setText(String.valueOf(flight.getFlightId()));
         flightNameField.setText(flight.getFlightName());
@@ -255,17 +255,20 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
                 int maxSeats = Integer.parseInt(String.valueOf(maxSeatCount.getValue()));
                 flight.setFlightName(flightName);
                 flight.setMaxSeatCount(maxSeats);
+                flight.setSeatAvailable(maxSeats);
                 flight.setPricePerTicket(Float.parseFloat(String.valueOf(pricePerTicket.getText())));
+                
                 Schedule schedule = new Schedule();
                 schedule.setSourceLocation(sourceLoc);
                 schedule.setDestLocation(destLoc);
                 schedule.setDepartureDate(departureDate);
-
+                
                 DateFormat timeFormatter = new SimpleDateFormat("HH:mm");
                 Date departureTime = timeFormatter.parse(departTime);
                 schedule.setDepartureTime(new java.sql.Time(departureTime.getTime()));
-
+                
                 flight.setSchedule(schedule);
+                
                 JOptionPane.showMessageDialog(null, "Flight updated successfully!!");
                 isEditable(false);
             } catch (ParseException ex) {
@@ -289,7 +292,7 @@ public class ViewFlightsJPanel extends javax.swing.JPanel {
     private void pricePerTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pricePerTicketActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pricePerTicketActionPerformed
-
+    
     public void isEditable(boolean isEditable) {
         saveFlightBtn.setEnabled(isEditable);
         cancelUpdateBtn.setEnabled(isEditable);

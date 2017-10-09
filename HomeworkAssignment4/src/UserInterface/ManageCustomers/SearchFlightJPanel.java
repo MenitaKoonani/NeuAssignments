@@ -8,7 +8,10 @@ package UserInterface.ManageCustomers;
 import Business.Flight;
 import Business.TravelAgency;
 import java.awt.CardLayout;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,19 +26,19 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
      */
     private javax.swing.JPanel CardSequenceJPanel;
     private TravelAgency travelAgency;
-
+    
     public SearchFlightJPanel(javax.swing.JPanel CardSequenceJPanel, TravelAgency travelAgency) {
         initComponents();
         this.CardSequenceJPanel = CardSequenceJPanel;
         this.travelAgency = travelAgency;
         populateSearchFlightTable(travelAgency.getAirlinerDirectory().getAvailableFlights(travelAgency.getAllFlights()));
     }
-
+    
     public void populateSearchFlightTable(ArrayList<Flight> flightList) {
         DefaultTableModel jTable = (DefaultTableModel) searchFlightsTable.getModel();
         //starting the population form row 0
         jTable.setRowCount(0);
-
+        
         for (Flight eachFlight : flightList) {
             Object row[] = new Object[8];
             //setting the object to the first row as we need to access all the other attributes of that particular object
@@ -43,6 +46,11 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             row[1] = eachFlight.getFlightName();
             row[2] = eachFlight.getSchedule().getSourceLocation();
             row[3] = eachFlight.getSchedule().getDestLocation();
+            
+            Date departureDate = eachFlight.getSchedule().getDepartureDate();
+            DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+            eachFlight.getSchedule().setDepartureDate(departureDate);
+            
             row[4] = eachFlight.getSchedule().getDepartureDate();
             row[5] = eachFlight.getSchedule().getDepartureTime();
             row[6] = "$ " + eachFlight.getPricePerTicket();
@@ -71,12 +79,13 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         destSearch = new javax.swing.JTextField();
         bookFlightBtn = new javax.swing.JButton();
+        manageBookingBtn = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Search and Book Flights ");
+        jLabel1.setText("Search for best deals and Book Flights ");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 910, 40));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -141,14 +150,23 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             }
         });
         add(bookFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 430, 200, -1));
+
+        manageBookingBtn.setBackground(new java.awt.Color(0, 153, 153));
+        manageBookingBtn.setText("Manage Bookings");
+        manageBookingBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageBookingBtnActionPerformed(evt);
+            }
+        });
+        add(manageBookingBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 470, 200, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFlightBtnActionPerformed
         // TODO add your handling code here:
         try {
-
+            
             ArrayList<Flight> flightList = travelAgency.getAllFlights();
-
+            
             String sourceSearch = soruceSearch.getText();
             if (!sourceSearch.isEmpty()) {
                 flightList = travelAgency.getAirlinerDirectory().getFlightsBySource(sourceSearch, flightList);
@@ -168,7 +186,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             }
         } catch (NumberFormatException num) {
             JOptionPane.showMessageDialog(null, "Enter only numbers in max price search field!", "Warning", JOptionPane.WARNING_MESSAGE);
-
+            
         }
     }//GEN-LAST:event_searchFlightBtnActionPerformed
 
@@ -177,7 +195,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         int selectedRow = searchFlightsTable.getSelectedRow();
         if (selectedRow >= 0) {
             Flight flight = (Flight) searchFlightsTable.getValueAt(selectedRow, 0);
-            BookFlightPanel bookFlightPanel = new BookFlightPanel(CardSequenceJPanel, flight, travelAgency);
+            BookFlightJPanel bookFlightPanel = new BookFlightJPanel(CardSequenceJPanel, flight, travelAgency);
             CardLayout cardLayout = (CardLayout) CardSequenceJPanel.getLayout();
             CardSequenceJPanel.add("BookFlightPanel", bookFlightPanel);
             cardLayout.next(CardSequenceJPanel);
@@ -185,6 +203,14 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a row!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_bookFlightBtnActionPerformed
+
+    private void manageBookingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageBookingBtnActionPerformed
+        // TODO add your handling code here:
+        ManageBookingsJPanel manageBookingPanel = new ManageBookingsJPanel(CardSequenceJPanel, travelAgency);
+        CardSequenceJPanel.add("ManageBookingPanel", manageBookingPanel);
+        CardLayout cardLayout = (CardLayout) CardSequenceJPanel.getLayout();
+        cardLayout.next(CardSequenceJPanel);
+    }//GEN-LAST:event_manageBookingBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -195,6 +221,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton manageBookingBtn;
     private javax.swing.JTextField maxPriceSearch;
     private javax.swing.JButton searchFlightBtn;
     private javax.swing.JTable searchFlightsTable;

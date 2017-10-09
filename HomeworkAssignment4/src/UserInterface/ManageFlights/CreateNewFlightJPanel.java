@@ -248,7 +248,8 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
                 Date departureTime = timeFormatter.parse(departTime);
                 schedule.setDepartureTime(new java.sql.Time(departureTime.getTime()));
                 newFlight.setSchedule(schedule);
-
+                airliner.setFlightCount(airliner.getFlightCount()+1);
+                
                 JOptionPane.showMessageDialog(null, "Flight successfully added in " + airlinerName + "!");
                 resetFields();
             } catch (ParseException ex) {
@@ -279,6 +280,8 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
         destLocField.setText("");
         departDate.setDate(new Date(System.currentTimeMillis()));
         maxSeatCount.setValue(1);
+        pricePerTicket.setText("");
+        departTimeField.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

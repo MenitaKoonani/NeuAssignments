@@ -93,7 +93,7 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
         viewAirlinerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         viewAirlinerLabel.setText("View Airliner Details");
         viewAirlinerLabel.setToolTipText("");
-        add(viewAirlinerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 740, 35));
+        add(viewAirlinerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 720, 35));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);

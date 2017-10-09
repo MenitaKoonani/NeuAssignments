@@ -17,8 +17,17 @@ public class Customer {
     private String lastName;
     private Date dateOfBirth;
     private String airplaneName;
+    private String airlinerName;
     private int totalSeatsBooked;
     private float ticketsPrice;
+
+    public String getAirlinerName() {
+        return airlinerName;
+    }
+
+    public void setAirlinerName(String airlinerName) {
+        this.airlinerName = airlinerName;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -66,5 +75,10 @@ public class Customer {
 
     public void setTicketsPrice(float ticketsPrice) {
         this.ticketsPrice = ticketsPrice;
+    }
+
+    @Override
+    public String toString() {
+        return this.firstName;
     }
 }

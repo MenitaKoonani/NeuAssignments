@@ -143,4 +143,18 @@ public class AirlinerDirectory {
             return null;
         }
     }
+
+    // get flight by airliner name ans flight name
+    public Flight getFlightByAirlinerNFlightName(String airlinerName, String flightName) {
+        for (Airliner eachAirliner : getAirlinerList()) {
+            if (eachAirliner.getAirlinerName().equalsIgnoreCase(airlinerName)) {
+                for (Flight eachFlight : eachAirliner.getFleet().getFlightList()) {
+                    if (eachFlight.getFlightName().equalsIgnoreCase(flightName)) {
+                        return eachFlight;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 }
