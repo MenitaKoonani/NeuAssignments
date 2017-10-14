@@ -6,6 +6,10 @@
 package UserInterface;
 
 import java.awt.CardLayout;
+import Business.Business;
+import Business.ConfigureABusiness;
+import Business.Person;
+import Business.User;
 
 /**
  *
@@ -16,8 +20,11 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
+    private Business business;
+
     public MainJFrame() {
         initComponents();
+        business = ConfigureABusiness.Initialize();
     }
 
     /**
@@ -31,34 +38,23 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         controlPanel = new javax.swing.JPanel();
-        LoginBtn = new javax.swing.JButton();
+        loginInBtn = new javax.swing.JButton();
         UserProcessContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1000, 700));
 
-        LoginBtn.setText("Login");
-        LoginBtn.addActionListener(new java.awt.event.ActionListener() {
+        controlPanel.setPreferredSize(new java.awt.Dimension(200, 200));
+        controlPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        loginInBtn.setBackground(new java.awt.Color(0, 153, 153));
+        loginInBtn.setText("Log In Page");
+        loginInBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginBtnActionPerformed(evt);
+                loginInBtnActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
-        controlPanel.setLayout(controlPanelLayout);
-        controlPanelLayout.setHorizontalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LoginBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        controlPanelLayout.setVerticalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(LoginBtn)
-                .addContainerGap(345, Short.MAX_VALUE))
-        );
+        controlPanel.add(loginInBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 180, -1));
 
         jSplitPane1.setLeftComponent(controlPanel);
 
@@ -71,27 +67,27 @@ public class MainJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
+    private void loginInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginInBtnActionPerformed
         // TODO add your handling code here:
-        LoginJPanel loginPanel = new LoginJPanel();
-        UserProcessContainer.add(loginPanel);
+        LoginJPanel sysAdminLoginPanel = new LoginJPanel(UserProcessContainer, business);
+        UserProcessContainer.add("SystemAdmingLoginPanel", sysAdminLoginPanel);
         CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
         cardLayout.next(UserProcessContainer);
-    }//GEN-LAST:event_LoginBtnActionPerformed
+    }//GEN-LAST:event_loginInBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,9 +125,9 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton LoginBtn;
     private javax.swing.JPanel UserProcessContainer;
     private javax.swing.JPanel controlPanel;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JButton loginInBtn;
     // End of variables declaration//GEN-END:variables
 }

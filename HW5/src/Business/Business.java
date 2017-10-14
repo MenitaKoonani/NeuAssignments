@@ -10,6 +10,21 @@ package Business;
  * @author Menita Koonani
  */
 public class Business {
+
     private PersonDirectory personDirectory;
     private UserDirectory userDirectory;
+
+    // constructor
+    public Business() {
+        this.personDirectory = new PersonDirectory();
+        this.userDirectory = new UserDirectory();
+    }
+
+    public PersonDirectory getPersonDirectory() {
+        return personDirectory;
+    }
+
+    public UserDirectory getUserDirectory() {
+        return userDirectory;
+    }
 }

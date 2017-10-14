@@ -5,10 +5,13 @@
  */
 package UserInterface.PersonDirectory;
 
+import Business.Business;
+import Business.Person;
 import UserInterface.UserDirectory.NewUserAccountJPanel;
-import UserInterface.UserDirectory.UpdateUserAccountJPanel;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,15 +23,27 @@ public class ManagePersonDirectory extends javax.swing.JPanel {
      * Creates new form ManageUserAccDirectory
      */
     JPanel UserProcessContainer;
+    Business business;
 
-    public ManagePersonDirectory(JPanel UserProcessContainer) {
+    public ManagePersonDirectory(JPanel UserProcessContainer, Business business) {
         initComponents();
         this.UserProcessContainer = UserProcessContainer;
-        populateManagePersonDir();
+        this.business = business;
+        populateManagePersonPanel();
     }
 
-    public void populateManagePersonDir() {
+    public void populateManagePersonPanel() {
+        DefaultTableModel managePersonTable = (DefaultTableModel) managePersonsTable.getModel();
+        managePersonTable.setRowCount(0);
 
+        for (Person eachPerson : business.getPersonDirectory().getPersonList()) {
+            Object row[] = new Object[5];
+
+            row[0] = eachPerson.getPersonId();
+            row[1] = eachPerson.getFirstName();
+            row[2] = eachPerson.getLastName();
+            managePersonTable.addRow(row);
+        }
     }
 
     /**
@@ -42,7 +57,7 @@ public class ManagePersonDirectory extends javax.swing.JPanel {
 
         managePersonDir = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        manageUsersTable = new javax.swing.JTable();
+        managePersonsTable = new javax.swing.JTable();
         updatePersonBtn = new javax.swing.JButton();
         findPersonBtn = new javax.swing.JButton();
         newPersonBtn = new javax.swing.JButton();
@@ -54,29 +69,28 @@ public class ManagePersonDirectory extends javax.swing.JPanel {
         managePersonDir.setText("Manage Person Directory");
         add(managePersonDir, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 24, 760, 60));
 
-        manageUsersTable.setBackground(new java.awt.Color(0, 153, 153));
-        manageUsersTable.setModel(new javax.swing.table.DefaultTableModel(
+        managePersonsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Person ID", "First Name", "Last Name", "Username"
+                "Person ID", "First Name", "Last Name"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(manageUsersTable);
+        jScrollPane1.setViewportView(managePersonsTable);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 140, 600, 180));
 
         updatePersonBtn.setBackground(new java.awt.Color(0, 153, 153));
-        updatePersonBtn.setText("Update Person");
+        updatePersonBtn.setText("Update Person >>");
         updatePersonBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updatePersonBtnActionPerformed(evt);
@@ -85,11 +99,11 @@ public class ManagePersonDirectory extends javax.swing.JPanel {
         add(updatePersonBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 440, 180, -1));
 
         findPersonBtn.setBackground(new java.awt.Color(0, 153, 153));
-        findPersonBtn.setText("Find Person");
+        findPersonBtn.setText("Find Person >>");
         add(findPersonBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, 180, -1));
 
         newPersonBtn.setBackground(new java.awt.Color(0, 153, 153));
-        newPersonBtn.setText("New Person");
+        newPersonBtn.setText("New Person >>");
         newPersonBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newPersonBtnActionPerformed(evt);
@@ -100,17 +114,23 @@ public class ManagePersonDirectory extends javax.swing.JPanel {
 
     private void newPersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPersonBtnActionPerformed
         // TODO add your handling code here:
-        NewUserAccountJPanel newUserAccPanel = new NewUserAccountJPanel(UserProcessContainer);
+        NewPersonJPanel newPersonPanel = new NewPersonJPanel(UserProcessContainer, business);
         CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
-        UserProcessContainer.add("NewUserAccPanel", newUserAccPanel);
+        UserProcessContainer.add("NewPersonJPanel", newPersonPanel);
         cardLayout.next(UserProcessContainer);
     }//GEN-LAST:event_newPersonBtnActionPerformed
 
     private void updatePersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePersonBtnActionPerformed
         // TODO add your handling code here:
-        UpdateUserAccountJPanel updateUserAccPanel = new UpdateUserAccountJPanel(UserProcessContainer);
+        int selectedRow = managePersonsTable.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Person selectedPerson = (Person) managePersonsTable.getValueAt(selectedRow, 1);
+        UpdatePersonJPanel updatePersonPanel = new UpdatePersonJPanel(UserProcessContainer, business, selectedPerson);
         CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
-        UserProcessContainer.add("UpdateUserAccountPanel", updateUserAccPanel);
+        UserProcessContainer.add("UpdatePersonPanel", updatePersonPanel);
         cardLayout.next(UserProcessContainer);
     }//GEN-LAST:event_updatePersonBtnActionPerformed
 
@@ -119,7 +139,7 @@ public class ManagePersonDirectory extends javax.swing.JPanel {
     private javax.swing.JButton findPersonBtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel managePersonDir;
-    private javax.swing.JTable manageUsersTable;
+    private javax.swing.JTable managePersonsTable;
     private javax.swing.JButton newPersonBtn;
     private javax.swing.JButton updatePersonBtn;
     // End of variables declaration//GEN-END:variables

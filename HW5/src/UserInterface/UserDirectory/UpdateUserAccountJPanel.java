@@ -5,8 +5,12 @@
  */
 package UserInterface.UserDirectory;
 
+import Business.Business;
+import Business.Person;
+import Business.User;
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -19,9 +23,49 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
      * Creates new form UpdateUserAccountJPanel
      */
     JPanel UserProcessContainer;
-    public UpdateUserAccountJPanel(JPanel UserProcessContainer) {
+    Business business;
+    User user;
+    
+    public UpdateUserAccountJPanel(JPanel UserProcessContainer, Business business, User user) {
         initComponents();
         this.UserProcessContainer = UserProcessContainer;
+        this.business = business;
+        this.user = user;
+        populateUpdateUserPanel();
+    }
+
+    // populating the person list chooser
+    public void populatePersonList() {
+        personChooser.removeAllItems();
+        personChooser.addItem("Select");
+        for (Person eachPerson : business.getPersonDirectory().getPersonList()) {
+            personChooser.addItem(eachPerson.getFirstName() + " " + eachPerson.getLastName());
+        }
+    }
+
+    // populating the user role chooser
+    public void populateUserRole() {
+        userRoleChooser.removeAllItems();
+        userRoleChooser.addItem("Select");
+        for (String userRole : business.getUserDirectory().getUserRole()) {
+            userRoleChooser.addItem(userRole);
+        }
+    }
+
+    // populating the new user panel
+    public void populateUpdateUserPanel() {
+        populatePersonList();
+        populateUserRole();
+        Person person = user.getPerson();
+        personChooser.setSelectedItem(person.getFirstName() + " " + person.getLastName());
+        userRoleChooser.setSelectedItem(user.getUserRole());
+        usernameField.setText(user.getUsername());
+        passwordField.setText(user.getUserPassword().toString());
+        if (user.isActive()) {
+            activeStatus.setSelected(true);
+        } else {
+            disableStatus.setSelected(true);
+        }
     }
 
     /**
@@ -39,15 +83,15 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        roleChooser = new javax.swing.JComboBox<>();
+        userRoleChooser = new javax.swing.JComboBox<>();
         personChooser = new javax.swing.JComboBox<>();
-        passwordField = new javax.swing.JTextField();
         usernameField = new javax.swing.JTextField();
         updateUserAccBtn = new javax.swing.JButton();
         cancelUserAccBtn = new javax.swing.JButton();
         disableStatus = new javax.swing.JRadioButton();
         activeStatus = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
+        passwordField = new javax.swing.JPasswordField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -76,16 +120,9 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
         jLabel7.setText("Password : ");
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 200, 30));
 
-        add(roleChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, 230, 30));
+        add(userRoleChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, 230, 30));
 
         add(personChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 230, 30));
-
-        passwordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordFieldActionPerformed(evt);
-            }
-        });
-        add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 230, 30));
         add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 230, 30));
 
         updateUserAccBtn.setBackground(new java.awt.Color(0, 153, 153));
@@ -121,14 +158,42 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Select a role : ");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 200, 30));
+        add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 230, 30));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordFieldActionPerformed
 
     private void updateUserAccBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateUserAccBtnActionPerformed
         // TODO add your handling code here:
+        String selectedPerson = (String) personChooser.getSelectedItem();
+        String userName = usernameField.getText();
+        char[] password = passwordField.getPassword();
+        String userRole = (String) userRoleChooser.getSelectedItem();
+        boolean isActive = activeStatus.isSelected();
+        
+        if (selectedPerson.equalsIgnoreCase("Select")) {
+            JOptionPane.showMessageDialog(null, "Choose a person!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (userName.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "The username field cannot be empty!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (userRole.equalsIgnoreCase("Select")) {
+            JOptionPane.showMessageDialog(null, "Choose a user role!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (password.length < 6) {
+            JOptionPane.showMessageDialog(null, "The password field should be atleast 6 char long", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Person person = business.getPersonDirectory().getPersonByName(selectedPerson);
+        User newUser = business.getUserDirectory().addNewUser();
+        newUser.setUsername(userName);
+        newUser.setUserPassword(password);
+        newUser.setUserRole(userRole);
+        newUser.setPerson(person);
+        newUser.setIsActive(isActive);
+        
+        JOptionPane.showMessageDialog(null, "Person update successfully!");
     }//GEN-LAST:event_updateUserAccBtnActionPerformed
 
     private void cancelUserAccBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelUserAccBtnActionPerformed
@@ -139,7 +204,7 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
         ManageUserAccountDirectory manageUserAccDir = (ManageUserAccountDirectory) component;
         manageUserAccDir.populateUserAccountDir();
         CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
-        cardLayout.previous(UserProcessContainer); 
+        cardLayout.previous(UserProcessContainer);
     }//GEN-LAST:event_cancelUserAccBtnActionPerformed
 
 
@@ -154,10 +219,10 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel newUserAccHeader;
-    private javax.swing.JTextField passwordField;
+    private javax.swing.JPasswordField passwordField;
     private javax.swing.JComboBox<String> personChooser;
-    private javax.swing.JComboBox<String> roleChooser;
     private javax.swing.JButton updateUserAccBtn;
+    private javax.swing.JComboBox<String> userRoleChooser;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }

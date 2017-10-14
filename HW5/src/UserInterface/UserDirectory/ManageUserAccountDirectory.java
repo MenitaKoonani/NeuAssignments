@@ -5,8 +5,12 @@
  */
 package UserInterface.UserDirectory;
 
+import Business.Business;
+import Business.User;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,15 +22,29 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
      * Creates new form ManageUserAccountDirectory
      */
     JPanel UserProcessContainer;
+    Business business;
 
-    public ManageUserAccountDirectory(JPanel UserProcessContainer) {
+    public ManageUserAccountDirectory(JPanel UserProcessContainer, Business business) {
         initComponents();
         this.UserProcessContainer = UserProcessContainer;
+        this.business = business;
         populateUserAccountDir();
     }
 
     public void populateUserAccountDir() {
+        DefaultTableModel manageUserAccTable = (DefaultTableModel) manageUsersTable.getModel();
+        manageUserAccTable.setRowCount(0);
 
+        for (User eachUser : business.getUserDirectory().getUserList()) {
+            Object row[] = new Object[4];
+
+            row[0] = eachUser;
+            row[1] = eachUser.getUsername();
+            row[2] = eachUser.getUserRole();
+            row[3] = eachUser.isActive();
+
+            manageUserAccTable.addRow(row);
+        }
     }
 
     /**
@@ -52,18 +70,24 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
         loginPageHeader.setText("Manage User Account Directory");
         add(loginPageHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 24, 760, 60));
 
-        manageUsersTable.setBackground(new java.awt.Color(0, 153, 153));
         manageUsersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "User ID", "Username", "Password", "Account Role"
+                "User ID", "Username", "Account Role", "Account Status"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -74,7 +98,7 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 140, 600, 180));
 
         findUserAcc.setBackground(new java.awt.Color(0, 153, 153));
-        findUserAcc.setText("Find User Account");
+        findUserAcc.setText("Find User Account >>");
         findUserAcc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 findUserAccActionPerformed(evt);
@@ -83,7 +107,7 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
         add(findUserAcc, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 440, 180, -1));
 
         newUserAcc.setBackground(new java.awt.Color(0, 153, 153));
-        newUserAcc.setText("New User Account");
+        newUserAcc.setText("New User Account >>");
         newUserAcc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newUserAccActionPerformed(evt);
@@ -92,7 +116,7 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
         add(newUserAcc, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, 180, -1));
 
         updateUserAcc.setBackground(new java.awt.Color(0, 153, 153));
-        updateUserAcc.setText("Update User Account");
+        updateUserAcc.setText("Update User Account >>");
         updateUserAcc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateUserAccActionPerformed(evt);
@@ -103,7 +127,13 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
 
     private void updateUserAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateUserAccActionPerformed
         // TODO add your handling code here:
-        UpdateUserAccountJPanel updateUserAccPanel = new UpdateUserAccountJPanel(UserProcessContainer);
+        int selectedRow = manageUsersTable.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        User selectedUser = (User) manageUsersTable.getValueAt(selectedRow, 0);
+        UpdateUserAccountJPanel updateUserAccPanel = new UpdateUserAccountJPanel(UserProcessContainer, business, selectedUser);
         CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
         UserProcessContainer.add("UpdateUserAccountPanel", updateUserAccPanel);
         cardLayout.next(UserProcessContainer);
@@ -115,7 +145,7 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
 
     private void newUserAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserAccActionPerformed
         // TODO add your handling code here:
-        NewUserAccountJPanel newUserAccPanel = new NewUserAccountJPanel(UserProcessContainer);
+        NewUserAccountJPanel newUserAccPanel = new NewUserAccountJPanel(UserProcessContainer, business);
         CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
         UserProcessContainer.add("NewUserAccPanel", newUserAccPanel);
         cardLayout.next(UserProcessContainer);

@@ -5,6 +5,9 @@
  */
 package UserInterface.PersonDirectory;
 
+import Business.User;
+import Business.Business;
+import Business.Person;
 import UserInterface.UserDirectory.ManageUserAccountDirectory;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -19,10 +22,22 @@ public class PersonWorkAreaJPanel extends javax.swing.JPanel {
      * Creates new form UserWorkAreaJPanel
      */
     JPanel UserProcessContainer;
+    Business business;
+    User user;
 
-    public PersonWorkAreaJPanel(JPanel UserProcessContainer) {
+    public PersonWorkAreaJPanel(JPanel UserProcessContainer, Business business, User user) {
         initComponents();
         this.UserProcessContainer = UserProcessContainer;
+        this.business = business;
+        this.user = user;
+        populatePersonWorkAreaPanel();
+    }
+
+    public void populatePersonWorkAreaPanel() {
+        Person person = user.getPerson();
+        personIDField.setText(String.valueOf(person.getPersonId()));
+        nameField.setText(person.getFirstName() + " " + person.getLastName());
+        userRoleField.setText(user.getUserRole());
     }
 
     /**
@@ -37,11 +52,11 @@ public class PersonWorkAreaJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        roleField = new javax.swing.JLabel();
-        UserIDField = new javax.swing.JLabel();
-        NameField = new javax.swing.JLabel();
+        userRoleField = new javax.swing.JLabel();
+        personIDField = new javax.swing.JLabel();
+        nameField = new javax.swing.JLabel();
         workAreaPanelHeader = new javax.swing.JLabel();
-        manageUsersBtn = new javax.swing.JButton();
+        managePersonsBtn = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -52,7 +67,7 @@ public class PersonWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("User ID : ");
+        jLabel4.setText("Person ID : ");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 200, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -60,48 +75,48 @@ public class PersonWorkAreaJPanel extends javax.swing.JPanel {
         jLabel5.setText("Name : ");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 200, 30));
 
-        roleField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        add(roleField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 200, 30));
+        userRoleField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        add(userRoleField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 200, 30));
 
-        UserIDField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        add(UserIDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 200, 30));
+        personIDField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        add(personIDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 200, 30));
 
-        NameField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        add(NameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 200, 30));
+        nameField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        add(nameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 200, 30));
 
         workAreaPanelHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         workAreaPanelHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         workAreaPanelHeader.setText("Person Work Area Panel");
         add(workAreaPanelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 24, 760, 60));
 
-        manageUsersBtn.setBackground(new java.awt.Color(0, 153, 153));
-        manageUsersBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        manageUsersBtn.setText("Manage Person Directory");
-        manageUsersBtn.addActionListener(new java.awt.event.ActionListener() {
+        managePersonsBtn.setBackground(new java.awt.Color(0, 153, 153));
+        managePersonsBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        managePersonsBtn.setText("Manage Person Directory");
+        managePersonsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageUsersBtnActionPerformed(evt);
+                managePersonsBtnActionPerformed(evt);
             }
         });
-        add(manageUsersBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 243, 230, 40));
+        add(managePersonsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 230, 40));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void manageUsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageUsersBtnActionPerformed
+    private void managePersonsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managePersonsBtnActionPerformed
         // TODO add your handling code here:
-        ManageUserAccountDirectory manageUserAccDir = new ManageUserAccountDirectory(UserProcessContainer);
+        ManagePersonDirectory managePersonDirPanel = new ManagePersonDirectory(UserProcessContainer, business);
         CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
-        UserProcessContainer.add("ManageUserAccDirPanel", manageUserAccDir);
+        UserProcessContainer.add("ManagePersonDirPanel", managePersonDirPanel);
         cardLayout.next(UserProcessContainer);
-    }//GEN-LAST:event_manageUsersBtnActionPerformed
+    }//GEN-LAST:event_managePersonsBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel NameField;
-    private javax.swing.JLabel UserIDField;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JButton manageUsersBtn;
-    private javax.swing.JLabel roleField;
+    private javax.swing.JButton managePersonsBtn;
+    private javax.swing.JLabel nameField;
+    private javax.swing.JLabel personIDField;
+    private javax.swing.JLabel userRoleField;
     private javax.swing.JLabel workAreaPanelHeader;
     // End of variables declaration//GEN-END:variables
 }
