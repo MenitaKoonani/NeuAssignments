@@ -15,12 +15,13 @@ import java.util.Arrays;
 public class UserDirectory {
 
     private ArrayList<User> userList;
-    private int userIdGen = 201;
-    String userRole[] = {"HRAdmin", "SystemAdmin", "User"};
+    private static int userIdGen;
+    String userRole[] = {"HR Admin", "System Admin"};
 
     // constuctor
     public UserDirectory() {
         userList = new ArrayList<User>();
+        userIdGen = 201;
     }
 
     public ArrayList<User> getUserList() {
@@ -59,7 +60,7 @@ public class UserDirectory {
     }
 
     // search user in user directory
-    public User searchUser(int userId) {
+    public User getUserById(int userId) {
         for (User eachUser : userList) {
             if (eachUser.getUserId() == userId) {
                 return eachUser;

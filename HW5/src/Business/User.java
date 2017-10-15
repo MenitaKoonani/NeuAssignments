@@ -18,6 +18,11 @@ public class User {
     String userRole;
     Person person;
 
+    // constructor
+    public User() {
+        this.isActive = true;
+    }
+
     public int getUserId() {
         return userId;
     }

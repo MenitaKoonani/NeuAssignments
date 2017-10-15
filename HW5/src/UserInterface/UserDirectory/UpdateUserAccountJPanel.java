@@ -186,14 +186,13 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
             return;
         }
         Person person = business.getPersonDirectory().getPersonByName(selectedPerson);
-        User newUser = business.getUserDirectory().addNewUser();
-        newUser.setUsername(userName);
-        newUser.setUserPassword(password);
-        newUser.setUserRole(userRole);
-        newUser.setPerson(person);
-        newUser.setIsActive(isActive);
+        user.setUsername(userName);
+        user.setUserPassword(password);
+        user.setUserRole(userRole);
+        user.setPerson(person);
+        user.setIsActive(isActive);
         
-        JOptionPane.showMessageDialog(null, "Person update successfully!");
+        JOptionPane.showMessageDialog(null, "User updated successfully!");
     }//GEN-LAST:event_updateUserAccBtnActionPerformed
 
     private void cancelUserAccBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelUserAccBtnActionPerformed

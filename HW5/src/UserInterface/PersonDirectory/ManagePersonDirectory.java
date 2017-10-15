@@ -7,7 +7,7 @@ package UserInterface.PersonDirectory;
 
 import Business.Business;
 import Business.Person;
-import UserInterface.UserDirectory.NewUserAccountJPanel;
+import Business.User;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -39,10 +39,18 @@ public class ManagePersonDirectory extends javax.swing.JPanel {
         for (Person eachPerson : business.getPersonDirectory().getPersonList()) {
             Object row[] = new Object[5];
 
-            row[0] = eachPerson.getPersonId();
+            row[0] = eachPerson;
             row[1] = eachPerson.getFirstName();
             row[2] = eachPerson.getLastName();
-            managePersonTable.addRow(row);
+            if (!eachPerson.getUserList().isEmpty()) {
+                for (User eachUser : eachPerson.getUserList()) {
+                    row[3] = eachUser.getUsername().isEmpty() ? "---------------" : eachUser.getUsername();
+                    managePersonTable.addRow(row);
+                }
+            } else {
+                row[3] = "---------------";
+                managePersonTable.addRow(row);
+            }
         }
     }
 
@@ -74,11 +82,11 @@ public class ManagePersonDirectory extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Person ID", "First Name", "Last Name"
+                "Person ID", "First Name", "Last Name", "Username"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -100,6 +108,11 @@ public class ManagePersonDirectory extends javax.swing.JPanel {
 
         findPersonBtn.setBackground(new java.awt.Color(0, 153, 153));
         findPersonBtn.setText("Find Person >>");
+        findPersonBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                findPersonBtnActionPerformed(evt);
+            }
+        });
         add(findPersonBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, 180, -1));
 
         newPersonBtn.setBackground(new java.awt.Color(0, 153, 153));
@@ -127,12 +140,20 @@ public class ManagePersonDirectory extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a row!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        Person selectedPerson = (Person) managePersonsTable.getValueAt(selectedRow, 1);
+        Person selectedPerson = (Person) managePersonsTable.getValueAt(selectedRow, 0);
         UpdatePersonJPanel updatePersonPanel = new UpdatePersonJPanel(UserProcessContainer, business, selectedPerson);
         CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
         UserProcessContainer.add("UpdatePersonPanel", updatePersonPanel);
         cardLayout.next(UserProcessContainer);
     }//GEN-LAST:event_updatePersonBtnActionPerformed
+
+    private void findPersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findPersonBtnActionPerformed
+        // TODO add your handling code here:
+        FindPersonJPanel findPersonPanel = new FindPersonJPanel(UserProcessContainer, business);
+        UserProcessContainer.add("FindPersonPanel",findPersonPanel);
+        CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
+        cardLayout.next(UserProcessContainer);
+    }//GEN-LAST:event_findPersonBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,6 +5,8 @@
  */
 package Business;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Menita Koonani
@@ -14,8 +16,12 @@ public class Person {
     int personId;
     String firstName;
     String lastName;
-//    String username;
-//    char[] personPassword;
+    ArrayList<User> userList;
+
+    // constructor
+    public Person() {
+        this.userList = new ArrayList<User>();
+    }
 
     public int getPersonId() {
         return personId;
@@ -41,24 +47,16 @@ public class Person {
         this.lastName = lastName;
     }
 
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
-//
-//    public char[] getPersonPassword() {
-//        return personPassword;
-//    }
-//
-//    public void setPersonPassword(char[] personPassword) {
-//        this.personPassword = personPassword;
-//    }
+    public ArrayList<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(ArrayList<User> userList) {
+        this.userList = userList;
+    }
 
     @Override
     public String toString() {
-        return getFirstName() + " " + getLastName();
+        return String.valueOf(getPersonId());
     }
 }

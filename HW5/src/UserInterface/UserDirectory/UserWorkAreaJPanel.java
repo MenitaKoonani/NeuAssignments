@@ -99,7 +99,7 @@ public class UserWorkAreaJPanel extends javax.swing.JPanel {
 
     private void manageUsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageUsersBtnActionPerformed
         // TODO add your handling code here:
-        ManageUserAccountDirectory manageUserAccDir = new ManageUserAccountDirectory(UserProcessContainer, business);
+        ManageUserAccountDirectory manageUserAccDir = new ManageUserAccountDirectory(UserProcessContainer, business, user);
         CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
         UserProcessContainer.add("ManageUserAccDirPanel", manageUserAccDir);
         cardLayout.next(UserProcessContainer);

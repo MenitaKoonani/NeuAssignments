@@ -7,6 +7,8 @@ package UserInterface.UserDirectory;
 
 import Business.Business;
 import Business.User;
+import UserInterface.PersonDirectory.FindPersonJPanel;
+import UserInterface.PersonDirectory.PersonWorkAreaJPanel;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,11 +25,13 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
      */
     JPanel UserProcessContainer;
     Business business;
+    User user;
 
-    public ManageUserAccountDirectory(JPanel UserProcessContainer, Business business) {
+    public ManageUserAccountDirectory(JPanel UserProcessContainer, Business business, User user) {
         initComponents();
         this.UserProcessContainer = UserProcessContainer;
         this.business = business;
+        this.user = user;
         populateUserAccountDir();
     }
 
@@ -36,12 +40,13 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
         manageUserAccTable.setRowCount(0);
 
         for (User eachUser : business.getUserDirectory().getUserList()) {
-            Object row[] = new Object[4];
+            Object row[] = new Object[5];
 
             row[0] = eachUser;
             row[1] = eachUser.getUsername();
-            row[2] = eachUser.getUserRole();
-            row[3] = eachUser.isActive();
+            row[2] = eachUser.getUserPassword();
+            row[3] = eachUser.getUserRole();
+            row[4] = eachUser.isActive();
 
             manageUserAccTable.addRow(row);
         }
@@ -75,14 +80,14 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
 
             },
             new String [] {
-                "User ID", "Username", "Account Role", "Account Status"
+                "User ID", "Username", "Password", "Account Role", "Account Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -141,6 +146,10 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
 
     private void findUserAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findUserAccActionPerformed
         // TODO add your handling code here:
+        FindUserJPanel findUserPanel = new FindUserJPanel(UserProcessContainer, business);
+        UserProcessContainer.add("FiendUserPanel", findUserPanel);
+        CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
+        cardLayout.next(UserProcessContainer);
     }//GEN-LAST:event_findUserAccActionPerformed
 
     private void newUserAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserAccActionPerformed

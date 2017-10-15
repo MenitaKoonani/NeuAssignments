@@ -113,9 +113,8 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "All the fields are mandatory", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        Person newPerson = business.getPersonDirectory().addNewPerson();
-        newPerson.setFirstName(firstName);
-        newPerson.setLastName(lastName);
+        person.setFirstName(firstName);
+        person.setLastName(lastName);
 
         JOptionPane.showMessageDialog(null, "Person updated successfully!");
     }//GEN-LAST:event_updatePersonBtnActionPerformed

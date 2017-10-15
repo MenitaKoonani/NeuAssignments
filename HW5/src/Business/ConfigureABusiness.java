@@ -34,7 +34,10 @@ public class ConfigureABusiness {
         u2.setUserPassword(("koonani").toCharArray());
         u2.setIsActive(true);
         u2.setPerson(p1);
-        u2.setUserRole("User");
+        u2.setUserRole("System Admin");
+        
+        p1.getUserList().add(u1);
+        p1.getUserList().add(u2);
 
         Person p2 = personDirectory.addNewPerson();
         p2.setFirstName("Mohan");
@@ -47,6 +50,8 @@ public class ConfigureABusiness {
         u3.setPerson(p2);
         u3.setUserRole("HR Admin");
 
+        p2.getUserList().add(u3);
+        
         return business;
     }
 }

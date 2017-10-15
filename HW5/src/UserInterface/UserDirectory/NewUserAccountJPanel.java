@@ -24,7 +24,7 @@ public class NewUserAccountJPanel extends javax.swing.JPanel {
      */
     JPanel UserProcessContainer;
     Business business;
-
+    
     public NewUserAccountJPanel(JPanel UserProcessContainer, Business business) {
         initComponents();
         this.UserProcessContainer = UserProcessContainer;
@@ -71,7 +71,7 @@ public class NewUserAccountJPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         userRoleChooser = new javax.swing.JComboBox<>();
-        personChooser = new javax.swing.JComboBox<>();
+        personChooser = new javax.swing.JComboBox();
         usernameField = new javax.swing.JTextField();
         createUserAccBtn = new javax.swing.JButton();
         cancelUserAccBtn = new javax.swing.JButton();
@@ -111,6 +111,11 @@ public class NewUserAccountJPanel extends javax.swing.JPanel {
         });
         add(userRoleChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, 230, 30));
 
+        personChooser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                personChooserActionPerformed(evt);
+            }
+        });
         add(personChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 230, 30));
         add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 230, 30));
 
@@ -155,7 +160,7 @@ public class NewUserAccountJPanel extends javax.swing.JPanel {
         String userName = usernameField.getText();
         char[] password = passwordField.getPassword();
         String userRole = (String) userRoleChooser.getSelectedItem();
-
+        
         if (selectedPerson.equalsIgnoreCase("Select")) {
             JOptionPane.showMessageDialog(null, "Choose a person!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
@@ -178,11 +183,16 @@ public class NewUserAccountJPanel extends javax.swing.JPanel {
         newUser.setUserPassword(password);
         newUser.setUserRole(userRole);
         newUser.setPerson(person);
-
+        person.getUserList().add(newUser);
+        
         JOptionPane.showMessageDialog(null, "New user successfully added!");
         resetFields();
     }//GEN-LAST:event_createUserAccBtnActionPerformed
 
+    private void personChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personChooserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_personChooserActionPerformed
+    
     public void resetFields() {
         personChooser.setSelectedIndex(0);
         userRoleChooser.setSelectedIndex(0);
@@ -199,7 +209,7 @@ public class NewUserAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel newUserAccHeader;
     private javax.swing.JPasswordField passwordField;
-    private javax.swing.JComboBox<String> personChooser;
+    private javax.swing.JComboBox personChooser;
     private javax.swing.JComboBox<String> userRoleChooser;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables

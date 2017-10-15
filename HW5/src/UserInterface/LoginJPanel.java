@@ -6,6 +6,7 @@
 package UserInterface;
 
 import Business.Business;
+import Business.Person;
 import Business.User;
 import UserInterface.PersonDirectory.PersonWorkAreaJPanel;
 import UserInterface.UserDirectory.ManageUserAccountDirectory;
@@ -26,7 +27,7 @@ public class LoginJPanel extends javax.swing.JPanel {
      */
     JPanel UserProcessContainer;
     Business business;
-    
+
     public LoginJPanel(JPanel UserProcessContainer, Business business) {
         initComponents();
         this.UserProcessContainer = UserProcessContainer;
@@ -53,7 +54,7 @@ public class LoginJPanel extends javax.swing.JPanel {
 
         loginPageHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         loginPageHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        loginPageHeader.setText("System Admin Login Page");
+        loginPageHeader.setText("Login Page");
         add(loginPageHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 24, 760, 60));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -82,28 +83,33 @@ public class LoginJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String userName = usernameField.getText();
         char[] password = passwordField.getPassword();
+
         if (userName.isEmpty() || password.length <= 0) {
             String warningMsg = userName.isEmpty() ? "The username field cannot by empty!" : "The password field cannot be empty!";
             JOptionPane.showMessageDialog(null, warningMsg, "Warning", JOptionPane.WARNING_MESSAGE);
-        } else {
-            User validUser = business.getUserDirectory().isValidUser(userName, password);
-            if (validUser == null) {
-                JOptionPane.showMessageDialog(null, "The credentials provided are incorrect! Please try again!", "Warning", JOptionPane.WARNING_MESSAGE);
-                usernameField.requestFocus();
-                return;
-            }
-            if (validUser.getUserRole().equalsIgnoreCase("System Admin")) {
-                UserWorkAreaJPanel userWorkAreaPanel = new UserWorkAreaJPanel(UserProcessContainer, business, validUser);
-                UserProcessContainer.add("UserWorkAreaPanel", userWorkAreaPanel);
-            } else if (validUser.getUserRole().equalsIgnoreCase("HR Admin")) {
-                PersonWorkAreaJPanel personWorkAreaPanel = new PersonWorkAreaJPanel(UserProcessContainer, business, validUser);
-                UserProcessContainer.add("PersonWorkAreaPanel", personWorkAreaPanel);
-            } else {
-                JOptionPane.showMessageDialog(null, validUser.getPerson().getFirstName() + " " + validUser.getPerson().getLastName() + " has the role of a user!");
-            }
-            CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
-            cardLayout.next(UserProcessContainer);
+            return;
         }
+        
+        User validUser = business.getUserDirectory().isValidUser(userName, password);
+        if (validUser == null) {
+            JOptionPane.showMessageDialog(null, "The credentials provided are incorrect! Please try again!", "Warning", JOptionPane.WARNING_MESSAGE);
+            usernameField.requestFocus();
+            return;
+        }
+//        Person person = business.getPersonDirectory().getPersonByUser(userName, password);
+        
+        if (validUser.getUserRole().equalsIgnoreCase("System Admin")) {
+            UserWorkAreaJPanel userWorkAreaPanel = new UserWorkAreaJPanel(UserProcessContainer, business, validUser);
+            UserProcessContainer.add("UserWorkAreaPanel", userWorkAreaPanel);
+        } else if (validUser.getUserRole().equalsIgnoreCase("HR Admin")) {
+            PersonWorkAreaJPanel personWorkAreaPanel = new PersonWorkAreaJPanel(UserProcessContainer, business, validUser);
+            UserProcessContainer.add("PersonWorkAreaPanel", personWorkAreaPanel);
+        } else {
+            JOptionPane.showMessageDialog(null, validUser.getPerson().getFirstName() + " " + validUser.getPerson().getLastName() + " has the role of a user!");
+        }
+        CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
+        cardLayout.next(UserProcessContainer);
+
     }//GEN-LAST:event_loginBtnActionPerformed
 
 
