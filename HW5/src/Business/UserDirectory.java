@@ -78,4 +78,14 @@ public class UserDirectory {
         }
         return null;
     }
+    
+    // check for user dulicates
+    public boolean isUserDuplicate(String username) {
+        for (User eachUser : userList) {
+            if (eachUser.getUsername().equalsIgnoreCase(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

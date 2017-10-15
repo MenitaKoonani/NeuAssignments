@@ -6,6 +6,7 @@
 package Business;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -16,6 +17,7 @@ public class Person {
     int personId;
     String firstName;
     String lastName;
+    Date dateOfBirth;
     ArrayList<User> userList;
 
     // constructor
@@ -45,6 +47,14 @@ public class Person {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public ArrayList<User> getUserList() {

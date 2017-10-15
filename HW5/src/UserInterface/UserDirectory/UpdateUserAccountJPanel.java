@@ -25,7 +25,7 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
     JPanel UserProcessContainer;
     Business business;
     User user;
-    
+
     public UpdateUserAccountJPanel(JPanel UserProcessContainer, Business business, User user) {
         initComponents();
         this.UserProcessContainer = UserProcessContainer;
@@ -168,7 +168,7 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
         char[] password = passwordField.getPassword();
         String userRole = (String) userRoleChooser.getSelectedItem();
         boolean isActive = activeStatus.isSelected();
-        
+
         if (selectedPerson.equalsIgnoreCase("Select")) {
             JOptionPane.showMessageDialog(null, "Choose a person!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
@@ -185,13 +185,20 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "The password field should be atleast 6 char long", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
+
+        boolean isUserDuplicate = business.getUserDirectory().isUserDuplicate(userName) && !user.getUsername().equals(userName);
+        if (isUserDuplicate) {
+            JOptionPane.showMessageDialog(null, "Username already exists! Try a different username!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         Person person = business.getPersonDirectory().getPersonByName(selectedPerson);
         user.setUsername(userName);
         user.setUserPassword(password);
         user.setUserRole(userRole);
         user.setPerson(person);
         user.setIsActive(isActive);
-        
+
         JOptionPane.showMessageDialog(null, "User updated successfully!");
     }//GEN-LAST:event_updateUserAccBtnActionPerformed
 

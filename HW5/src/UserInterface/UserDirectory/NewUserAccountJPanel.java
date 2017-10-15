@@ -24,7 +24,7 @@ public class NewUserAccountJPanel extends javax.swing.JPanel {
      */
     JPanel UserProcessContainer;
     Business business;
-    
+
     public NewUserAccountJPanel(JPanel UserProcessContainer, Business business) {
         initComponents();
         this.UserProcessContainer = UserProcessContainer;
@@ -160,7 +160,7 @@ public class NewUserAccountJPanel extends javax.swing.JPanel {
         String userName = usernameField.getText();
         char[] password = passwordField.getPassword();
         String userRole = (String) userRoleChooser.getSelectedItem();
-        
+
         if (selectedPerson.equalsIgnoreCase("Select")) {
             JOptionPane.showMessageDialog(null, "Choose a person!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
@@ -177,6 +177,11 @@ public class NewUserAccountJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "The password field should be atleast 6 char long", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        boolean isUserDuplicate = business.getUserDirectory().isUserDuplicate(userName);
+        if (isUserDuplicate) {
+            JOptionPane.showMessageDialog(null, "Username already exists! Try a different username!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         Person person = business.getPersonDirectory().getPersonByName(selectedPerson);
         User newUser = business.getUserDirectory().addNewUser();
         newUser.setUsername(userName);
@@ -184,7 +189,7 @@ public class NewUserAccountJPanel extends javax.swing.JPanel {
         newUser.setUserRole(userRole);
         newUser.setPerson(person);
         person.getUserList().add(newUser);
-        
+
         JOptionPane.showMessageDialog(null, "New user successfully added!");
         resetFields();
     }//GEN-LAST:event_createUserAccBtnActionPerformed
@@ -192,7 +197,7 @@ public class NewUserAccountJPanel extends javax.swing.JPanel {
     private void personChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personChooserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_personChooserActionPerformed
-    
+
     public void resetFields() {
         personChooser.setSelectedIndex(0);
         userRoleChooser.setSelectedIndex(0);

@@ -36,6 +36,8 @@ public class FindPersonJPanel extends javax.swing.JPanel {
         firstnameField.setVisible(false);
         lastnamelabel.setVisible(false);
         lastnameField.setVisible(false);
+        dobLabel.setVisible(false);
+        dobField.setVisible(false);
     }
 
     public String generatePassword(String password) {
@@ -66,6 +68,8 @@ public class FindPersonJPanel extends javax.swing.JPanel {
         findTablePanel = new javax.swing.JScrollPane();
         findPersonTable = new javax.swing.JTable();
         backBtn = new javax.swing.JButton();
+        dobLabel = new javax.swing.JLabel();
+        dobField = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -92,7 +96,7 @@ public class FindPersonJPanel extends javax.swing.JPanel {
         lastnamelabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lastnamelabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lastnamelabel.setText("Last Name : ");
-        add(lastnamelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 100, 30));
+        add(lastnamelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 100, 30));
 
         firstnameField.setEditable(false);
         add(firstnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 160, 30));
@@ -103,7 +107,7 @@ public class FindPersonJPanel extends javax.swing.JPanel {
         add(firstnamelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 100, 30));
 
         lastnameField.setEditable(false);
-        add(lastnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, 160, 30));
+        add(lastnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 160, 30));
 
         findPersonTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -130,7 +134,7 @@ public class FindPersonJPanel extends javax.swing.JPanel {
         });
         findTablePanel.setViewportView(findPersonTable);
 
-        add(findTablePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 730, 180));
+        add(findTablePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 730, 180));
 
         backBtn.setBackground(new java.awt.Color(0, 153, 153));
         backBtn.setText("<< Back");
@@ -140,6 +144,14 @@ public class FindPersonJPanel extends javax.swing.JPanel {
             }
         });
         add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 100, -1));
+
+        dobLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        dobLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        dobLabel.setText("Date of Birth : ");
+        add(dobLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 100, 30));
+
+        dobField.setEditable(false);
+        add(dobField, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, 160, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
@@ -160,8 +172,11 @@ public class FindPersonJPanel extends javax.swing.JPanel {
         firstnameField.setVisible(true);
         lastnamelabel.setVisible(true);
         lastnameField.setVisible(true);
+        dobLabel.setVisible(true);
+        dobField.setVisible(true);
         firstnameField.setText(person.getFirstName());
         lastnameField.setText(person.getLastName());
+        dobField.setText(String.valueOf(person.getDateOfBirth()));
 
         if (!person.getUserList().isEmpty()) {
             findTablePanel.setVisible(true);
@@ -193,6 +208,8 @@ public class FindPersonJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
+    private javax.swing.JTextField dobField;
+    private javax.swing.JLabel dobLabel;
     private javax.swing.JTable findPersonTable;
     private javax.swing.JScrollPane findTablePanel;
     private javax.swing.JTextField firstnameField;

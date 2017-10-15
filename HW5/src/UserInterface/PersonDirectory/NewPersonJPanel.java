@@ -7,9 +7,9 @@ package UserInterface.PersonDirectory;
 
 import Business.Business;
 import Business.Person;
-import Business.User;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -29,6 +29,7 @@ public class NewPersonJPanel extends javax.swing.JPanel {
         initComponents();
         this.UserProcessContainer = UserProcessContainer;
         this.business = business;
+        dobChooser.setMaxSelectableDate(new Date(System.currentTimeMillis()));
     }
 
     /**
@@ -47,6 +48,8 @@ public class NewPersonJPanel extends javax.swing.JPanel {
         createPersonBtn = new javax.swing.JButton();
         cancelPersonBtn = new javax.swing.JButton();
         firstnameField = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        dobChooser = new com.toedter.calendar.JDateChooser();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -62,8 +65,8 @@ public class NewPersonJPanel extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Enter last name : ");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 200, 30));
+        jLabel6.setText("Enter date of birth : ");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 200, 30));
         add(lastnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 230, 30));
 
         createPersonBtn.setBackground(new java.awt.Color(0, 153, 153));
@@ -84,6 +87,12 @@ public class NewPersonJPanel extends javax.swing.JPanel {
         });
         add(cancelPersonBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 110, 30));
         add(firstnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 230, 30));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Enter last name : ");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 200, 30));
+        add(dobChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 230, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelPersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelPersonBtnActionPerformed
@@ -99,8 +108,10 @@ public class NewPersonJPanel extends javax.swing.JPanel {
 
     private void createPersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createPersonBtnActionPerformed
         // TODO add your handling code here:
+
         String firstName = firstnameField.getText();
         String lastName = lastnameField.getText();
+        Date dob = dobChooser.getDate();
 
         if (firstName.isEmpty() || lastName.isEmpty()) {
             JOptionPane.showMessageDialog(null, "All the fields are mandatory", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -109,6 +120,7 @@ public class NewPersonJPanel extends javax.swing.JPanel {
         Person newPerson = business.getPersonDirectory().addNewPerson();
         newPerson.setFirstName(firstName);
         newPerson.setLastName(lastName);
+        newPerson.setDateOfBirth(dob);
 
         JOptionPane.showMessageDialog(null, "New person successfully added!");
         resetFields();
@@ -117,14 +129,17 @@ public class NewPersonJPanel extends javax.swing.JPanel {
     public void resetFields() {
         firstnameField.setText("");
         lastnameField.setText("");
+        dobChooser.setDate(new Date(System.currentTimeMillis()));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelPersonBtn;
     private javax.swing.JButton createPersonBtn;
+    private com.toedter.calendar.JDateChooser dobChooser;
     private javax.swing.JTextField firstnameField;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField lastnameField;
     private javax.swing.JLabel newPersonHeader;
     // End of variables declaration//GEN-END:variables
