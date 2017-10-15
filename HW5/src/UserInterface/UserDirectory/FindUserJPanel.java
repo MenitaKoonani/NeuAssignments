@@ -29,6 +29,12 @@ public class FindUserJPanel extends javax.swing.JPanel {
         initComponents();
         this.UserProcessContainer = UserProcessContainer;
         this.business = business;
+        personIdField.setVisible(true);
+        firstnameField.setVisible(true);
+        lastnameField.setVisible(true);
+        usernameField.setVisible(true);
+        userroleField.setVisible(true);
+        accStatusField.setVisible(true);
     }
 
     /**
@@ -55,6 +61,8 @@ public class FindUserJPanel extends javax.swing.JPanel {
         userroleField = new javax.swing.JTextField();
         accStatusLabel = new javax.swing.JLabel();
         accStatusField = new javax.swing.JTextField();
+        personIdLabel = new javax.swing.JLabel();
+        personIdField = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -81,18 +89,18 @@ public class FindUserJPanel extends javax.swing.JPanel {
         lastnamelabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lastnamelabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lastnamelabel.setText("Last Name : ");
-        add(lastnamelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 100, 30));
+        add(lastnamelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 100, 30));
 
         firstnameField.setEditable(false);
-        add(firstnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 230, 30));
+        add(firstnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, 230, 30));
 
         firstnamelabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         firstnamelabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         firstnamelabel.setText("First Name : ");
-        add(firstnamelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 100, 30));
+        add(firstnamelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 100, 30));
 
         lastnameField.setEditable(false);
-        add(lastnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, 230, 30));
+        add(lastnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, 230, 30));
 
         backBtn.setBackground(new java.awt.Color(0, 153, 153));
         backBtn.setText("<< Back");
@@ -106,26 +114,34 @@ public class FindUserJPanel extends javax.swing.JPanel {
         usernameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         usernameLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         usernameLabel.setText("Username : ");
-        add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 100, 30));
+        add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 340, 100, 30));
 
         usernameField.setEditable(false);
-        add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 230, 30));
+        add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, 230, 30));
 
         userroleLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         userroleLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         userroleLabel.setText("User role : ");
-        add(userroleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 100, 30));
+        add(userroleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 100, 30));
 
         userroleField.setEditable(false);
-        add(userroleField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 230, 30));
+        add(userroleField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, 230, 30));
 
         accStatusLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         accStatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         accStatusLabel.setText("Account Status : ");
-        add(accStatusLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 140, 30));
+        add(accStatusLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, 140, 30));
 
         accStatusField.setEditable(false);
-        add(accStatusField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, 230, 30));
+        add(accStatusField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 230, 30));
+
+        personIdLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        personIdLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        personIdLabel.setText("Person ID : ");
+        add(personIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 100, 30));
+
+        personIdField.setEditable(false);
+        add(personIdField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 230, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
@@ -142,6 +158,14 @@ public class FindUserJPanel extends javax.swing.JPanel {
             return;
         }
 
+        personIdField.setVisible(true);
+        firstnameField.setVisible(true);
+        lastnameField.setVisible(true);
+        usernameField.setVisible(true);
+        userroleField.setVisible(true);
+        accStatusField.setVisible(true);
+
+        personIdField.setText(String.valueOf(user.getPerson().getPersonId()));
         firstnameField.setText(user.getPerson().getFirstName());
         lastnameField.setText(user.getPerson().getLastName());
         usernameField.setText(user.getUsername());
@@ -171,6 +195,8 @@ public class FindUserJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField lastnameField;
     private javax.swing.JLabel lastnamelabel;
     private javax.swing.JLabel managePersonDir;
+    private javax.swing.JTextField personIdField;
+    private javax.swing.JLabel personIdLabel;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField userId;
     private javax.swing.JTextField usernameField;

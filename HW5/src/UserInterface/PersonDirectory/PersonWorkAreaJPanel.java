@@ -8,8 +8,11 @@ package UserInterface.PersonDirectory;
 import Business.User;
 import Business.Business;
 import Business.Person;
+import UserInterface.LoginJPanel;
 import UserInterface.UserDirectory.ManageUserAccountDirectory;
 import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -57,6 +60,7 @@ public class PersonWorkAreaJPanel extends javax.swing.JPanel {
         nameField = new javax.swing.JLabel();
         workAreaPanelHeader = new javax.swing.JLabel();
         managePersonsBtn = new javax.swing.JButton();
+        logoutBtn = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -97,7 +101,17 @@ public class PersonWorkAreaJPanel extends javax.swing.JPanel {
                 managePersonsBtnActionPerformed(evt);
             }
         });
-        add(managePersonsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 230, 40));
+        add(managePersonsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 230, 30));
+
+        logoutBtn.setBackground(new java.awt.Color(0, 153, 153));
+        logoutBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        logoutBtn.setText("<< Logout");
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtnActionPerformed(evt);
+            }
+        });
+        add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 100, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void managePersonsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managePersonsBtnActionPerformed
@@ -108,11 +122,26 @@ public class PersonWorkAreaJPanel extends javax.swing.JPanel {
         cardLayout.next(UserProcessContainer);
     }//GEN-LAST:event_managePersonsBtnActionPerformed
 
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        // TODO add your handling code here:
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout? ", "Warning", JOptionPane.YES_NO_CANCEL_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            UserProcessContainer.remove(this);
+            Component[] componentArray = UserProcessContainer.getComponents();
+            Component component = componentArray[componentArray.length - 1];
+            CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
+            LoginJPanel loginPanel = (LoginJPanel) component;
+            loginPanel.renderLoginPage();
+            cardLayout.previous(UserProcessContainer);
+        }
+    }//GEN-LAST:event_logoutBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton logoutBtn;
     private javax.swing.JButton managePersonsBtn;
     private javax.swing.JLabel nameField;
     private javax.swing.JLabel personIDField;

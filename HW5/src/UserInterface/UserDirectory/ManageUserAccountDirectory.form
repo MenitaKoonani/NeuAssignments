@@ -50,7 +50,7 @@
               <Table columnCount="5" rowCount="0">
                 <Column editable="false" title="User ID" type="java.lang.Object"/>
                 <Column editable="false" title="Username" type="java.lang.Object"/>
-                <Column editable="false" title="Password" type="java.lang.String"/>
+                <Column editable="false" title="Password" type="java.lang.Object"/>
                 <Column editable="false" title="Account Role" type="java.lang.Object"/>
                 <Column editable="false" title="Account Status" type="java.lang.Boolean"/>
               </Table>
@@ -104,6 +104,22 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="500" y="400" width="180" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JButton" name="backBtn">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="0" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="&lt;&lt; Back"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backBtnActionPerformed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="90" y="383" width="100" height="30"/>
         </Constraint>
       </Constraints>
     </Component>

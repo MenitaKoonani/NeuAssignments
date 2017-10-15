@@ -10,6 +10,7 @@ import Business.Person;
 import Business.User;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -35,6 +36,14 @@ public class FindPersonJPanel extends javax.swing.JPanel {
         firstnameField.setVisible(false);
         lastnamelabel.setVisible(false);
         lastnameField.setVisible(false);
+    }
+
+    public String generatePassword(String password) {
+        String encryptedPwd = "";
+        for (int i = 0; i < password.length(); i++) {
+            encryptedPwd = encryptedPwd + "*";
+        }
+        return encryptedPwd;
     }
 
     /**
@@ -83,32 +92,32 @@ public class FindPersonJPanel extends javax.swing.JPanel {
         lastnamelabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lastnamelabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lastnamelabel.setText("Last Name : ");
-        add(lastnamelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 100, 30));
+        add(lastnamelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 100, 30));
 
         firstnameField.setEditable(false);
-        add(firstnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 160, 30));
+        add(firstnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 160, 30));
 
         firstnamelabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         firstnamelabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         firstnamelabel.setText("First Name : ");
-        add(firstnamelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 100, 30));
+        add(firstnamelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 100, 30));
 
         lastnameField.setEditable(false);
-        add(lastnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 160, 30));
+        add(lastnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, 160, 30));
 
         findPersonTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Username", "Password", "User Role", "Account Status"
+                "User ID", "Username", "Password", "User Role", "Account Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -121,7 +130,7 @@ public class FindPersonJPanel extends javax.swing.JPanel {
         });
         findTablePanel.setViewportView(findPersonTable);
 
-        add(findTablePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 410, 260));
+        add(findTablePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 730, 180));
 
         backBtn.setBackground(new java.awt.Color(0, 153, 153));
         backBtn.setText("<< Back");
@@ -130,7 +139,7 @@ public class FindPersonJPanel extends javax.swing.JPanel {
                 backBtnActionPerformed(evt);
             }
         });
-        add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 100, -1));
+        add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 100, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
@@ -159,11 +168,12 @@ public class FindPersonJPanel extends javax.swing.JPanel {
             DefaultTableModel findPersonTbl = (DefaultTableModel) findPersonTable.getModel();
             findPersonTbl.setRowCount(0);
             for (User eachUser : person.getUserList()) {
-                Object row[] = new Object[4];
-                row[0] = eachUser.getUsername();
-                row[1] = eachUser.getUserPassword();
-                row[2] = eachUser.getUserRole();
-                row[3] = eachUser.isActive();
+                Object row[] = new Object[5];
+                row[0] = eachUser;
+                row[1] = eachUser.getUsername();
+                row[2] = generatePassword(Arrays.toString(eachUser.getUserPassword()));
+                row[3] = eachUser.getUserRole();
+                row[4] = eachUser.isActive();
                 findPersonTbl.addRow(row);
             }
         }

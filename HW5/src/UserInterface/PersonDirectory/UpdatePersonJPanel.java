@@ -115,7 +115,6 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
         }
         person.setFirstName(firstName);
         person.setLastName(lastName);
-
         JOptionPane.showMessageDialog(null, "Person updated successfully!");
     }//GEN-LAST:event_updatePersonBtnActionPerformed
 

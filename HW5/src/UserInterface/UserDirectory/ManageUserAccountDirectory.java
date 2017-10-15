@@ -7,9 +7,9 @@ package UserInterface.UserDirectory;
 
 import Business.Business;
 import Business.User;
-import UserInterface.PersonDirectory.FindPersonJPanel;
-import UserInterface.PersonDirectory.PersonWorkAreaJPanel;
 import java.awt.CardLayout;
+import java.awt.Component;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -44,12 +44,20 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
 
             row[0] = eachUser;
             row[1] = eachUser.getUsername();
-            row[2] = eachUser.getUserPassword();
+            row[2] = generatePassword(Arrays.toString(eachUser.getUserPassword()));
             row[3] = eachUser.getUserRole();
             row[4] = eachUser.isActive();
 
             manageUserAccTable.addRow(row);
         }
+    }
+
+    public String generatePassword(String password) {
+        String encryptedPwd = "";
+        for (int i = 0; i < password.length(); i++) {
+            encryptedPwd = encryptedPwd + "*";
+        }
+        return encryptedPwd;
     }
 
     /**
@@ -67,6 +75,7 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
         findUserAcc = new javax.swing.JButton();
         newUserAcc = new javax.swing.JButton();
         updateUserAcc = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -84,7 +93,7 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
@@ -128,6 +137,15 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
             }
         });
         add(updateUserAcc, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, 180, -1));
+
+        backBtn.setBackground(new java.awt.Color(0, 153, 153));
+        backBtn.setText("<< Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+        add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 383, 100, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateUserAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateUserAccActionPerformed
@@ -160,8 +178,20 @@ public class ManageUserAccountDirectory extends javax.swing.JPanel {
         cardLayout.next(UserProcessContainer);
     }//GEN-LAST:event_newUserAccActionPerformed
 
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        UserProcessContainer.remove(this);
+        Component[] componentArray = UserProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        UserWorkAreaJPanel userWorkAreaPanel = (UserWorkAreaJPanel) component;
+        userWorkAreaPanel.populateUserWorkAreaPanel();
+        CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
+        cardLayout.previous(UserProcessContainer);
+    }//GEN-LAST:event_backBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
     private javax.swing.JButton findUserAcc;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel loginPageHeader;

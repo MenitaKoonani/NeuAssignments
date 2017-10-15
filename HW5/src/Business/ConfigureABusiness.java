@@ -19,39 +19,46 @@ public class ConfigureABusiness {
         UserDirectory userDirectory = business.getUserDirectory();
 
         Person p1 = personDirectory.addNewPerson();
-        p1.setFirstName("Menita");
+        p1.setFirstName("Mohan");
         p1.setLastName("Koonani");
 
         User u1 = userDirectory.addNewUser();
-        u1.setUsername("Menita");
-        u1.setUserPassword(("menita").toCharArray());
-        u1.setIsActive(true);
+        u1.setUsername("mohan");
+        u1.setUserPassword(("mohan").toCharArray());
         u1.setPerson(p1);
         u1.setUserRole("System Admin");
 
-        User u2 = userDirectory.addNewUser();
-        u2.setUsername("koonani");
-        u2.setUserPassword(("koonani").toCharArray());
-        u2.setIsActive(true);
-        u2.setPerson(p1);
-        u2.setUserRole("System Admin");
-        
         p1.getUserList().add(u1);
+
+        User u2 = userDirectory.addNewUser();
+        u2.setUsername("hema");
+        u2.setUserPassword(("hema").toCharArray());
+        u2.setIsActive(false);
+        u2.setPerson(p1);
+        u2.setUserRole("HR Admin");
+
         p1.getUserList().add(u2);
 
         Person p2 = personDirectory.addNewPerson();
-        p2.setFirstName("Mohan");
+        p2.setFirstName("Menita");
         p2.setLastName("Koonani");
 
         User u3 = userDirectory.addNewUser();
-        u3.setUsername("mohan");
-        u3.setUserPassword(("mohan").toCharArray());
-        u3.setIsActive(true);
+        u3.setUsername("menita");
+        u3.setUserPassword(("menita").toCharArray());
         u3.setPerson(p2);
-        u3.setUserRole("HR Admin");
+        u3.setUserRole("System Admin");
 
         p2.getUserList().add(u3);
-        
+
+        User u4 = userDirectory.addNewUser();
+        u4.setUsername("akshay");
+        u4.setUserPassword(("akshay").toCharArray());
+        u4.setPerson(p2);
+        u4.setUserRole("HR Admin");
+
+        p2.getUserList().add(u4);
+
         return business;
     }
 }

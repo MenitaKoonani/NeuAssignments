@@ -9,6 +9,7 @@ import Business.Business;
 import Business.Person;
 import Business.User;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -69,6 +70,7 @@ public class ManagePersonDirectory extends javax.swing.JPanel {
         updatePersonBtn = new javax.swing.JButton();
         findPersonBtn = new javax.swing.JButton();
         newPersonBtn = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -104,7 +106,7 @@ public class ManagePersonDirectory extends javax.swing.JPanel {
                 updatePersonBtnActionPerformed(evt);
             }
         });
-        add(updatePersonBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 440, 180, -1));
+        add(updatePersonBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, 180, -1));
 
         findPersonBtn.setBackground(new java.awt.Color(0, 153, 153));
         findPersonBtn.setText("Find Person >>");
@@ -113,7 +115,7 @@ public class ManagePersonDirectory extends javax.swing.JPanel {
                 findPersonBtnActionPerformed(evt);
             }
         });
-        add(findPersonBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, 180, -1));
+        add(findPersonBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 440, 180, -1));
 
         newPersonBtn.setBackground(new java.awt.Color(0, 153, 153));
         newPersonBtn.setText("New Person >>");
@@ -122,7 +124,16 @@ public class ManagePersonDirectory extends javax.swing.JPanel {
                 newPersonBtnActionPerformed(evt);
             }
         });
-        add(newPersonBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, 180, -1));
+        add(newPersonBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, 180, -1));
+
+        backBtn.setBackground(new java.awt.Color(0, 153, 153));
+        backBtn.setText("<< Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+        add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 100, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void newPersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPersonBtnActionPerformed
@@ -150,13 +161,25 @@ public class ManagePersonDirectory extends javax.swing.JPanel {
     private void findPersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findPersonBtnActionPerformed
         // TODO add your handling code here:
         FindPersonJPanel findPersonPanel = new FindPersonJPanel(UserProcessContainer, business);
-        UserProcessContainer.add("FindPersonPanel",findPersonPanel);
+        UserProcessContainer.add("FindPersonPanel", findPersonPanel);
         CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
         cardLayout.next(UserProcessContainer);
     }//GEN-LAST:event_findPersonBtnActionPerformed
 
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        UserProcessContainer.remove(this);
+        Component[] componentArray = UserProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        PersonWorkAreaJPanel personWorkAreaPanel = (PersonWorkAreaJPanel) component;
+        personWorkAreaPanel.populatePersonWorkAreaPanel();
+        CardLayout cardLayout = (CardLayout) UserProcessContainer.getLayout();
+        cardLayout.previous(UserProcessContainer);
+    }//GEN-LAST:event_backBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
     private javax.swing.JButton findPersonBtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel managePersonDir;
