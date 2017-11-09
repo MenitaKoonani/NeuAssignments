@@ -7,7 +7,7 @@ package Business.Organization;
 import Business.Person.PersonDirectory;
 import Business.Role.Role;
 import Business.UserAccount.UserAccountDirectory;
-import Business.WorkQueue.WorkQueue;
+import Business.VaccineQueue.WorkQueue;
 import java.util.ArrayList;
 
 /**
@@ -18,10 +18,9 @@ public abstract class Organization {
 
     private String name;
     private WorkQueue workQueue;
-    private PersonDirectory employeeDirectory;
+    private PersonDirectory staffDirectory;
     private UserAccountDirectory userAccountDirectory;
     private int organizationID;
-    private static int counter;
 
     public enum Type {
         
@@ -43,10 +42,8 @@ public abstract class Organization {
     public Organization(String name) {
         this.name = name;
         workQueue = new WorkQueue();
-        employeeDirectory = new PersonDirectory();
+        staffDirectory = new PersonDirectory();
         userAccountDirectory = new UserAccountDirectory();
-        organizationID = counter;
-        ++counter;
     }
 
     public abstract ArrayList<Role> getSupportedRole();
@@ -59,8 +56,12 @@ public abstract class Organization {
         return organizationID;
     }
 
-    public PersonDirectory getEmployeeDirectory() {
-        return employeeDirectory;
+    public void setOrganizationID(int organizationID) {
+        this.organizationID = organizationID;
+    }
+
+    public PersonDirectory getStaffDirectory() {
+        return staffDirectory;
     }
 
     public String getName() {

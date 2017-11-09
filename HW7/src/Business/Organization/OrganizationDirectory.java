@@ -14,25 +14,26 @@ import java.util.ArrayList;
 public class OrganizationDirectory {
     
     private ArrayList<Organization> organizationList;
-
+    private static int counter;
+    
     public OrganizationDirectory() {
         organizationList = new ArrayList<>();
+        counter = 1000;
     }
-
+    
     public ArrayList<Organization> getOrganizationList() {
         return organizationList;
     }
     
-    public Organization createOrganization(Type type){
+    public Organization createOrganization(Type type) {
         Organization organization = null;
-        if (type.getValue().equals(Type.Doctor.getValue())){
+        if (type.getValue().equals(Type.Doctor.getValue())) {
             organization = new DoctorOrganization();
-            organizationList.add(organization);
-        }
-        else if (type.getValue().equals(Type.Distributor.getValue())){
+        } else if (type.getValue().equals(Type.Distributor.getValue())) {
             organization = new DistributorOrganization();
-            organizationList.add(organization);
         }
+        organization.setOrganizationID(counter++);
+        organizationList.add(organization);
         return organization;
     }
 }

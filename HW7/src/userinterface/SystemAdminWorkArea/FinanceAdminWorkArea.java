@@ -9,12 +9,12 @@ package userinterface.SystemAdminWorkArea;
  *
  * @author Menita Koonani
  */
-public class FinanaceAminWorkArea extends javax.swing.JPanel {
+public class FinanceAdminWorkArea extends javax.swing.JPanel {
 
     /**
      * Creates new form FinanaceAminWorkArea
      */
-    public FinanaceAminWorkArea() {
+    public FinanceAdminWorkArea() {
         initComponents();
     }
 
@@ -41,24 +41,10 @@ public class FinanaceAminWorkArea extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jLabel1.setText("FinanaceAdmin");
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(391, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(396, 396, 396))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(jLabel1)
-                .addContainerGap(397, Short.MAX_VALUE))
-        );
+        jLabel1.setText("FinanaceAdmin");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(391, 139, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 

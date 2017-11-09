@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package UserInterface.LabAssistantRole;
+package userinterface.DistributorRole;
 
 import Business.VaccineQueue.VaccineRequest;
 import java.awt.CardLayout;
@@ -44,15 +44,15 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        submitJButton.setText("Submit Result");
+        submitJButton.setText("Provide Vaccine");
         submitJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitJButtonActionPerformed(evt);
             }
         });
-        add(submitJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 108, -1, -1));
+        add(submitJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, -1, -1));
 
-        jLabel1.setText("Result");
+        jLabel1.setText("Vaccine Name");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 47, -1, -1));
         add(resultJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 44, 88, -1));
 
@@ -62,14 +62,14 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 108, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        LabAssistantWorkAreaJPanel dwjp = (LabAssistantWorkAreaJPanel) component;
+        DistributorWorkAreaJPanel dwjp = (DistributorWorkAreaJPanel) component;
         dwjp.populateTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);

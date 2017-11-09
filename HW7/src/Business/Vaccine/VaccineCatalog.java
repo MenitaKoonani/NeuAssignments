@@ -27,4 +27,8 @@ public class VaccineCatalog {
         newVaccine.setVaccineName(vaccineName);
         return newVaccine;
     }
+
+    public ArrayList<Vaccine> getVaccineList() {
+        return vaccineList;
+    }
 }

@@ -2,14 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.WorkQueue;
+package Business.VaccineQueue;
 
 /**
  *
  * @author Menita Koonani
  */
-public class LabTestWorkRequest extends WorkRequest{
-    
+public class VaccineRequest extends RequestVaccine {
+
     private String testResult;
 
     public String getTestResult() {
@@ -19,6 +19,4 @@ public class LabTestWorkRequest extends WorkRequest{
     public void setTestResult(String testResult) {
         this.testResult = testResult;
     }
-    
-    
 }

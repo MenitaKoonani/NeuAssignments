@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.WorkQueue;
+package Business.VaccineQueue;
 
 import java.util.ArrayList;
 
@@ -12,13 +12,13 @@ import java.util.ArrayList;
  */
 public class WorkQueue {
     
-    private ArrayList<WorkRequest> workRequestList;
+    private ArrayList<RequestVaccine> workRequestList;
 
     public WorkQueue() {
         workRequestList = new ArrayList<>();
     }
 
-    public ArrayList<WorkRequest> getWorkRequestList() {
+    public ArrayList<RequestVaccine> getWorkRequestList() {
         return workRequestList;
     }
 }

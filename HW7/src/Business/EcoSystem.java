@@ -1,5 +1,6 @@
 package Business;
 
+import Business.Disease.DiseaseCatalog;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Role.Role;
@@ -49,8 +50,6 @@ public class EcoSystem extends Organization {
         if (!this.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
             return false;
         }
-
-       
 
         return true;
     }

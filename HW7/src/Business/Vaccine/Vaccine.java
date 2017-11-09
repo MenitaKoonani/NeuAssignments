@@ -5,6 +5,8 @@
  */
 package Business.Vaccine;
 
+import Business.Disease.Disease;
+
 /**
  *
  * @author Menita Koonani
@@ -13,6 +15,7 @@ public class Vaccine {
 
     private String vaccineName;
     private int vaccineId;
+    private Disease disease;
 
     public String getVaccineName() {
         return vaccineName;
@@ -30,4 +33,16 @@ public class Vaccine {
         this.vaccineId = vaccineId;
     }
 
+    public Disease getDisease() {
+        return disease;
+    }
+
+    public void setDisease(Disease disease) {
+        this.disease = disease;
+    }
+
+    @Override
+    public String toString() {
+        return vaccineName;
+    }
 }

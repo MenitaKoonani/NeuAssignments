@@ -21,7 +21,7 @@ public class ConfigureASystem {
         //create user account
         
         
-        Person employee = system.getEmployeeDirectory().createEmployee("MK");
+        Person employee = system.getStaffDirectory().createEmployee("MK");
         
         UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
         

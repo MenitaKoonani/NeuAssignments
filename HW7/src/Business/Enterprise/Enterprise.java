@@ -4,6 +4,7 @@
  */
 package Business.Enterprise;
 
+import Business.Disease.DiseaseCatalog;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 
@@ -11,20 +12,20 @@ import Business.Organization.OrganizationDirectory;
  *
  * @author Menita Koonani
  */
-public abstract class Enterprise extends Organization{
+public abstract class Enterprise extends Organization {
 
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
-    
+
     public Enterprise(String name, EnterpriseType type) {
         super(name);
         this.enterpriseType = type;
         organizationDirectory = new OrganizationDirectory();
     }
-    
-    public enum EnterpriseType{
-        Hospital("Hospital"),Finanace("Finanace");
-        
+
+    public enum EnterpriseType {
+        Hospital("Hospital"), Finance("Finance");
+
         private String value;
 
         private EnterpriseType(String value) {
