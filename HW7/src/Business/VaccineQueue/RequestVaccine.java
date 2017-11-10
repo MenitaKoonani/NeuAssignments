@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @author Menita Koonani
  */
-public abstract class RequestVaccine {
+public class RequestVaccine {
 
     private Disease disease;
     private UserAccount sender;
@@ -81,5 +81,10 @@ public abstract class RequestVaccine {
 
     public void setResolveDate(Date resolveDate) {
         this.resolveDate = resolveDate;
+    }
+
+    @Override
+    public String toString() {
+        return getVaccine().getVaccineName();
     }
 }

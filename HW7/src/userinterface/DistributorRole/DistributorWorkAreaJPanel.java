@@ -6,9 +6,7 @@ package userinterface.DistributorRole;
 
 import Business.Enterprise.HospitalEnterprise;
 import Business.Organization.DistributorOrganization;
-import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
-import Business.VaccineQueue.RequestVaccine;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -19,19 +17,20 @@ import javax.swing.JPanel;
 public class DistributorWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-    private UserAccount userAccount;
+    private UserAccount account;
     private DistributorOrganization distributorOrganization;
     private HospitalEnterprise enterprise;
 
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public DistributorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, HospitalEnterprise enterprise) {
+    public DistributorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, DistributorOrganization organization, HospitalEnterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.userAccount = account;
-        this.distributorOrganization = (DistributorOrganization) organization;
+        this.account = account;
+        this.distributorOrganization = organization;
         this.enterprise = enterprise;
+        valueLabel.setText(enterprise.getName());
     }
 
     /**
@@ -47,15 +46,17 @@ public class DistributorWorkAreaJPanel extends javax.swing.JPanel {
         valueLabel = new javax.swing.JLabel();
         SupplyVaccinesBtn = new javax.swing.JButton();
         manageVaccinesBtn = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         enterpriseLabel.setText("EnterPrise :");
-        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 127, 30));
+        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 80, 30));
 
+        valueLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         valueLabel.setText("<value>");
-        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 158, 26));
+        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 158, 26));
 
         SupplyVaccinesBtn.setText("Supply Vaccines");
         SupplyVaccinesBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -63,7 +64,7 @@ public class DistributorWorkAreaJPanel extends javax.swing.JPanel {
                 SupplyVaccinesBtnActionPerformed(evt);
             }
         });
-        add(SupplyVaccinesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 180, -1));
+        add(SupplyVaccinesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 180, -1));
 
         manageVaccinesBtn.setText("Manage Vaccines");
         manageVaccinesBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -71,19 +72,22 @@ public class DistributorWorkAreaJPanel extends javax.swing.JPanel {
                 manageVaccinesBtnActionPerformed(evt);
             }
         });
-        add(manageVaccinesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 180, -1));
+        add(manageVaccinesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 180, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Distributor Work Area Panel");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 320, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void manageVaccinesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageVaccinesBtnActionPerformed
-        ManageVaccinesJPanel manageVaccinesJPanel = new ManageVaccinesJPanel(userProcessContainer, enterprise);
-        userProcessContainer.add("manageVaccinesJPanel", manageVaccinesJPanel);
+        userProcessContainer.add("manageVaccinesJPanel", new ManageVaccinesJPanel(userProcessContainer, enterprise));
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_manageVaccinesBtnActionPerformed
 
     private void SupplyVaccinesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SupplyVaccinesBtnActionPerformed
-        SupplyVaccinesJPanel supplyVaccinesJPanel = new SupplyVaccinesJPanel(userProcessContainer, enterprise);
-        userProcessContainer.add("supplyVaccinesJPanel", supplyVaccinesJPanel);
+        userProcessContainer.add("supplyVaccinesJPanel", new SupplyVaccinesJPanel(userProcessContainer, account, enterprise, distributorOrganization));
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_SupplyVaccinesBtnActionPerformed
@@ -91,6 +95,7 @@ public class DistributorWorkAreaJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton SupplyVaccinesBtn;
     private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton manageVaccinesBtn;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables

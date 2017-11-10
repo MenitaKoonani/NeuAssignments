@@ -5,13 +5,10 @@
  */
 package userinterface.DistributorRole;
 
-import Business.EcoSystem;
 import Business.Enterprise.HospitalEnterprise;
 import Business.Organization.DistributorOrganization;
-import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.VaccineQueue.RequestVaccine;
-import Business.VaccineQueue.VaccineRequest;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,21 +19,25 @@ import javax.swing.table.DefaultTableModel;
  * @author Menita Koonani
  */
 public class SupplyVaccinesJPanel extends javax.swing.JPanel {
-
+    
     private JPanel userProcessContainer;
-    private UserAccount userAccount;
+    private UserAccount account;
     private DistributorOrganization distributorOrganization;
     private HospitalEnterprise enterprise;
 
     /**
      * Creates new form ManageVaccinesJPanel
      */
-    public SupplyVaccinesJPanel(JPanel userProcessContainer, HospitalEnterprise enterprise) {
+    public SupplyVaccinesJPanel(JPanel userProcessContainer, UserAccount account, HospitalEnterprise enterprise, DistributorOrganization distributorOrganization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.account = account;
         this.enterprise = enterprise;
+        this.distributorOrganization = distributorOrganization;
+        populateTable();
+        valueLabel.setText(enterprise.getName());
     }
-
+    
     public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         model.setRowCount(0);
@@ -66,6 +67,7 @@ public class SupplyVaccinesJPanel extends javax.swing.JPanel {
         refreshJButton = new javax.swing.JButton();
         processJButton = new javax.swing.JButton();
         assignJButton = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -81,7 +83,7 @@ public class SupplyVaccinesJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Message", "Sender", "Receiver", "Status"
+                "Vaccine", "Sender", "Receiver", "Status"
             }
         ) {
             Class[] types = new Class [] {
@@ -111,21 +113,29 @@ public class SupplyVaccinesJPanel extends javax.swing.JPanel {
         });
         add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
 
-        processJButton.setText("Process");
+        processJButton.setText("Provide Vaccine");
         processJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 processJButtonActionPerformed(evt);
             }
         });
-        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, -1, -1));
+        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, -1, -1));
 
-        assignJButton.setText("Assign to me");
+        assignJButton.setText("Assign and process the request");
         assignJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignJButtonActionPerformed(evt);
             }
         });
-        add(assignJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
+        add(assignJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
+
+        backBtn.setText("<< Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+        add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
@@ -138,12 +148,9 @@ public class SupplyVaccinesJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a row!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        VaccineRequest request = (VaccineRequest) workRequestJTable.getValueAt(selectedRow, 0);
-        request.setStatus("Processing");
-        ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request);
-        userProcessContainer.add("processWorkRequestJPanel", processWorkRequestJPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        RequestVaccine request = (RequestVaccine) workRequestJTable.getValueAt(selectedRow, 0);
+        request.setStatus("Completed");
+        populateTable();
     }//GEN-LAST:event_processJButtonActionPerformed
 
     private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
@@ -153,14 +160,21 @@ public class SupplyVaccinesJPanel extends javax.swing.JPanel {
             return;
         }
         RequestVaccine request = (RequestVaccine) workRequestJTable.getValueAt(selectedRow, 0);
-        request.setReceiver(userAccount);
-        request.setStatus("Pending");
+        request.setReceiver(account);
+        request.setStatus("Processing");
         populateTable();
     }//GEN-LAST:event_assignJButtonActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        userProcessContainer.remove(this);
+        CardLayout cardLayout = (CardLayout) userProcessContainer.getLayout();
+        cardLayout.previous(userProcessContainer);
+    }//GEN-LAST:event_backBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton assignJButton;
+    private javax.swing.JButton backBtn;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton processJButton;

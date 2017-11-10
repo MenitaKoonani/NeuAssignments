@@ -4,7 +4,6 @@
  */
 package UserInterface.DoctorRole;
 
-import Business.Enterprise.Enterprise;
 import Business.Enterprise.HospitalEnterprise;
 import Business.Organization.DoctorOrganization;
 import Business.UserAccount.UserAccount;
@@ -17,22 +16,22 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Menita Koonani
  */
-public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
+public class ManageVaccineRequestsJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private DoctorOrganization organization;
     private HospitalEnterprise enterprise;
-    private UserAccount userAccount;
+    private UserAccount account;
 
     /**
      * Creates new form DoctorWorkAreaJPanel
      */
-    public DoctorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, DoctorOrganization organization, HospitalEnterprise enterprise) {
+    public ManageVaccineRequestsJPanel(JPanel userProcessContainer, UserAccount account, DoctorOrganization organization, HospitalEnterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
-        this.userAccount = account;
+        this.account = account;
         valueLabel.setText(enterprise.getName());
         populateRequestTable();
     }
@@ -40,8 +39,8 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     public void populateRequestTable() {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         model.setRowCount(0);
-        for (RequestVaccine request : userAccount.getWorkQueue().getWorkRequestList()) {
-            Object[] row = new Object[4];
+        for (RequestVaccine request : enterprise.getWorkQueue().getWorkRequestList()) {
+            Object[] row = new Object[5];
             row[0] = request.getDisease();
             row[1] = request.getVaccine();
             row[2] = request.getSender();
@@ -66,6 +65,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         refreshTestJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
+        backJButton = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -124,11 +124,19 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
         valueLabel.setText("<value>");
         add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 158, 26));
+
+        backJButton.setText("<< Back");
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backJButtonActionPerformed(evt);
+            }
+        });
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButtonActionPerformed
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestVaccineJPanel", new RequestVaccineJPanel(userProcessContainer, userAccount, (HospitalEnterprise) enterprise));
+        userProcessContainer.add("RequestVaccineJPanel", new RequestVaccineJPanel(userProcessContainer, account, (HospitalEnterprise) enterprise));
         layout.next(userProcessContainer);
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
@@ -136,7 +144,14 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         populateRequestTable();
     }//GEN-LAST:event_refreshTestJButtonActionPerformed
 
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_backJButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backJButton;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshTestJButton;

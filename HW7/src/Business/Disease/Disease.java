@@ -32,6 +32,6 @@ public class Disease {
 
     @Override
     public String toString() {
-        return diseaseName;
+        return getDiseaseName();
     }
 }

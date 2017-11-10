@@ -4,7 +4,6 @@
  */
 package Business.Enterprise;
 
-import Business.Disease.DiseaseCatalog;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 

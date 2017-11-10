@@ -5,6 +5,7 @@
  */
 package Business.Vaccine;
 
+import Business.Disease.Disease;
 import java.util.ArrayList;
 
 /**
@@ -21,10 +22,12 @@ public class VaccineCatalog {
         counter = 300;
     }
 
-    public Vaccine newVaccine(String vaccineName) {
+    public Vaccine newVaccine(String vaccineName, Disease disease) {
         Vaccine newVaccine = new Vaccine();
         newVaccine.setVaccineId(counter++);
         newVaccine.setVaccineName(vaccineName);
+        newVaccine.setDisease(disease);
+        vaccineList.add(newVaccine);
         return newVaccine;
     }
 

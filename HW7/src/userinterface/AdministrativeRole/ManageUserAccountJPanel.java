@@ -186,6 +186,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             return;
         }
         String password = passwordField.getPassword().toString();
+        String password1 = String.valueOf(passwordField.getPassword());
         if (password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Password cannot be empty!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
@@ -193,7 +194,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         Organization organization = (Organization) organizationJComboBox.getSelectedItem();
         Person employee = (Person) employeeJComboBox.getSelectedItem();
         Role role = (Role) roleJComboBox.getSelectedItem();
-        organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+        organization.getUserAccountDirectory().createUserAccount(userName, password1, employee, role);
         popData();
         usernameField.setText("");
         passwordField.setText("");

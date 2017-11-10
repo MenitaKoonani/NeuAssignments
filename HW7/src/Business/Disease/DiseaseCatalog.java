@@ -36,4 +36,13 @@ public class DiseaseCatalog {
         diseaseList.add(newDisease);
         return newDisease;
     }
+
+    public Disease getDiseaseByName(String disease) {
+        for (Disease eachDisease : diseaseList) {
+            if (eachDisease.getDiseaseName().equalsIgnoreCase(disease)) {
+                return eachDisease;
+            }
+        }
+        return null;
+    }
 }

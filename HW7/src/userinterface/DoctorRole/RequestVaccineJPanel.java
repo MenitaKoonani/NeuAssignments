@@ -5,17 +5,14 @@
 package UserInterface.DoctorRole;
 
 import Business.Disease.Disease;
-import Business.EcoSystem;
-import Business.Enterprise.Enterprise;
 import Business.Enterprise.HospitalEnterprise;
 import Business.Organization.DistributorOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.Vaccine.Vaccine;
-import Business.VaccineQueue.VaccineRequest;
+import Business.VaccineQueue.RequestVaccine;
 import java.awt.CardLayout;
 import java.awt.Component;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -45,7 +42,7 @@ public class RequestVaccineJPanel extends javax.swing.JPanel {
     public void populateDiseaseComboBox() {
         diseaseComboBox.removeAllItems();
         for (Disease eachDisease : enterprise.getDiseaseCatalog().getDiseaseList()) {
-            diseaseComboBox.addItem(eachDisease.toString());
+            diseaseComboBox.addItem(String.valueOf(eachDisease));
         }
     }
 
@@ -140,8 +137,9 @@ public class RequestVaccineJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a row", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        VaccineRequest request = new VaccineRequest();
-        request.setDisease((Disease) diseaseComboBox.getSelectedItem());
+        RequestVaccine request = new RequestVaccine();
+        Disease disease = enterprise.getDiseaseCatalog().getDiseaseByName((String) diseaseComboBox.getSelectedItem());
+        request.setDisease(disease);
         request.setVaccine((Vaccine) vaccineTable.getValueAt(selectedRow, 1));
         request.setSender(userAccount);
         request.setStatus("Sent");
@@ -154,16 +152,13 @@ public class RequestVaccineJPanel extends javax.swing.JPanel {
         }
         if (org != null) {
             org.getWorkQueue().getWorkRequestList().add(request);
-            userAccount.getWorkQueue().getWorkRequestList().add(request);
+            enterprise.getWorkQueue().getWorkRequestList().add(request);
+            JOptionPane.showMessageDialog(null, "Vaccine requested!");
         }
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
         userProcessContainer.remove(this);
-        Component[] componentArray = userProcessContainer.getComponents();
-        Component component = componentArray[componentArray.length - 1];
-        DoctorWorkAreaJPanel dwjp = (DoctorWorkAreaJPanel) component;
-        dwjp.populateRequestTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
