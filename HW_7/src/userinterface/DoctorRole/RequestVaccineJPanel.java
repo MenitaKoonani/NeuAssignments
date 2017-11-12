@@ -5,6 +5,7 @@
 package UserInterface.DoctorRole;
 
 import Business.Disease.Disease;
+import Business.EcoSystem;
 import Business.Enterprise.HospitalEnterprise;
 import Business.Organization.DistributorOrganization;
 import Business.Organization.Organization;
@@ -12,7 +13,6 @@ import Business.UserAccount.UserAccount;
 import Business.Vaccine.Vaccine;
 import Business.VaccineQueue.RequestVaccine;
 import java.awt.CardLayout;
-import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -26,11 +26,12 @@ public class RequestVaccineJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private HospitalEnterprise enterprise;
     private UserAccount userAccount;
+    private EcoSystem system;
 
     /**
      * Creates new form RequestLabTestJPanel
      */
-    public RequestVaccineJPanel(JPanel userProcessContainer, UserAccount account, HospitalEnterprise enterprise) {
+    public RequestVaccineJPanel(JPanel userProcessContainer, UserAccount account, HospitalEnterprise enterprise, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
@@ -41,7 +42,7 @@ public class RequestVaccineJPanel extends javax.swing.JPanel {
 
     public void populateDiseaseComboBox() {
         diseaseComboBox.removeAllItems();
-        for (Disease eachDisease : enterprise.getDiseaseCatalog().getDiseaseList()) {
+        for (Disease eachDisease : system.getDiseaseCatalog().getDiseaseList()) {
             diseaseComboBox.addItem(String.valueOf(eachDisease));
         }
     }
@@ -74,6 +75,7 @@ public class RequestVaccineJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         vaccineTable = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -94,21 +96,21 @@ public class RequestVaccineJPanel extends javax.swing.JPanel {
         add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, -1, -1));
 
         valueLabel.setText("<value>");
-        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 130, -1));
+        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 130, -1));
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         enterpriseLabel.setText("EnterPrise :");
-        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 120, 30));
+        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 120, 30));
 
         diseaseComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 diseaseComboBoxActionPerformed(evt);
             }
         });
-        add(diseaseComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 120, -1));
+        add(diseaseComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 120, -1));
 
         jLabel2.setText("Disease : ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 90, 90, 20));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 90, 20));
 
         vaccineTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -129,6 +131,11 @@ public class RequestVaccineJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(vaccineTable);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, 160));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Request Vaccine Panel");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 320, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButtonActionPerformed
@@ -138,7 +145,7 @@ public class RequestVaccineJPanel extends javax.swing.JPanel {
             return;
         }
         RequestVaccine request = new RequestVaccine();
-        Disease disease = enterprise.getDiseaseCatalog().getDiseaseByName((String) diseaseComboBox.getSelectedItem());
+        Disease disease = system.getDiseaseCatalog().getDiseaseByName((String) diseaseComboBox.getSelectedItem());
         request.setDisease(disease);
         request.setVaccine((Vaccine) vaccineTable.getValueAt(selectedRow, 1));
         request.setSender(userAccount);
@@ -172,6 +179,7 @@ public class RequestVaccineJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> diseaseComboBox;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton requestTestJButton;
     private javax.swing.JTable vaccineTable;

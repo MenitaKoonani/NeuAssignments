@@ -7,7 +7,7 @@ package Business.Role;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.HospitalEnterprise;
-import Business.Organization.DoctorOrganization;
+import Business.Organization.ClinicOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import UserInterface.DoctorRole.ManageVaccineRequestsJPanel;
@@ -22,7 +22,7 @@ public class DoctorRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new DoctorsWorkAreaJPanel(userProcessContainer, account, (DoctorOrganization) organization, (HospitalEnterprise) enterprise);
+        return new DoctorsWorkAreaJPanel(userProcessContainer, account, (ClinicOrganization) organization, (HospitalEnterprise) enterprise);
     }
 
 }

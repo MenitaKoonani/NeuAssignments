@@ -4,8 +4,9 @@
  */
 package UserInterface.DoctorRole;
 
+import Business.EcoSystem;
 import Business.Enterprise.HospitalEnterprise;
-import Business.Organization.DoctorOrganization;
+import Business.Organization.ClinicOrganization;
 import Business.UserAccount.UserAccount;
 import Business.VaccineQueue.RequestVaccine;
 import java.awt.CardLayout;
@@ -19,14 +20,15 @@ import javax.swing.table.DefaultTableModel;
 public class ManageVaccineRequestsJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-    private DoctorOrganization organization;
+    private ClinicOrganization organization;
     private HospitalEnterprise enterprise;
     private UserAccount account;
+    private EcoSystem system;
 
     /**
      * Creates new form DoctorWorkAreaJPanel
      */
-    public ManageVaccineRequestsJPanel(JPanel userProcessContainer, UserAccount account, DoctorOrganization organization, HospitalEnterprise enterprise) {
+    public ManageVaccineRequestsJPanel(JPanel userProcessContainer, UserAccount account, ClinicOrganization organization, HospitalEnterprise enterprise, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
@@ -66,6 +68,7 @@ public class ManageVaccineRequestsJPanel extends javax.swing.JPanel {
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
         backJButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -120,10 +123,10 @@ public class ManageVaccineRequestsJPanel extends javax.swing.JPanel {
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         enterpriseLabel.setText("EnterPrise :");
-        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 127, 30));
+        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 127, 30));
 
         valueLabel.setText("<value>");
-        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 158, 26));
+        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 158, 26));
 
         backJButton.setText("<< Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -132,11 +135,16 @@ public class ManageVaccineRequestsJPanel extends javax.swing.JPanel {
             }
         });
         add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Manage Vaccine Requests Panel");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 320, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButtonActionPerformed
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestVaccineJPanel", new RequestVaccineJPanel(userProcessContainer, account, (HospitalEnterprise) enterprise));
+        userProcessContainer.add("RequestVaccineJPanel", new RequestVaccineJPanel(userProcessContainer, account, (HospitalEnterprise) enterprise, system));
         layout.next(userProcessContainer);
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
@@ -153,6 +161,7 @@ public class ManageVaccineRequestsJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
     private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshTestJButton;
     private javax.swing.JButton requestTestJButton;

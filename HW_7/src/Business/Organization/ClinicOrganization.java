@@ -12,10 +12,10 @@ import java.util.ArrayList;
  *
  * @author Menita Koonani
  */
-public class DoctorOrganization extends Organization{
+public class ClinicOrganization extends Organization{
 
-    public DoctorOrganization() {
-        super(Organization.Type.Doctor.getValue());
+    public ClinicOrganization() {
+        super(Organization.Type.Clinic.getValue());
     }
     
     @Override
