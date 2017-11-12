@@ -7,7 +7,6 @@ package Business.Role;
 import Business.EcoSystem;
 import Business.Enterprise.DistributorEnterprise;
 import Business.Enterprise.Enterprise;
-import Business.Enterprise.HospitalEnterprise;
 import Business.Organization.DistributorOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
@@ -22,7 +21,7 @@ public class Distributor extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new DistributorWorkAreaJPanel(userProcessContainer, account, (DistributorOrganization) organization, (DistributorEnterprise) enterprise, business);
+        return new DistributorWorkAreaJPanel(userProcessContainer, account, (DistributorEnterprise) enterprise, business);
     }
 
 }

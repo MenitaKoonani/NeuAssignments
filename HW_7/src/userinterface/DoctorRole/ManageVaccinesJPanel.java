@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.SystemAdminWorkArea;
+package userinterface.DoctorRole;
 
 import Business.Disease.Disease;
 import Business.EcoSystem;
-import Business.Enterprise.DistributorEnterprise;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.HospitalEnterprise;
 import Business.Vaccine.Vaccine;
+import Business.VaccineQueue.RequestVaccine;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,45 +23,40 @@ import javax.swing.table.DefaultTableModel;
 public class ManageVaccinesJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-    private Enterprise enterprise;
+    private HospitalEnterprise enterprise;
     private EcoSystem system;
 
     /**
      * Creates new form ManageVaccinesJPanel
      */
-    public ManageVaccinesJPanel(JPanel userProcessContainer, Enterprise enterprise, EcoSystem system) {
+    public ManageVaccinesJPanel(JPanel userProcessContainer, HospitalEnterprise enterprise, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
         this.system = system;
         populateDiseaseComboBox();
-        populateTable();
+        populateHospitalInventory();
+        populateVaccineTable(String.valueOf(diseaseComboBox.getSelectedItem()));
     }
 
-    public void populateTable() {
+    public void populateVaccineTable(String disease) {
         DefaultTableModel jTable = (DefaultTableModel) diseaseVaccineTable.getModel();
         jTable.setRowCount(0);
-//        Enterprise hospEnterprise = (HospitalEnterprise) enterprise;
-//        for (Vaccine eachVaccine : hospEnterprise.getHospitalVaccineCatalog().getVaccineList()) {
-//            Object[] row = new Object[2];
-//            row[0] = eachVaccine.getDisease();
-//            row[1] = eachVaccine;
-//            jTable.addRow(row);
-//        }
-//        Enterprise disEnterprise = (DistributorEnterprise) enterprise;
-//        for (Vaccine eachVaccine : disEnterprise.getD().getVaccineList()) {
-//            Object[] row = new Object[2];
-//            row[0] = eachVaccine.getDisease();
-//            row[1] = eachVaccine;
-//            jTable.addRow(row);
-//        }
+        for (Vaccine eachVaccine : enterprise.getVaccineInventory().getVaccineList()) {
+            if (eachVaccine.getDisease().getDiseaseName().equalsIgnoreCase(disease)) {
+                Object[] row = new Object[2];
+                row[0] = eachVaccine.getDisease();
+                row[1] = eachVaccine;
+                jTable.addRow(row);
+            }
+        }
+    }
 
-//        Enterprise disEnterprise = (DistributorEnterprise) enterprise;
-        for (Vaccine eachVaccine : system.getVaccineCatalog().getVaccineList()) {
-            Object[] row = new Object[2];
-            row[0] = eachVaccine.getDisease();
-            row[1] = eachVaccine;
-            jTable.addRow(row);
+    public void populateHospitalInventory() {
+        for (RequestVaccine request : system.getWorkQueue().getWorkRequestList()) {
+            if (request.getStatus().equalsIgnoreCase("Completed")) {
+                enterprise.getVaccineInventory().newVaccine(request.getVaccine());
+            }
         }
     }
 
@@ -81,10 +76,7 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        manageVaccinesBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        vaccineNameField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         diseaseComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         diseaseVaccineTable = new javax.swing.JTable();
@@ -93,24 +85,16 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        manageVaccinesBtn.setText("Add Vaccine");
-        manageVaccinesBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageVaccinesBtnActionPerformed(evt);
-            }
-        });
-        add(manageVaccinesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, 150, -1));
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Disease : ");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 90, 20));
-        add(vaccineNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 170, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 90, 20));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Vaccine Name : ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 90, 20));
-
-        add(diseaseComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 170, -1));
+        diseaseComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                diseaseComboBoxActionPerformed(evt);
+            }
+        });
+        add(diseaseComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 170, -1));
 
         diseaseVaccineTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -130,7 +114,7 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(diseaseVaccineTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, 110));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, 110));
 
         backBtn.setText("<< Back");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -142,22 +126,9 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Manage Vaccine Catalog");
+        jLabel3.setText("Manage Clinic Vaccine Catalog");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 320, 30));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void manageVaccinesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageVaccinesBtnActionPerformed
-        String vaccine = vaccineNameField.getText();
-        if (vaccine.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Vaccine name cannot be empty!", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        Disease disease = system.getDiseaseCatalog().getDiseaseByName((String) diseaseComboBox.getSelectedItem());
-
-        system.getVaccineCatalog().newVaccine(vaccine, disease);
-        vaccineNameField.setText("");
-        populateTable();
-    }//GEN-LAST:event_manageVaccinesBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         userProcessContainer.remove(this);
@@ -165,16 +136,17 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
         cardLayout.previous(userProcessContainer);
     }//GEN-LAST:event_backBtnActionPerformed
 
+    private void diseaseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diseaseComboBoxActionPerformed
+        populateVaccineTable(String.valueOf(diseaseComboBox.getSelectedItem()));
+    }//GEN-LAST:event_diseaseComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
     private javax.swing.JComboBox<String> diseaseComboBox;
     private javax.swing.JTable diseaseVaccineTable;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton manageVaccinesBtn;
-    private javax.swing.JTextField vaccineNameField;
     // End of variables declaration//GEN-END:variables
 }

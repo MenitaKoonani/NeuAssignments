@@ -31,6 +31,15 @@ public class VaccineCatalog {
         return newVaccine;
     }
 
+    public Vaccine newVaccine(Vaccine vaccine) {
+        vaccineList.add(vaccine);
+        return vaccine;
+    }
+
+    public void removeVaccine(Vaccine vaccine) {
+        vaccineList.remove(vaccine);
+    }
+
     public ArrayList<Vaccine> getVaccineList() {
         return vaccineList;
     }

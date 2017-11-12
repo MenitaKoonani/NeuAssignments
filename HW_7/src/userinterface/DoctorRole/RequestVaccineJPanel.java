@@ -7,12 +7,14 @@ package UserInterface.DoctorRole;
 import Business.Disease.Disease;
 import Business.EcoSystem;
 import Business.Enterprise.HospitalEnterprise;
+import Business.Organization.ClinicOrganization;
 import Business.Organization.DistributorOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.Vaccine.Vaccine;
 import Business.VaccineQueue.RequestVaccine;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -36,8 +38,10 @@ public class RequestVaccineJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
         this.userAccount = account;
+        this.system = system;
         valueLabel.setText(enterprise.getName());
         populateDiseaseComboBox();
+        populateVaccineTable(String.valueOf(diseaseComboBox.getSelectedItem()));
     }
 
     public void populateDiseaseComboBox() {
@@ -50,7 +54,7 @@ public class RequestVaccineJPanel extends javax.swing.JPanel {
     public void populateVaccineTable(String disease) {
         DefaultTableModel jTable = (DefaultTableModel) vaccineTable.getModel();
         jTable.setRowCount(0);
-        for (Vaccine eachVaccine : enterprise.getVaccineListForDisease(disease)) {
+        for (Vaccine eachVaccine : system.getVaccineListForDisease(disease)) {
             Object[] row = new Object[2];
             row[0] = eachVaccine.getVaccineId();
             row[1] = eachVaccine;
@@ -152,20 +156,24 @@ public class RequestVaccineJPanel extends javax.swing.JPanel {
         request.setStatus("Sent");
         Organization org = null;
         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
-            if (organization instanceof DistributorOrganization) {
+            if (organization instanceof ClinicOrganization) {
                 org = organization;
                 break;
             }
         }
         if (org != null) {
             org.getWorkQueue().getWorkRequestList().add(request);
-            enterprise.getWorkQueue().getWorkRequestList().add(request);
+            system.getWorkQueue().getWorkRequestList().add(request);
             JOptionPane.showMessageDialog(null, "Vaccine requested!");
         }
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
         userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        ManageVaccineRequestsJPanel mvrjp = (ManageVaccineRequestsJPanel) component;
+        mvrjp.populateRequestTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed

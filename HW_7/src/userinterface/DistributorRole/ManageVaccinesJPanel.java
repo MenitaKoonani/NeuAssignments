@@ -9,6 +9,7 @@ import Business.Disease.Disease;
 import Business.EcoSystem;
 import Business.Enterprise.DistributorEnterprise;
 import Business.Vaccine.Vaccine;
+import Business.VaccineQueue.RequestVaccine;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,15 +33,26 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
         this.system = system;
-        valueLabel.setText(enterprise.getName());
-        populateTable();
+        populateMainCatalogTable(String.valueOf(diseaseComboBox.getSelectedItem()));
+        populateDistributorCatalogTable();
         populateDiseaseComboBox();
     }
 
-    public void populateTable() {
-        DefaultTableModel jTable = (DefaultTableModel) diseaseVaccineTable.getModel();
+    public void populateMainCatalogTable(String diseaseName) {
+        DefaultTableModel jTable = (DefaultTableModel) mainVaccineCatalog.getModel();
         jTable.setRowCount(0);
-        for (Vaccine eachVaccine : enterprise.getVaccineCatalog().getVaccineList()) {
+        for (Vaccine eachVaccine : system.getVaccineListForDisease(diseaseName)) {
+            Object[] row = new Object[2];
+            row[0] = eachVaccine.getDisease();
+            row[1] = eachVaccine;
+            jTable.addRow(row);
+        }
+    }
+
+    public void populateDistributorCatalogTable() {
+        DefaultTableModel jTable = (DefaultTableModel) distributorVaccineCatalog.getModel();
+        jTable.setRowCount(0);
+        for (Vaccine eachVaccine : enterprise.getDistributorVaccineCatalog().getVaccineList()) {
             Object[] row = new Object[2];
             row[0] = eachVaccine.getDisease();
             row[1] = eachVaccine;
@@ -64,48 +76,41 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        enterpriseLabel = new javax.swing.JLabel();
-        valueLabel = new javax.swing.JLabel();
-        manageVaccinesBtn = new javax.swing.JButton();
+        removeVaccineBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        vaccineNameField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         diseaseComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        diseaseVaccineTable = new javax.swing.JTable();
+        mainVaccineCatalog = new javax.swing.JTable();
         backBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        distributorVaccineCatalog = new javax.swing.JTable();
+        addVaccineBtn = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        enterpriseLabel.setText("EnterPrise :");
-        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 127, 30));
-
-        valueLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        valueLabel.setText("<value>");
-        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 158, 26));
-
-        manageVaccinesBtn.setText("Add Vaccine");
-        manageVaccinesBtn.addActionListener(new java.awt.event.ActionListener() {
+        removeVaccineBtn.setText("Remove Vaccine");
+        removeVaccineBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageVaccinesBtnActionPerformed(evt);
+                removeVaccineBtnActionPerformed(evt);
             }
         });
-        add(manageVaccinesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, 150, -1));
+        add(removeVaccineBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 500, 150, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Disease : ");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 90, 20));
-        add(vaccineNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 170, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 90, 20));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Vaccine Name : ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 90, 20));
+        diseaseComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                diseaseComboBoxActionPerformed(evt);
+            }
+        });
+        add(diseaseComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 170, -1));
 
-        add(diseaseComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 170, -1));
-
-        diseaseVaccineTable.setModel(new javax.swing.table.DefaultTableModel(
+        mainVaccineCatalog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -121,9 +126,9 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(diseaseVaccineTable);
+        jScrollPane1.setViewportView(mainVaccineCatalog);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, 110));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 460, 110));
 
         backBtn.setText("<< Back");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -131,25 +136,47 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
                 backBtnActionPerformed(evt);
             }
         });
-        add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, -1, -1));
+        add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Manage Vaccines");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 320, 30));
-    }// </editor-fold>//GEN-END:initComponents
+        jLabel3.setText("Manage Distributor Vaccine Catalog");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 430, 30));
 
-    private void manageVaccinesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageVaccinesBtnActionPerformed
-        String vaccine = vaccineNameField.getText();
-        if (vaccine.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Vaccine name cannot be empty!", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        Disease disease = system.getDiseaseCatalog().getDiseaseByName((String) diseaseComboBox.getSelectedItem());
-        enterprise.getVaccineCatalog().newVaccine(vaccine, disease);
-        vaccineNameField.setText("");
-        populateTable();
-    }//GEN-LAST:event_manageVaccinesBtnActionPerformed
+        jLabel2.setText("Main Vaccine Catalog:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 150, 20));
+
+        jLabel4.setText("Distributor Vaccine Catalog:");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 150, 20));
+
+        distributorVaccineCatalog.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Disease", "Vaccine"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(distributorVaccineCatalog);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 460, 110));
+
+        addVaccineBtn.setText("Add Vaccine");
+        addVaccineBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addVaccineBtnActionPerformed(evt);
+            }
+        });
+        add(addVaccineBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 150, -1));
+    }// </editor-fold>//GEN-END:initComponents
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         userProcessContainer.remove(this);
@@ -157,18 +184,45 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
         cardLayout.previous(userProcessContainer);
     }//GEN-LAST:event_backBtnActionPerformed
 
+    private void removeVaccineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeVaccineBtnActionPerformed
+        int selectedRow = distributorVaccineCatalog.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Vaccine vaccine = (Vaccine) distributorVaccineCatalog.getValueAt(selectedRow, 1);
+        enterprise.getDistributorVaccineCatalog().removeVaccine(vaccine);
+        populateDistributorCatalogTable();
+    }//GEN-LAST:event_removeVaccineBtnActionPerformed
+
+    private void diseaseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diseaseComboBoxActionPerformed
+        populateMainCatalogTable(String.valueOf(diseaseComboBox.getSelectedItem()));
+    }//GEN-LAST:event_diseaseComboBoxActionPerformed
+
+    private void addVaccineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVaccineBtnActionPerformed
+        int selectedRow = mainVaccineCatalog.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Vaccine vaccine = (Vaccine) mainVaccineCatalog.getValueAt(selectedRow, 1);
+        enterprise.getDistributorVaccineCatalog().newVaccine(vaccine);
+        populateDistributorCatalogTable();
+    }//GEN-LAST:event_addVaccineBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addVaccineBtn;
     private javax.swing.JButton backBtn;
     private javax.swing.JComboBox<String> diseaseComboBox;
-    private javax.swing.JTable diseaseVaccineTable;
-    private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JTable distributorVaccineCatalog;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton manageVaccinesBtn;
-    private javax.swing.JTextField vaccineNameField;
-    private javax.swing.JLabel valueLabel;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable mainVaccineCatalog;
+    private javax.swing.JButton removeVaccineBtn;
     // End of variables declaration//GEN-END:variables
 }

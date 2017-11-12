@@ -16,29 +16,29 @@ import java.util.ArrayList;
  */
 public class DistributorEnterprise extends Enterprise {
 
-//    private VaccineCatalog distributorVaccineCatalog;
+    private VaccineCatalog distributorVaccineCatalog;
 
     public DistributorEnterprise(String name) {
         super(name, EnterpriseType.Distributor);
-//        distributorVaccineCatalog = new VaccineCatalog();
+        distributorVaccineCatalog = new VaccineCatalog();
     }
 
-//    public VaccineCatalog getDistributorVaccineCatalog() {
-//        return distributorVaccineCatalog;
-//    }
+    public VaccineCatalog getDistributorVaccineCatalog() {
+        return distributorVaccineCatalog;
+    }
 
     @Override
     public ArrayList<Role> getSupportedRole() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-//    public ArrayList<Vaccine> getVaccineListForDisease(String disease) {
-//        ArrayList<Vaccine> vaccineList = new ArrayList<>();
-//        for (Vaccine eachVaccine : distributorVaccineCatalog.getVaccineList()) {
-//            if (eachVaccine.getDisease().getDiseaseName().equalsIgnoreCase(disease)) {
-//                vaccineList.add(eachVaccine);
-//            }
-//        }
-//        return vaccineList;
-//    }
+    public ArrayList<Vaccine> getVaccineListForDisease(String disease) {
+        ArrayList<Vaccine> vaccineList = new ArrayList<>();
+        for (Vaccine eachVaccine : distributorVaccineCatalog.getVaccineList()) {
+            if (eachVaccine.getDisease().getDiseaseName().equalsIgnoreCase(disease)) {
+                vaccineList.add(eachVaccine);
+            }
+        }
+        return vaccineList;
+    }
 }

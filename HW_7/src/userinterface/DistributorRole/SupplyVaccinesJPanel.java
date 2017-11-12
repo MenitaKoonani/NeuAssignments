@@ -5,6 +5,7 @@
  */
 package userinterface.DistributorRole;
 
+import Business.EcoSystem;
 import Business.Enterprise.DistributorEnterprise;
 import Business.Enterprise.HospitalEnterprise;
 import Business.Organization.DistributorOrganization;
@@ -23,26 +24,28 @@ public class SupplyVaccinesJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private UserAccount account;
-    private DistributorOrganization distributorOrganization;
-    private DistributorEnterprise enterprise;
+    private DistributorEnterprise distEnterprise;
+//    private HospitalEnterprise hospEnterprise;
+    private EcoSystem system;
 
     /**
      * Creates new form ManageVaccinesJPanel
      */
-    public SupplyVaccinesJPanel(JPanel userProcessContainer, UserAccount account, DistributorEnterprise enterprise, DistributorOrganization distributorOrganization) {
+    public SupplyVaccinesJPanel(JPanel userProcessContainer, UserAccount account, DistributorEnterprise distEnterprise, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
-        this.enterprise = enterprise;
-        this.distributorOrganization = distributorOrganization;
+        this.distEnterprise = distEnterprise;
+//        this.hospEnterprise = hospEnterprise;
+        this.system = system;
         populateTable();
-        valueLabel.setText(enterprise.getName());
+        valueLabel.setText(distEnterprise.getName());
     }
 
     public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         model.setRowCount(0);
-        for (RequestVaccine request : distributorOrganization.getWorkQueue().getWorkRequestList()) {
+        for (RequestVaccine request : system.getWorkQueue().getWorkRequestList()) {
             Object[] row = new Object[4];
             row[0] = request;
             row[1] = request.getSender().getEmployee().getName();
@@ -156,8 +159,14 @@ public class SupplyVaccinesJPanel extends javax.swing.JPanel {
             return;
         }
         RequestVaccine request = (RequestVaccine) workRequestJTable.getValueAt(selectedRow, 0);
-        request.setStatus("Completed");
-        populateTable();
+        if (distEnterprise.getDistributorVaccineCatalog().getVaccineList().contains(request.getVaccine())) {
+            request.setReceiver(account);
+            request.setStatus("Completed");
+            populateTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "This vaccine isn't in your catalog!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
     }//GEN-LAST:event_processJButtonActionPerformed
 
     private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
@@ -167,9 +176,14 @@ public class SupplyVaccinesJPanel extends javax.swing.JPanel {
             return;
         }
         RequestVaccine request = (RequestVaccine) workRequestJTable.getValueAt(selectedRow, 0);
-        request.setReceiver(account);
-        request.setStatus("Processing");
-        populateTable();
+        if (distEnterprise.getDistributorVaccineCatalog().getVaccineList().contains(request.getVaccine())) {
+            request.setReceiver(account);
+            request.setStatus("Processing");
+            populateTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "This vaccine isn't in your catalog!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
     }//GEN-LAST:event_assignJButtonActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed

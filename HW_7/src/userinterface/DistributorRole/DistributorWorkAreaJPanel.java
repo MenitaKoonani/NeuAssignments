@@ -6,7 +6,6 @@ package userinterface.DistributorRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.DistributorEnterprise;
-import Business.Organization.DistributorOrganization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -19,20 +18,19 @@ public class DistributorWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private UserAccount account;
-    private DistributorOrganization distributorOrganization;
-    private DistributorEnterprise enterprise;
+    private DistributorEnterprise distEnterprise;
     private EcoSystem system;
 
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public DistributorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, DistributorOrganization organization, DistributorEnterprise enterprise, EcoSystem system) {
+    public DistributorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, DistributorEnterprise distEnterprise, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
-        this.distributorOrganization = organization;
-        this.enterprise = enterprise;
-        valueLabel.setText(enterprise.getName());
+        this.distEnterprise = distEnterprise;
+        this.system = system;
+        valueLabel.setText(distEnterprise.getName());
     }
 
     /**
@@ -83,13 +81,13 @@ public class DistributorWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void manageVaccinesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageVaccinesBtnActionPerformed
-        userProcessContainer.add("manageVaccinesJPanel", new ManageVaccinesJPanel(userProcessContainer, (DistributorEnterprise) enterprise, system));
+        userProcessContainer.add("manageVaccinesJPanel", new ManageVaccinesJPanel(userProcessContainer, distEnterprise, system));
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_manageVaccinesBtnActionPerformed
 
     private void SupplyVaccinesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SupplyVaccinesBtnActionPerformed
-        userProcessContainer.add("supplyVaccinesJPanel", new SupplyVaccinesJPanel(userProcessContainer, account, (DistributorEnterprise) enterprise, distributorOrganization));
+        userProcessContainer.add("supplyVaccinesJPanel", new SupplyVaccinesJPanel(userProcessContainer, account, distEnterprise, system));
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_SupplyVaccinesBtnActionPerformed

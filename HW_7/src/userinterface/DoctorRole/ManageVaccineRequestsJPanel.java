@@ -34,6 +34,7 @@ public class ManageVaccineRequestsJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.enterprise = enterprise;
         this.account = account;
+        this.system = system;
         valueLabel.setText(enterprise.getName());
         populateRequestTable();
     }
@@ -41,7 +42,7 @@ public class ManageVaccineRequestsJPanel extends javax.swing.JPanel {
     public void populateRequestTable() {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         model.setRowCount(0);
-        for (RequestVaccine request : enterprise.getWorkQueue().getWorkRequestList()) {
+        for (RequestVaccine request : system.getWorkQueue().getWorkRequestList()) {
             Object[] row = new Object[5];
             row[0] = request.getDisease();
             row[1] = request.getVaccine();

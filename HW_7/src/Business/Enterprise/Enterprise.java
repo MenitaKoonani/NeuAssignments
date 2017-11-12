@@ -18,13 +18,13 @@ public abstract class Enterprise extends Organization {
 
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
-    private VaccineCatalog vaccineCatalog;
+    private VaccineCatalog vaccineInventory;
 
     public Enterprise(String name, EnterpriseType type) {
         super(name);
         this.enterpriseType = type;
-        vaccineCatalog = new VaccineCatalog();
-        organizationDirectory = new OrganizationDirectory();
+        this.organizationDirectory = new OrganizationDirectory();
+        this.vaccineInventory = new VaccineCatalog();
     }
 
     public enum EnterpriseType {
@@ -55,13 +55,13 @@ public abstract class Enterprise extends Organization {
         return organizationDirectory;
     }
 
-    public VaccineCatalog getVaccineCatalog() {
-        return vaccineCatalog;
+    public VaccineCatalog getVaccineInventory() {
+        return vaccineInventory;
     }
 
     public ArrayList<Vaccine> getVaccineListForDisease(String disease) {
         ArrayList<Vaccine> vaccineList = new ArrayList<>();
-        for (Vaccine eachVaccine : vaccineCatalog.getVaccineList()) {
+        for (Vaccine eachVaccine : vaccineInventory.getVaccineList()) {
             if (eachVaccine.getDisease().getDiseaseName().equalsIgnoreCase(disease)) {
                 vaccineList.add(eachVaccine);
             }
