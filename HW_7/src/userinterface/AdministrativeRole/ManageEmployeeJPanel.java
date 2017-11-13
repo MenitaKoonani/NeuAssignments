@@ -4,6 +4,11 @@
  */
 package UserInterface.AdministrativeRole;
 
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.DistributorEnterprise;
+import Business.Enterprise.HospitalEnterprise;
+import Business.Organization.ClinicOrganization;
+import Business.Organization.DistributorOrganization;
 import Business.Person.Person;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
@@ -20,35 +25,54 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
 
     private OrganizationDirectory organizationDir;
     private JPanel userProcessContainer;
+    private Enterprise enterprise;
+    private static boolean comboPopulated = false;
 
     /**
      * Creates new form ManageOrganizationJPanel
      */
-    public ManageEmployeeJPanel(JPanel userProcessContainer, OrganizationDirectory organizationDir) {
+    public ManageEmployeeJPanel(JPanel userProcessContainer, OrganizationDirectory organizationDir, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organizationDir = organizationDir;
+        this.enterprise = enterprise;
         populateOrganizationComboBox();
         populateOrganizationEmpComboBox();
     }
 
     public void populateOrganizationComboBox() {
         organizationJComboBox.removeAllItems();
-        for (Organization organization : organizationDir.getOrganizationList()) {
-            organizationJComboBox.addItem(organization);
+        if (enterprise instanceof DistributorEnterprise) {
+            enterprise = (DistributorEnterprise) enterprise;
+        } else if (enterprise instanceof HospitalEnterprise) {
+            enterprise = (HospitalEnterprise) enterprise;
         }
+        for (Organization eachOrg : enterprise.getOrganizationDirectory().getOrganizationList()) {
+            organizationJComboBox.addItem(eachOrg.getOrganizationID() + " - " + eachOrg);
+        }
+        comboPopulated = true;
     }
 
     public void populateOrganizationEmpComboBox() {
         organizationEmpJComboBox.removeAllItems();
-        for (Organization organization : organizationDir.getOrganizationList()) {
-            organizationEmpJComboBox.addItem(organization);
+        if (enterprise instanceof DistributorEnterprise) {
+            enterprise = (DistributorEnterprise) enterprise;
+        } else if (enterprise instanceof HospitalEnterprise) {
+            enterprise = (HospitalEnterprise) enterprise;
+        }
+        for (Organization eachOrg : enterprise.getOrganizationDirectory().getOrganizationList()) {
+            organizationEmpJComboBox.addItem(eachOrg.getOrganizationID() + " - " + eachOrg);
         }
     }
 
     private void populateTable(Organization organization) {
         DefaultTableModel model = (DefaultTableModel) organizationJTable.getModel();
         model.setRowCount(0);
+        if (organization instanceof ClinicOrganization) {
+            organization = (ClinicOrganization) organization;
+        } else if (organization instanceof DistributorOrganization) {
+            organization = (DistributorOrganization) organization;
+        }
         for (Person employee : organization.getStaffDirectory().getEmployeeList()) {
             Object[] row = new Object[2];
             row[0] = employee.getId();
@@ -117,7 +141,7 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
                 addJButtonActionPerformed(evt);
             }
         });
-        add(addJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, -1, -1));
+        add(addJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 350, -1, -1));
 
         organizationJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         organizationJComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +149,7 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
                 organizationJComboBoxActionPerformed(evt);
             }
         });
-        add(organizationJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 81, -1));
+        add(organizationJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 170, -1));
 
         jLabel1.setText("Organization");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
@@ -140,10 +164,10 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Name");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, -1, 20));
-        add(nameJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, 126, -1));
+        add(nameJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, 180, -1));
 
         organizationEmpJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(organizationEmpJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 81, -1));
+        add(organizationEmpJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 180, -1));
 
         jLabel3.setText("Organization");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, -1, 20));
@@ -155,7 +179,9 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
-        Organization organization = (Organization) organizationEmpJComboBox.getSelectedItem();
+        String orgName = (String) organizationEmpJComboBox.getSelectedItem();
+        String[] splitOrgName = orgName.split("");
+        Organization organization = enterprise.getOrganizationDirectory().getOrgByName(Integer.valueOf(splitOrgName[0]));
         String name = nameJTextField.getText();
         if (name.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Name cannot be empty!", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -173,9 +199,27 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_backJButtonActionPerformed
 
     private void organizationJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationJComboBoxActionPerformed
-        Organization organization = (Organization) organizationJComboBox.getSelectedItem();
-        if (organization != null) {
-            populateTable(organization);
+        if (comboPopulated) {
+            String orgName = (String) organizationJComboBox.getSelectedItem();
+            if (orgName != null) {
+                String[] splitOrgName = orgName.split("");
+//                if (enterprise instanceof DistributorEnterprise) {
+//                    enterprise = (DistributorEnterprise) enterprise;
+//                } else if (enterprise instanceof HospitalEnterprise) {
+//                    enterprise = (HospitalEnterprise) enterprise;
+//                }
+                HospitalEnterprise hospEnterprise = (HospitalEnterprise) enterprise;
+                Organization organization = hospEnterprise.getOrganizationDirectory().getOrgByName(Integer.valueOf(splitOrgName[0]));
+                if (organization != null) {
+                    populateTable(organization);
+                } else {
+                    DistributorEnterprise distEnterprise = (DistributorEnterprise) enterprise;
+                    organization = distEnterprise.getOrganizationDirectory().getOrgByName(Integer.valueOf(splitOrgName[0]));
+                    if (organization != null) {
+                        populateTable(organization);
+                    }
+                }
+            }
         }
     }//GEN-LAST:event_organizationJComboBoxActionPerformed
 

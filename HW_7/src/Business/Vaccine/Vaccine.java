@@ -16,6 +16,7 @@ public class Vaccine {
     private String vaccineName;
     private int vaccineId;
     private Disease disease;
+    private int maxAvailable;
 
     public String getVaccineName() {
         return vaccineName;
@@ -39,6 +40,14 @@ public class Vaccine {
 
     public void setDisease(Disease disease) {
         this.disease = disease;
+    }
+
+    public int getMaxAvailable() {
+        return maxAvailable;
+    }
+
+    public void setMaxAvailable(int maxAvailable) {
+        this.maxAvailable = maxAvailable;
     }
 
     @Override

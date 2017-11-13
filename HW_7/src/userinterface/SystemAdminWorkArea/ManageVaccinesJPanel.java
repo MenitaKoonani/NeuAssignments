@@ -7,9 +7,7 @@ package userinterface.SystemAdminWorkArea;
 
 import Business.Disease.Disease;
 import Business.EcoSystem;
-import Business.Enterprise.DistributorEnterprise;
 import Business.Enterprise.Enterprise;
-import Business.Enterprise.HospitalEnterprise;
 import Business.Vaccine.Vaccine;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -41,26 +39,11 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
     public void populateTable() {
         DefaultTableModel jTable = (DefaultTableModel) diseaseVaccineTable.getModel();
         jTable.setRowCount(0);
-//        Enterprise hospEnterprise = (HospitalEnterprise) enterprise;
-//        for (Vaccine eachVaccine : hospEnterprise.getHospitalVaccineCatalog().getVaccineList()) {
-//            Object[] row = new Object[2];
-//            row[0] = eachVaccine.getDisease();
-//            row[1] = eachVaccine;
-//            jTable.addRow(row);
-//        }
-//        Enterprise disEnterprise = (DistributorEnterprise) enterprise;
-//        for (Vaccine eachVaccine : disEnterprise.getD().getVaccineList()) {
-//            Object[] row = new Object[2];
-//            row[0] = eachVaccine.getDisease();
-//            row[1] = eachVaccine;
-//            jTable.addRow(row);
-//        }
-
-//        Enterprise disEnterprise = (DistributorEnterprise) enterprise;
         for (Vaccine eachVaccine : system.getVaccineCatalog().getVaccineList()) {
             Object[] row = new Object[2];
             row[0] = eachVaccine.getDisease();
             row[1] = eachVaccine;
+            row[2] = eachVaccine.getMaxAvailable();
             jTable.addRow(row);
         }
     }
@@ -90,6 +73,8 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
         diseaseVaccineTable = new javax.swing.JTable();
         backBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        maxAvailSpinner = new javax.swing.JSpinner();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -99,7 +84,7 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
                 manageVaccinesBtnActionPerformed(evt);
             }
         });
-        add(manageVaccinesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, 150, -1));
+        add(manageVaccinesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 150, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Disease : ");
@@ -107,8 +92,8 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
         add(vaccineNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 170, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Vaccine Name : ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 90, 20));
+        jLabel2.setText("Max Availabiltiy : ");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 120, 20));
 
         add(diseaseComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 170, -1));
 
@@ -117,11 +102,11 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Disease", "Vaccine"
+                "Disease", "Vaccine", "Max Availability"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -138,12 +123,17 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
                 backBtnActionPerformed(evt);
             }
         });
-        add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, -1, -1));
+        add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Manage Vaccine Catalog");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 320, 30));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel4.setText("Vaccine Name : ");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 90, 20));
+        add(maxAvailSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 100, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void manageVaccinesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageVaccinesBtnActionPerformed
@@ -152,10 +142,14 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Vaccine name cannot be empty!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        if ((int) maxAvailSpinner.getValue() <= 0) {
+            JOptionPane.showMessageDialog(null, "Vaccine availability should be positive!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         Disease disease = system.getDiseaseCatalog().getDiseaseByName((String) diseaseComboBox.getSelectedItem());
-
-        system.getVaccineCatalog().newVaccine(vaccine, disease);
+        system.getVaccineCatalog().newVaccine(vaccine, disease, (int) maxAvailSpinner.getValue());
         vaccineNameField.setText("");
+        maxAvailSpinner.setValue(0);
         populateTable();
     }//GEN-LAST:event_manageVaccinesBtnActionPerformed
 
@@ -173,8 +167,10 @@ public class ManageVaccinesJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton manageVaccinesBtn;
+    private javax.swing.JSpinner maxAvailSpinner;
     private javax.swing.JTextField vaccineNameField;
     // End of variables declaration//GEN-END:variables
 }

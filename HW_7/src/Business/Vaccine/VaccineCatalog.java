@@ -22,11 +22,12 @@ public class VaccineCatalog {
         counter = 300;
     }
 
-    public Vaccine newVaccine(String vaccineName, Disease disease) {
+    public Vaccine newVaccine(String vaccineName, Disease disease, int maxAvail) {
         Vaccine newVaccine = new Vaccine();
         newVaccine.setVaccineId(counter++);
         newVaccine.setVaccineName(vaccineName);
         newVaccine.setDisease(disease);
+        newVaccine.setMaxAvailable(maxAvail);
         vaccineList.add(newVaccine);
         return newVaccine;
     }

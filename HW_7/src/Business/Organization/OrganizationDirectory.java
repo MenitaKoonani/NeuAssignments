@@ -36,4 +36,13 @@ public class OrganizationDirectory {
         organizationList.add(organization);
         return organization;
     }
+
+    public Organization getOrgByName(int orgId) {
+        for (Organization eachOrg : organizationList) {
+            if (eachOrg.getOrganizationID() == orgId) {
+                return eachOrg;
+            }
+        }
+        return null;
+    }
 }

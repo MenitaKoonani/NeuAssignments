@@ -4,8 +4,10 @@
  */
 package UserInterface.AdministrativeRole;
 
+import Business.Enterprise.DistributorEnterprise;
 import Business.Person.Person;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.HospitalEnterprise;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
@@ -25,6 +27,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
      */
     private JPanel container;
     private Enterprise enterprise;
+    private static boolean comboPopulated = false;
 
     public ManageUserAccountJPanel(JPanel container, Enterprise enterprise) {
         initComponents();
@@ -36,9 +39,17 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
     public void popOrganizationComboBox() {
         organizationJComboBox.removeAllItems();
-        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
-            organizationJComboBox.addItem(organization);
+        if (enterprise instanceof DistributorEnterprise) {
+            enterprise = (DistributorEnterprise) enterprise;
+        } else if (enterprise instanceof HospitalEnterprise) {
+            enterprise = (HospitalEnterprise) enterprise;
         }
+        for (Organization eachOrg : enterprise.getOrganizationDirectory().getOrganizationList()) {
+            if (!eachOrg.getStaffDirectory().getEmployeeList().isEmpty()) {
+                organizationJComboBox.addItem(eachOrg.getOrganizationID() + " - " + eachOrg);
+            }
+        }
+        comboPopulated = true;
     }
 
     public void populateEmployeeComboBox(Organization organization) {
@@ -197,7 +208,17 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Password cannot be empty!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        Organization organization = (Organization) organizationJComboBox.getSelectedItem();
+        String orgName = (String) organizationJComboBox.getSelectedItem();
+        if (orgName == null) {
+            return;
+        }
+        String[] splitOrgName = orgName.split("");
+        if (enterprise instanceof DistributorEnterprise) {
+            enterprise = (DistributorEnterprise) enterprise;
+        } else if (enterprise instanceof HospitalEnterprise) {
+            enterprise = (HospitalEnterprise) enterprise;
+        }
+        Organization organization = enterprise.getOrganizationDirectory().getOrgByName(Integer.valueOf(splitOrgName[0]));
         Person employee = (Person) employeeJComboBox.getSelectedItem();
         Role role = (Role) roleJComboBox.getSelectedItem();
         organization.getUserAccountDirectory().createUserAccount(userName, password1, employee, role);
@@ -213,10 +234,21 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_backjButton1ActionPerformed
 
     private void organizationJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationJComboBoxActionPerformed
-        Organization organization = (Organization) organizationJComboBox.getSelectedItem();
-        if (organization != null) {
-            populateEmployeeComboBox(organization);
-            populateRoleComboBox(organization);
+        if (comboPopulated) {
+            String orgName = (String) organizationJComboBox.getSelectedItem();
+            if (orgName != null) {
+                String[] splitOrgName = orgName.split("");
+                if (enterprise instanceof DistributorEnterprise) {
+                    enterprise = (DistributorEnterprise) enterprise;
+                } else if (enterprise instanceof HospitalEnterprise) {
+                    enterprise = (HospitalEnterprise) enterprise;
+                }
+                Organization organization = enterprise.getOrganizationDirectory().getOrgByName(Integer.valueOf(splitOrgName[0]));
+                if (organization != null) {
+                    populateEmployeeComboBox(organization);
+                    populateRoleComboBox(organization);
+                }
+            }
         }
     }//GEN-LAST:event_organizationJComboBoxActionPerformed
 

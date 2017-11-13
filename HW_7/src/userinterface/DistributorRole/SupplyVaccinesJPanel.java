@@ -7,8 +7,6 @@ package userinterface.DistributorRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.DistributorEnterprise;
-import Business.Enterprise.HospitalEnterprise;
-import Business.Organization.DistributorOrganization;
 import Business.UserAccount.UserAccount;
 import Business.VaccineQueue.RequestVaccine;
 import java.awt.CardLayout;
@@ -25,7 +23,6 @@ public class SupplyVaccinesJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount account;
     private DistributorEnterprise distEnterprise;
-//    private HospitalEnterprise hospEnterprise;
     private EcoSystem system;
 
     /**
@@ -78,10 +75,10 @@ public class SupplyVaccinesJPanel extends javax.swing.JPanel {
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         enterpriseLabel.setText("EnterPrise :");
-        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 127, 30));
+        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 127, 30));
 
         valueLabel.setText("<value>");
-        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 158, 26));
+        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 158, 26));
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,7 +141,7 @@ public class SupplyVaccinesJPanel extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Supply Vaccines");
+        jLabel3.setText("Supply Vaccines To Clinics");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 320, 30));
     }// </editor-fold>//GEN-END:initComponents
 
